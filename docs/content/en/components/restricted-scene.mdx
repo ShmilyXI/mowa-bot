@@ -4,11 +4,11 @@ import { API } from '@theme';
 
 The page you land on when something says no.
 
-> Part of `@aora-bot/surfaces`, not `@aora-bot/react`: `pnpm add @aora-bot/surfaces @aora-bot/react`, and import `@aora-bot/surfaces/styles.css` after the React stylesheet.
+> Part of `@mowa-bot/surfaces`, not `@mowa-bot/react`: `pnpm add @mowa-bot/surfaces @mowa-bot/react`, and import `@mowa-bot/surfaces/styles.css` after the React stylesheet.
 
 ```tsx preview
 import { useState } from 'react';
-import { RestrictedScene, type RestrictedTone } from '@aora-bot/surfaces';
+import { RestrictedScene, type RestrictedTone } from '@mowa-bot/surfaces';
 
 const tones: RestrictedTone[] = ['restricted', 'offline', 'unauthorised'];
 
@@ -52,8 +52,8 @@ The shape changes every `rotateMs` (12 s by default) because these screens get s
 The frame around the character: a rounded shell, an inset screen and a status light, all procedural. At these sizes a window screenshot would need three variants (dark mode, high density, a narrow column) and would tie the interface to the operating system shown when it was taken.
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
-import { DeviceBezel } from '@aora-bot/surfaces';
+import { CharacterMark } from '@mowa-bot/react';
+import { DeviceBezel } from '@mowa-bot/surfaces';
 
 export default function Demo() {
   return (

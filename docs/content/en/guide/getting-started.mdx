@@ -1,20 +1,20 @@
 # Getting started
 
-Aora Bot draws a cartoon character entirely from code. There are no sprite sheets and no exported animations: each body is a generated outline, each expression is a stroke described by a few numbers, and each frame is written straight to SVG attributes.
+Mowa Bot draws a cartoon character entirely from code. There are no sprite sheets and no exported animations: each body is a generated outline, each expression is a stroke described by a few numbers, and each frame is written straight to SVG attributes.
 
 If you only want to pick a character and copy the code, go to the [console](/): style on the left, colour and face on the right, shape along the bottom and the expression under the character. The sliders button tunes the style's parameters, and the code chip under the character copies the matching markup.
 
 ## Install
 
 ```bash
-pnpm add @aora-bot/react
+pnpm add @mowa-bot/react
 ```
 
-The components need only `@aora-bot/react`, which brings `@aora-bot/engine` along. To import from `@aora-bot/engine` yourself (for example `getStyle`, `getInkVars` or `@aora-bot/engine/agent`), or to use the geometry and animation without React, also run `pnpm add @aora-bot/engine`.
+The components need only `@mowa-bot/react`, which brings `@mowa-bot/engine` along. To import from `@mowa-bot/engine` yourself (for example `getStyle`, `getInkVars` or `@mowa-bot/engine/agent`), or to use the geometry and animation without React, also run `pnpm add @mowa-bot/engine`.
 
 The packages are ESM-only: their `exports` have only the `import` condition, so `require()` is not available.
 
-Not using React? See [Without React](/guide/without-react) for the `<aora-bot>` custom element and a one-line CDN script.
+Not using React? See [Without React](/guide/without-react) for the `<mowa-bot>` custom element and a one-line CDN script.
 
 :::warning React 19 is required
 The component layer uses `ref` as an ordinary prop and returns cleanup functions from ref callbacks. Both are React 19 semantics. On React 18 the cleanups are ignored, shared animation sources are never released, and mirrored characters render blank.
@@ -23,8 +23,8 @@ The component layer uses `ref` as an ordinary prop and returns cleanup functions
 ## First character
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
-import '@aora-bot/react/styles.css';
+import { CharacterMark } from '@mowa-bot/react';
+import '@mowa-bot/react/styles.css';
 
 export default function Demo() {
   return <CharacterMark shape="mochi" state="happy" sizePx={160} />;
@@ -44,7 +44,7 @@ Import the stylesheet once at the root of your application. Three props carry mo
 Pick a style with `styleId`; every style has its own variants, picked with `variant`. Colour and state carry over unchanged.
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -61,10 +61,10 @@ Each style has a page: [Vector](/design/styles/vector), [Pixel](/design/styles/p
 
 ## The background token
 
-Every face is painted on the body in colours chosen from the body's own ink, so on a filled body it reads the same on any background. A hollow body (`outline`, `glass`) is mostly the page, and there the whites of a drawn face, and the ring round a badge, are the page colour. If such a character sits on something other than the page background, tell it so by setting `--aora-bg-base`:
+Every face is painted on the body in colours chosen from the body's own ink, so on a filled body it reads the same on any background. A hollow body (`outline`, `glass`) is mostly the page, and there the whites of a drawn face, and the ring round a badge, are the page colour. If such a character sits on something other than the page background, tell it so by setting `--mowa-bg-base`:
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -78,7 +78,7 @@ export default function Demo() {
           borderRadius: 12,
           background: '#101828',
           // Tell the character what is actually behind it.
-          ['--aora-bg-base' as string]: '#101828',
+          ['--mowa-bg-base' as string]: '#101828',
         }}
       >
         <CharacterMark shape="blob" color="cyan" variant="outline" face="capsule" sizePx={80} />
@@ -96,7 +96,7 @@ Characters expose three one-shot actions through a ref.
 
 ```tsx preview
 import { useRef } from 'react';
-import { CharacterMark, type CharacterHandle } from '@aora-bot/react';
+import { CharacterMark, type CharacterHandle } from '@mowa-bot/react';
 
 export default function Demo() {
   const ref = useRef<CharacterHandle>(null);
@@ -125,7 +125,7 @@ export default function Demo() {
 Any string hashes to a stable shape and ink, so you can show a consistent character per user without storing anything.
 
 ```tsx preview
-import { AgentPortrait } from '@aora-bot/react';
+import { AgentPortrait } from '@mowa-bot/react';
 
 const people = ['ada@example.com', 'grace@example.com', 'alan@example.com', 'edsger@example.com'];
 

@@ -3,7 +3,7 @@ import { act, type ReactNode } from 'react';
 import { createRoot, type Root } from 'react-dom/client';
 import { renderToString } from 'react-dom/server';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { LocaleProvider } from '@aora-bot/react';
+import { LocaleProvider } from '@mowa-bot/react';
 import { BootLoop } from '../src/scenes/BootLoop.js';
 import { DeviceBezel } from '../src/scenes/DeviceBezel.js';
 import { LoadingCharacter } from '../src/scenes/LoadingCharacter.js';
@@ -25,7 +25,7 @@ const advance = (ms: number) =>
     vi.advanceTimersByTime(ms);
   });
 
-const shapeOf = (el: HTMLElement) => el.querySelector('.aora-mark')!.getAttribute('data-shape');
+const shapeOf = (el: HTMLElement) => el.querySelector('.mowa-mark')!.getAttribute('data-shape');
 
 beforeEach(() => {
   vi.useFakeTimers({
@@ -79,7 +79,7 @@ describe('RestrictedScene', () => {
 
   it('refuses by default', () => {
     const el = render(<RestrictedScene />);
-    expect(el.querySelector('.aora-mark')!.getAttribute('data-state')).toBe('refusing');
+    expect(el.querySelector('.mowa-mark')!.getAttribute('data-state')).toBe('refusing');
   });
 
   it('takes its copy from the tone, and lets a host override it', () => {
@@ -105,7 +105,7 @@ describe('BootLoop', () => {
   it('alternates the two states and reports each cycle', () => {
     const onCycle = vi.fn();
     const el = render(<BootLoop durationMs={1000} onCycle={onCycle} />);
-    const state = () => el.querySelector('.aora-mark')!.getAttribute('data-state');
+    const state = () => el.querySelector('.mowa-mark')!.getAttribute('data-state');
 
     expect(state()).toBe('working');
     advance(1000);
@@ -136,7 +136,7 @@ describe('LoadingCharacter', () => {
 
   it('masks with the shape it is standing in for', () => {
     const html = renderToString(<LoadingCharacter shape="star" />);
-    expect(html).toContain('--aora-mask');
+    expect(html).toContain('--mowa-mask');
     expect(html).toContain('data:image/svg+xml');
   });
 });

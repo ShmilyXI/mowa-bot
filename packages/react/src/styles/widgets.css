@@ -7,49 +7,49 @@
  * an application will want to override most of them; the split lets a host
  * replace this file without losing the styles the engine depends on.
  *
- * Everything sits in the `aora.components` layer declared in `tokens.css`, so
+ * Everything sits in the `mowa.components` layer declared in `tokens.css`, so
  * an application's own rules win by default without needing `!important`.
  * Colour and size follow the same rules as the rest of the library: tokens
  * only, and a container where the widget has a definite width.
  */
 
-@layer aora.components {
+@layer mowa.components {
   /* ---- shared controls ------------------------------------------------- */
 
   /*
    * Deliberately plain.
    *
    * These are the buttons and fields the widgets need to exist, not a design
-   * system, and `@aora-bot/surfaces` uses them as they are. Sized and spaced
+   * system, and `@mowa-bot/surfaces` uses them as they are. Sized and spaced
    * to sit next to a host's own controls without arguing with them, and every
    * colour comes from a token so they follow a theme they know nothing about.
    */
-  .aora-button {
+  .mowa-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: var(--aora-space-2);
-    min-height: var(--aora-control-h);
-    padding: 0 var(--aora-space-3);
-    border: 1px solid var(--aora-line);
-    border-radius: var(--aora-radius-sm);
-    background: var(--aora-surface);
-    box-shadow: var(--aora-shadow-xs);
-    color: var(--aora-text);
+    gap: var(--mowa-space-2);
+    min-height: var(--mowa-control-h);
+    padding: 0 var(--mowa-space-3);
+    border: 1px solid var(--mowa-line);
+    border-radius: var(--mowa-radius-sm);
+    background: var(--mowa-surface);
+    box-shadow: var(--mowa-shadow-xs);
+    color: var(--mowa-text);
     font: inherit;
-    font-size: var(--aora-text-sm);
-    font-weight: var(--aora-weight-medium);
+    font-size: var(--mowa-text-sm);
+    font-weight: var(--mowa-weight-medium);
     cursor: pointer;
     transition:
-      background-color var(--aora-duration-fast) var(--aora-ease-standard),
-      border-color var(--aora-duration-fast) var(--aora-ease-standard);
+      background-color var(--mowa-duration-fast) var(--mowa-ease-standard),
+      border-color var(--mowa-duration-fast) var(--mowa-ease-standard);
 
     &:hover:not(:disabled) {
-      background: var(--aora-fill-hover);
+      background: var(--mowa-fill-hover);
     }
 
     &:active:not(:disabled) {
-      background: var(--aora-fill-active);
+      background: var(--mowa-fill-active);
     }
 
     &:disabled {
@@ -58,40 +58,40 @@
     }
   }
 
-  .aora-button--primary {
+  .mowa-button--primary {
     border-color: transparent;
-    background: var(--aora-accent);
+    background: var(--mowa-accent);
     box-shadow: none;
-    color: var(--aora-on-accent);
+    color: var(--mowa-on-accent);
 
     &:hover:not(:disabled) {
-      background: var(--aora-accent-hover);
+      background: var(--mowa-accent-hover);
     }
 
     &:active:not(:disabled) {
-      background: var(--aora-accent-active);
+      background: var(--mowa-accent-active);
     }
   }
 
-  .aora-field {
+  .mowa-field {
     width: 100%;
-    padding: var(--aora-space-2) var(--aora-space-3);
-    border: 1px solid var(--aora-line);
-    border-radius: var(--aora-radius-sm);
-    background: var(--aora-surface);
-    color: var(--aora-text);
+    padding: var(--mowa-space-2) var(--mowa-space-3);
+    border: 1px solid var(--mowa-line);
+    border-radius: var(--mowa-radius-sm);
+    background: var(--mowa-surface);
+    color: var(--mowa-text);
     font: inherit;
-    font-size: var(--aora-text-sm);
-    line-height: var(--aora-leading-snug);
+    font-size: var(--mowa-text-sm);
+    line-height: var(--mowa-leading-snug);
     resize: vertical;
-    transition: border-color var(--aora-duration-fast) var(--aora-ease-standard);
+    transition: border-color var(--mowa-duration-fast) var(--mowa-ease-standard);
 
     &:hover:not(:disabled) {
-      border-color: var(--aora-line-strong);
+      border-color: var(--mowa-line-strong);
     }
 
     &::placeholder {
-      color: var(--aora-text-faint);
+      color: var(--mowa-text-faint);
     }
   }
 
@@ -102,15 +102,15 @@
    * `components.css` carry their own copy of the list.
    */
   :is(
-    .aora-button,
-    .aora-field,
-    .aora-avatar-button__button,
-    .aora-editable__button,
-    .aora-editor__tab
+    .mowa-button,
+    .mowa-field,
+    .mowa-avatar-button__button,
+    .mowa-editable__button,
+    .mowa-editor__tab
   ):focus-visible,
-  .aora-editor__drop:has(:focus-visible) {
-    outline: var(--aora-focus-ring);
-    outline-offset: var(--aora-focus-offset);
+  .mowa-editor__drop:has(:focus-visible) {
+    outline: var(--mowa-focus-ring);
+    outline-offset: var(--mowa-focus-offset);
   }
 
   /* ---- HUD plate ------------------------------------------------------- */
@@ -124,102 +124,102 @@
    * rethemes its statuses gets its plates for free, and their dark halves come
    * from the tokens' own `light-dark()` pairs.
    */
-  .aora-hud-plate {
-    --aora-hud-ink: var(--aora-text-muted);
+  .mowa-hud-plate {
+    --mowa-hud-ink: var(--mowa-text-muted);
     display: flex;
     align-items: center;
-    gap: var(--aora-space-3);
-    color: var(--aora-text);
+    gap: var(--mowa-space-3);
+    color: var(--mowa-text);
   }
 
-  .aora-hud-plate[data-level='ok'] {
-    --aora-hud-ink: var(--aora-status-online);
+  .mowa-hud-plate[data-level='ok'] {
+    --mowa-hud-ink: var(--mowa-status-online);
   }
 
-  .aora-hud-plate[data-level='warn'] {
-    --aora-hud-ink: var(--aora-status-away);
+  .mowa-hud-plate[data-level='warn'] {
+    --mowa-hud-ink: var(--mowa-status-away);
   }
 
-  .aora-hud-plate[data-level='alert'] {
-    --aora-hud-ink: var(--aora-status-error);
+  .mowa-hud-plate[data-level='alert'] {
+    --mowa-hud-ink: var(--mowa-status-error);
   }
 
-  .aora-hud-plate[data-placement='top'] {
+  .mowa-hud-plate[data-placement='top'] {
     flex-direction: column-reverse;
   }
 
-  .aora-hud-plate[data-placement='bottom'] {
+  .mowa-hud-plate[data-placement='bottom'] {
     flex-direction: column;
   }
 
-  .aora-hud-plate[data-placement='right'] {
+  .mowa-hud-plate[data-placement='right'] {
     flex-direction: row;
   }
 
-  .aora-hud-plate__mark {
+  .mowa-hud-plate__mark {
     display: inline-flex;
     flex: none;
-    width: var(--aora-hud-size, 72px);
+    width: var(--mowa-hud-size, 72px);
   }
 
-  .aora-hud-plate__text {
+  .mowa-hud-plate__text {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--aora-space-0-5);
+    gap: var(--mowa-space-0-5);
     text-align: center;
   }
 
-  .aora-hud-plate[data-placement='right'] .aora-hud-plate__text {
+  .mowa-hud-plate[data-placement='right'] .mowa-hud-plate__text {
     align-items: start;
     text-align: start;
   }
 
-  .aora-hud-plate__title {
-    color: var(--aora-text-muted);
-    font-size: var(--aora-text-xs);
+  .mowa-hud-plate__title {
+    color: var(--mowa-text-muted);
+    font-size: var(--mowa-text-xs);
   }
 
-  /* `--aora-hud-value-size` is the hook for a host that wants a bigger figure
+  /* `--mowa-hud-value-size` is the hook for a host that wants a bigger figure
      — set on any container above the plate. */
-  .aora-hud-plate__value {
-    color: var(--aora-hud-ink);
-    font-family: var(--aora-font-mono);
-    font-size: var(--aora-hud-value-size, var(--aora-text-xl));
+  .mowa-hud-plate__value {
+    color: var(--mowa-hud-ink);
+    font-family: var(--mowa-font-mono);
+    font-size: var(--mowa-hud-value-size, var(--mowa-text-xl));
     font-variant-numeric: tabular-nums;
     letter-spacing: -0.03em;
-    line-height: var(--aora-leading-tight);
+    line-height: var(--mowa-leading-tight);
   }
 
-  .aora-hud-plate__unit {
-    margin-inline-start: var(--aora-space-0-5);
-    color: var(--aora-text-faint);
-    font-size: var(--aora-text-xs);
+  .mowa-hud-plate__unit {
+    margin-inline-start: var(--mowa-space-0-5);
+    color: var(--mowa-text-faint);
+    font-size: var(--mowa-text-xs);
   }
 
-  .aora-hud-plate__line {
-    color: var(--aora-text-muted);
-    font-size: var(--aora-text-xs);
+  .mowa-hud-plate__line {
+    color: var(--mowa-text-muted);
+    font-size: var(--mowa-text-xs);
   }
 
   /* ---- pickers --------------------------------------------------------- */
 
-  .aora-staged-picker {
+  .mowa-staged-picker {
     display: flex;
     flex-direction: column;
-    gap: var(--aora-space-3);
+    gap: var(--mowa-space-3);
   }
 
-  .aora-staged-picker__actions {
+  .mowa-staged-picker__actions {
     display: flex;
     flex-wrap: wrap;
     justify-content: end;
-    gap: var(--aora-space-2);
+    gap: var(--mowa-space-2);
   }
 
-  .aora-picker--compact {
+  .mowa-picker--compact {
     max-inline-size: min(18.75rem, 100%);
-    gap: var(--aora-space-3);
+    gap: var(--mowa-space-3);
   }
 
   /* ---- avatar studio --------------------------------------------------- */
@@ -230,105 +230,105 @@
    * dropped into an absolutely positioned popover, where a percentage would
    * resolve against the avatar it hangs from.
    */
-  .aora-editor {
-    container: aora-editor / inline-size;
+  .mowa-editor {
+    container: mowa-editor / inline-size;
     display: flex;
     flex-direction: column;
-    gap: var(--aora-space-3);
+    gap: var(--mowa-space-3);
     box-sizing: border-box;
-    inline-size: var(--aora-editor-width, 19rem);
+    inline-size: var(--mowa-editor-width, 19rem);
     max-inline-size: 100%;
-    padding: var(--aora-space-3);
-    border: 1px solid var(--aora-line);
-    border-radius: var(--aora-radius-lg);
-    background: var(--aora-surface-raised);
-    box-shadow: var(--aora-shadow-md);
+    padding: var(--mowa-space-3);
+    border: 1px solid var(--mowa-line);
+    border-radius: var(--mowa-radius-lg);
+    background: var(--mowa-surface-raised);
+    box-shadow: var(--mowa-shadow-md);
   }
 
-  .aora-editor__head {
+  .mowa-editor__head {
     display: flex;
     align-items: start;
     justify-content: space-between;
-    gap: var(--aora-space-2);
+    gap: var(--mowa-space-2);
   }
 
-  .aora-editor__preview,
-  .aora-editor__preview img {
+  .mowa-editor__preview,
+  .mowa-editor__preview img {
     display: inline-flex;
-    border-radius: var(--aora-radius-pill);
+    border-radius: var(--mowa-radius-pill);
     overflow: hidden;
   }
 
-  .aora-editor__preview img {
+  .mowa-editor__preview img {
     width: 4.5rem;
     height: 4.5rem;
     object-fit: cover;
   }
 
-  .aora-editor__tabs {
+  .mowa-editor__tabs {
     display: flex;
-    gap: var(--aora-space-0-5);
-    padding: var(--aora-space-0-5);
-    border-radius: var(--aora-radius-sm);
-    background: var(--aora-surface-sunken);
+    gap: var(--mowa-space-0-5);
+    padding: var(--mowa-space-0-5);
+    border-radius: var(--mowa-radius-sm);
+    background: var(--mowa-surface-sunken);
   }
 
-  .aora-editor__tab {
+  .mowa-editor__tab {
     flex: 1;
-    min-height: var(--aora-control-h-sm);
+    min-height: var(--mowa-control-h-sm);
     border: 0;
-    border-radius: var(--aora-radius-xs);
+    border-radius: var(--mowa-radius-xs);
     background: transparent;
-    color: var(--aora-text-muted);
+    color: var(--mowa-text-muted);
     font: inherit;
-    font-size: var(--aora-text-sm);
-    font-weight: var(--aora-weight-medium);
+    font-size: var(--mowa-text-sm);
+    font-weight: var(--mowa-weight-medium);
     cursor: pointer;
     transition:
-      background-color var(--aora-duration-fast) var(--aora-ease-standard),
-      color var(--aora-duration-fast) var(--aora-ease-standard);
+      background-color var(--mowa-duration-fast) var(--mowa-ease-standard),
+      color var(--mowa-duration-fast) var(--mowa-ease-standard);
 
     &[data-selected] {
-      background: var(--aora-surface-raised);
-      box-shadow: var(--aora-shadow-xs), var(--aora-shadow-line);
-      color: var(--aora-text);
+      background: var(--mowa-surface-raised);
+      box-shadow: var(--mowa-shadow-xs), var(--mowa-shadow-line);
+      color: var(--mowa-text);
     }
   }
 
-  .aora-editor__panel {
+  .mowa-editor__panel {
     display: flex;
     flex-direction: column;
-    gap: var(--aora-space-2);
+    gap: var(--mowa-space-2);
     min-height: 8.75rem;
   }
 
-  .aora-editor__generate,
-  .aora-editor__upload {
+  .mowa-editor__generate,
+  .mowa-editor__upload {
     display: flex;
     flex-direction: column;
-    gap: var(--aora-space-2);
+    gap: var(--mowa-space-2);
   }
 
   /* The whole area is the file input's label, so a click anywhere in the
      dashed box opens the picker and the input itself can be hidden. */
-  .aora-editor__drop {
+  .mowa-editor__drop {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: var(--aora-space-1);
+    gap: var(--mowa-space-1);
     min-height: 8rem;
-    padding: var(--aora-space-3);
-    border: 1px dashed var(--aora-line-strong);
-    border-radius: var(--aora-radius-md);
-    background: var(--aora-surface-sunken);
+    padding: var(--mowa-space-3);
+    border: 1px dashed var(--mowa-line-strong);
+    border-radius: var(--mowa-radius-md);
+    background: var(--mowa-surface-sunken);
     text-align: center;
     cursor: pointer;
-    transition: border-color var(--aora-duration-fast) var(--aora-ease-standard);
+    transition: border-color var(--mowa-duration-fast) var(--mowa-ease-standard);
 
     &:hover,
     &:focus-within {
-      border-color: var(--aora-accent);
+      border-color: var(--mowa-accent);
     }
 
     & input {
@@ -340,45 +340,45 @@
     }
   }
 
-  .aora-editor__dropText {
-    color: var(--aora-text);
-    font-size: var(--aora-text-sm);
+  .mowa-editor__dropText {
+    color: var(--mowa-text);
+    font-size: var(--mowa-text-sm);
   }
 
-  .aora-editor__dropHint {
-    color: var(--aora-text-faint);
-    font-size: var(--aora-text-xs);
+  .mowa-editor__dropHint {
+    color: var(--mowa-text-faint);
+    font-size: var(--mowa-text-xs);
   }
 
-  .aora-editor__error {
+  .mowa-editor__error {
     margin: 0;
-    color: var(--aora-status-error);
-    font-size: var(--aora-text-sm);
+    color: var(--mowa-status-error);
+    font-size: var(--mowa-text-sm);
   }
 
-  .aora-editor__actions {
+  .mowa-editor__actions {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: var(--aora-space-2);
+    gap: var(--mowa-space-2);
   }
 
-  .aora-editor__spacer {
+  .mowa-editor__spacer {
     flex: 1;
   }
 
   /* A narrow editor drops the preview above its tabs instead of squeezing
      both into one row. */
-  @container aora-editor (inline-size < 15rem) {
-    .aora-editor__head {
+  @container mowa-editor (inline-size < 15rem) {
+    .mowa-editor__head {
       flex-direction: column;
       align-items: center;
     }
 
-    .aora-editor__actions {
+    .mowa-editor__actions {
       justify-content: stretch;
 
-      & .aora-button {
+      & .mowa-button {
         flex: 1;
       }
     }
@@ -386,25 +386,25 @@
 
   /* A wide one gives the generate panel's picker room for more columns, which
      it does by being allowed to fill the editor. */
-  @container aora-editor (inline-size >= 24rem) {
-    .aora-editor__panel .aora-picker--grid {
-      --aora-picker-width: 100%;
+  @container mowa-editor (inline-size >= 24rem) {
+    .mowa-editor__panel .mowa-picker--grid {
+      --mowa-picker-width: 100%;
     }
   }
 
   /* ---- crop stage ------------------------------------------------------ */
 
-  .aora-crop {
+  .mowa-crop {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--aora-space-2);
+    gap: var(--mowa-space-2);
   }
 
-  .aora-crop__stage {
+  .mowa-crop__stage {
     position: relative;
-    border-radius: var(--aora-radius-pill);
-    background: var(--aora-surface-sunken);
+    border-radius: var(--mowa-radius-pill);
+    background: var(--mowa-surface-sunken);
     overflow: hidden;
     cursor: grab;
     touch-action: none;
@@ -422,45 +422,45 @@
     }
   }
 
-  .aora-crop__hint {
-    color: var(--aora-text-faint);
-    font-size: var(--aora-text-xs);
+  .mowa-crop__hint {
+    color: var(--mowa-text-faint);
+    font-size: var(--mowa-text-xs);
   }
 
-  .aora-crop__zoom {
+  .mowa-crop__zoom {
     display: flex;
     align-items: center;
-    gap: var(--aora-space-2);
+    gap: var(--mowa-space-2);
     width: 100%;
 
     & input {
       flex: 1;
-      accent-color: var(--aora-accent);
+      accent-color: var(--mowa-accent);
     }
   }
 
   /* ---- trigger and editable avatar ------------------------------------- */
 
-  .aora-avatar-button,
-  .aora-editable {
+  .mowa-avatar-button,
+  .mowa-editable {
     position: relative;
     display: inline-flex;
   }
 
-  .aora-avatar-button__button,
-  .aora-editable__button {
+  .mowa-avatar-button__button,
+  .mowa-editable__button {
     position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     padding: 0;
     border: 0;
-    border-radius: var(--aora-radius-pill);
+    border-radius: var(--mowa-radius-pill);
     background: transparent;
     cursor: pointer;
 
     & img {
-      border-radius: var(--aora-radius-pill);
+      border-radius: var(--mowa-radius-pill);
       object-fit: cover;
     }
   }
@@ -470,21 +470,21 @@
    * than sitting in a corner: at 72px a corner badge is four pixels of pencil,
    * and the affordance has to be legible to be one.
    */
-  .aora-editable__overlay {
+  .mowa-editable__overlay {
     position: absolute;
     inset: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: var(--aora-radius-pill);
-    background: var(--aora-scrim);
-    color: var(--aora-on-scrim);
+    border-radius: var(--mowa-radius-pill);
+    background: var(--mowa-scrim);
+    color: var(--mowa-on-scrim);
     opacity: 0;
-    transition: opacity var(--aora-duration-fast) var(--aora-ease-out);
+    transition: opacity var(--mowa-duration-fast) var(--mowa-ease-out);
   }
 
-  .aora-editable__button:hover .aora-editable__overlay,
-  .aora-editable__button:focus-visible .aora-editable__overlay {
+  .mowa-editable__button:hover .mowa-editable__overlay,
+  .mowa-editable__button:focus-visible .mowa-editable__overlay {
     opacity: 1;
   }
 
@@ -493,15 +493,15 @@
    * wrapper is as wide as the avatar, so the editor's `100%` cap would
    * otherwise fold it down to the avatar's width.
    */
-  .aora-avatar-button__editor,
-  .aora-editable__editor {
+  .mowa-avatar-button__editor,
+  .mowa-editable__editor {
     position: absolute;
-    top: calc(100% + var(--aora-space-2));
+    top: calc(100% + var(--mowa-space-2));
     left: 50%;
-    z-index: var(--aora-z-popover);
+    z-index: var(--mowa-z-popover);
     transform: translateX(-50%);
 
-    & > .aora-editor {
+    & > .mowa-editor {
       max-inline-size: none;
     }
   }
@@ -512,28 +512,28 @@
    * and every selected state gets one that is not a colour difference.
    */
   @media (forced-colors: active) {
-    .aora-button,
-    .aora-field,
-    .aora-editor {
+    .mowa-button,
+    .mowa-field,
+    .mowa-editor {
       border-color: ButtonText;
     }
 
-    .aora-button--primary {
+    .mowa-button--primary {
       border: 1px solid ButtonText;
       background: ButtonFace;
       color: ButtonText;
     }
 
-    .aora-editor__tab[data-selected] {
+    .mowa-editor__tab[data-selected] {
       outline: 2px solid Highlight;
       outline-offset: -2px;
     }
 
-    .aora-editor__drop {
+    .mowa-editor__drop {
       border-color: ButtonText;
     }
 
-    .aora-editable__overlay {
+    .mowa-editable__overlay {
       background: Canvas;
       color: CanvasText;
     }

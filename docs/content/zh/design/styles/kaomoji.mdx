@@ -3,7 +3,7 @@
 `kaomoji` 系列把角色写成一行文字：`(・ω・)`、`☁(^▽^) ♪`、`ฅ(・ω・)ฅ`。形状决定括号，状态决定表情和尾巴。它没有身体，是最轻量的系列，嵌在一行文字里也认得出是哪个角色。
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -33,7 +33,7 @@ export default function Demo() {
 ## 变体
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 const variants = ['plain', 'bubble'] as const;
 
@@ -68,8 +68,8 @@ export default function Demo() {
 每个形状用哪种括号，由引擎里的 `SHAPE_WRAPPERS` 决定：猫是 `ฅ( )ฅ`，兔子是 `૮( )ა`，云朵是 `☁( )`，没有专属括号的形状用一对圆括号。
 
 ```tsx preview
-import { SHAPE_IDS } from '@aora-bot/react';
-import { kaomoji } from '@aora-bot/engine';
+import { SHAPE_IDS } from '@mowa-bot/react';
+import { kaomoji } from '@mowa-bot/engine';
 
 export default function Demo() {
   return (
@@ -94,8 +94,8 @@ export default function Demo() {
 括号里的脸沿用 `cute` 脸的规则：圆点眼表示专注，弧线表示满足，叉表示拒绝。手绘脸在每个状态下都有自己的字形，所以 `capsule`、`specs` 写成文字也认得出来。括号后面的尾巴，是该状态的情绪特效写成的符号：`zZ`、`♪`、`✎`、`!`。每个状态都有一张脸（`STATE_FACES`）和一个尾巴（`STATE_TAILS`，可以为空）。
 
 ```tsx preview
-import { CHARACTER_STATES } from '@aora-bot/react';
-import { kaomoji } from '@aora-bot/engine';
+import { CHARACTER_STATES } from '@mowa-bot/react';
+import { kaomoji } from '@mowa-bot/engine';
 
 export default function Demo() {
   return (
@@ -118,7 +118,7 @@ export default function Demo() {
 `kaomoji(shape, state, face?)` 返回的正是该系列画出的那一行文字，所以聊天消息、终端输出和日志里都能使用同一套角色。`faceText(state, face?)` 只返回脸，不带括号和尾巴。两者的 `face` 默认都是 `cute`：
 
 ```ts
-import { kaomoji } from '@aora-bot/engine';
+import { kaomoji } from '@mowa-bot/engine';
 
 kaomoji('cat', 'happy'); // ฅ(^▽^)ฅ ♪
 kaomoji('mochi', 'thinking'); // (・_・)?

@@ -9,8 +9,8 @@ import type {
   NoseId,
   ShapeFamilyId,
   ShapeId,
-} from '@aora-bot/engine';
-import { themeLabel } from '@aora-bot/engine/labels';
+} from '@mowa-bot/engine';
+import { themeLabel } from '@mowa-bot/engine/labels';
 import { createContext, useContext, useMemo, type ReactNode } from 'react';
 import { enUS } from './en-US.js';
 import { zhCN } from './zh-CN.js';

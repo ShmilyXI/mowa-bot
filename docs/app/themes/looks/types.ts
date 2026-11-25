@@ -178,7 +178,7 @@ export const KAI = `'Palatino Linotype', Palatino, KaiTi, STKaiti, 'Kaiti SC', '
 export const SONG = `Georgia, 'Songti SC', STSong, SimSun, 'Noto Serif CJK SC', serif`;
 export const ROUND = `'Trebuchet MS', 'Microsoft YaHei UI', 'Microsoft YaHei', 'PingFang SC', 'Hiragino Sans GB', sans-serif`;
 export const HEAVY = `'Arial Black', Impact, 'Microsoft YaHei UI', 'Microsoft YaHei', 'PingFang SC', sans-serif`;
-export const SANS = 'var(--aora-font-sans)';
+export const SANS = 'var(--mowa-font-sans)';
 
 /** Latin stacks for the second-language name. */
 export const LATIN = {

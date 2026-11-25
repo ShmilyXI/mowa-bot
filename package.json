@@ -1,5 +1,5 @@
 {
-  "name": "aora-bot-workspace",
+  "name": "mowa-bot-workspace",
   "version": "0.1.1",
   "private": true,
   "type": "module",
@@ -10,20 +10,20 @@
     "node": ">=22.12"
   },
   "scripts": {
-    "dev": "pnpm --filter @aora-bot/docs dev",
-    "build": "pnpm run build:lib && pnpm --filter @aora-bot/docs build",
-    "build:lib": "pnpm --filter @aora-bot/engine build && pnpm --filter @aora-bot/element build && pnpm --filter @aora-bot/react build && pnpm --filter @aora-bot/surfaces build",
-    "preview": "pnpm --filter @aora-bot/docs preview",
-    "test": "pnpm --filter @aora-bot/engine test && pnpm --filter @aora-bot/element test && pnpm --filter @aora-bot/react test && pnpm --filter @aora-bot/surfaces test && vitest run --dir api",
+    "dev": "pnpm --filter @mowa-bot/docs dev",
+    "build": "pnpm run build:lib && pnpm --filter @mowa-bot/docs build",
+    "build:lib": "pnpm --filter @mowa-bot/engine build && pnpm --filter @mowa-bot/element build && pnpm --filter @mowa-bot/react build && pnpm --filter @mowa-bot/surfaces build",
+    "preview": "pnpm --filter @mowa-bot/docs preview",
+    "test": "pnpm --filter @mowa-bot/engine test && pnpm --filter @mowa-bot/element test && pnpm --filter @mowa-bot/react test && pnpm --filter @mowa-bot/surfaces test && vitest run --dir api",
     "typecheck": "tsc --noEmit && pnpm -r typecheck",
     "lint": "oxlint",
-    "check": "pnpm run build:lib && pnpm run lint && pnpm run format:check && pnpm run typecheck && pnpm run test && pnpm --filter @aora-bot/docs build",
+    "check": "pnpm run build:lib && pnpm run lint && pnpm run format:check && pnpm run typecheck && pnpm run test && pnpm --filter @mowa-bot/docs build",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,mdx,css,yml}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md,mdx,css,yml}\"",
     "media": "node scripts/readme-media.mjs"
   },
   "dependencies": {
-    "@aora-bot/engine": "workspace:*"
+    "@mowa-bot/engine": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^24.2.0",

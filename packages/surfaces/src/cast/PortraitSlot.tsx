@@ -1,5 +1,5 @@
 import type { CSSProperties, ReactNode } from 'react';
-import { cx } from '@aora-bot/react';
+import { cx } from '@mowa-bot/react';
 import { useSurfaceLocale } from '../locale/index.js';
 
 export interface AvatarSlotProps {
@@ -34,14 +34,14 @@ export function PortraitSlot({
 
   return (
     <span
-      className={cx('aora-s-slot', className)}
+      className={cx('mowa-s-slot', className)}
       data-arrived={arrived || undefined}
       aria-label={label ?? t('cast.slot')}
       role="img"
       style={{ width: sizePx, height: sizePx, ...style }}
     >
-      <span className="aora-s-slot__ring" aria-hidden="true" />
-      <span className="aora-s-slot__content">{children}</span>
+      <span className="mowa-s-slot__ring" aria-hidden="true" />
+      <span className="mowa-s-slot__content">{children}</span>
     </span>
   );
 }

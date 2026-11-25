@@ -1,4 +1,4 @@
-import { acceptsVariant, getStyle, hasStyle, type StyleId, type StyleVariant } from '@aora-bot/engine';
+import { acceptsVariant, getStyle, hasStyle, type StyleId, type StyleVariant } from '@mowa-bot/engine';
 
 /**
  * The variant a series will actually draw, given what the caller asked for.

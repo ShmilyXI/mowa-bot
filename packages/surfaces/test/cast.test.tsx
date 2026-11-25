@@ -163,7 +163,7 @@ describe('CastLineup', () => {
 
   it('adopts the state a step names', () => {
     const el = render(<CastLineup members={members} steps={STEPS} stepIndex={2} />);
-    const lead = el.querySelector('[data-member="lead"] .aora-mark')!;
+    const lead = el.querySelector('[data-member="lead"] .mowa-mark')!;
     expect(lead.getAttribute('data-state')).toBe('happy');
   });
 
@@ -193,9 +193,9 @@ describe('CastLineup', () => {
 
   it('bobs on a separate element from the one that glides', () => {
     const el = render(<CastLineup members={members} steps={STEPS} />);
-    const bob = el.querySelector<HTMLElement>('[data-member="lead"] .aora-s-cast-lineup__bob')!;
-    expect(bob.style.getPropertyValue('--aora-s-cast-bob-amp')).toBe('4px');
-    expect(el.querySelector('[data-member="helper"] .aora-s-cast-lineup__bob')).toBeNull();
+    const bob = el.querySelector<HTMLElement>('[data-member="lead"] .mowa-s-cast-lineup__bob')!;
+    expect(bob.style.getPropertyValue('--mowa-s-cast-bob-amp')).toBe('4px');
+    expect(el.querySelector('[data-member="helper"] .mowa-s-cast-lineup__bob')).toBeNull();
   });
 });
 

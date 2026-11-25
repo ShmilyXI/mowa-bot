@@ -1,4 +1,4 @@
-import { LocaleProvider } from '@aora-bot/react';
+import { LocaleProvider } from '@mowa-bot/react';
 import { renderToString } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
 import { SurfaceLocaleProvider, surfaceEnUS, surfaceZhCN, useSurfaceLocale } from '../src/locale/index.js';

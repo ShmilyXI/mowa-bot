@@ -28,7 +28,7 @@ const n3 = (v: number): number => Math.round(v * 1000) / 1000;
  * ever has as many as its themes have distinct motions, and a character
  * that comes back finds its own still there.
  */
-const MARK = 'data-aora-motion';
+const MARK = 'data-mowa-motion';
 
 interface Sheet {
   style: HTMLStyleElement;
@@ -254,7 +254,7 @@ function layer(doc: Document, name: string, style: string): Layer {
   svg.setAttribute('viewBox', `${minX} ${minY} ${width} ${height}`);
   svg.setAttribute('fill', 'none');
   svg.setAttribute('style', style);
-  svg.setAttribute('data-aora-layer', name);
+  svg.setAttribute('data-mowa-layer', name);
   const root = doc.createElementNS(SVG_NS, 'g') as SVGGElement;
   svg.appendChild(root);
   return { svg, root };
@@ -275,7 +275,7 @@ function createStack(doc: Document, scale: number): Stack {
   const box = (style: string, name?: string): HTMLDivElement => {
     const div = doc.createElementNS(XHTML_NS, 'div') as HTMLDivElement;
     div.setAttribute('style', style);
-    if (name) div.setAttribute('data-aora-layer', name);
+    if (name) div.setAttribute('data-mowa-layer', name);
     return div;
   };
   const frame = box(`position:relative;width:${side}px;height:${side}px`);

@@ -1,5 +1,5 @@
-import { getStyle, paramsForVariant, type StyleParam } from '@aora-bot/engine';
-import { useLabel } from '@aora-bot/react';
+import { getStyle, paramsForVariant, type StyleParam } from '@mowa-bot/engine';
+import { useLabel } from '@mowa-bot/react';
 import { cleanParams, type ParamValue, type Preset } from '../shared/share.js';
 import type { StyleChoice } from './registry.js';
 

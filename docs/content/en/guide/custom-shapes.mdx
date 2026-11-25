@@ -6,7 +6,7 @@ A shape is a function that returns a closed outline. Everything else — the pat
 
 ```tsx preview
 import { useEffect, useState } from 'react';
-import { CharacterMark, defineShape } from '@aora-bot/react';
+import { CharacterMark, defineShape } from '@mowa-bot/react';
 
 // A five-lobed scallop, sampled in polar coordinates.
 function lobes(): [number, number][] {
@@ -66,7 +66,7 @@ The ears, leaves and antennae of the built-in characters are `ShapeDef.parts`: t
 
 ```tsx preview
 import { useEffect, useState } from 'react';
-import { CharacterMark, defineShape } from '@aora-bot/react';
+import { CharacterMark, defineShape } from '@mowa-bot/react';
 
 function ellipse(cx: number, cy: number, rx: number, ry: number): [number, number][] {
   return Array.from({ length: 64 }, (_, i) => {
@@ -142,8 +142,8 @@ For faceted shapes, use `shapeGenerators.roundedPolygon`. It clips each corner r
 
 ```tsx preview
 import { useEffect, useState } from 'react';
-import { CharacterMark, defineShape } from '@aora-bot/react';
-import { shapeGenerators } from '@aora-bot/engine';
+import { CharacterMark, defineShape } from '@mowa-bot/react';
+import { shapeGenerators } from '@mowa-bot/engine';
 
 function facet(): [number, number][] {
   const vertices: [number, number][] = [];

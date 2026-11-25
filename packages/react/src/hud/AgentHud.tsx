@@ -1,4 +1,4 @@
-import { formatHud, type CharacterState, type FaceStyle, type NoseId } from '@aora-bot/engine';
+import { formatHud, type CharacterState, type FaceStyle, type NoseId } from '@mowa-bot/engine';
 import type { CSSProperties } from 'react';
 import { useOptionalAgentState } from '../agent/AgentState.js';
 import { agentColor, agentFace, agentNose, agentShape, type AgentLike } from '../avatar/identity.js';

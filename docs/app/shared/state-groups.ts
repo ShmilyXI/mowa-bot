@@ -1,4 +1,4 @@
-import { CHARACTER_STATES, STATE_GROUPS, type CharacterState } from '@aora-bot/react';
+import { CHARACTER_STATES, STATE_GROUPS, type CharacterState } from '@mowa-bot/react';
 
 export interface StateGroup {
   id: string;

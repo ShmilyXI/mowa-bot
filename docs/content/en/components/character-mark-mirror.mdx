@@ -5,7 +5,7 @@ import { API } from '@theme';
 Draws an already-running character again, somewhere else.
 
 ```tsx preview
-import { CharacterMark, CharacterMarkMirror } from '@aora-bot/react';
+import { CharacterMark, CharacterMarkMirror } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -29,7 +29,7 @@ One engine, five characters, five inks. The mirrors are `<use href>` elements po
 
 ## Ink without a second animation
 
-Ink is an inherited CSS custom property, so it resolves where the `<use>` element sits rather than where the source was defined. Each mirror sets its own `--aora-fg` and the shared geometry picks it up.
+Ink is an inherited CSS custom property, so it resolves where the `<use>` element sits rather than where the source was defined. Each mirror sets its own `--mowa-fg` and the shared geometry picks it up.
 
 Size works the same way — it is set on the wrapper, not inside the SVG.
 

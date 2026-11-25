@@ -1,4 +1,4 @@
-import { CUTE_EYE_IDS, STATE_FX } from '@aora-bot/engine';
+import { CUTE_EYE_IDS, STATE_FX } from '@mowa-bot/engine';
 import {
   CHARACTER_STATES,
   COLOR_SWATCHES,
@@ -11,7 +11,7 @@ import {
   useLabel,
   type ColorId,
   type ShapeId,
-} from '@aora-bot/react';
+} from '@mowa-bot/react';
 import { useState } from 'react';
 import { useLocalized } from '../../app/shared/i18n.js';
 import { StillMark } from '../../app/shared/StillMark.js';

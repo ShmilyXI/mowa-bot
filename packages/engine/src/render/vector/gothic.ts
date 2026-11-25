@@ -110,7 +110,7 @@ export function paintGothic(piece: MediumPiece, ctx: MediumContext): SceneNode[]
   const { size } = kit.extentOf(ring);
   const seed = seedOf(ring);
   const d = kit.remember(ring, 'curve', () => kit.closedCurve(ring));
-  const clip = `${ctx.prefix ?? 'aora'}-gothic-${fnv1a32(d).toString(36)}`;
+  const clip = `${ctx.prefix ?? 'mowa'}-gothic-${fnv1a32(d).toString(36)}`;
   const out: SceneNode[] = [
     kit.node('clipPath', { id: clip }, [kit.node('path', { d })]),
     kit.node('path', { d, fill: ctx.fill(piece) }),

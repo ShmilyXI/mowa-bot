@@ -1441,7 +1441,7 @@ const PAINTERS: Record<BuiltinMedium, (piece: Piece, ctx: DrawContext) => SceneN
     const { ring, color } = piece;
     const d = remember(ring, 'curve', () => closedCurve(ring));
     const k = reliefScale(extentOf(ring).size);
-    const clip = `${ctx.prefix ?? 'aora'}-relief-${fnv1a32(d).toString(36)}`;
+    const clip = `${ctx.prefix ?? 'mowa'}-relief-${fnv1a32(d).toString(36)}`;
     const rim = (spec: typeof RELIEF.lit | typeof RELIEF.shade, paint: string) =>
       node('path', {
         d,

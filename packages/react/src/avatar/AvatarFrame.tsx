@@ -18,7 +18,7 @@ export function UnreadBadge({ count, className, style }: UnreadBadgeProps) {
   const label = count > UNREAD_BADGE_CAP ? `${UNREAD_BADGE_CAP}+` : String(count);
 
   return (
-    <span className={cx('aora-badge', className)} style={style} aria-label={`${count} ${t('avatar.unread')}`}>
+    <span className={cx('mowa-badge', className)} style={style} aria-label={`${count} ${t('avatar.unread')}`}>
       {label}
     </span>
   );
@@ -64,7 +64,7 @@ export function AvatarStatusDot({
 
   return (
     <span
-      className={cx('aora-status', pulse && 'aora-status--pulse', ringed && 'aora-status--ring', className)}
+      className={cx('mowa-status', pulse && 'mowa-status--pulse', ringed && 'mowa-status--ring', className)}
       data-tone={tone}
       style={style}
       role={label ? 'img' : undefined}
@@ -101,15 +101,15 @@ export function WorkingBadge({ sizePx = 8, label, className, style }: WorkingBad
   const { t } = useLocale();
   return (
     <span
-      className={cx('aora-working', className)}
+      className={cx('mowa-working', className)}
       role="img"
       aria-label={label ?? t('avatar.working')}
-      style={{ '--aora-working-size': `${sizePx}px`, ...style } as CSSProperties}
+      style={{ '--mowa-working-size': `${sizePx}px`, ...style } as CSSProperties}
     >
       {Array.from({ length: WORKING_DOTS }, (_, index) => (
         <span
           key={index}
-          className="aora-working__dot"
+          className="mowa-working__dot"
           // Negative, so every dot is already mid-cycle on the first frame and
           // the badge does not start with all three at full brightness.
           style={{ animationDelay: `${-index * 0.18}s` }}

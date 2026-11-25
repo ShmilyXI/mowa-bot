@@ -1,4 +1,4 @@
-import { prefersReducedMotion } from '@aora-bot/react';
+import { prefersReducedMotion } from '@mowa-bot/react';
 import { useEffect, useRef, useState } from 'react';
 
 const VERTEX = `

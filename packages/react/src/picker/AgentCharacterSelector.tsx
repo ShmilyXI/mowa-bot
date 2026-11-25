@@ -1,4 +1,4 @@
-import type { ColorId, FaceStyle, NoseId, ShapeId } from '@aora-bot/engine';
+import type { ColorId, FaceStyle, NoseId, ShapeId } from '@mowa-bot/engine';
 import { useState, type CSSProperties } from 'react';
 import { useLocale } from '../locale/index.js';
 import { CharacterSelector } from './CharacterSelector.js';
@@ -87,7 +87,7 @@ export function AgentCharacterSelector({
   };
 
   return (
-    <div className={cx('aora-staged-picker', className)} style={style}>
+    <div className={cx('mowa-staged-picker', className)} style={style}>
       <CharacterSelector
         shape={staged.shape}
         color={staged.color}
@@ -105,10 +105,10 @@ export function AgentCharacterSelector({
       />
 
       {actions && !immediate && (
-        <div className="aora-staged-picker__actions">
+        <div className="mowa-staged-picker__actions">
           <button
             type="button"
-            className="aora-button"
+            className="mowa-button"
             onClick={() => {
               setStaged(value);
               onCancel?.();
@@ -118,7 +118,7 @@ export function AgentCharacterSelector({
           </button>
           <button
             type="button"
-            className="aora-button aora-button--primary"
+            className="mowa-button mowa-button--primary"
             onClick={() => onCommit?.(staged)}
           >
             {t('editor.save')}

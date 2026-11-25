@@ -5,7 +5,7 @@ import {
   type ColorId,
   type ShapeId,
   type StaticOptions,
-} from '@aora-bot/react';
+} from '@mowa-bot/react';
 import { memo, type CSSProperties } from 'react';
 
 /** Drawings kept for a mark that comes back with the same props: a swatch toggled back, a list scrolled back. Oldest go first. */
@@ -70,15 +70,15 @@ export const StillMark = memo(function StillMark({ sizeCss, ...options }: StillM
   // A theme's character or skin draws once its theme is loaded; the box is held until then.
   const ready = useThemesReady({ shape, variant, style, color });
   if (!ready) {
-    return <span className="aora-mark aora-mark--still" style={{ width: size, height: size }} />;
+    return <span className="mowa-mark mowa-mark--still" style={{ width: size, height: size }} />;
   }
   return (
     <span
-      className="aora-mark aora-mark--still"
+      className="mowa-mark mowa-mark--still"
       data-shape={shape}
       data-color={color}
       data-state={state}
-      style={{ '--aora-fg': getInkColorCss(color), width: size, height: size } as CSSProperties}
+      style={{ '--mowa-fg': getInkColorCss(color), width: size, height: size } as CSSProperties}
       dangerouslySetInnerHTML={{
         __html: draw({ ...options, state, colorScheme: 'page' }),
       }}

@@ -5,7 +5,7 @@ import { API } from '@theme';
 为其内部的所有组件提供语言。
 
 ```tsx preview
-import { LocaleProvider, CharacterSelector, ActivityBadge } from '@aora-bot/react';
+import { LocaleProvider, CharacterSelector, ActivityBadge } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -28,7 +28,7 @@ export default function Demo() {
 `useLabel()` 把这些族封装成函数，所以遍历 `SHAPE_IDS` 的组件不必再拼出 `'shape.' + id` 并强制转换成键：
 
 ```tsx preview
-import { LocaleProvider, SHAPE_IDS, useLabel, type ShapeId } from '@aora-bot/react';
+import { LocaleProvider, SHAPE_IDS, useLabel, type ShapeId } from '@mowa-bot/react';
 
 function Names({ shapes }: { shapes: ShapeId[] }) {
   const label = useLabel();

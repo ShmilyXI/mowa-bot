@@ -6,8 +6,8 @@ import {
   getInkColorCss,
   type ColorId,
   type FaceStyle,
-} from '@aora-bot/react';
-import { mulberry32 } from '@aora-bot/engine';
+} from '@mowa-bot/react';
+import { mulberry32 } from '@mowa-bot/engine';
 import { memo, useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
 import type { Preset } from '../shared/share.js';
 import type { StyleChoice } from './registry.js';
@@ -441,7 +441,7 @@ export const Wall = memo(function Wall({ styles, face, lineArt = false }: WallPr
         } as CSSProperties
       }
     >
-      <span ref={probe} className="aora-mark" hidden />
+      <span ref={probe} className="mowa-mark" hidden />
       {field && shown && (
         <div className="site-home__field" style={{ width: shown.fieldW, height: shown.fieldH }}>
           {field.rows.map((row) => (
@@ -461,7 +461,7 @@ export const Wall = memo(function Wall({ styles, face, lineArt = false }: WallPr
                     style={{ '--site-tile-ink': getInkColorCss(tile.color) } as CSSProperties}
                   >
                     <span
-                      className="aora-mark aora-mark--still"
+                      className="mowa-mark mowa-mark--still"
                       data-shape={tile.shape}
                       data-color={tile.color}
                       data-state={tile.state}

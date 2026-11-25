@@ -6,7 +6,7 @@
 
 ```tsx preview
 import { useEffect, useState } from 'react';
-import { CharacterMark, defineShape } from '@aora-bot/react';
+import { CharacterMark, defineShape } from '@mowa-bot/react';
 
 // 五瓣的花边形，在极坐标下采样。
 function lobes(): [number, number][] {
@@ -66,7 +66,7 @@ export default function Demo() {
 
 ```tsx preview
 import { useEffect, useState } from 'react';
-import { CharacterMark, defineShape } from '@aora-bot/react';
+import { CharacterMark, defineShape } from '@mowa-bot/react';
 
 function ellipse(cx: number, cy: number, rx: number, ry: number): [number, number][] {
   return Array.from({ length: 64 }, (_, i) => {
@@ -142,8 +142,8 @@ defineShapeWithProps('mochi-hat', {
 
 ```tsx preview
 import { useEffect, useState } from 'react';
-import { CharacterMark, defineShape } from '@aora-bot/react';
-import { shapeGenerators } from '@aora-bot/engine';
+import { CharacterMark, defineShape } from '@mowa-bot/react';
+import { shapeGenerators } from '@mowa-bot/engine';
 
 function facet(): [number, number][] {
   const vertices: [number, number][] = [];

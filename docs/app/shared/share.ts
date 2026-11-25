@@ -15,7 +15,7 @@ import {
   type ColorId,
   type FaceStyle,
   type ShapeId,
-} from '@aora-bot/engine';
+} from '@mowa-bot/engine';
 
 /** A series parameter's value: what a slider, a switch or a choice sets. */
 export type ParamValue = number | boolean | string;
@@ -75,7 +75,7 @@ export function cleanParams(style: string, input: unknown): Preset['params'] {
  * Version-pinned prefix, so a later wire format can sit beside this one and
  * links already sent keep opening.
  */
-const SHARE_PREFIX = 'aorabot1.';
+const SHARE_PREFIX = 'mowabot1.';
 
 const toBase64Url = (s: string) =>
   btoa(String.fromCharCode(...new TextEncoder().encode(s)))
@@ -115,7 +115,7 @@ const oneOf = <T extends string>(list: readonly T[], value: unknown): value is T
 
 /**
  * Decode a share string. Returns `null` for anything that is not a valid
- * `aorabot1.` payload; a field the registries do not know falls back to the
+ * `mowabot1.` payload; a field the registries do not know falls back to the
  * default, since a slightly different character is better than a broken link.
  */
 export function decodeShare(input: string | null | undefined): Preset | null {

@@ -55,33 +55,33 @@ afterEach(() => {
   vi.useRealTimers();
 });
 
-const row = (el: HTMLElement) => el.querySelector('.aora-activity') as HTMLElement | null;
-const markBox = (el: HTMLElement) => el.querySelector('.aora-activity__mark') as HTMLElement;
-const label = (el: HTMLElement) => el.querySelector('.aora-ticker__line--in')?.textContent ?? null;
-const poked = (el: HTMLElement) => markBox(el).classList.contains('aora-activity__mark--poked');
+const row = (el: HTMLElement) => el.querySelector('.mowa-activity') as HTMLElement | null;
+const markBox = (el: HTMLElement) => el.querySelector('.mowa-activity__mark') as HTMLElement;
+const label = (el: HTMLElement) => el.querySelector('.mowa-ticker__line--in')?.textContent ?? null;
+const poked = (el: HTMLElement) => markBox(el).classList.contains('mowa-activity__mark--poked');
 
 describe('ActivityBadge labels', () => {
   it('shows the label by default and keeps the tool and the face in step', () => {
     const el = render(<ActivityBadge agent={freshAgent()} tool="search" />);
     expect(label(el)).toBe('Searching');
-    expect(el.querySelector('.aora-mark')!.getAttribute('data-state')).toBe('spawning');
+    expect(el.querySelector('.mowa-mark')!.getAttribute('data-state')).toBe('spawning');
 
     // The engine owns the arrival clock; the prop stops fighting it afterwards.
     advance(2000);
-    expect(el.querySelector('.aora-mark')!.getAttribute('data-state')).toBe('searching');
+    expect(el.querySelector('.mowa-mark')!.getAttribute('data-state')).toBe('searching');
   });
 
   it('keeps a hover-only label in the DOM, so it is still readable aloud', () => {
     const el = render(<ActivityBadge agent={freshAgent()} tool="search" showLabel="hover" />);
-    const line = el.querySelector('.aora-ticker')!;
-    expect(line.classList.contains('aora-activity__label--hover')).toBe(true);
+    const line = el.querySelector('.mowa-ticker')!;
+    expect(line.classList.contains('mowa-activity__label--hover')).toBe(true);
     expect(label(el)).toBe('Searching');
   });
 
   it('hides the label visually rather than dropping it', () => {
     const el = render(<ActivityBadge agent={freshAgent()} tool="search" showLabel="never" />);
-    expect(el.querySelector('.aora-ticker')).toBeNull();
-    expect(el.querySelector('.aora-visually-hidden')!.textContent).toBe('Searching');
+    expect(el.querySelector('.mowa-ticker')).toBeNull();
+    expect(el.querySelector('.mowa-visually-hidden')!.textContent).toBe('Searching');
   });
 
   it('takes an explicit text override', () => {
@@ -105,10 +105,10 @@ describe('ActivityBadge interaction', () => {
 
     // React synthesises enter/leave from the delegated over/out pair.
     act(() => markBox(el).dispatchEvent(new MouseEvent('pointerover', { bubbles: true })));
-    expect(row(el)!.classList.contains('aora-activity--emphasis')).toBe(true);
+    expect(row(el)!.classList.contains('mowa-activity--emphasis')).toBe(true);
 
     act(() => markBox(el).dispatchEvent(new MouseEvent('pointerout', { bubbles: true })));
-    expect(row(el)!.classList.contains('aora-activity--emphasis')).toBe(false);
+    expect(row(el)!.classList.contains('mowa-activity--emphasis')).toBe(false);
   });
 
   it('becomes a real control when the host wants the click, and reports it', () => {
@@ -131,9 +131,9 @@ describe('ActivityBadge interaction', () => {
     advance(16);
 
     act(() => markBox(el).click());
-    expect(markBox(el).classList.contains('aora-activity__mark--poked')).toBe(true);
+    expect(markBox(el).classList.contains('mowa-activity__mark--poked')).toBe(true);
     advance(420);
-    expect(markBox(el).classList.contains('aora-activity__mark--poked')).toBe(false);
+    expect(markBox(el).classList.contains('mowa-activity__mark--poked')).toBe(false);
   });
 
   /*
@@ -185,7 +185,7 @@ describe('ActivityBadge appearance', () => {
     const el = render(
       <ActivityBadge agent={freshAgent()} tool="search" face="line" nose="hook" lineWeight={1.4} />,
     );
-    const mark = el.querySelector('.aora-mark')!;
+    const mark = el.querySelector('.mowa-mark')!;
     expect(mark.getAttribute('data-face')).toBe('line');
     expect(mark.querySelectorAll('g[clip-path] > path[fill="none"]').length).toBeGreaterThan(0);
   });
@@ -193,21 +193,21 @@ describe('ActivityBadge appearance', () => {
   it('applies a style to the row rather than to the character', () => {
     const el = render(<ActivityBadge agent={freshAgent()} tool="search" style={{ marginTop: '4px' }} />);
     expect(row(el)!.style.marginTop).toBe('4px');
-    expect((el.querySelector('.aora-mark') as HTMLElement).style.marginTop).toBe('');
+    expect((el.querySelector('.mowa-mark') as HTMLElement).style.marginTop).toBe('');
   });
 
   it('carries the same three through a group, for whichever member is showing', () => {
     const el = render(
       <GroupActivityBadge members={[{ id: 'ada' }]} tool="run" face="line" nose="bow" lineWeight={1.4} />,
     );
-    expect(el.querySelector('.aora-mark')!.getAttribute('data-face')).toBe('line');
+    expect(el.querySelector('.mowa-mark')!.getAttribute('data-face')).toBe('line');
   });
 
   it('takes a style on the group without losing the ink crossfade', () => {
     const el = render(<GroupActivityBadge members={[{ id: 'ada' }]} style={{ gap: '2px' }} />);
-    const group = el.querySelector('.aora-activity-group') as HTMLElement;
+    const group = el.querySelector('.mowa-activity-group') as HTMLElement;
     expect(group.style.gap).toBe('2px');
-    expect(group.getAttribute('style')).toContain('--aora-activity-ink');
+    expect(group.getAttribute('style')).toContain('--mowa-activity-ink');
   });
 });
 
@@ -218,7 +218,7 @@ describe('ActivityBadge presence', () => {
     expect(row(el)).not.toBeNull();
 
     rerender(<ActivityBadge agent={agent} tool="search" visible={false} />);
-    expect(row(el)!.classList.contains('aora-activity--leaving')).toBe(true);
+    expect(row(el)!.classList.contains('mowa-activity--leaving')).toBe(true);
 
     advance(ACTIVITY_EXIT_MS - 1);
     expect(row(el)).not.toBeNull();
@@ -229,15 +229,15 @@ describe('ActivityBadge presence', () => {
   it('plays the arrival once per agent, not once per mount', () => {
     const agent = freshAgent();
     const first = render(<ActivityBadge agent={agent} tool="search" />);
-    expect(first.querySelector('.aora-activity--entering')).not.toBeNull();
+    expect(first.querySelector('.mowa-activity--entering')).not.toBeNull();
 
     act(() => root!.unmount());
     root = null;
     host?.remove();
 
     const second = render(<ActivityBadge agent={agent} tool="search" />);
-    expect(second.querySelector('.aora-activity--entering')).toBeNull();
-    expect(second.querySelector('.aora-mark')!.getAttribute('data-state')).toBe('searching');
+    expect(second.querySelector('.mowa-activity--entering')).toBeNull();
+    expect(second.querySelector('.mowa-mark')!.getAttribute('data-state')).toBe('searching');
   });
 });
 
@@ -249,11 +249,11 @@ describe('ActivityBadge facts mode', () => {
     );
     advance(2000);
 
-    expect(el.querySelector('.aora-mark')!.getAttribute('data-state')).toBe('reading');
+    expect(el.querySelector('.mowa-mark')!.getAttribute('data-state')).toBe('reading');
     expect(label(el)).toBe('Reading');
 
     rerender(<ActivityBadge agent={agent} activityMode="facts" facts={{ composing: true }} />);
-    expect(el.querySelector('.aora-mark')!.getAttribute('data-state')).toBe('composing');
+    expect(el.querySelector('.mowa-mark')!.getAttribute('data-state')).toBe('composing');
     expect(label(el)).toBe('Typing');
   });
 
@@ -261,10 +261,10 @@ describe('ActivityBadge facts mode', () => {
     const agent = freshAgent();
     const el = render(<ActivityBadge agent={agent} activityMode="facts" facts={{ running: true }} />);
     advance(2000);
-    const before = el.querySelector('.aora-mark')!.getAttribute('data-state');
+    const before = el.querySelector('.mowa-mark')!.getAttribute('data-state');
 
     rerender(<ActivityBadge agent={agent} activityMode="facts" facts={{ running: true }} />);
-    expect(el.querySelector('.aora-mark')!.getAttribute('data-state')).toBe(before);
+    expect(el.querySelector('.mowa-mark')!.getAttribute('data-state')).toBe(before);
   });
 });
 
@@ -276,10 +276,10 @@ describe('GroupActivityBadge', () => {
 
   it('rotates through members and carries the ink on a transitionable property', () => {
     const el = render(<GroupActivityBadge members={members} tool="run" cycleMs={2000} />);
-    const group = el.querySelector('.aora-activity-group')!;
+    const group = el.querySelector('.mowa-activity-group')!;
     const ink = () => group.getAttribute('style') ?? '';
 
-    expect(ink()).toContain('--aora-activity-ink');
+    expect(ink()).toContain('--mowa-activity-ink');
     const first = ink();
     advance(2000);
     expect(ink()).not.toBe(first);
@@ -287,12 +287,12 @@ describe('GroupActivityBadge', () => {
 
   it('draws a member picture instead of a character, keyed so the swap animates', () => {
     const el = render(<GroupActivityBadge members={[{ id: 'pic', pictureUrl: '/a.png' }]} tool="run" />);
-    expect(el.querySelector('.aora-activity-group__picture')!.getAttribute('src')).toBe('/a.png');
-    expect(el.querySelector('.aora-mark')).toBeNull();
+    expect(el.querySelector('.mowa-activity-group__picture')!.getAttribute('src')).toBe('/a.png');
+    expect(el.querySelector('.mowa-mark')).toBeNull();
   });
 
   it('renders nothing for an empty group rather than an empty box', () => {
     const el = render(<GroupActivityBadge members={[]} />);
-    expect(el.querySelector('.aora-activity-group')).toBeNull();
+    expect(el.querySelector('.mowa-activity-group')).toBeNull();
   });
 });

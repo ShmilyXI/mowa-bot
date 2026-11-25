@@ -5,7 +5,7 @@ import type {
   CoreShapeId,
   EyeTopologyId,
   MouthId,
-} from '@aora-bot/engine';
+} from '@mowa-bot/engine';
 import { family, hudLabels, shapeFamilyLabels, stateGroupLabels } from './families.js';
 
 /*

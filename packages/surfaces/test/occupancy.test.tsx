@@ -3,7 +3,7 @@ import { act, type ReactNode } from 'react';
 import { createRoot, type Root } from 'react-dom/client';
 import { renderToString } from 'react-dom/server';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { LocaleProvider, CharacterStageProvider } from '@aora-bot/react';
+import { LocaleProvider, CharacterStageProvider } from '@mowa-bot/react';
 import { OccupancyList, type OccupancyRow } from '../src/occupancy/OccupancyList.js';
 import { OccupancyMark } from '../src/occupancy/OccupancyMark.js';
 
@@ -55,17 +55,17 @@ afterEach(() => {
 describe('OccupancyList', () => {
   it('shows a row per resource, with an overflow count', () => {
     const el = render(<OccupancyList rows={ROWS} maxVisible={4} />);
-    const rows = el.querySelectorAll('.aora-s-occupancy__row');
+    const rows = el.querySelectorAll('.mowa-s-occupancy__row');
     expect(rows).toHaveLength(3);
 
-    expect(rows[0]!.querySelectorAll('.aora-s-occupancy__mark')).toHaveLength(4);
-    expect(rows[0]!.querySelector('.aora-s-occupancy__overflow')!.textContent).toBe('+2');
-    expect(rows[1]!.querySelector('.aora-s-occupancy__overflow')).toBeNull();
+    expect(rows[0]!.querySelectorAll('.mowa-s-occupancy__mark')).toHaveLength(4);
+    expect(rows[0]!.querySelector('.mowa-s-occupancy__overflow')!.textContent).toBe('+2');
+    expect(rows[1]!.querySelector('.mowa-s-occupancy__overflow')).toBeNull();
   });
 
   it('says so when nothing is using a resource', () => {
     const el = render(<OccupancyList rows={ROWS} />);
-    expect(el.querySelector('.aora-s-occupancy__idle')!.textContent).toBe('Not in use');
+    expect(el.querySelector('.mowa-s-occupancy__idle')!.textContent).toBe('Not in use');
   });
 
   it('names the occupants for a screen reader', () => {
@@ -94,8 +94,8 @@ describe('OccupancyList', () => {
       vi.advanceTimersByTime(32);
     });
     // Six visible marks in two states, so two hosted animations.
-    expect(el.querySelectorAll('.aora-s-occupancy__mark')).toHaveLength(6);
-    expect(el.querySelectorAll('.aora-stage > .aora-mark')).toHaveLength(2);
+    expect(el.querySelectorAll('.mowa-s-occupancy__mark')).toHaveLength(6);
+    expect(el.querySelectorAll('.mowa-stage > .mowa-mark')).toHaveLength(2);
   });
 
   it('opts out of the stage when a line weight is asked for', () => {
@@ -107,8 +107,8 @@ describe('OccupancyList', () => {
     act(() => {
       vi.advanceTimersByTime(32);
     });
-    expect(el.querySelectorAll('.aora-stage > .aora-mark')).toHaveLength(0);
-    expect(el.querySelectorAll('.aora-s-occupancy__mark svg')).toHaveLength(2);
+    expect(el.querySelectorAll('.mowa-stage > .mowa-mark')).toHaveLength(0);
+    expect(el.querySelectorAll('.mowa-s-occupancy__mark svg')).toHaveLength(2);
   });
 });
 

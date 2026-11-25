@@ -1,25 +1,25 @@
 ---
-name: aora-bot-integration
-description: Embed Aora Bot characters in a host app — CharacterMark, the line face, the HUD, the emotion protocol, the arbiter, state channels, Claude Code / Cursor adapters, product surfaces (pickers, editor, scenes, cast, activity), SpriteMark, autoPause. Use when wiring an AI agent to a face, posting aoraBotId, drawing progress or timers around a character, or mounting the React surfaces.
+name: mowa-bot-integration
+description: Embed Mowa Bot characters in a host app — CharacterMark, the line face, the HUD, the emotion protocol, the arbiter, state channels, Claude Code / Cursor adapters, product surfaces (pickers, editor, scenes, cast, activity), SpriteMark, autoPause. Use when wiring an AI agent to a face, posting mowaBotId, drawing progress or timers around a character, or mounting the React surfaces.
 ---
 
-# Aora Bot integration
+# Mowa Bot integration
 
 ## Install
 
 ```bash
-pnpm add @aora-bot/react
+pnpm add @mowa-bot/react
 ```
 
 ```tsx
-import { CharacterMark } from '@aora-bot/react';
-import '@aora-bot/react/styles.css';
+import { CharacterMark } from '@mowa-bot/react';
+import '@mowa-bot/react/styles.css';
 
 <CharacterMark shape="cloud" color="blue" state="thinking" sizePx={96} />;
 ```
 
 React 19 is required. For geometry or a Node relay without React, use
-`@aora-bot/engine` and `@aora-bot/engine/agent`.
+`@mowa-bot/engine` and `@mowa-bot/engine/agent`.
 
 ## Appearance
 
@@ -95,9 +95,9 @@ alerting, `38` refusing, `40` searching, `41` powering-down. Full table in
 `EMOTIONS`.
 
 ```ts
-import { parseAgentMessage, resolveEmotionId, createArbiter } from '@aora-bot/engine/agent';
+import { parseAgentMessage, resolveEmotionId, createArbiter } from '@mowa-bot/engine/agent';
 
-parseAgentMessage({ aoraBotId: '32', tips: 'Editing…', hud: { kind: 'progress', value: 0.4 } });
+parseAgentMessage({ mowaBotId: '32', tips: 'Editing…', hud: { kind: 'progress', value: 0.4 } });
 // → { emotionId: '32', state: 'working', tips: 'Editing…', hud: { kind: 'progress', value: 0.4 } }
 ```
 
@@ -115,7 +115,7 @@ screen for `minDisplayMs`; one-shot events (`celebrate`, `alerting`,
 `surprised`) are never dropped.
 
 ```tsx
-import { AgentStateProvider, useAgentState, CharacterMark } from '@aora-bot/react';
+import { AgentStateProvider, useAgentState, CharacterMark } from '@mowa-bot/react';
 
 function Face() {
   const { state, tips, hud, update } = useAgentState();
@@ -138,14 +138,14 @@ function Face() {
 Same object on HTTP, stdin, and `postMessage`:
 
 ```
-{ "session_id": "s1", "aoraBotId": "32", "tips": "Editing…" }
-{ "session_id": "s1", "aoraBotId": "32", "hud": { "kind": "progress", "value": 0.4 } }
+{ "session_id": "s1", "mowaBotId": "32", "tips": "Editing…" }
+{ "session_id": "s1", "mowaBotId": "32", "hud": { "kind": "progress", "value": 0.4 } }
 { "session_id": "s1", "agent_id": "claude-code", "event": "PreToolUse" }
 { "session_id": "s1", "state": "thinking" }
 ```
 
 - `normalize` / `normalizeLine` — Node relays.
-- `openMessageChannel` — iframes (`type: 'aora:state'`).
+- `openMessageChannel` — iframes (`type: 'mowa:state'`).
 - `useEventSourceChannel(url)` — browser, feeds the nearest provider.
 
 A sample relay lives at `examples/agent-relay/relay.mjs`.

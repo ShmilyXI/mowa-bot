@@ -5,8 +5,8 @@ import { StyleParamsDemo } from '@theme';
 The `vector` series draws a character as smooth SVG paths. It has sixteen variants that differ in paint only: the geometry, the animation and the face are the same in all of them, so a new state or a new shape arrives in every variant at once. Seven are drawing media, which draw the same character by hand, and two are paper media: origami and relief.
 
 ```tsx preview
-import { getStyle } from '@aora-bot/engine';
-import { CharacterMark } from '@aora-bot/react';
+import { getStyle } from '@mowa-bot/engine';
+import { CharacterMark } from '@mowa-bot/react';
 
 const variants = getStyle('vector').variants;
 
@@ -26,7 +26,7 @@ export default function Demo() {
 
 | Variant      | Body                                                                     | Colour of the `cute` face                | Parameters                                   |
 | ------------ | ------------------------------------------------------------------------ | ---------------------------------------- | -------------------------------------------- |
-| `solid`      | Flat fill of the ink                                                     | The features colour (`--aora-face-soft`) | —                                            |
+| `solid`      | Flat fill of the ink                                                     | The features colour (`--mowa-face-soft`) | —                                            |
 | `outline`    | Stroked, with an 8% ink fill                                             | The ink                                  | `strokeWidth`                                |
 | `glass`      | A tinted body with a fine rim, lit at the top and the rim                | The ink                                  | `strokeWidth`                                |
 | `sticker`    | Filled, inside a white border and a shadow                               | As `solid`                               | `stickerWidth`, `stickerShadow`              |
@@ -50,7 +50,7 @@ export default function Demo() {
 A sticker is a figure with a white border cut round it and a small soft shadow under it, as if it had been stuck onto the page. The border wraps the body and the notification badge as one silhouette, and it is drawn inside the body's transform, so it squashes, turns and fades with the body during a bounce, a spin or a belt change.
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 export default function Demo() {
   const surfaces = ['#fcfcfc', '#16161a', '#2b1a3d'];
@@ -74,18 +74,18 @@ export default function Demo() {
 }
 ```
 
-The paper does not follow the page. A sticker has an edge of its own, so on a dark page it stays light, and that contrast lifts it off the surface. For the same reason a drawn face's whites are paper too, rather than the page. A host that wants a cream or a tinted edge sets `--aora-paper` on any ancestor:
+The paper does not follow the page. A sticker has an edge of its own, so on a dark page it stays light, and that contrast lifts it off the surface. For the same reason a drawn face's whites are paper too, rather than the page. A host that wants a cream or a tinted edge sets `--mowa-paper` on any ancestor:
 
 ```css
 .card {
-  --aora-paper: #fff7e6;
+  --mowa-paper: #fff7e6;
 }
 ```
 
 `stickerWidth` is how far the border reaches beyond the body, in shape-space units, so it scales with the character: a 24-pixel avatar gets a border about one pixel wide. `stickerShadow` turns the drop shadow off, which is what you want on a busy background or in a long list.
 
 ```tsx preview
-import { renderStaticSvgDataUrl } from '@aora-bot/react';
+import { renderStaticSvgDataUrl } from '@mowa-bot/react';
 
 const cases = [
   { label: 'stickerWidth 4', styleOptions: { stickerWidth: 4 } },
@@ -124,7 +124,7 @@ export default function Demo() {
 A paper cut-out lies on a darker copy of itself, offset down and to one side, with no blur: a hard shadow. `paperOffset` is the distance in shape-space units and `paperAngle` the direction in degrees, clockwise from the right — `90` is straight down.
 
 ```tsx preview
-import { renderStaticSvgDataUrl } from '@aora-bot/react';
+import { renderStaticSvgDataUrl } from '@mowa-bot/react';
 
 const cases = [
   { label: 'offset 4', styleOptions: { paperOffset: 4 } },
@@ -161,7 +161,7 @@ export default function Demo() {
 
 Two design decisions are worth knowing.
 
-- **The shade comes from the ink, not from a second colour.** The shadow is a copy of the body in the same paint with black laid over it at 32%, so it is the ink, darkened. That works whatever the ink is (the `--aora-fg` token, a flat colour or a gradient), whereas `color-mix()` on a computed colour could not handle a gradient.
+- **The shade comes from the ink, not from a second colour.** The shadow is a copy of the body in the same paint with black laid over it at 32%, so it is the ink, darkened. That works whatever the ink is (the `--mowa-fg` token, a flat colour or a gradient), whereas `color-mix()` on a computed colour could not handle a gradient.
 - **The direction does not turn with the body.** The offset is applied outside the body's transform. When the character spins the shadow squashes and rotates with it but keeps falling the same way, like a light that stays where it is.
 
 The figure itself stays upright. A slight tilt would be a pose, and poses belong to the simulation (`poseHome`), not to paint, so `paper` never changes where the face or the belt is.
@@ -171,7 +171,7 @@ The figure itself stays upright. A slight tilt would be a pose, and poses belong
 `soft` is a rounded toy: the flat body under a radial wash (light at the top left, dark at the bottom right) and a shadow on the ground that stays put when the body hops. The blush is deeper and leans pink, so it shows through the wash. A small gloss at the top left is off by default (`softGloss`), because on a shape whose face sits high it lands on an eye. The wash and the gloss are overlays on the body rather than a gradient computed from the ink, so they work on a token, a colour or a gradient ink. Parts such as ears take the wash too, so their shading matches where they sit on the figure.
 
 ```tsx preview
-import { renderStaticSvgDataUrl } from '@aora-bot/react';
+import { renderStaticSvgDataUrl } from '@mowa-bot/react';
 
 const cases = [
   { label: 'default', styleOptions: {} },
@@ -206,10 +206,10 @@ export default function Demo() {
 
 ## Riso
 
-`riso` imitates two-colour stencil printing: the body is printed in its own ink in place, multiplied over a copy in a second ink shifted a little to one side, with a halftone screen over the top. The second ink is `--aora-ink2`: pink by default, gold on a body of a similar hue (red, pink, magenta), and the ink itself for a light ink, so cream stays cream. The edge where the two passes miss each other is the look of this variant. `risoOffset` is the misregistration in shape-space units, and `risoHalftone` switches the screen.
+`riso` imitates two-colour stencil printing: the body is printed in its own ink in place, multiplied over a copy in a second ink shifted a little to one side, with a halftone screen over the top. The second ink is `--mowa-ink2`: pink by default, gold on a body of a similar hue (red, pink, magenta), and the ink itself for a light ink, so cream stays cream. The edge where the two passes miss each other is the look of this variant. `risoOffset` is the misregistration in shape-space units, and `risoHalftone` switches the screen.
 
 ```tsx preview
-import { renderStaticSvgDataUrl } from '@aora-bot/react';
+import { renderStaticSvgDataUrl } from '@mowa-bot/react';
 
 const cases = [
   { label: 'offset 0', styleOptions: { risoOffset: 0 } },
@@ -250,7 +250,7 @@ export default function Demo() {
 None of them paints a background. They read on the page they are put on, light or dark, through the same ink tokens as the other variants:
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 const media = ['pencil', 'marker', 'crayon', 'watercolor', 'neon', 'chalk', 'gothic', 'origami', 'relief'];
 const surfaces = [
@@ -293,7 +293,7 @@ A medium also adapts to the size it is shown at. Between 80 and 40 pixels wide t
 A faint tint of the ink, hatching on the side away from the light, and the outline drawn twice: once closed, once a looser pass that overshoots its start. `wobble` is how far the hand strays, `grain` how much of the paper's tooth the graphite misses, and `hatching` switches the shading.
 
 ```tsx preview
-import { renderStaticSvgDataUrl } from '@aora-bot/react';
+import { renderStaticSvgDataUrl } from '@mowa-bot/react';
 
 const cases = [
   { label: 'default', styleOptions: {} },
@@ -333,7 +333,7 @@ export default function Demo() {
 A pale pass drawn slightly off-register, a scribble that fills the shape without lifting, and a dark double outline. The gaps in the scribble show the pale pass. The face and the effects are outlined in the same dark marker. `strokeWidth` sets the marker's width, and with it the scribble's.
 
 ```tsx preview
-import { renderStaticSvgDataUrl } from '@aora-bot/react';
+import { renderStaticSvgDataUrl } from '@mowa-bot/react';
 
 const cases = [
   { label: 'default', styleOptions: {} },
@@ -372,7 +372,7 @@ export default function Demo() {
 A waxy fill with the paper's tooth showing through, a ragged edge, and a heavier rim where the crayon was pressed along the outline. `grain` is how much of the paper shows; `wobble` how ragged the edge is.
 
 ```tsx preview
-import { renderStaticSvgDataUrl } from '@aora-bot/react';
+import { renderStaticSvgDataUrl } from '@mowa-bot/react';
 
 const cases = [
   { label: 'default', styleOptions: {} },
@@ -411,7 +411,7 @@ export default function Demo() {
 A wash a little lighter than the ink, pigment pooled in one blot and pushed out of another into a bloom with a ragged edge, granulation in the paper's hollows, and the darker edge a wash leaves where it dried. A blot is drawn only where it stays inside the wash, so a notched shape simply has fewer.
 
 ```tsx preview
-import { renderStaticSvgDataUrl } from '@aora-bot/react';
+import { renderStaticSvgDataUrl } from '@mowa-bot/react';
 
 const cases = [
   { label: 'default', styleOptions: {} },
@@ -450,7 +450,7 @@ export default function Demo() {
 A tube of the ink with a core, and everything on and around the body — the face, the effects, the dials, the belt — glowing in its own colour, so a pink heart glows pink. `neonGlow` is the glow's radius in shape-space units; `0` leaves the bare tube, which costs nothing to draw.
 
 ```tsx preview
-import { renderStaticSvgDataUrl } from '@aora-bot/react';
+import { renderStaticSvgDataUrl } from '@mowa-bot/react';
 
 const cases = [
   { label: 'neonGlow 0', styleOptions: { neonGlow: 0 } },
@@ -493,7 +493,7 @@ export default function Demo() {
 A dusty haze along the line, diagonal strokes for the fill, the line itself and a fainter retrace beside it, all crumbling on the grain. `hatching` switches the diagonal fill; `grain` is how much of the chalk the surface takes.
 
 ```tsx preview
-import { renderStaticSvgDataUrl } from '@aora-bot/react';
+import { renderStaticSvgDataUrl } from '@mowa-bot/react';
 
 const cases = [
   { label: 'default', styleOptions: {} },
@@ -532,7 +532,7 @@ export default function Demo() {
 A dark storybook drawing in ink. Each piece is darkened from the edge in, hatched and then cross-hatched on the side away from the light, and ringed by a brushed ink line in a warm black that swells on the shadow side and thins where the brush lifts. The fill carries a fine paper grain. The face is painted as on `solid`, over the shading. `hatching` switches the hatching and `grain` sets the paper; a piece smaller than an ear is left unhatched.
 
 ```tsx preview
-import { renderStaticSvgDataUrl } from '@aora-bot/react';
+import { renderStaticSvgDataUrl } from '@mowa-bot/react';
 
 const cases = [
   { label: 'default', styleOptions: {} },
@@ -588,7 +588,7 @@ Each piece is a sheet crumpled and pressed flat again. The outline is kept as it
 Origami reads no parameters. The crumple is seeded by the outline, worked out once per outline and cached, so a static render comes out the same every time.
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 const cast = [
   { shape: 'circle', color: 'cream', face: 'capsule' },
@@ -619,7 +619,7 @@ Each piece is one thick card pressed up from behind. A white rim lights its uppe
 Relief reads no parameters and has no texture, so it costs about what `paper` does to redraw.
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 const cast = [
   { shape: 'circle', color: 'cream', face: 'capsule' },
@@ -645,10 +645,10 @@ export default function Demo() {
 
 ## A single line
 
-The `outline` variant is already the single-line look. Whether it is one colour depends on its ink. With no `ink` the stroke, the eyes and the features use `--aora-fg`, and `CharacterMark` sets that to the palette colour — so the outline is blue, violet, whatever `color` says. To draw in the text colour instead, give it `currentColor`:
+The `outline` variant is already the single-line look. Whether it is one colour depends on its ink. With no `ink` the stroke, the eyes and the features use `--mowa-fg`, and `CharacterMark` sets that to the palette colour — so the outline is blue, violet, whatever `color` says. To draw in the text colour instead, give it `currentColor`:
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 const surfaces = [
   { bg: '#fcfcfc', fg: '#1f2937', scheme: 'light' },

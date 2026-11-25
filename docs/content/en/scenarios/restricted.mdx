@@ -10,8 +10,8 @@ The three tones and the roster dot that goes with each. Switching the tone swaps
 
 ```tsx preview
 import { useState } from 'react';
-import { AgentPortrait, AvatarStatusDot, CharacterStageProvider } from '@aora-bot/react';
-import { RestrictedScene, type RestrictedTone } from '@aora-bot/surfaces';
+import { AgentPortrait, AvatarStatusDot, CharacterStageProvider } from '@mowa-bot/react';
+import { RestrictedScene, type RestrictedTone } from '@mowa-bot/surfaces';
 
 const tones: RestrictedTone[] = ['restricted', 'unauthorised', 'offline'];
 const dot: Record<RestrictedTone, { tone: 'error' | 'offline'; label: string }> = {

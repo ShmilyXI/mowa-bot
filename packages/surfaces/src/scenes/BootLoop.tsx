@@ -1,7 +1,7 @@
-import type { CharacterState, ColorId, FaceStyle, NoseId, ShapeId } from '@aora-bot/engine';
+import type { CharacterState, ColorId, FaceStyle, NoseId, ShapeId } from '@mowa-bot/engine';
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { useSurfaceLocale } from '../locale/index.js';
-import { CharacterMark, cx } from '@aora-bot/react';
+import { CharacterMark, cx } from '@mowa-bot/react';
 import { DeviceBezel } from './DeviceBezel.js';
 
 export interface BootLoopProps {
@@ -80,14 +80,14 @@ export function BootLoop({
   const state = CYCLE[step % CYCLE.length]!;
 
   return (
-    <div className={cx('aora-s-boot', className)} style={style}>
+    <div className={cx('mowa-s-boot', className)} style={style}>
       <DeviceBezel widthPx={widthPx} light="on">
-        <div className="aora-s-boot__screen" data-front={inFront || undefined}>
+        <div className="mowa-s-boot__screen" data-front={inFront || undefined}>
           {/* The sweep is a CSS gradient on its own layer: one animated
               element for the whole scene, and the reduced-motion query in the
               stylesheet stops it. Deciding that in JavaScript instead would
               render a different tree on the server than in the browser. */}
-          <span className="aora-s-boot__scan" aria-hidden="true" />
+          <span className="mowa-s-boot__scan" aria-hidden="true" />
           <CharacterMark
             shape={shape}
             color={color}
@@ -96,14 +96,14 @@ export function BootLoop({
             lineWeight={lineWeight}
             state={state}
             sizePx={markSize}
-            className="aora-s-boot__mark"
+            className="mowa-s-boot__mark"
           />
         </div>
       </DeviceBezel>
 
-      <div className="aora-s-boot__text" role="status" aria-live="polite">
-        <span className="aora-s-boot__title">{title ?? t('boot.title')}</span>
-        <span className="aora-s-boot__body">{body ?? t('boot.body')}</span>
+      <div className="mowa-s-boot__text" role="status" aria-live="polite">
+        <span className="mowa-s-boot__title">{title ?? t('boot.title')}</span>
+        <span className="mowa-s-boot__body">{body ?? t('boot.body')}</span>
       </div>
     </div>
   );

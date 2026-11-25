@@ -5,10 +5,10 @@ import {
   type FaceStyle,
   type NoseId,
   type ShapeId,
-} from '@aora-bot/engine';
+} from '@mowa-bot/engine';
 import type { CSSProperties } from 'react';
 import { useSurfaceLocale } from '../locale/index.js';
-import { CharacterMark, cx } from '@aora-bot/react';
+import { CharacterMark, cx } from '@mowa-bot/react';
 
 export interface LoadingCharacterProps {
   /** Swap the placeholder for the live character. */
@@ -61,17 +61,17 @@ export function LoadingCharacter({
 
   return (
     <span
-      className={cx('aora-s-loading-character', className)}
+      className={cx('mowa-s-loading-character', className)}
       data-ready={ready || undefined}
       style={{ width: sizePx, height: sizePx, ...style }}
     >
       <span
-        className="aora-s-loading-character__skeleton"
+        className="mowa-s-loading-character__skeleton"
         role={ready ? undefined : 'status'}
         aria-label={ready ? undefined : t('loading.label')}
-        style={{ '--aora-mask': shapeMaskImage({ shape, sizePx }) } as CSSProperties}
+        style={{ '--mowa-mask': shapeMaskImage({ shape, sizePx }) } as CSSProperties}
       />
-      <span className="aora-s-loading-character__live" aria-hidden={!ready}>
+      <span className="mowa-s-loading-character__live" aria-hidden={!ready}>
         <CharacterMark
           shape={shape}
           color={color}

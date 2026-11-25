@@ -98,7 +98,7 @@ export interface ThemeVariant {
 }
 
 /**
- * A theme's entry (`@aora-bot/engine/themes/<id>`), as `installTheme` takes
+ * A theme's entry (`@mowa-bot/engine/themes/<id>`), as `installTheme` takes
  * it: its definition and everything the definition names that the core does
  * not have. It is plain data and painters, with no import of the engine at
  * run time, so it installs into whichever copy of the engine (the main entry
@@ -130,7 +130,7 @@ export interface ThemePackage {
   motions?: Readonly<Record<string, PartMotion>>;
   /**
    * What draws `decor`, `motions`, a skin's `moodAccent` and the effect
-   * anchor: `EXTRAS` from `@aora-bot/engine/themes/extras` (in a theme's own
+   * anchor: `EXTRAS` from `@mowa-bot/engine/themes/extras` (in a theme's own
    * entry, `import { EXTRAS } from '../extras/index.js'`). Without it they
    * are not drawn and the accent leans as every accent does.
    */

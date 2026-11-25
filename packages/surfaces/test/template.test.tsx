@@ -3,7 +3,7 @@ import { act, useEffect, type ReactNode, type RefObject } from 'react';
 import { createRoot, type Root } from 'react-dom/client';
 import { renderToString } from 'react-dom/server';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { CelebrationLayer, type ConfettiHandle } from '@aora-bot/react';
+import { CelebrationLayer, type ConfettiHandle } from '@mowa-bot/react';
 import { ShareCard } from '../src/template/ShareCard.js';
 import { TemplateDialog } from '../src/template/TemplateDialog.js';
 import { VisibilityControls } from '../src/template/VisibilityControls.js';
@@ -224,12 +224,12 @@ describe('template surfaces', () => {
 
     const save = [...el.querySelectorAll('button')].find((b) => b.textContent === 'Save')!;
     act(() => save.dispatchEvent(new window.MouseEvent('click', { bubbles: true })));
-    expect(el.querySelector('.aora-s-template__mark .aora-mark')?.getAttribute('data-state')).toBe('working');
+    expect(el.querySelector('.mowa-s-template__mark .mowa-mark')?.getAttribute('data-state')).toBe('working');
 
     await act(async () => {
       settle?.();
     });
-    expect(el.querySelector('.aora-s-template__mark .aora-mark')?.getAttribute('data-state')).toBe(
+    expect(el.querySelector('.mowa-s-template__mark .mowa-mark')?.getAttribute('data-state')).toBe(
       'celebrate',
     );
   });

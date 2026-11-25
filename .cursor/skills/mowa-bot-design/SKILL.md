@@ -1,9 +1,9 @@
 ---
-name: aora-bot-design
-description: Add or draw characters, states, effects, belts, HUD forms, mouths, or cast members in Aora Bot. Use when extending the engine's design language — a new silhouette, a new animation state, a protocol id, or a named character.
+name: mowa-bot-design
+description: Add or draw characters, states, effects, belts, HUD forms, mouths, or cast members in Mowa Bot. Use when extending the engine's design language — a new silhouette, a new animation state, a protocol id, or a named character.
 ---
 
-# Aora Bot design
+# Mowa Bot design
 
 English-first code. Bilingual data (`{ en, zh }`) for anything a reader sees.
 Procedural where it moves: a pose is a spring, an effect is a function of
@@ -96,10 +96,10 @@ Iterate on the picture, not the path. Drop what does not hold up.
    automatic avatar. Append the member's id to the end of `AVATAR_POOL` in
    `api/_avatar.ts`; never reorder or remove entries there, since the
    avatar endpoint's consistent hash depends on that order.
-7. Run `pnpm --filter @aora-bot/engine generate:faces`, which stores how
+7. Run `pnpm --filter @mowa-bot/engine generate:faces`, which stores how
    every drawn face fits the new body. Add a `CHANGELOG.md` line, run the
    engine tests and inspect the snapshot diff before
-   `pnpm --filter @aora-bot/engine test -- -u`.
+   `pnpm --filter @mowa-bot/engine test -- -u`.
 
 Cap the roster by taste, not by count: when a new character is added, ask
 which existing one it makes redundant.
@@ -229,7 +229,7 @@ cute face's geometry at runtime.
    off the face `loose`, so the fit to narrow bodies ignores it.
 5. Give it a glyph per kind of eye and per mouth (`kaomoji`), and
    `face.<id>` in both locale files.
-6. Run `pnpm --filter @aora-bot/engine generate:faces`: it stores the face's
+6. Run `pnpm --filter @mowa-bot/engine generate:faces`: it stores the face's
    extent over all its states and its fit to every body of the roster, which
    a live mount reads instead of working them out. `drawn-stored.test.ts`
    fails until they match.

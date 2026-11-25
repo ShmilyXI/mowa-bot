@@ -5,7 +5,7 @@ import { API } from '@theme';
 A character and a label showing what an agent is doing.
 
 ```tsx preview
-import { CharacterStageProvider, ActivityBadge, TOOL_ACTIVITIES } from '@aora-bot/react';
+import { CharacterStageProvider, ActivityBadge, TOOL_ACTIVITIES } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -34,7 +34,7 @@ Unknown tools fall back to a generic working state rather than rendering nothing
 ## Adding tools
 
 ```ts
-import { TOOL_ACTIVITIES } from '@aora-bot/react';
+import { TOOL_ACTIVITIES } from '@mowa-bot/react';
 
 TOOL_ACTIVITIES.deploy = { labelKey: 'activity.running', state: 'working' };
 ```
@@ -42,7 +42,7 @@ TOOL_ACTIVITIES.deploy = { labelKey: 'activity.running', state: 'working' };
 ## Groups
 
 ```tsx preview
-import { CharacterStageProvider, GroupActivityBadge } from '@aora-bot/react';
+import { CharacterStageProvider, GroupActivityBadge } from '@mowa-bot/react';
 
 const members = [{ id: 'ada' }, { id: 'grace' }, { id: 'alan' }];
 
@@ -62,7 +62,7 @@ Showing every member at once turns a four-person group into a wall of characters
 Labels come from the [locale provider](/components/locale-provider), so the text follows the surrounding language without a prop.
 
 ```tsx preview
-import { LocaleProvider, ActivityBadge } from '@aora-bot/react';
+import { LocaleProvider, ActivityBadge } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -82,7 +82,7 @@ export default function Demo() {
 
 ```tsx preview
 import { useState } from 'react';
-import { CharacterStageProvider, ActivityBadge, AgentPortrait, useMarkCommand } from '@aora-bot/react';
+import { CharacterStageProvider, ActivityBadge, AgentPortrait, useMarkCommand } from '@mowa-bot/react';
 
 const agent = { id: 'nova', shape: 'hex', color: 'violet' } as const;
 
@@ -123,7 +123,7 @@ export default function Demo() {
 
 ```tsx preview
 import { useState } from 'react';
-import { CharacterStageProvider, ActivityBadge } from '@aora-bot/react';
+import { CharacterStageProvider, ActivityBadge } from '@mowa-bot/react';
 
 export default function Demo() {
   const [visible, setVisible] = useState(true);
@@ -148,7 +148,7 @@ export default function Demo() {
 
 ```tsx preview
 import { useState } from 'react';
-import { CharacterStageProvider, ActivityBadge } from '@aora-bot/react';
+import { CharacterStageProvider, ActivityBadge } from '@mowa-bot/react';
 
 export default function Demo() {
   const [pokes, setPokes] = useState(0);
@@ -177,14 +177,14 @@ Two hooks the component uses are exported for hosts that render their own row.
 
 ```tsx preview
 import { useState } from 'react';
-import { CharacterStageProvider, StagedMark, useActivityStatus, useArrival } from '@aora-bot/react';
+import { CharacterStageProvider, StagedMark, useActivityStatus, useArrival } from '@mowa-bot/react';
 
 function Row({ id, visible }: { id: string; visible: boolean }) {
   const presence = useActivityStatus(visible);
   const spawn = useArrival(id);
   if (!presence.mounted) return null;
   return (
-    <span className={`aora-activity${presence.leaving ? ' aora-activity--leaving' : ''}`}>
+    <span className={`mowa-activity${presence.leaving ? ' mowa-activity--leaving' : ''}`}>
       <StagedMark shape="pebble" color="green" state={spawn.state ?? 'idle'} sizePx={28} />
       <span className="site-demo__label">
         {spawn.isFirst ? 'first appearance' : 'seen before'}, {presence.leaving ? 'leaving' : 'here'}

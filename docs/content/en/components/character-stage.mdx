@@ -5,7 +5,7 @@ import { API } from '@theme';
 Shares one animation between every character that looks the same.
 
 ```tsx preview
-import { CharacterStageProvider, StagedMark, COLOR_IDS } from '@aora-bot/react';
+import { CharacterStageProvider, StagedMark, COLOR_IDS } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -60,13 +60,13 @@ Hidden sources render at 96 pixels rather than collapsing to nothing. Anything t
 
 ## Style and ref
 
-`style` is applied last, so a `--aora-fg` set there overrides the ink derived from `color`. That is the only way to hand a mark an animatable custom property instead of a fixed ink — the group activity ink transition relies on it.
+`style` is applied last, so a `--mowa-fg` set there overrides the ink derived from `color`. That is the only way to hand a mark an animatable custom property instead of a fixed ink — the group activity ink transition relies on it.
 
 `ref` exposes the same `CharacterHandle` as `CharacterMark`, but only when the mark owns an engine — which, for a `StagedMark`, means outside a provider. Inside one, every mark is a mirror of the stage's hidden source. It shares its animation with every other mark of the same appearance, so it cannot move alone. The handle is never attached in that case, and [`useTapCycle`](/components/mark-commands) reports that there was nothing to poke.
 
 ```tsx preview
 import { useRef, type CSSProperties } from 'react';
-import { CharacterStageProvider, StagedMark, type CharacterHandle } from '@aora-bot/react';
+import { CharacterStageProvider, StagedMark, type CharacterHandle } from '@mowa-bot/react';
 
 export default function Demo() {
   const own = useRef<CharacterHandle>(null);
@@ -79,7 +79,7 @@ export default function Demo() {
           color="cyan"
           state="happy"
           sizePx={72}
-          style={{ '--aora-fg': '#0ea5e9' } as CSSProperties}
+          style={{ '--mowa-fg': '#0ea5e9' } as CSSProperties}
         />
         <StagedMark ref={mirror} shape="hex" color="cyan" state="happy" sizePx={72} />
       </CharacterStageProvider>

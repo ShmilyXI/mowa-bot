@@ -14,7 +14,7 @@ import { alphaLevel, type PaintTable } from './paints.js';
 import { fillCentres } from './raster.js';
 
 /** The leaf's paint in a live pixel scene: a token, as in the vector style. */
-export const PIXEL_LEAF_TOKEN = `var(--aora-leaf, ${LEAF_COLOR})`;
+export const PIXEL_LEAF_TOKEN = `var(--mowa-leaf, ${LEAF_COLOR})`;
 
 /** How far an ear's inside is lightened towards white: the tone step `shade.ts` understands. */
 const INNER_TONE = 0.45;

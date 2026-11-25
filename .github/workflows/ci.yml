@@ -48,7 +48,7 @@ jobs:
         run: pnpm run test
 
       - name: Build documentation
-        run: pnpm --filter @aora-bot/docs build
+        run: pnpm --filter @mowa-bot/docs build
 
       - name: Bundle size
         run: |

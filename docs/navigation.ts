@@ -198,10 +198,9 @@ export const sidebarFor = (lang: Lang): Sidebar => ({
 });
 
 /*
- * Seven items, and only seven: the console (the home page, where a character is
+ * Five items, and only five: the console (the home page, where a character is
  * built by clicking), the theme exhibition beside it, the docs, the scenarios,
- * what is new in each release, the sponsor page, and the classic Emotion Ball, which keeps its own site and
- * license. The docs item stands for every space the one sidebar draws from, so
+ * and what is new in each release. The docs item stands for every space the one sidebar draws from, so
  * the bar does not need an edit when a page is added, and the sidebar is the
  * map. The exhibition item likewise covers the shelf and every album, so a
  * theme the engine ships needs no edit here.
@@ -224,7 +223,5 @@ export const navFor = (lang: Lang): Nav => {
     },
     { text: t('Scenarios', '场景'), link: '/scenarios/', activeMatch: '/scenarios/' },
     { text: t("What's New", '更新日志'), link: '/whats-new', activeMatch: '/whats-new' },
-    { text: t('Sponsor', '打赏作者'), link: '/sponsor', activeMatch: '/sponsor' },
-    { text: t('Emotion Ball', '表情馆'), link: 'https://sam70361.github.io/aora-bot/' },
   ];
 };

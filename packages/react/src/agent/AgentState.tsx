@@ -7,7 +7,7 @@ import {
   type CharacterState,
   type EmotionId,
   type HudSpec,
-} from '@aora-bot/engine';
+} from '@mowa-bot/engine';
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 
 /** What a component gets back from the arbiter: the displayed state and the means to feed it. */

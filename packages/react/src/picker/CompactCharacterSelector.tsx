@@ -5,7 +5,7 @@ import {
   type FaceStyle,
   type NoseId,
   type ShapeId,
-} from '@aora-bot/engine';
+} from '@mowa-bot/engine';
 import type { CSSProperties } from 'react';
 import { CharacterSelector } from './CharacterSelector.js';
 import { cx } from '../utils/cx.js';
@@ -73,7 +73,7 @@ export function CompactCharacterSelector({
       sizePx={sizePx}
       shapes={AUTO_SHAPE_POOL}
       colors={ASSIGNABLE_COLOR_IDS}
-      className={cx('aora-picker--compact', className)}
+      className={cx('mowa-picker--compact', className)}
       style={style}
     />
   );

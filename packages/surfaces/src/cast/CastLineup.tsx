@@ -1,6 +1,6 @@
-import { springToLinearEasing, type FaceStyle, type NoseId } from '@aora-bot/engine';
+import { springToLinearEasing, type FaceStyle, type NoseId } from '@mowa-bot/engine';
 import { useMemo, type CSSProperties, type ReactNode } from 'react';
-import { cx } from '@aora-bot/react';
+import { cx } from '@mowa-bot/react';
 import { useSurfaceLocale } from '../locale/index.js';
 import { CastFigure, type CastMemberSpec } from './CastFigure.js';
 import type { CastStep } from './useCastScene.js';
@@ -71,7 +71,7 @@ export function CastLineup({
 
   return (
     <div
-      className={cx('aora-s-cast-lineup', className)}
+      className={cx('mowa-s-cast-lineup', className)}
       role="img"
       aria-label={t('cast.stage')}
       data-step={step?.id}

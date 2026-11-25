@@ -11,13 +11,13 @@ describe('entry point', () => {
   it('loads without a DOM', () => {
     expect(typeof document).toBe('undefined');
     expect(typeof HTMLElement).toBe('undefined');
-    expect(element.AoraBotElement).toBeTypeOf('function');
-    expect(element.defineAoraBot).toBeTypeOf('function');
+    expect(element.MowaBotElement).toBeTypeOf('function');
+    expect(element.defineMowaBot).toBeTypeOf('function');
   });
 
   it('registers nothing without a DOM and does not throw', () => {
     expect(typeof customElements).toBe('undefined');
-    expect(element.defineAoraBot()).toBe(element.AoraBotElement);
-    expect(element.defineAoraBot('x-aora-bot')).toBe(element.AoraBotElement);
+    expect(element.defineMowaBot()).toBe(element.MowaBotElement);
+    expect(element.defineMowaBot('x-mowa-bot')).toBe(element.MowaBotElement);
   });
 });

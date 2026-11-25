@@ -7,7 +7,7 @@ import {
   type ColorId,
   type FaceStyle,
   type ShapeId,
-} from '@aora-bot/engine/static';
+} from '@mowa-bot/engine/static';
 
 /*
  * The wall's tiles as images.
@@ -47,7 +47,7 @@ export const BLEED = 0.25;
 /** The page's values a set of drawings reads, by property name, plus `color` for `currentColor`. */
 export type PageValues = Readonly<Record<string, string>>;
 
-const PAGE_VAR = /var\((--aora-[\w-]+)/g;
+const PAGE_VAR = /var\((--mowa-[\w-]+)/g;
 const pageVars = (svg: string): string[] => Array.from(svg.matchAll(PAGE_VAR), (m) => m[1]!);
 
 const attr = (value: string) => value.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
@@ -78,7 +78,7 @@ function toImage(svg: string, color: ColorId, values: PageValues): string {
   if (values.color) declarations.push(`color:${values.color}`);
   for (const name of new Set(pageVars(svg))) {
     // `StillMark` sets the ink on the mark itself, over whatever the page says.
-    const value = name === '--aora-fg' ? getInkColorCss(color) : values[name];
+    const value = name === '--mowa-fg' ? getInkColorCss(color) : values[name];
     if (value) declarations.push(`${name}:${value}`);
   }
   const style = attr(declarations.join(';'));
@@ -112,7 +112,7 @@ export class TileShop {
       }
       for (const name of pageVars(entry.svg)) names.add(name);
     }
-    names.delete('--aora-fg');
+    names.delete('--mowa-fg');
     return [...names];
   }
 

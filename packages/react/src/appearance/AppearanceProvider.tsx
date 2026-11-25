@@ -1,4 +1,4 @@
-import type { FaceStyle, NoseId, StyleId, StyleVariant } from '@aora-bot/engine';
+import type { FaceStyle, NoseId, StyleId, StyleVariant } from '@mowa-bot/engine';
 import { createContext, useContext, useMemo, type ReactNode } from 'react';
 import { useStable } from '../utils/hooks.js';
 

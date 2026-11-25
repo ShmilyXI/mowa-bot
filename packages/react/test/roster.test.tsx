@@ -23,6 +23,6 @@ describe('shapes on the mark', () => {
   });
 
   it('sets the leaf colour next to the ink', () => {
-    expect(renderToString(<CharacterMark shape="sprout" color="blue" />)).toContain('--aora-leaf:#34B36B');
+    expect(renderToString(<CharacterMark shape="sprout" color="blue" />)).toContain('--mowa-leaf:#34B36B');
   });
 });

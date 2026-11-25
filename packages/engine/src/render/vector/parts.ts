@@ -27,7 +27,7 @@ import type { ExtrasScene } from '../../themes/extras-hook.js';
  * React layer can lighten it for a green body without the engine knowing
  * which colour the character is.
  */
-export const LEAF_TOKEN = `var(--aora-leaf, ${LEAF_COLOR})`;
+export const LEAF_TOKEN = `var(--mowa-leaf, ${LEAF_COLOR})`;
 
 /** How much white is mixed into the ink for the inside of an ear. */
 export const INNER_WHITE = 0.45;

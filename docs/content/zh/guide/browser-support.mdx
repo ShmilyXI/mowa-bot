@@ -1,6 +1,6 @@
 # 浏览器支持
 
-Aora Bot 面向 2024 年中期及之后发布的浏览器。最主要的限制来自 `light-dark()`，整套墨色系统都建立在它之上。
+Mowa Bot 面向 2024 年中期及之后发布的浏览器。最主要的限制来自 `light-dark()`，整套墨色系统都建立在它之上。
 
 | 浏览器        | 最低版本 |
 | ------------- | -------- |
@@ -11,7 +11,7 @@ Aora Bot 面向 2024 年中期及之后发布的浏览器。最主要的限制�
 下面三种上色方式就运行在你当前使用的浏览器里：普通 SVG，每个角色一种 `light-dark()` 墨色，没有 canvas，也没有 WebGL。
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 const variants = ['solid', 'outline', 'glass'] as const;
 
@@ -35,20 +35,20 @@ export default function Demo() {
 
 每一种墨色都是一组 `light-dark()` 值，所以角色切换主题时不需要 JavaScript，也不需要重新渲染。
 
-低于最低版本时，`--aora-fg` 解析失败，角色回退为 `currentColor`：仍会渲染、仍会动，只是没有墨色。如果必须支持更老的浏览器，请自己设置墨色：
+低于最低版本时，`--mowa-fg` 解析失败，角色回退为 `currentColor`：仍会渲染、仍会动，只是没有墨色。如果必须支持更老的浏览器，请自己设置墨色：
 
 ```css
-.aora-mark {
-  --aora-fg: #2a92fe;
+.mowa-mark {
+  --mowa-fg: #2a92fe;
 }
-:root.dark .aora-mark {
-  --aora-fg: #0e74e0;
+:root.dark .mowa-mark {
+  --mowa-fg: #0e74e0;
 }
 ```
 
 ### `@property` — 优雅降级
 
-Aora Bot 注册了三个自定义属性，让墨色可以在两种颜色之间过渡。不支持注册时，属性仍然有值，只是过渡会直接跳变，没有插值。
+Mowa Bot 注册了三个自定义属性，让墨色可以在两种颜色之间过渡。不支持注册时，属性仍然有值，只是过渡会直接跳变，没有插值。
 
 ### CSS mask — 两个组件必需
 

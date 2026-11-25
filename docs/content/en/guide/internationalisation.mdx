@@ -5,7 +5,7 @@ Every label the components draw comes from one locale table, swapped by a single
 ## One provider, not a prop per component
 
 ```tsx preview
-import { LocaleProvider, ActivityBadge, CharacterSelector } from '@aora-bot/react';
+import { LocaleProvider, ActivityBadge, CharacterSelector } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -35,10 +35,10 @@ Language is not a prop on each component. A per-component prop has to be threade
 
 ## Copy for the product surfaces
 
-`@aora-bot/surfaces` keeps its own table (`template.*`, `walkthrough.*`, `restricted.*` and so on); those keys are not part of `@aora-bot/react`. The language still comes from the one `LocaleProvider`, so a surface and the primitives inside it always use the same language. Only overrides go through `SurfaceLocaleProvider`, because the React provider's `overrides` are typed to its own keys.
+`@mowa-bot/surfaces` keeps its own table (`template.*`, `walkthrough.*`, `restricted.*` and so on); those keys are not part of `@mowa-bot/react`. The language still comes from the one `LocaleProvider`, so a surface and the primitives inside it always use the same language. Only overrides go through `SurfaceLocaleProvider`, because the React provider's `overrides` are typed to its own keys.
 
 ```tsx
-import { SurfaceLocaleProvider } from '@aora-bot/surfaces';
+import { SurfaceLocaleProvider } from '@mowa-bot/surfaces';
 
 <SurfaceLocaleProvider overrides={{ 'template.title': 'New template' }}>{children}</SurfaceLocaleProvider>;
 ```
@@ -48,7 +48,7 @@ import { SurfaceLocaleProvider } from '@aora-bot/surfaces';
 The English table is the source of truth for the key set, so a new locale is a `Record` over the same keys. TypeScript enforces completeness.
 
 ```ts
-import { enUS, type Locale } from '@aora-bot/react';
+import { enUS, type Locale } from '@mowa-bot/react';
 
 const frFR: Locale = {
   ...enUS,
@@ -63,7 +63,7 @@ const frFR: Locale = {
 ## Reading strings yourself
 
 ```tsx
-import { useLocale } from '@aora-bot/react';
+import { useLocale } from '@mowa-bot/react';
 
 function Label() {
   const { t, id } = useLocale();

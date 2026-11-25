@@ -8,34 +8,34 @@ const GROUPS: {
 }[] = [
   {
     titleKey: 'tokens.surfaces',
-    tokens: ['--aora-bg-base', '--aora-surface', '--aora-surface-raised', '--aora-surface-sunken'],
+    tokens: ['--mowa-bg-base', '--mowa-surface', '--mowa-surface-raised', '--mowa-surface-sunken'],
   },
   {
     titleKey: 'tokens.text',
-    tokens: ['--aora-text', '--aora-text-muted', '--aora-text-faint'],
+    tokens: ['--mowa-text', '--mowa-text-muted', '--mowa-text-faint'],
   },
   {
     titleKey: 'tokens.lines',
-    tokens: ['--aora-line', '--aora-line-strong', '--aora-fill', '--aora-fill-hover'],
+    tokens: ['--mowa-line', '--mowa-line-strong', '--mowa-fill', '--mowa-fill-hover'],
   },
   {
     titleKey: 'tokens.accent',
     tokens: [
-      '--aora-accent',
-      '--aora-accent-hover',
-      '--aora-accent-soft',
-      '--aora-on-accent',
-      '--aora-on-scrim',
+      '--mowa-accent',
+      '--mowa-accent-hover',
+      '--mowa-accent-soft',
+      '--mowa-on-accent',
+      '--mowa-on-scrim',
     ],
   },
   {
     titleKey: 'tokens.radii',
     tokens: [
-      '--aora-radius-xs',
-      '--aora-radius-sm',
-      '--aora-radius-md',
-      '--aora-radius-lg',
-      '--aora-radius-pill',
+      '--mowa-radius-xs',
+      '--mowa-radius-sm',
+      '--mowa-radius-md',
+      '--mowa-radius-lg',
+      '--mowa-radius-pill',
     ],
   },
 ];

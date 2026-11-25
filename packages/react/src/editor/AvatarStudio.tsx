@@ -1,4 +1,4 @@
-import type { FaceStyle, NoseId } from '@aora-bot/engine';
+import type { FaceStyle, NoseId } from '@mowa-bot/engine';
 import {
   useEffect,
   useRef,
@@ -220,14 +220,14 @@ export function AvatarStudio({
       role="dialog"
       aria-modal="true"
       aria-label={t('editor.title')}
-      className={cx('aora-editor', className)}
+      className={cx('mowa-editor', className)}
       style={style}
       onPaste={onPaste}
       onDragOver={(event) => event.preventDefault()}
       onDrop={onDrop}
     >
-      <div className="aora-editor__head">
-        <span className="aora-editor__preview" aria-label={t('editor.preview')} role="img">
+      <div className="mowa-editor__head">
+        <span className="mowa-editor__preview" aria-label={t('editor.preview')} role="img">
           {showPicture ? (
             <img src={showPicture} alt="" />
           ) : (
@@ -242,21 +242,21 @@ export function AvatarStudio({
             />
           )}
         </span>
-        <button type="button" className="aora-button" aria-label={t('editor.close')} onClick={cancel}>
+        <button type="button" className="mowa-button" aria-label={t('editor.close')} onClick={cancel}>
           ×
         </button>
       </div>
 
-      <div className="aora-editor__tabs" role="tablist" aria-label={t('editor.tabs')}>
+      <div className="mowa-editor__tabs" role="tablist" aria-label={t('editor.tabs')}>
         {tabs.map((id) => (
           <button
             key={id}
             type="button"
             role="tab"
-            id={`aora-editor-tab-${id}`}
+            id={`mowa-editor-tab-${id}`}
             aria-selected={tab === id}
-            aria-controls={`aora-editor-panel-${id}`}
-            className="aora-editor__tab"
+            aria-controls={`mowa-editor-panel-${id}`}
+            className="mowa-editor__tab"
             data-selected={tab === id || undefined}
             onClick={() => setTab(id)}
           >
@@ -267,9 +267,9 @@ export function AvatarStudio({
 
       <div
         role="tabpanel"
-        id={`aora-editor-panel-${tab}`}
-        aria-labelledby={`aora-editor-tab-${tab}`}
-        className="aora-editor__panel"
+        id={`mowa-editor-panel-${tab}`}
+        aria-labelledby={`mowa-editor-tab-${tab}`}
+        className="mowa-editor__panel"
       >
         {tab === 'character' && (
           <AgentCharacterSelector
@@ -283,9 +283,9 @@ export function AvatarStudio({
         )}
 
         {tab === 'generate' && (
-          <div className="aora-editor__generate">
+          <div className="mowa-editor__generate">
             <textarea
-              className="aora-field"
+              className="mowa-field"
               rows={3}
               placeholder={t('editor.generate.placeholder')}
               aria-label={t('editor.generate.placeholder')}
@@ -300,7 +300,7 @@ export function AvatarStudio({
             />
             <button
               type="button"
-              className="aora-button aora-button--primary"
+              className="mowa-button mowa-button--primary"
               disabled={pending || !prompt.trim()}
               onClick={() => void generate()}
             >
@@ -310,7 +310,7 @@ export function AvatarStudio({
         )}
 
         {tab === 'upload' && (
-          <div className="aora-editor__upload">
+          <div className="mowa-editor__upload">
             {source && view ? (
               <CropStage
                 source={source}
@@ -328,31 +328,31 @@ export function AvatarStudio({
                 hint={t('editor.crop.hint')}
               />
             ) : (
-              <label className="aora-editor__drop">
+              <label className="mowa-editor__drop">
                 <input
                   type="file"
                   accept="image/*"
                   onChange={(event) => void acceptFile(event.target.files?.[0])}
                 />
-                <span className="aora-editor__dropText">{t('editor.upload.prompt')}</span>
-                <span className="aora-editor__dropHint">{t('editor.upload.hint')}</span>
+                <span className="mowa-editor__dropText">{t('editor.upload.prompt')}</span>
+                <span className="mowa-editor__dropHint">{t('editor.upload.hint')}</span>
               </label>
             )}
           </div>
         )}
 
         {error && (
-          <p className="aora-editor__error" role="alert">
+          <p className="mowa-editor__error" role="alert">
             {t(error)}
           </p>
         )}
       </div>
 
-      <div className="aora-editor__actions">
+      <div className="mowa-editor__actions">
         {showPicture && (
           <button
             type="button"
-            className="aora-button"
+            className="mowa-button"
             onClick={() => {
               setSource(null);
               setRemoved(true);
@@ -361,11 +361,11 @@ export function AvatarStudio({
             {t(value.pictureUrl ? 'editor.useCharacter' : 'editor.remove')}
           </button>
         )}
-        <span className="aora-editor__spacer" />
-        <button type="button" className="aora-button" onClick={cancel}>
+        <span className="mowa-editor__spacer" />
+        <button type="button" className="mowa-button" onClick={cancel}>
           {t('editor.cancel')}
         </button>
-        <button type="button" className="aora-button aora-button--primary" onClick={save}>
+        <button type="button" className="mowa-button mowa-button--primary" onClick={save}>
           {t('editor.save')}
         </button>
       </div>
@@ -432,9 +432,9 @@ function CropStage({ source, pan, zoom, onPan, onZoom, zoomLabel, hint }: CropSt
   };
 
   return (
-    <div className="aora-crop">
+    <div className="mowa-crop">
       <div
-        className="aora-crop__stage"
+        className="mowa-crop__stage"
         style={{ width: CROP_STAGE_PX, height: CROP_STAGE_PX }}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
@@ -452,11 +452,11 @@ function CropStage({ source, pan, zoom, onPan, onZoom, zoomLabel, hint }: CropSt
           }}
         />
       </div>
-      <span className="aora-crop__hint">{hint}</span>
-      <div className="aora-crop__zoom">
+      <span className="mowa-crop__hint">{hint}</span>
+      <div className="mowa-crop__zoom">
         <button
           type="button"
-          className="aora-button"
+          className="mowa-button"
           aria-hidden="true"
           tabIndex={-1}
           onClick={() => onZoom(zoom - ZOOM_STEP)}
@@ -474,7 +474,7 @@ function CropStage({ source, pan, zoom, onPan, onZoom, zoomLabel, hint }: CropSt
         />
         <button
           type="button"
-          className="aora-button"
+          className="mowa-button"
           aria-hidden="true"
           tabIndex={-1}
           onClick={() => onZoom(zoom + ZOOM_STEP)}

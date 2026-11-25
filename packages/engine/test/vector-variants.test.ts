@@ -101,7 +101,7 @@ describe('sticker', () => {
     const svg = staticSvg('sticker', { styleOptions: { stickerWidth: 9 } });
     // Stroked at twice the edge: half is hidden under the body.
     expect(attrs(svg, 'path', 'stroke-width')).toContain('18');
-    expect(attrs(svg, 'path', 'stroke')).toContain('var(--aora-paper, #fff)');
+    expect(attrs(svg, 'path', 'stroke')).toContain('var(--mowa-paper, #fff)');
   });
 
   it('paints its eyes in the colour the page asks for, as every filled body does', () => {
@@ -127,9 +127,9 @@ describe('sticker', () => {
 
     const badge = frame.badge!;
     const circles = Array.from(live.element.querySelectorAll('circle'));
-    const halo = circles.find((c) => c.getAttribute('fill') === 'var(--aora-paper, #fff)')!;
+    const halo = circles.find((c) => c.getAttribute('fill') === 'var(--mowa-paper, #fff)')!;
     const dot = circles.find((c) => c.getAttribute('fill') === '#ff3b30')!;
-    expect(dot.getAttribute('stroke')).toBe('var(--aora-paper, #fff)');
+    expect(dot.getAttribute('stroke')).toBe('var(--mowa-paper, #fff)');
     // Badge radius + half its own 8-unit ring + the 12-unit edge.
     expect(Number(halo.getAttribute('r'))).toBeCloseTo(badge.r + 4 + 12, 1);
     expect(halo.getAttribute('cx')).toBe(dot.getAttribute('cx'));
@@ -192,7 +192,7 @@ describe('paper', () => {
     const live = style.createRenderer(host, { seed: 'p', styleOptions: resolveStyleOptions(style) });
     live.draw(frame);
     const fills = Array.from(live.element.querySelectorAll('path')).map((p) => p.getAttribute('fill'));
-    expect(fills.filter((f) => f === 'var(--aora-fg, currentColor)')).toHaveLength(2);
+    expect(fills.filter((f) => f === 'var(--mowa-fg, currentColor)')).toHaveLength(2);
     expect(fills).toContain('#000');
     live.destroy();
 
@@ -242,14 +242,14 @@ describe('single line: outline with a currentColor ink', () => {
   it('draws only in the text colour, static', () => {
     const face = staticSvg('outline', { ink: { flat: 'currentColor' }, state: 'happy' });
     expect(face).not.toContain('url(#');
-    expect(face).not.toContain('--aora-fg');
+    expect(face).not.toContain('--mowa-fg');
     expect(attrs(face, 'path', 'stroke')).toContain('currentColor');
     // Eyes switch to the ink in a hollow variant.
     expect(attrs(face, 'path', 'fill')).toContain('currentColor');
 
     // And so do the belt's dots and rings, which sit outside the body.
     const belt = staticSvg('outline', { ink: { flat: 'currentColor' }, state: 'thinking' });
-    expect(belt).not.toContain('--aora-fg');
+    expect(belt).not.toContain('--mowa-fg');
     expect(attrs(belt, 'circle', 'fill').length).toBeGreaterThan(0);
     expect(attrs(belt, 'circle', 'fill').every((f) => f === 'none' || f === 'currentColor')).toBe(true);
   });
@@ -278,13 +278,13 @@ describe('single line: outline with a currentColor ink', () => {
   );
 
   it('is what ink null gives when no stylesheet sets the token', () => {
-    // `--aora-fg` is a token with `currentColor` as its own fallback, so with
+    // `--mowa-fg` is a token with `currentColor` as its own fallback, so with
     // nothing setting it the plain outline is already a single line.
     expect(staticSvg('outline')).not.toContain('currentColor');
     const host = document.createElement('div');
     const character = createCharacter(host, { variant: 'outline', reducedMotion: true });
     const stroke = character.element.querySelector('path[stroke]')!.getAttribute('stroke');
-    expect(stroke).toBe('var(--aora-ink-line, var(--aora-fg, currentColor))');
+    expect(stroke).toBe('var(--mowa-ink-line, var(--mowa-fg, currentColor))');
     character.destroy();
   });
 
@@ -450,7 +450,7 @@ describe('switching variant on a running character', () => {
    */
   const bare = (el: Element): string =>
     el.outerHTML
-      .replace(/aora-(clip|ink|shadow|soft|halftone|gloss|media)-[\w-]+/g, 'ID')
+      .replace(/mowa-(clip|ink|shadow|soft|halftone|gloss|media)-[\w-]+/g, 'ID')
       .replace(/<([\w-]+)((?:\s+[\w:-]+="[^"]*")+)\s*>/g, (_m, tag: string, list: string) => {
         const sorted = (list.match(/[\w:-]+="[^"]*"/g) ?? []).sort();
         return `<${tag} ${sorted.join(' ')}>`;
@@ -547,7 +547,7 @@ describe('solid, outline and glass, as restyled with the cute face', () => {
   it.each(['solid', 'outline', 'glass'] as const)('%s uses none of the layered constructs', (variant) => {
     const svg = renderStaticSvg({ shape: 'blob', state: 'thinking', variant });
     expect(svg).not.toContain('filter');
-    expect(svg).not.toContain('--aora-paper');
+    expect(svg).not.toContain('--mowa-paper');
     expect(svg).not.toContain('fill="#000"');
   });
 });
@@ -596,7 +596,7 @@ describe('riso', () => {
 
   it('swaps the second ink on pink, where it would disappear into its own body', () => {
     const svg = staticSvg('riso', { color: 'pink' });
-    expect(svg).toContain('--aora-ink2: #F5B428');
+    expect(svg).toContain('--mowa-ink2: #F5B428');
   });
 
   it('screens the print with halftone dots unless told not to', () => {
@@ -689,7 +689,7 @@ describe('drawing media', () => {
       expect(mask.length).toBeGreaterThan(0);
       // The face sits inside the masked group, whatever face style draws it.
       const masked = svg.slice(svg.indexOf(`mask="${mask[0]}"`));
-      expect(masked).toContain('data-aora-face');
+      expect(masked).toContain('data-mowa-face');
       expect(staticSvg(variant, { styleOptions: { grain: 0 } })).not.toContain('<mask');
     }
   });
@@ -705,7 +705,7 @@ describe('drawing media', () => {
     const svg = staticSvg('marker', { state: 'happy' });
     expect(svg).toContain('feMorphology');
     const rim = attrs(svg, 'g', 'filter')[0]!;
-    expect(svg.slice(svg.indexOf(`filter="${rim}"`))).toContain('data-aora-face');
+    expect(svg.slice(svg.indexOf(`filter="${rim}"`))).toContain('data-mowa-face');
   });
 
   it('takes the wobble, the hatching and the line width from its parameters', () => {
@@ -728,7 +728,7 @@ describe('drawing media', () => {
       // Not a busy state: there the eyes and line faces give the body to a belt and fade.
       for (const state of ['happy', 'sad'] as const) {
         expect(renderStaticSvg({ shape: 'cat', variant, face, state, color: 'orange' })).toContain(
-          'data-aora-face',
+          'data-mowa-face',
         );
       }
     },

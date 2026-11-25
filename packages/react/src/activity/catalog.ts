@@ -1,4 +1,4 @@
-import { DEFAULT_TOOL_STATE, TOOL_STATES, type CharacterState } from '@aora-bot/engine';
+import { DEFAULT_TOOL_STATE, TOOL_STATES, type CharacterState } from '@mowa-bot/engine';
 import type { LocaleKey } from '../locale/index.js';
 
 /**

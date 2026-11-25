@@ -81,7 +81,7 @@ describe('deterministic assignment', () => {
   });
 
   it('hashes to a 32-bit unsigned value', () => {
-    const h = fnv1a32('aora');
+    const h = fnv1a32('mowa');
     expect(h).toBeGreaterThanOrEqual(0);
     expect(h).toBeLessThanOrEqual(0xffffffff);
     expect(Number.isInteger(h)).toBe(true);

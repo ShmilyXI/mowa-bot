@@ -1,4 +1,4 @@
-import type { FaceStyle, NoseId } from '@aora-bot/engine';
+import type { FaceStyle, NoseId } from '@mowa-bot/engine';
 import { useState, type CSSProperties } from 'react';
 import { useLocale } from '../locale/index.js';
 import { CharacterMark } from '../mark/CharacterMark.js';
@@ -45,10 +45,10 @@ export function AvatarButton({
   const [hover, setHover] = useState(false);
 
   return (
-    <span className={cx('aora-avatar-button', className)} style={style}>
+    <span className={cx('mowa-avatar-button', className)} style={style}>
       <button
         type="button"
-        className="aora-avatar-button__button"
+        className="mowa-avatar-button__button"
         aria-label={t('avatar.edit')}
         aria-expanded={open}
         onClick={() => setOpen((was) => !was)}
@@ -84,7 +84,7 @@ export function AvatarButton({
           face={face}
           nose={nose}
           lineWeight={lineWeight}
-          className="aora-avatar-button__editor"
+          className="mowa-avatar-button__editor"
         />
       )}
     </span>

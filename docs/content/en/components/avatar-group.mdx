@@ -5,7 +5,7 @@ import { API } from '@theme';
 Overlapping cluster of group members.
 
 ```tsx preview
-import { AvatarGroup } from '@aora-bot/react';
+import { AvatarGroup } from '@mowa-bot/react';
 
 const members = [{ id: 'a' }, { id: 'b' }, { id: 'c' }, { id: 'd' }, { id: 'e' }, { id: 'f' }];
 
@@ -30,7 +30,7 @@ Each disc punches a hole in the one behind it using the neighbour's **own silhou
 A circular cut-out looks correct only when the shape in front is round. Against a hexagon it bites into one side and leaves a wedge on the other, and the gap appears to vary in width as you look around the edge. Using the real outline keeps the separation even for every shape.
 
 ```tsx preview
-import { AvatarGroup } from '@aora-bot/react';
+import { AvatarGroup } from '@mowa-bot/react';
 
 const shaped = [
   { id: 'a', shape: 'hex' as const },
@@ -53,7 +53,7 @@ export default function Demo() {
 Members past `maxVisible` collapse into a `+N` chip.
 
 ```tsx preview
-import { AvatarGroup } from '@aora-bot/react';
+import { AvatarGroup } from '@mowa-bot/react';
 
 const many = Array.from({ length: 12 }, (_, i) => ({ id: `m-${i}` }));
 
@@ -77,7 +77,7 @@ Three helpers carry the cluster's numbers to places that are not rendering it: a
 - `participantsFromMembers(members, max)` splits a membership list into the `visible` faces and a `hidden` count for the chip. `max` defaults to `GROUP_MAX_VISIBLE` (3); `STACK_OVERLAP` (0.36) is the default overlap.
 
 ```tsx preview
-import { AvatarGroup, layoutAvatarGroup, participantsFromMembers, groupMetrics } from '@aora-bot/react';
+import { AvatarGroup, layoutAvatarGroup, participantsFromMembers, groupMetrics } from '@mowa-bot/react';
 
 const members = Array.from({ length: 7 }, (_, i) => ({ id: `p-${i}` }));
 

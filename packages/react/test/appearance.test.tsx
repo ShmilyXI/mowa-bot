@@ -1,6 +1,6 @@
 // @vitest-environment happy-dom
-import type * as Engine from '@aora-bot/engine';
-import type { CharacterOptions } from '@aora-bot/engine';
+import type * as Engine from '@mowa-bot/engine';
+import type { CharacterOptions } from '@mowa-bot/engine';
 import { act, useEffect, type ReactNode } from 'react';
 import { renderToString } from 'react-dom/server';
 import { createRoot, type Root } from 'react-dom/client';
@@ -28,8 +28,8 @@ const updates: Partial<CharacterOptions>[] = [];
 const created: CharacterOptions[] = [];
 const statics: StaticSvgOptions[] = [];
 
-vi.mock('@aora-bot/engine', async () => {
-  const actual = await vi.importActual<typeof Engine>('@aora-bot/engine');
+vi.mock('@mowa-bot/engine', async () => {
+  const actual = await vi.importActual<typeof Engine>('@mowa-bot/engine');
   return {
     ...actual,
     renderStaticSvg: (options: StaticSvgOptions) => {
@@ -93,9 +93,9 @@ afterEach(() => {
   vi.useRealTimers();
 });
 
-const mark = (el: HTMLElement) => el.querySelector('.aora-mark') as HTMLElement;
-const sources = (el: HTMLElement) => [...el.querySelectorAll('.aora-stage > .aora-mark')] as HTMLElement[];
-const roster = (el: HTMLElement) => [...el.querySelectorAll('.aora-roster > .aora-mark')] as HTMLElement[];
+const mark = (el: HTMLElement) => el.querySelector('.mowa-mark') as HTMLElement;
+const sources = (el: HTMLElement) => [...el.querySelectorAll('.mowa-stage > .mowa-mark')] as HTMLElement[];
+const roster = (el: HTMLElement) => [...el.querySelectorAll('.mowa-roster > .mowa-mark')] as HTMLElement[];
 
 describe('CharacterMark style series', () => {
   it('reports vector and solid when nothing is named, and asks the engine for the same', () => {
@@ -258,7 +258,7 @@ describe('AppearanceProvider', () => {
     rerender(tree('pixel'));
 
     expect(created).toHaveLength(2);
-    expect([...el.querySelectorAll('.aora-mark')].map((m) => m.getAttribute('data-style'))).toEqual([
+    expect([...el.querySelectorAll('.mowa-mark')].map((m) => m.getAttribute('data-style'))).toEqual([
       'pixel',
       'pixel',
     ]);
@@ -279,7 +279,7 @@ describe('AppearanceProvider', () => {
 
 describe('shared stage appearance key', () => {
   const marks = (
-    <div className="aora-roster">
+    <div className="mowa-roster">
       <StagedMark shape="blob" state="idle" />
       <StagedMark shape="blob" state="idle" styleId="pixel" />
       <StagedMark shape="blob" state="idle" styleId="pixel" variant="dot" />
@@ -300,11 +300,11 @@ describe('shared stage appearance key', () => {
       ['pixel', 'dot'],
     ]);
     expect(roster(el)).toHaveLength(5);
-    expect(roster(el).every((m) => m.classList.contains('aora-mark--mirror'))).toBe(true);
+    expect(roster(el).every((m) => m.classList.contains('mowa-mark--mirror'))).toBe(true);
 
-    for (const use of el.querySelectorAll('.aora-roster use')) {
+    for (const use of el.querySelectorAll('.mowa-roster use')) {
       const id = use.getAttribute('href')!.slice(1);
-      expect(el.querySelector(`.aora-stage [id="${id}"]`)).not.toBeNull();
+      expect(el.querySelector(`.mowa-stage [id="${id}"]`)).not.toBeNull();
     }
   });
 
@@ -320,7 +320,7 @@ describe('shared stage appearance key', () => {
   it('treats options equal to the defaults, or in another order, as the same appearance', () => {
     const el = render(
       <CharacterStageProvider>
-        <div className="aora-roster">
+        <div className="mowa-roster">
           <StagedMark shape="blob" styleId="pixel" />
           <StagedMark shape="blob" styleId="pixel" styleOptions={{}} />
           <StagedMark shape="blob" styleId="pixel" styleOptions={{ grid: 24 }} />
@@ -340,7 +340,7 @@ describe('shared stage appearance key', () => {
   it('draws the same series in the still image once the stage is over its cap', () => {
     const el = render(
       <CharacterStageProvider maxSources={1}>
-        <div className="aora-roster">
+        <div className="mowa-roster">
           <StagedMark shape="blob" />
           <StagedMark shape="hex" styleId="pixel" variant="block" />
         </div>
@@ -349,7 +349,7 @@ describe('shared stage appearance key', () => {
     advance(FRAME_MS);
 
     const still = roster(el)[1]!;
-    expect(still.classList.contains('aora-mark--still')).toBe(true);
+    expect(still.classList.contains('mowa-mark--still')).toBe(true);
     expect(still.getAttribute('data-style')).toBe('pixel');
     expect(still.getAttribute('data-variant')).toBe('block');
     // happy-dom cannot parse the static SVG's <style>, so the call is what is checked.
@@ -360,7 +360,7 @@ describe('shared stage appearance key', () => {
   it('keeps the ids of marks that never named a style as they were', () => {
     const el = render(
       <CharacterStageProvider>
-        <div className="aora-roster">
+        <div className="mowa-roster">
           <StagedMark shape="blob" state="idle" lineWeight={1.15} />
         </div>
       </CharacterStageProvider>,
@@ -368,14 +368,14 @@ describe('shared stage appearance key', () => {
     advance(FRAME_MS);
 
     const id = sources(el)[0]!.querySelector('g[id]')!.getAttribute('id')!;
-    expect(id).toMatch(/^aora-src-.+-blob-idle-cute---1-15----$/);
+    expect(id).toMatch(/^mowa-src-.+-blob-idle-cute---1-15----$/);
     expect(id).not.toMatch(/%/);
   });
 
   it('gives a pixel source an id a <use> can resolve', () => {
     const el = render(
       <CharacterStageProvider>
-        <div className="aora-roster">
+        <div className="mowa-roster">
           <StagedMark shape="blob" styleId="pixel" styleOptions={{ grid: 32, gap: 0.3 }} />
         </div>
       </CharacterStageProvider>,
@@ -384,14 +384,14 @@ describe('shared stage appearance key', () => {
 
     const href = roster(el)[0]!.querySelector('use')!.getAttribute('href')!;
     expect(href).toMatch(/^#[A-Za-z0-9_-]+$/);
-    expect(el.querySelector(`.aora-stage [id="${href.slice(1)}"]`)).not.toBeNull();
+    expect(el.querySelector(`.mowa-stage [id="${href.slice(1)}"]`)).not.toBeNull();
   });
 
   it('takes the ambient series from an AppearanceProvider, without leaking it into the sources it hosts', () => {
     const el = render(
       <AppearanceProvider styleId="pixel" variant="dot" lineWeight={1.2}>
         <CharacterStageProvider>
-          <div className="aora-roster">
+          <div className="mowa-roster">
             <StagedMark shape="blob" />
           </div>
         </CharacterStageProvider>

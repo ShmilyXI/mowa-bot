@@ -4,11 +4,11 @@ import { API } from '@theme';
 
 Create or edit an agent template: a name, what it should do, who can use it.
 
-> Part of `@aora-bot/surfaces`, not `@aora-bot/react`: `pnpm add @aora-bot/surfaces @aora-bot/react`, and import `@aora-bot/surfaces/styles.css` after the React stylesheet.
+> Part of `@mowa-bot/surfaces`, not `@mowa-bot/react`: `pnpm add @mowa-bot/surfaces @mowa-bot/react`, and import `@mowa-bot/surfaces/styles.css` after the React stylesheet.
 
 ```tsx preview
 import { useState } from 'react';
-import { TemplateDialog, type TemplateDraft } from '@aora-bot/surfaces';
+import { TemplateDialog, type TemplateDraft } from '@mowa-bot/surfaces';
 
 export default function Demo() {
   const [saved, setSaved] = useState<TemplateDraft | null>(null);
@@ -56,7 +56,7 @@ The name is whitespace-collapsed because a name pasted from a document arrives w
 
 ```tsx preview
 import { useState } from 'react';
-import { ShareCard, VisibilityControls, type TemplateVisibility } from '@aora-bot/surfaces';
+import { ShareCard, VisibilityControls, type TemplateVisibility } from '@mowa-bot/surfaces';
 
 export default function Demo() {
   const [visibility, setVisibility] = useState<TemplateVisibility>('private');

@@ -7,7 +7,7 @@ import {
   useLabel,
   type ColorId,
   type ShapeId,
-} from '@aora-bot/react';
+} from '@mowa-bot/react';
 import { useI18n, useLocalized } from '../../app/shared/i18n.js';
 import { TABLE_SOURCES } from '../../app/shared/constants.js';
 

@@ -1,7 +1,7 @@
-import type { CharacterState, ColorId, FaceStyle, NoseId, ShapeId } from '@aora-bot/engine';
+import type { CharacterState, ColorId, FaceStyle, NoseId, ShapeId } from '@mowa-bot/engine';
 import type { CSSProperties } from 'react';
 import { useSurfaceLocale, type SurfaceLocaleKey } from '../locale/index.js';
-import { CharacterMark, cx } from '@aora-bot/react';
+import { CharacterMark, cx } from '@mowa-bot/react';
 
 export interface JobBubblesProps {
   /** Short task strings. Defaults to four from the locale. */
@@ -61,7 +61,7 @@ export function JobBubbles({
   const box = radiusPx * 2 + markSize;
 
   return (
-    <div className={cx('aora-s-jobs', className)} style={{ width: box, height: box, ...style }}>
+    <div className={cx('mowa-s-jobs', className)} style={{ width: box, height: box, ...style }}>
       <CharacterMark
         shape={shape}
         color={color}
@@ -70,16 +70,16 @@ export function JobBubbles({
         lineWeight={lineWeight}
         state={state}
         sizePx={markSize}
-        className="aora-s-jobs__mark"
+        className="mowa-s-jobs__mark"
       />
 
-      <ul className="aora-s-jobs__list" aria-label={t('walkthrough.jobs')}>
+      <ul className="mowa-s-jobs__list" aria-label={t('walkthrough.jobs')}>
         {labels.map((label, index) => {
           const angle = START_ANGLE + (index / Math.max(1, labels.length)) * Math.PI * 2;
           return (
             <li
               key={label}
-              className="aora-s-jobs__bubble"
+              className="mowa-s-jobs__bubble"
               style={
                 {
                   left: `calc(50% + ${Math.round(Math.cos(angle) * radiusPx)}px)`,

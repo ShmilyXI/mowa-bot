@@ -1,13 +1,13 @@
 # 性能
 
-角色是有开销的：每帧都要做一次物理积分，并写入几十个 SVG 属性。一个角色没什么影响；如果直接渲染两百个，任何机器都会掉帧。本页说明 Aora Bot 为此做了哪些优化，以及你需要做什么。
+角色是有开销的：每帧都要做一次物理积分，并写入几十个 SVG 属性。一个角色没什么影响；如果直接渲染两百个，任何机器都会掉帧。本页说明 Mowa Bot 为此做了哪些优化，以及你需要做什么。
 
 ## 一个循环，而不是每个角色一个
 
 所有角色共用同一个 `requestAnimationFrame` 循环。
 
 ```ts
-import { ticker } from '@aora-bot/engine';
+import { ticker } from '@mowa-bot/engine';
 
 const stop = ticker.add((dt, now) => {
   // 每帧调用一次，在所有角色更新之后。
@@ -23,7 +23,7 @@ const stop = ticker.add((dt, now) => {
 收益更大的做法是不重复运行同一个动画。`CharacterStageProvider` 为每一种不同的**外观**托管一个隐藏角色，所有可见实例都变成指向它的 `<use href>` 引用。
 
 ```tsx preview
-import { CharacterStageProvider, StagedMark } from '@aora-bot/react';
+import { CharacterStageProvider, StagedMark } from '@mowa-bot/react';
 
 const COLOURS = ['blue', 'green', 'violet', 'orange', 'magenta', 'cyan'] as const;
 
@@ -80,7 +80,7 @@ export default function Demo() {
 集合非常大时，干脆不要用动画。`renderAvatarDataUrl` 生成静态 SVG，运行时没有开销：
 
 ```tsx preview
-import { renderAvatarDataUrl } from '@aora-bot/react';
+import { renderAvatarDataUrl } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -96,7 +96,7 @@ export default function Demo() {
 静态渲染也接受表情和状态，所以静止的角色仍然能表现它在做什么：
 
 ```tsx preview
-import { renderStaticSvgDataUrl } from '@aora-bot/react';
+import { renderStaticSvgDataUrl } from '@mowa-bot/react';
 
 const states = ['idle', 'sleeping', 'happy', 'angry', 'surprised', 'thinking'] as const;
 
@@ -126,7 +126,7 @@ export default function Demo() {
 引擎启动前会检查 `prefers-reduced-motion`。该偏好开启后，弹簧立即收敛到目标值，只绘制一帧，不启动循环，也不发射粒子。你不需要自己处理，但可以查询这个偏好：
 
 ```ts
-import { prefersReducedMotion, onReducedMotionChange } from '@aora-bot/engine';
+import { prefersReducedMotion, onReducedMotionChange } from '@mowa-bot/engine';
 ```
 
 ## 预算

@@ -6,7 +6,7 @@
 
 每个角色都带 `aria-hidden="true"`。这是合理的默认值：名字旁边的角色只是视觉点缀，如果对话的每一行前都读出「图片」，屏幕阅读器就没法用了。
 
-这也意味着**角色本身从不单独传达信息**。这条约束同样适用于你的代码，不只是 Aora Bot 自己。
+这也意味着**角色本身从不单独传达信息**。这条约束同样适用于你的代码，不只是 Mowa Bot 自己。
 
 ## 含义必须落在哪里
 
@@ -51,7 +51,7 @@
 如果你自己驱动动效，也要检查同一个偏好：
 
 ```ts
-import { prefersReducedMotion, onReducedMotionChange } from '@aora-bot/engine';
+import { prefersReducedMotion, onReducedMotionChange } from '@mowa-bot/engine';
 
 if (!prefersReducedMotion()) confetti.current?.burst();
 ```

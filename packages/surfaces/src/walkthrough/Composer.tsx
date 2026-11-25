@@ -1,7 +1,7 @@
-import type { ColorId, FaceStyle, NoseId, ShapeId } from '@aora-bot/engine';
+import type { ColorId, FaceStyle, NoseId, ShapeId } from '@mowa-bot/engine';
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { useSurfaceLocale } from '../locale/index.js';
-import { CharacterMark, cx } from '@aora-bot/react';
+import { CharacterMark, cx } from '@mowa-bot/react';
 
 export interface ComposerProps {
   value?: string;
@@ -82,7 +82,7 @@ export function Composer({
   const state = typing ? 'composing' : focused ? 'listening' : 'idle';
 
   return (
-    <div className={cx('aora-s-composer', className)} style={style}>
+    <div className={cx('mowa-s-composer', className)} style={style}>
       <CharacterMark
         shape={shape}
         color={color}
@@ -92,11 +92,11 @@ export function Composer({
         state={state}
         emphasis={focused}
         sizePx={markSize}
-        className="aora-s-composer__mark"
+        className="mowa-s-composer__mark"
       />
 
       <input
-        className="aora-field aora-s-composer__field"
+        className="mowa-field mowa-s-composer__field"
         value={text}
         placeholder={placeholder ?? t('walkthrough.composer.placeholder')}
         aria-label={placeholder ?? t('walkthrough.composer.placeholder')}
@@ -111,7 +111,7 @@ export function Composer({
       {sendButton && (
         <button
           type="button"
-          className="aora-button aora-button--primary"
+          className="mowa-button mowa-button--primary"
           disabled={!text.trim()}
           onClick={() => text.trim() && onSubmit?.(text.trim())}
         >

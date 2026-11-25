@@ -1,11 +1,11 @@
-import { DEFAULT_FACE, DEFAULT_STYLE_ID, getStyle } from '@aora-bot/engine';
+import { DEFAULT_FACE, DEFAULT_STYLE_ID, getStyle } from '@mowa-bot/engine';
 import type { Preset } from './share.js';
 
 /** The size every copied React and HTML snippet renders at. */
 export const SNIPPET_SIZE_PX = 96;
 
-export const AVATAR_ORIGIN = 'https://aora-bot.vercel.app';
-export const ELEMENT_SCRIPT = `<script type="module" src="https://cdn.jsdelivr.net/npm/@aora-bot/element"></script>`;
+export const AVATAR_ORIGIN = 'https://mowa-bot.vercel.app';
+export const ELEMENT_SCRIPT = `<script type="module" src="https://cdn.jsdelivr.net/npm/@mowa-bot/element"></script>`;
 
 const literal = (value: unknown): string => (typeof value === 'string' ? `'${value}'` : String(value));
 
@@ -38,8 +38,8 @@ export const tagFor = (preset: Preset): string => `<CharacterMark ${propsFor(pre
  */
 export function snippetFor(preset: Preset): string {
   return [
-    `import { CharacterMark } from '@aora-bot/react';`,
-    `import '@aora-bot/react/styles.css';`,
+    `import { CharacterMark } from '@mowa-bot/react';`,
+    `import '@mowa-bot/react/styles.css';`,
     ``,
     `<CharacterMark`,
     ...propsFor(preset).map((prop) => `  ${prop}`),
@@ -48,7 +48,7 @@ export function snippetFor(preset: Preset): string {
   ].join('\n');
 }
 
-/** The same character as an `<aora-bot>` element, on one line. */
+/** The same character as an `<mowa-bot>` element, on one line. */
 export function htmlTagFor(preset: Preset, extra: string[] = []): string {
   const attributes = [`shape="${preset.shape}"`, `color="${preset.color}"`];
   if (preset.style !== DEFAULT_STYLE_ID) attributes.push(`style-id="${preset.style}"`);
@@ -58,7 +58,7 @@ export function htmlTagFor(preset: Preset, extra: string[] = []): string {
   if (preset.face !== DEFAULT_FACE) attributes.push(`face="${preset.face}"`);
   if (Object.keys(preset.params).length > 0)
     attributes.push(`style-options='${JSON.stringify(preset.params)}'`);
-  return `<aora-bot ${[...attributes, ...extra].join(' ')}></aora-bot>`;
+  return `<mowa-bot ${[...attributes, ...extra].join(' ')}></mowa-bot>`;
 }
 
 /** The element's script and the tag, ready to paste into a page. */

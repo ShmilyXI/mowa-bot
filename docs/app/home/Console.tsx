@@ -9,7 +9,7 @@ import {
   type ColorId,
   type FaceStyle,
   type ShapeId,
-} from '@aora-bot/react';
+} from '@mowa-bot/react';
 import { useCallback, useDeferredValue, useMemo, useRef, useState, type CSSProperties } from 'react';
 import { CodeChip, ShareButton } from '../shared/CopyControls.js';
 import { useI18n } from '../shared/i18n.js';

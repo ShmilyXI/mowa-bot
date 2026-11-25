@@ -12,7 +12,7 @@ Then, in another terminal:
 ```bash
 curl -X POST http://127.0.0.1:27182/state \
   -H 'content-type: application/json' \
-  -d '{"session_id":"s1","aoraBotId":"32","tips":"Editing…"}'
+  -d '{"session_id":"s1","mowaBotId":"32","tips":"Editing…"}'
 ```
 
 Open http://127.0.0.1:27182 — the page shows the current character and
@@ -26,7 +26,7 @@ show it:
 ```bash
 curl -X POST http://127.0.0.1:27182/state \
   -H 'content-type: application/json' \
-  -d '{"session_id":"s1","aoraBotId":"47","tips":"Indexing 3 of 8","hud":{"kind":"progress","value":0.375}}'
+  -d '{"session_id":"s1","mowaBotId":"47","tips":"Indexing 3 of 8","hud":{"kind":"progress","value":0.375}}'
 ```
 
 Pipe a stream of lines instead:
@@ -38,4 +38,4 @@ my-agent --emit-json | node examples/agent-relay/relay.mjs --stdin
 `POST /state` answers 204 on success and 400 with the reason on a bad
 payload, matching the channel contract. The React side of the same flow is
 `useEventSourceChannel` + `CharacterMark`; see
-[Agent integration](https://aora-bot.vercel.app/en/guide/agent-integration).
+[Agent integration](https://mowa-bot.vercel.app/en/guide/agent-integration).

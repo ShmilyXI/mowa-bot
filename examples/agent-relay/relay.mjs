@@ -100,7 +100,7 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(PORT, '127.0.0.1', () => {
-  process.stderr.write(`Aora Bot agent relay on http://127.0.0.1:${PORT}\n`);
+  process.stderr.write(`Mowa Bot agent relay on http://127.0.0.1:${PORT}\n`);
 });
 
 if (process.argv.includes('--stdin')) {

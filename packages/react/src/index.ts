@@ -163,7 +163,7 @@ export {
 } from './activity/catalog.js';
 export type { ActivityDescriptor } from './activity/catalog.js';
 
-// Class name joiner, shared with `@aora-bot/surfaces`
+// Class name joiner, shared with `@mowa-bot/surfaces`
 export { cx } from './utils/cx.js';
 
 // Effects
@@ -356,7 +356,7 @@ export {
   // Runtime, for hosts that drive a character without the component
   createCharacter,
   createConfettiController,
-} from '@aora-bot/engine';
+} from '@mowa-bot/engine';
 export type {
   ShapeId,
   ShapeFamily,
@@ -439,4 +439,4 @@ export type {
   StateGroupId,
   BeltDot,
   BeltRing,
-} from '@aora-bot/engine';
+} from '@mowa-bot/engine';

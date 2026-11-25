@@ -5,7 +5,7 @@ import { useLang } from '@rspress/core/runtime';
  *
  * Every id-driven family (shapes, colours, states, expressions, mouths, noses,
  * face styles, state groups) comes from the kit's own locale table through
- * `useLabel()` / `useLocale()` in `@aora-bot/react`. Component names are not
+ * `useLabel()` / `useLocale()` in `@mowa-bot/react`. Component names are not
  * engine identifiers and the kit has no table for them, so this one family
  * lives here. They are display-only:
  * the identifier is always shown, the name beside it, the way a component

@@ -1,4 +1,4 @@
-import { getInkColorCss, type CharacterState, type ColorId } from '@aora-bot/react';
+import { getInkColorCss, type CharacterState, type ColorId } from '@mowa-bot/react';
 import type { ThemeCard } from '../catalog.js';
 import { hasStill, stillOf, whenIdle } from './still.js';
 
@@ -34,7 +34,7 @@ const SHADOW_DY_PX = 4;
 const SHADOW_BLUR_PX = 4;
 const SHADOW_ALPHA = 0.32;
 
-const PAGE_VAR = /var\((--aora-[\w-]+)/g;
+const PAGE_VAR = /var\((--mowa-[\w-]+)/g;
 
 /** The page properties a drawing reads. */
 export const pageVarsOf = (svg: string): string[] => [
@@ -107,7 +107,7 @@ export function toImage(
   const declarations = ['color-scheme:light dark'];
   for (const name of pageVarsOf(svg)) {
     // A still sets the ink on itself, over whatever the page says.
-    const value = name === '--aora-fg' ? getInkColorCss(color) : values[name];
+    const value = name === '--mowa-fg' ? getInkColorCss(color) : values[name];
     if (value) declarations.push(`${name}:${value}`);
   }
   const style = attr(declarations.join(';'));

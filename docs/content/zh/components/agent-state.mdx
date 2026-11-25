@@ -6,7 +6,7 @@ import { API } from '@theme';
 
 ```tsx preview
 import { useState } from 'react';
-import { AgentStateProvider, useAgentState, CharacterMark, ActivityLine } from '@aora-bot/react';
+import { AgentStateProvider, useAgentState, CharacterMark, ActivityLine } from '@mowa-bot/react';
 
 function Sessions() {
   const agent = useAgentState();
@@ -130,7 +130,7 @@ function Sidebar() {
 一条消息除 `tips` 外还可以带一个 `hud`，见[协议](/design/protocol#hud)。仲裁器把它保存在胜出会话的 `ArbiterResult` 上，provider 的 value 以 `hud` 暴露它。这样表盘和脸经过同一套仲裁：优先级落败的会话，不能把自己的进度环画在胜出者的表情外面。可以把 `hud` 直接传给角色，也可以让 [`AgentHud`](/components/agent-hud) 替你读取 provider。
 
 ```tsx preview
-import { AgentStateProvider, CharacterMark, useAgentState } from '@aora-bot/react';
+import { AgentStateProvider, CharacterMark, useAgentState } from '@mowa-bot/react';
 
 function Face() {
   const { state, hud, update } = useAgentState();
@@ -182,7 +182,7 @@ const status = useEventSourceChannel('http://127.0.0.1:27182/events');
 // 'idle' | 'connecting' | 'open' | 'error'
 ```
 
-`useStateChannel` 只接受来自 `allowOrigin`（默认是页面自身的来源）的 `{ type: 'aora:state', payload }` 消息。只有页面本身就是沙箱化的小组件时，才应传 `'*'`。`useEventSourceChannel` 把每个事件的 `data` 解析为一条协议消息；`EventSource` 会自动重连，所以这个 Hook 只报告连接状态。两者都支持 `enabled: false`，可以在不卸载的情况下断开连接。
+`useStateChannel` 只接受来自 `allowOrigin`（默认是页面自身的来源）的 `{ type: 'mowa:state', payload }` 消息。只有页面本身就是沙箱化的小组件时，才应传 `'*'`。`useEventSourceChannel` 把每个事件的 `data` 解析为一条协议消息；`EventSource` 会自动重连，所以这个 Hook 只报告连接状态。两者都支持 `enabled: false`，可以在不卸载的情况下断开连接。
 
 两者都会先用 `normalize` 处理每条消息，格式错误的消息会交给 `onError`，不会到达仲裁器。
 
@@ -191,8 +191,8 @@ const status = useEventSourceChannel('http://127.0.0.1:27182/events');
 provider 只是一层很薄的封装，同一个仲裁器在任何环境中都能运行：
 
 ```ts
-import { createArbiter } from '@aora-bot/engine/agent';
-import { createCharacter, getInkColorCss } from '@aora-bot/engine';
+import { createArbiter } from '@mowa-bot/engine/agent';
+import { createCharacter, getInkColorCss } from '@mowa-bot/engine';
 
 const character = createCharacter(el, { shape: 'blob', ink: { flat: getInkColorCss('blue') } });
 const arbiter = createArbiter({ onApply: ({ state }) => character.update({ state }) });

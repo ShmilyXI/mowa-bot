@@ -1,4 +1,4 @@
-import { CUTE_MOUTH_IDS, DRAWN_FACE_STYLES, listStyles } from '@aora-bot/engine';
+import { CUTE_MOUTH_IDS, DRAWN_FACE_STYLES, listStyles } from '@mowa-bot/engine';
 import {
   CHARACTER_STATES,
   COLOR_IDS,
@@ -20,7 +20,7 @@ import {
   type MouthId,
   type NoseId,
   type ShapeId,
-} from '@aora-bot/react';
+} from '@mowa-bot/react';
 import { useState } from 'react';
 import { useI18n, useLocalized } from '../../app/shared/i18n.js';
 import { TABLE_SOURCES } from '../../app/shared/constants.js';

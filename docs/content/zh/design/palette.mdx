@@ -19,7 +19,7 @@ import { PaletteGrid } from '@theme';
 | `gradient` | 两对，给静态头像                     |
 
 ```tsx preview
-import { COLOR_SWATCHES, getSwatchHex, getInkColor } from '@aora-bot/react';
+import { COLOR_SWATCHES, getSwatchHex, getInkColor } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -57,7 +57,7 @@ getInkColorCss('blue'); // → light-dark(#2B8FFF, #2884EB)
 
 ## 奶油色与低饱和色
 
-`cream`（奶油色）是偏暖的米白，在 `COLOR_IDS` 里排第一，是球球的颜色。它很浅，所以和 `yellow` 一样配深色的脸。紧随其后的 `ivory`（象牙白）是调色板里的白色。这两种颜色在浅色页面上都几乎与页面同色，因此实心身体在浅色页面上会加一圈线条色的细边（`--aora-rim`）：任何尺寸下都是一个屏幕像素宽，所有实心变体和画材都一样。在深色页面上它们本身就很清楚，不加边。`night` 在深色页面上也会加同样的细边。
+`cream`（奶油色）是偏暖的米白，在 `COLOR_IDS` 里排第一，是球球的颜色。它很浅，所以和 `yellow` 一样配深色的脸。紧随其后的 `ivory`（象牙白）是调色板里的白色。这两种颜色在浅色页面上都几乎与页面同色，因此实心身体在浅色页面上会加一圈线条色的细边（`--mowa-rim`）：任何尺寸下都是一个屏幕像素宽，所有实心变体和画材都一样。在深色页面上它们本身就很清楚，不加边。`night` 在深色页面上也会加同样的细边。
 
 `sage`（鼠尾草）、`clay`（陶土）、`navy`（藏青）和 `mauve`（藕荷）是排在鲜亮色相之后的四种低饱和颜色；`navy` 在深色页面上会提亮一档，以免与页面混在一起。`night` 是近黑色，在深色页面上也保持深色，可以按 id 使用，但不在默认列表里（`UNLISTED_COLOR_IDS`）。
 
@@ -77,26 +77,26 @@ getInkColorCss('blue'); // → light-dark(#2B8FFF, #2884EB)
 
 ## 墨色之外的变量
 
-身体墨色是 `--aora-fg`，但脸和个别变体还需要各自的颜色。自己给角色写样式时，应当用 `getInkVars(color)` 一次写全，而不是只写 `--aora-fg`；`CharacterMark` 和 `StagedMark` 内部就是这样做的。中间色相只写 `--aora-face`（白色），其余变量使用默认值。
+身体墨色是 `--mowa-fg`，但脸和个别变体还需要各自的颜色。自己给角色写样式时，应当用 `getInkVars(color)` 一次写全，而不是只写 `--mowa-fg`；`CharacterMark` 和 `StagedMark` 内部就是这样做的。中间色相只写 `--mowa-face`（白色），其余变量使用默认值。
 
 | 变量                  | 用途                                                        | 值                                                                                             |
 | --------------------- | ----------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `--aora-fg`           | 身体墨色                                                    | 该色相的 `light-dark()` 值对                                                                   |
-| `--aora-face`         | 手绘脸眼白的颜色                                            | 两种页面上各自按规则得到的脸色                                                                 |
-| `--aora-face-soft`    | 五官：`cute`、`eyes`、`line` 脸，以及身体上的眉、眼睑和眼睛 | 两种页面上各自按规则得到的五官色；中间色相以外的颜色都会写入                                   |
-| `--aora-face-pupil`   | 手绘脸的瞳孔                                                | 在脸色上读得清的颜色                                                                           |
-| `--aora-face-glint`   | 直接画在身体上的眼睛的高光                                  | 在五官色上读得清的颜色                                                                         |
-| `--aora-face-sticker` | `sticker` 变体的脸                                          | 纸白；白脸在身体上看不清时换成深色                                                             |
-| `--aora-hair-shade`   | 实心身体上头发叠加的阴影色                                  | 黑色；身体深到看不出黑色时换成白色                                                             |
-| `--aora-ink2`         | `riso` 变体的第二墨色                                       | 浅色墨用自身再叠印一遍；和第二墨同色相的身体（`red`、`pink`、`magenta`）改用金色；其余沿用默认 |
-| `--aora-ink-line`     | 用墨色画的线：`outline`、`glass`、颜文字                    | 只在墨色在某个页面上太淡时写入：浅色页面上保持色相并加深，深色页面上提亮                       |
-| `--aora-rim`          | 实心身体的细边                                              | 只在身体与某个页面几乎同色时写入：该页面上是线条色，另一页面上是 `transparent`                 |
-| `--aora-eye`          | `cute`、`eyes`、`line` 脸的眼睛                             | `getInkVars` 不写入；由 `eyeColor` 设置，用于自定义眼睛颜色                                    |
+| `--mowa-fg`           | 身体墨色                                                    | 该色相的 `light-dark()` 值对                                                                   |
+| `--mowa-face`         | 手绘脸眼白的颜色                                            | 两种页面上各自按规则得到的脸色                                                                 |
+| `--mowa-face-soft`    | 五官：`cute`、`eyes`、`line` 脸，以及身体上的眉、眼睑和眼睛 | 两种页面上各自按规则得到的五官色；中间色相以外的颜色都会写入                                   |
+| `--mowa-face-pupil`   | 手绘脸的瞳孔                                                | 在脸色上读得清的颜色                                                                           |
+| `--mowa-face-glint`   | 直接画在身体上的眼睛的高光                                  | 在五官色上读得清的颜色                                                                         |
+| `--mowa-face-sticker` | `sticker` 变体的脸                                          | 纸白；白脸在身体上看不清时换成深色                                                             |
+| `--mowa-hair-shade`   | 实心身体上头发叠加的阴影色                                  | 黑色；身体深到看不出黑色时换成白色                                                             |
+| `--mowa-ink2`         | `riso` 变体的第二墨色                                       | 浅色墨用自身再叠印一遍；和第二墨同色相的身体（`red`、`pink`、`magenta`）改用金色；其余沿用默认 |
+| `--mowa-ink-line`     | 用墨色画的线：`outline`、`glass`、颜文字                    | 只在墨色在某个页面上太淡时写入：浅色页面上保持色相并加深，深色页面上提亮                       |
+| `--mowa-rim`          | 实心身体的细边                                              | 只在身体与某个页面几乎同色时写入：该页面上是线条色，另一页面上是 `transparent`                 |
+| `--mowa-eye`          | `cute`、`eyes`、`line` 脸的眼睛                             | `getInkVars` 不写入；由 `eyeColor` 设置，用于自定义眼睛颜色                                    |
 
-颜色选择器的色块显示身体在当前页面上的颜色（`getInkColorCss(id)`），所以 `black` 的色块在深色页面上是白色；色块与页面几乎同色时，还会带上和身体一样的细边（`--aora-rim`）。`CharacterSelector` 两点都做到了。
+颜色选择器的色块显示身体在当前页面上的颜色（`getInkColorCss(id)`），所以 `black` 的色块在深色页面上是白色；色块与页面几乎同色时，还会带上和身体一样的细边（`--mowa-rim`）。`CharacterSelector` 两点都做到了。
 
 ```tsx preview
-import { getInkVars } from '@aora-bot/engine';
+import { getInkVars } from '@mowa-bot/engine';
 
 export default function Demo() {
   return (
@@ -123,7 +123,7 @@ export default function Demo() {
 任意字符串都会映射到固定的墨色和形状。
 
 ```tsx preview
-import { autoColorForKey, autoShapeForKey, renderStaticSvgDataUrl } from '@aora-bot/react';
+import { autoColorForKey, autoShapeForKey, renderStaticSvgDataUrl } from '@mowa-bot/react';
 
 const keys = ['ada', 'grace', 'alan', 'edsger', 'barbara', 'donald'];
 
@@ -154,7 +154,7 @@ export default function Demo() {
 `haloBackground` 根据色相合成一层柔和的多色标渐变，用作头像的背景。
 
 ```tsx preview
-import { COLOR_IDS, haloBackground, renderAvatarDataUrl } from '@aora-bot/react';
+import { COLOR_IDS, haloBackground, renderAvatarDataUrl } from '@mowa-bot/react';
 
 export default function Demo() {
   return (

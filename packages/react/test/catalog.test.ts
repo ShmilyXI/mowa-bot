@@ -1,4 +1,4 @@
-import { DEFAULT_TOOL_STATE, TOOL_STATES } from '@aora-bot/engine';
+import { DEFAULT_TOOL_STATE, TOOL_STATES } from '@mowa-bot/engine';
 import { describe, expect, it } from 'vitest';
 import {
   activityForTool,

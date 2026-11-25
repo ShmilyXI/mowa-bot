@@ -6,9 +6,9 @@ import {
   type FaceStyle,
   type NoseId,
   type ShapeId,
-} from '@aora-bot/engine';
+} from '@mowa-bot/engine';
 import type { CSSProperties, TransitionEvent } from 'react';
-import { CharacterMark, cx } from '@aora-bot/react';
+import { CharacterMark, cx } from '@mowa-bot/react';
 import type { CastPosition } from './useCastScene.js';
 
 /** A member of the ensemble, independent of where it happens to stand. */
@@ -76,7 +76,7 @@ export function CastFigure({
 
   return (
     <span
-      className={cx('aora-s-cast-lineup__member', className)}
+      className={cx('mowa-s-cast-lineup__member', className)}
       data-member={member.id}
       data-off={position ? undefined : true}
       onTransitionEnd={onTransitionEnd}
@@ -91,15 +91,15 @@ export function CastFigure({
       }
     >
       <span
-        className={bob > 0 ? 'aora-s-cast-lineup__bob' : undefined}
+        className={bob > 0 ? 'mowa-s-cast-lineup__bob' : undefined}
         style={
           bob > 0
             ? ({
-                '--aora-s-cast-bob-amp': `${bob}px`,
-                '--aora-s-cast-bob-ms': `${member.bobMs ?? 5200}ms`,
+                '--mowa-s-cast-bob-amp': `${bob}px`,
+                '--mowa-s-cast-bob-ms': `${member.bobMs ?? 5200}ms`,
                 // Members given the same period still need to be out of step,
                 // or an ensemble breathes as one animal.
-                '--aora-s-cast-bob-delay': `${-(fnv1a32(member.id) % 2000)}ms`,
+                '--mowa-s-cast-bob-delay': `${-(fnv1a32(member.id) % 2000)}ms`,
               } as CSSProperties)
             : undefined
         }

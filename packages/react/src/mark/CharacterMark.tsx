@@ -24,7 +24,7 @@ import {
   type ShapeId,
   type StyleId,
   type StyleVariant,
-} from '@aora-bot/engine';
+} from '@mowa-bot/engine';
 import { useEffect, useImperativeHandle, useRef, type CSSProperties, type ReactNode, type Ref } from 'react';
 import { optionsKey, useAppearance } from '../appearance/AppearanceProvider.js';
 import { resolveVariant } from '../appearance/resolve.js';
@@ -40,7 +40,7 @@ import { useLatest, useStable } from '../utils/hooks.js';
  * the curve would make a character that follows the mouse and one handed the
  * same point look at different pixels.
  */
-export { mapPointerToGaze } from '@aora-bot/engine';
+export { mapPointerToGaze } from '@mowa-bot/engine';
 
 export interface CharacterHandle {
   /** Spin the body `turns` full revolutions. */
@@ -181,7 +181,7 @@ export function CharacterMark({
   hud = null,
   onSettle,
   eyeColor,
-  badgeColor = 'var(--aora-accent)',
+  badgeColor = 'var(--mowa-accent)',
   seed,
   autoPause = false,
   entryEffects = true,
@@ -366,7 +366,7 @@ export function CharacterMark({
   return (
     <span
       ref={hostRef}
-      className={cx('aora-mark', className)}
+      className={cx('mowa-mark', className)}
       data-state={state}
       data-shape={shape}
       data-color={color}
@@ -376,8 +376,8 @@ export function CharacterMark({
       style={
         {
           ...getInkVars(color),
-          '--aora-leaf': getLeafColor(color),
-          ...(eyeColor ? { '--aora-eye': eyeColor } : null),
+          '--mowa-leaf': getLeafColor(color),
+          ...(eyeColor ? { '--mowa-eye': eyeColor } : null),
           width: size,
           ...(ready ? null : { aspectRatio: '1 / 1' }),
           ...style,

@@ -5,7 +5,7 @@ import {
   getFaceDesign,
   isCuteFamily,
   isDrawnFace,
-} from '@aora-bot/engine';
+} from '@mowa-bot/engine';
 import {
   CHARACTER_STATES,
   EMOTIONS,
@@ -20,7 +20,7 @@ import {
   type CharacterState,
   type FaceStyle,
   type HudKind,
-} from '@aora-bot/react';
+} from '@mowa-bot/react';
 import { useState } from 'react';
 import { useI18n, useLocalized, type MessageKey } from '../../app/shared/i18n.js';
 import { buildStateGroups } from '../../app/shared/state-groups.js';

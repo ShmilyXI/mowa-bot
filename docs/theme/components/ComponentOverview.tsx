@@ -1,5 +1,5 @@
-import { getInkColorCss, renderStaticSvg } from '@aora-bot/react';
-import type { ShapeId, ColorId, CharacterState, FaceStyle } from '@aora-bot/react';
+import { getInkColorCss, renderStaticSvg } from '@mowa-bot/react';
+import type { ShapeId, ColorId, CharacterState, FaceStyle } from '@mowa-bot/react';
 import { useI18n } from '../../app/shared/i18n.js';
 import { Link } from '@rspress/core/theme-original';
 import type { CSSProperties } from 'react';
@@ -293,8 +293,8 @@ export function ComponentOverview() {
                 // preloading on hover, which a plain <a> does not.
                 <Link className="site-overview__card" href={localePath(entry.link)} key={entry.title}>
                   <span
-                    className="site-overview__preview aora-mark"
-                    style={{ '--aora-fg': getInkColorCss(entry.preview.color) } as CSSProperties}
+                    className="site-overview__preview mowa-mark"
+                    style={{ '--mowa-fg': getInkColorCss(entry.preview.color) } as CSSProperties}
                     // Inline so the eye cut-outs resolve to the card colour in
                     // both themes; an <img> cannot see the page's variables.
                     dangerouslySetInnerHTML={{

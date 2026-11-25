@@ -1,37 +1,37 @@
-# @aora-bot/element
+# @mowa-bot/element
 
-The [Aora Bot](https://aora-bot.vercel.app) character as a Web Component, for pages without React.
+The [Mowa Bot](https://mowa-bot.vercel.app) character as a Web Component, for pages without React.
 A named cast of generated characters, animation states, sixteen faces, and vector, pixel,
 kaomoji and ASCII styles, all drawn by code and animated from one shared frame loop. Pick a
-character in the [console](https://aora-bot.vercel.app/en/) and set it with attributes.
+character in the [console](https://mowa-bot.vercel.app/en/) and set it with attributes.
 
 ## From a CDN
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/@aora-bot/element"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@mowa-bot/element"></script>
 
-<aora-bot character="mochi" state="happy" size="120"></aora-bot>
+<mowa-bot character="mochi" state="happy" size="120"></mowa-bot>
 ```
 
-That one file carries the engine and registers `<aora-bot>` when it loads. No build step.
+That one file carries the engine and registers `<mowa-bot>` when it loads. No build step.
 
 ## Install
 
 ```bash
-pnpm add @aora-bot/element
+pnpm add @mowa-bot/element
 ```
 
 ```ts
-import { defineAoraBot } from '@aora-bot/element';
+import { defineMowaBot } from '@mowa-bot/element';
 
-defineAoraBot(); // registers <aora-bot>; call it once, early
+defineMowaBot(); // registers <mowa-bot>; call it once, early
 ```
 
-`defineAoraBot(tagName = 'aora-bot')` returns the element class and is safe to call more than
+`defineMowaBot(tagName = 'mowa-bot')` returns the element class and is safe to call more than
 once. Importing the package never touches the DOM, so it is safe in a server render or a build
-step; there, `defineAoraBot` registers nothing. `@aora-bot/engine` is a dependency and comes along
+step; there, `defineMowaBot` registers nothing. `@mowa-bot/engine` is a dependency and comes along
 automatically. To ship the single bundled file from your own host, import
-`@aora-bot/element/cdn`.
+`@mowa-bot/element/cdn`.
 
 ## Attributes
 
@@ -52,7 +52,7 @@ the cast member's choice, and never throws.
 | `seed`           | Any string; makes blinks and idle motion differ per instance          | `shape:color`                   |
 | `size`           | A CSS length, or a number of pixels                                   | `28px`                          |
 | `eye-color`      | Any CSS colour for the eyes of the `cute`, `eyes` and `line` faces    | Chosen by the colour            |
-| `badge-color`    | Any CSS colour for the `notifying` badge                              | `var(--aora-accent)`            |
+| `badge-color`    | Any CSS colour for the `notifying` badge                              | `var(--mowa-accent)`            |
 | `eye-scale`      | A positive number                                                     | `1`                             |
 | `line-weight`    | A number from 0.8 to 1.25                                             | `1`                             |
 | `reduced-motion` | Boolean; draw one still frame instead of animating                    | Follows the OS setting          |
@@ -70,7 +70,7 @@ once and build a new one. Each attribute is also a property in camel case, so
 single-quoted attribute. A value that is not a JSON object is ignored.
 
 ```html
-<aora-bot shape="mochi" color="blue" variant="paper" style-options='{"paperOffset":12}'></aora-bot>
+<mowa-bot shape="mochi" color="blue" variant="paper" style-options='{"paperOffset":12}'></mowa-bot>
 ```
 
 The element is `role="img"` and labelled with the cast member's name, in Chinese when the nearest
@@ -79,7 +79,7 @@ The element is `role="img"` and labelled with the cast member's name, in Chinese
 ## Methods
 
 ```ts
-const el = document.querySelector('aora-bot');
+const el = document.querySelector('mowa-bot');
 
 el.state = 'celebrate';
 el.spin(2); // two turns
@@ -98,24 +98,24 @@ or `hud`, call `el.controller.update({ ... })`.
 
 The character is drawn in a shadow root, so page CSS cannot reach inside. The host is
 `display: inline-block`; size it with `size`, or with your own `width` and `height`. Ink follows
-the page's `color-scheme`, and `--aora-bg-base` on any ancestor sets the page colour a face shows,
+the page's `color-scheme`, and `--mowa-bg-base` on any ancestor sets the page colour a face shows,
 such as a drawn face's whites on a line body.
 
 ## Without the element
 
 ```ts
-import { createCharacter } from '@aora-bot/engine';
+import { createCharacter } from '@mowa-bot/engine';
 
 const character = createCharacter(document.querySelector('#avatar')!, { shape: 'mochi', state: 'happy' });
 ```
 
 ## Documentation
 
-- [Without React](https://aora-bot.vercel.app/en/guide/without-react)
-- [Getting started](https://aora-bot.vercel.app/en/guide/getting-started)
-- [Shapes](https://aora-bot.vercel.app/en/design/shapes) | [States](https://aora-bot.vercel.app/en/design/states) | [Palette](https://aora-bot.vercel.app/en/design/palette)
-- [Cast](https://aora-bot.vercel.app/en/design/cast)
+- [Without React](https://mowa-bot.vercel.app/en/guide/without-react)
+- [Getting started](https://mowa-bot.vercel.app/en/guide/getting-started)
+- [Shapes](https://mowa-bot.vercel.app/en/design/shapes) | [States](https://mowa-bot.vercel.app/en/design/states) | [Palette](https://mowa-bot.vercel.app/en/design/palette)
+- [Cast](https://mowa-bot.vercel.app/en/design/cast)
 
 ## License
 
-[MIT](https://github.com/sam70361/aora-bot/blob/main/LICENSE), code and character designs alike. A credit such as "Powered by Aora Bot" is welcome but not required. The name and logo are covered by the [trademark policy](https://github.com/sam70361/aora-bot/blob/main/TRADEMARKS.md).
+[MIT](https://github.com/ShmilyXI/mowa-bot/blob/main/LICENSE), code and character designs alike. Based on [Aora Bot](https://github.com/sam70361/aora-bot) by sam70361 (MIT); see [NOTICE.md](https://github.com/ShmilyXI/mowa-bot/blob/main/NOTICE.md).

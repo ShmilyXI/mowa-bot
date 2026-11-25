@@ -24,7 +24,7 @@ interface EyeSpec {
 A centreline of half-length `len` runs along `angle`, bows sideways by `bend`, and is thickened to `width` with round caps. A dot eye is a stroke with almost no length, so `width` is its radius; a smiling eye is a horizontal stroke with a negative bend; a closed eye is a horizontal stroke with a positive one. `sad` and `mad` carry a brow above the dot, and `cross` and `star` are an x and a four-pointed star.
 
 ```tsx preview
-import { CUTE_EYE_TOPOLOGIES, CUTE_EYE_IDS } from '@aora-bot/engine';
+import { CUTE_EYE_TOPOLOGIES, CUTE_EYE_IDS } from '@mowa-bot/engine';
 
 export default function Demo() {
   return (
@@ -80,8 +80,8 @@ The mouth and the blush follow 50% of the eyes' gaze, so turning the head tilts 
 The blush is two flat, faint pink ellipses on the cheeks, strength 0 to 1, given per state (`STATE_BLUSH`) and eased on a spring. Only the warm moods, shyness and deep sleep flush; no busy state does, because a blush that appears too often stops meaning anything.
 
 ```tsx preview
-import { STATE_BLUSH } from '@aora-bot/engine';
-import { CharacterMark } from '@aora-bot/react';
+import { STATE_BLUSH } from '@mowa-bot/engine';
+import { CharacterMark } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -109,7 +109,7 @@ Some states carry an effect outside the body: Zz for sleeping, a pink heart for 
 `STATE_FX` maps states to effects. The table below reads it directly, and includes the activity effects the belt states use instead (see [States](/design/states#belt-states-on-the-cute-face)).
 
 ```tsx preview
-import { FX_KINDS, STATE_FX } from '@aora-bot/engine';
+import { FX_KINDS, STATE_FX } from '@mowa-bot/engine';
 
 export default function Demo() {
   return (
@@ -145,7 +145,7 @@ export default function Demo() {
 A state names a set of eyes and cycles through them at random intervals. `idle` drifts between the dot and an occasional glance to either side; `searching` switches roughly every half second.
 
 ```tsx preview
-import { STATE_CUTE_EYES, STATE_EYE_SWITCH_MS } from '@aora-bot/engine';
+import { STATE_CUTE_EYES, STATE_EYE_SWITCH_MS } from '@mowa-bot/engine';
 
 const rows = ['idle', 'thinking', 'searching', 'sleeping', 'angry', 'celebrate'] as const;
 

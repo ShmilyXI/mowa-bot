@@ -5,7 +5,7 @@ import { ProtocolTable } from '@theme';
 Agents do not speak in state names. They speak in two-digit ids.
 
 ```json
-{ "session_id": "s1", "aoraBotId": "34", "tips": "Build failed" }
+{ "session_id": "s1", "mowaBotId": "34", "tips": "Build failed" }
 ```
 
 A shell hook can emit `34` without knowing what the character on the other end calls an error, and state names can change without breaking a relay script written against the ids. The digits are grouped by decade, so a receiver that has never seen an id can still tell what kind of thing it is.
@@ -39,7 +39,7 @@ stateForEmotion(3); //    'curious'   — numbers and single digits are normalis
 
 An id keeps its number and meaning for good, because scripts in the wild already send it. The gaps in each decade hold `03` curious, `09` dragging, `26` bouncing, `27` humming, `38` refusing and `42`–`49`, the finer-grained tool states — so the two-digit budget is never exceeded and no number changes meaning. `09` is a lifecycle id because being picked up and moved is something that happens _to_ the character, not a mood; `27` is a feeling, the small contentment of something working away on its own.
 
-Several ids share a state: `15` _Tired_ and `06` _Dormant_ both drowse, and `16` _Focused_ and `32` _Busy_ both work. That is intentional. The id records what the sender meant; the state is how Aora Bot chooses to show it. `emotionIdForState` returns the lowest id for a state, which is the one a host built on Aora Bot should emit.
+Several ids share a state: `15` _Tired_ and `06` _Dormant_ both drowse, and `16` _Focused_ and `32` _Busy_ both work. That is intentional. The id records what the sender meant; the state is how Mowa Bot chooses to show it. `emotionIdForState` returns the lowest id for a state, which is the one a host built on Mowa Bot should emit.
 
 ## Events and conditions
 
@@ -52,7 +52,7 @@ Everything that accepts an id also accepts a state name, and the parser takes ei
 ```ts
 parseAgentMessage('34'); //                     { emotionId: '34', state: 'alerting' }
 parseAgentMessage('thinking'); //               { emotionId: '30', state: 'thinking' }
-parseAgentMessage({ aoraBotId: 33, tips: 'ok' }); // { emotionId: '33', state: 'celebrate', tips: 'ok' }
+parseAgentMessage({ mowaBotId: 33, tips: 'ok' }); // { emotionId: '33', state: 'celebrate', tips: 'ok' }
 parseAgentMessage('{"emotionId":"40"}'); //     { emotionId: '40', state: 'searching' }
 parseAgentMessage('nope'); //                   null
 ```
@@ -71,7 +71,7 @@ A message may carry a third, optional field: a dial to draw in the ring outside 
 ```json
 {
   "session_id": "s1",
-  "aoraBotId": "32",
+  "mowaBotId": "32",
   "tips": "Indexing 3 of 5",
   "hud": { "kind": "progress", "value": 0.6 }
 }

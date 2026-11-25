@@ -23,8 +23,8 @@ export const BACKDROPS = ['lineart', 'wall'] as const;
 export type Backdrop = (typeof BACKDROPS)[number];
 
 /** `localStorage` keys, and the `?view=` parameter a link can open a view with. */
-export const VIEW_KEY = 'aora-bot:home-view';
-export const BACKDROP_KEY = 'aora-bot:home-backdrop';
+export const VIEW_KEY = 'mowa-bot:home-view';
+export const BACKDROP_KEY = 'mowa-bot:home-backdrop';
 export const VIEW_PARAM = 'view';
 
 export interface ViewProps {

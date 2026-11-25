@@ -1,7 +1,7 @@
 // The static entry: this module is re-exported from `static.ts` so a server
 // action can validate the same draft the dialog does.
-import { autoColorForKey, autoShapeForKey } from '@aora-bot/engine/static';
-import type { ColorId, FaceStyle, NoseId, ShapeId } from '@aora-bot/engine';
+import { autoColorForKey, autoShapeForKey } from '@mowa-bot/engine/static';
+import type { ColorId, FaceStyle, NoseId, ShapeId } from '@mowa-bot/engine';
 import type { SurfaceLocaleKey } from '../locale/index.js';
 
 /**

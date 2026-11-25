@@ -1,4 +1,4 @@
-import { loadTheme, renderStaticSvg } from '@aora-bot/engine/static';
+import { loadTheme, renderStaticSvg } from '@mowa-bot/engine/static';
 import type { StillReply, StillRequest } from './images.js';
 
 const scope = self as unknown as {

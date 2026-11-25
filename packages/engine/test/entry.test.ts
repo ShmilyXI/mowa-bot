@@ -121,8 +121,8 @@ describe('static rendering', () => {
       sync: { kind: 'sync', state: 'done' },
     };
     const svg = engine.renderStaticSvg({ shape: 'blob', color: 'blue', hud: specs[kind] });
-    expect(svg).toContain('data-aora-hud');
-    expect(svg).not.toContain('data-aora-face');
+    expect(svg).toContain('data-mowa-hud');
+    expect(svg).not.toContain('data-mowa-face');
     expect(svg).not.toContain('NaN');
     expect(svg).not.toContain('undefined');
   });

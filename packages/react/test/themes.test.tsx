@@ -1,5 +1,5 @@
 // @vitest-environment happy-dom
-import { isThemeInstalled, loadTheme } from '@aora-bot/engine';
+import { isThemeInstalled, loadTheme } from '@mowa-bot/engine';
 import { act } from 'react';
 import { createRoot, type Root } from 'react-dom/client';
 import { afterEach, describe, expect, it } from 'vitest';
@@ -40,7 +40,7 @@ describe('a mark naming a theme', () => {
   it('holds its box, loads the theme and then draws', async () => {
     expect(isThemeInstalled('halloween')).toBe(false);
     const host = render(<CharacterMark shape="pumpkin" variant="doodle" sizePx={64} />);
-    const mark = host.querySelector<HTMLElement>('.aora-mark')!;
+    const mark = host.querySelector<HTMLElement>('.mowa-mark')!;
     expect(mark.querySelector('svg')).toBeNull();
     expect(mark.style.width).toBe('64px');
     expect(mark.style.aspectRatio).toBe('1 / 1');
@@ -54,7 +54,7 @@ describe('a mark naming a theme', () => {
 
   it('draws a theme member by preset once installed, at once', () => {
     const host = render(<CharacterMark preset="floaty" />);
-    const mark = host.querySelector<HTMLElement>('.aora-mark')!;
+    const mark = host.querySelector<HTMLElement>('.mowa-mark')!;
     expect(mark.dataset.shape).toBe('spook');
     expect(mark.dataset.color).toBe('cream');
     expect(mark.querySelector('svg')).not.toBeNull();

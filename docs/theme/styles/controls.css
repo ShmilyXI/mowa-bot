@@ -4,7 +4,7 @@
  * The small set of pieces every page and every documentation demo is built
  * from: the button, the labelled field, the dropdown menu, the slider, the
  * swatch grid, and the block a demo sits in. They read the kit's tokens, so a
- * change to `--aora-radius-sm` or `--aora-accent` reaches all of them.
+ * change to `--mowa-radius-sm` or `--mowa-accent` reaches all of them.
  *
  * The site has one selected state — ink. A chosen button, menu option, swatch,
  * timeline clip or tour pick is filled with the text colour, so "this one"
@@ -17,24 +17,24 @@
   /*
    * The edge is an inset hairline rather than a border: a demo sits inside the
    * prose, and one more 1px box around a box is what the page had too many of.
-   * The characters inside read `--aora-bg-base` from the root, which is the
+   * The characters inside read `--mowa-bg-base` from the root, which is the
    * page; the fill here is the page at 88%, so the eye cut-outs match it.
    */
   .site-demo {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: var(--aora-space-5);
-    padding: 1.75rem var(--aora-space-6);
-    border-radius: var(--aora-radius-lg);
-    background: color-mix(in oklab, var(--aora-bg-base) 88%, transparent);
-    box-shadow: var(--aora-shadow-line);
+    gap: var(--mowa-space-5);
+    padding: 1.75rem var(--mowa-space-6);
+    border-radius: var(--mowa-radius-lg);
+    background: color-mix(in oklab, var(--mowa-bg-base) 88%, transparent);
+    box-shadow: var(--mowa-shadow-line);
   }
 
   /* On a phone the doc column is under 360px, and 24px a side leaves a demo little more than 220. */
   @media (width < 480px) {
     .site-demo {
-      padding-inline: var(--aora-space-4);
+      padding-inline: var(--mowa-space-4);
     }
   }
 
@@ -74,7 +74,7 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: var(--aora-space-3);
+    gap: var(--mowa-space-3);
   }
 
   /* An avatar with chrome in its corners: `__dot` at the bottom, `__count` at the top. */
@@ -118,34 +118,34 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--aora-space-2);
+    gap: var(--mowa-space-2);
     min-width: 4.5rem;
   }
 
   /*
-   * `--aora-text-xs` (12px) is the floor for an identifier.
+   * `--mowa-text-xs` (12px) is the floor for an identifier.
    *
    * These labels are things you type — `powering-down`, `neutralSoft` — not
    * captions, so they have to survive being read character by character.
    */
   .site-demo__label {
-    font-family: var(--aora-font-mono);
-    font-size: var(--aora-text-xs);
+    font-family: var(--mowa-font-mono);
+    font-size: var(--mowa-text-xs);
     font-variant-numeric: tabular-nums;
-    line-height: var(--aora-leading-snug);
-    color: var(--aora-text-muted);
+    line-height: var(--mowa-leading-snug);
+    color: var(--mowa-text-muted);
     text-align: center;
     overflow-wrap: anywhere;
   }
 
   .site-demo__label[data-active='true'] {
-    color: var(--aora-accent);
+    color: var(--mowa-accent);
   }
 
   .site-demo__name {
-    font-size: var(--aora-text-sm);
-    line-height: var(--aora-leading-snug);
-    color: var(--aora-text);
+    font-size: var(--mowa-text-sm);
+    line-height: var(--mowa-leading-snug);
+    color: var(--mowa-text);
     text-align: center;
   }
 
@@ -159,18 +159,18 @@
   .site-swatches {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(5.75rem, 1fr));
-    gap: var(--aora-space-2);
-    margin-block: var(--aora-space-4);
+    gap: var(--mowa-space-2);
+    margin-block: var(--mowa-space-4);
   }
 
   .site-swatch {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--aora-space-1);
-    padding: var(--aora-space-3) var(--aora-space-1);
+    gap: var(--mowa-space-1);
+    padding: var(--mowa-space-3) var(--mowa-space-1);
     border: 0;
-    border-radius: var(--aora-radius-md);
+    border-radius: var(--mowa-radius-md);
     background: none;
     color: inherit;
     font: inherit;
@@ -178,20 +178,20 @@
 
   button.site-swatch {
     cursor: pointer;
-    transition: background-color var(--aora-duration-fast) var(--aora-ease-standard);
+    transition: background-color var(--mowa-duration-fast) var(--mowa-ease-standard);
 
     &:hover {
-      background: var(--aora-fill);
+      background: var(--mowa-fill);
     }
 
     /*
-     * Chosen is ink. The cut-out eyes read `--aora-bg-base`, so the fill has
+     * Chosen is ink. The cut-out eyes read `--mowa-bg-base`, so the fill has
      * to be handed to them too, or the character on the chosen swatch looks
      * out through two page-coloured holes.
      */
     &[aria-pressed='true'] {
-      --aora-bg-base: var(--aora-text);
-      background: var(--aora-text);
+      --mowa-bg-base: var(--mowa-text);
+      background: var(--mowa-text);
       color: var(--site-paper);
 
       & :is(.site-demo__label, .site-demo__name) {
@@ -206,7 +206,7 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: var(--aora-space-2);
+    gap: var(--mowa-space-2);
   }
 
   /*
@@ -219,32 +219,32 @@
   .site-btn {
     display: inline-flex;
     align-items: center;
-    gap: var(--aora-space-1);
-    height: var(--aora-control-h);
-    padding: 0 var(--aora-space-3);
+    gap: var(--mowa-space-1);
+    height: var(--mowa-control-h);
+    padding: 0 var(--mowa-space-3);
     border: 0;
-    border-radius: var(--aora-radius-sm);
+    border-radius: var(--mowa-radius-sm);
     background: none;
-    color: var(--aora-text);
+    color: var(--mowa-text);
     font-family: inherit;
-    font-size: var(--aora-text-sm);
-    font-weight: var(--aora-weight-medium);
+    font-size: var(--mowa-text-sm);
+    font-weight: var(--mowa-weight-medium);
     white-space: nowrap;
     cursor: pointer;
     transition:
-      background-color var(--aora-duration-fast) var(--aora-ease-standard),
-      color var(--aora-duration-fast) var(--aora-ease-standard);
+      background-color var(--mowa-duration-fast) var(--mowa-ease-standard),
+      color var(--mowa-duration-fast) var(--mowa-ease-standard);
 
     &:hover:not(:disabled) {
-      background: var(--aora-fill);
+      background: var(--mowa-fill);
     }
 
     &:active:not(:disabled) {
-      background: var(--aora-fill-hover);
+      background: var(--mowa-fill-hover);
     }
 
     &[data-active='true'] {
-      background: var(--aora-text);
+      background: var(--mowa-text);
       color: var(--site-paper);
     }
 
@@ -261,9 +261,9 @@
   .site-field {
     display: inline-flex;
     align-items: center;
-    gap: var(--aora-space-2);
-    font-size: var(--aora-text-sm);
-    color: var(--aora-text-muted);
+    gap: var(--mowa-space-2);
+    font-size: var(--mowa-text-sm);
+    color: var(--mowa-text-muted);
   }
 
   /*
@@ -275,19 +275,19 @@
     appearance: none;
     height: 1.25rem;
     background: transparent;
-    accent-color: var(--aora-accent);
+    accent-color: var(--mowa-accent);
     cursor: pointer;
 
     &::-webkit-slider-runnable-track {
       height: 4px;
-      border-radius: var(--aora-radius-pill);
-      background: var(--aora-fill-hover);
+      border-radius: var(--mowa-radius-pill);
+      background: var(--mowa-fill-hover);
     }
 
     &::-moz-range-track {
       height: 4px;
-      border-radius: var(--aora-radius-pill);
-      background: var(--aora-fill-hover);
+      border-radius: var(--mowa-radius-pill);
+      background: var(--mowa-fill-hover);
     }
 
     &::-webkit-slider-thumb {
@@ -297,11 +297,11 @@
       margin-top: -6px;
       border: 0;
       border-radius: 50%;
-      background: var(--aora-surface-raised);
+      background: var(--mowa-surface-raised);
       box-shadow:
-        0 0 0 1px var(--aora-line-strong),
-        var(--aora-shadow-sm);
-      transition: transform var(--aora-duration-fast) var(--aora-ease-standard);
+        0 0 0 1px var(--mowa-line-strong),
+        var(--mowa-shadow-sm);
+      transition: transform var(--mowa-duration-fast) var(--mowa-ease-standard);
     }
 
     &::-moz-range-thumb {
@@ -309,10 +309,10 @@
       height: 1rem;
       border: 0;
       border-radius: 50%;
-      background: var(--aora-surface-raised);
+      background: var(--mowa-surface-raised);
       box-shadow:
-        0 0 0 1px var(--aora-line-strong),
-        var(--aora-shadow-sm);
+        0 0 0 1px var(--mowa-line-strong),
+        var(--mowa-shadow-sm);
     }
 
     &:hover::-webkit-slider-thumb,
@@ -338,12 +338,12 @@
     position: relative;
     display: inline-flex;
     align-items: center;
-    gap: var(--aora-space-2);
+    gap: var(--mowa-space-2);
   }
 
   .site-menu__label {
-    font-size: var(--aora-text-sm);
-    color: var(--aora-text-muted);
+    font-size: var(--mowa-text-sm);
+    color: var(--mowa-text-muted);
   }
 
   .site-menu__trigger {
@@ -357,15 +357,15 @@
   }
 
   .site-menu__trigger code {
-    font-size: var(--aora-text-xs);
-    color: var(--aora-text-muted);
+    font-size: var(--mowa-text-xs);
+    color: var(--mowa-text-muted);
   }
 
   .site-menu__caret {
     flex: none;
     width: 8px;
     height: 5px;
-    margin-inline-start: var(--aora-space-1);
+    margin-inline-start: var(--mowa-space-1);
     background: currentColor;
     clip-path: polygon(0 0, 100% 0, 50% 100%);
     opacity: 0.55;
@@ -373,26 +373,26 @@
 
   .site-menu__panel {
     position: absolute;
-    z-index: var(--aora-z-dropdown);
-    top: calc(100% + var(--aora-space-1));
+    z-index: var(--mowa-z-dropdown);
+    top: calc(100% + var(--mowa-space-1));
     inset-inline-start: 0;
     display: flex;
     flex-direction: column;
     min-width: max(100%, 16rem);
     max-width: min(36rem, 92vw);
     max-height: min(22rem, 60vh);
-    padding: var(--aora-space-1);
+    padding: var(--mowa-space-1);
     overflow: auto;
-    border-radius: var(--aora-radius-md);
-    background: var(--aora-surface-raised);
-    box-shadow: var(--aora-shadow-line), var(--aora-shadow-lg);
+    border-radius: var(--mowa-radius-md);
+    background: var(--mowa-surface-raised);
+    box-shadow: var(--mowa-shadow-line), var(--mowa-shadow-lg);
   }
 
   .site-menu__panel[data-columns='2'],
   .site-menu__panel[data-columns='3'] {
     display: grid;
     grid-template-columns: repeat(var(--site-menu-cols, 2), minmax(0, 1fr));
-    gap: var(--aora-space-0-5);
+    gap: var(--mowa-space-0-5);
   }
 
   .site-menu__panel[data-columns='3'] {
@@ -403,54 +403,54 @@
   .site-menu__group {
     display: flex;
     flex-direction: column;
-    gap: var(--aora-space-0-5);
-    padding-block: var(--aora-space-1);
+    gap: var(--mowa-space-0-5);
+    padding-block: var(--mowa-space-1);
 
     & + & {
-      border-top: 1px solid var(--aora-line);
+      border-top: 1px solid var(--mowa-line);
     }
   }
 
   .site-menu__groupName {
     margin: 0;
-    padding: var(--aora-space-2) var(--aora-space-3) var(--aora-space-1);
-    font-size: var(--aora-text-sm);
-    font-weight: var(--aora-weight-semibold);
+    padding: var(--mowa-space-2) var(--mowa-space-3) var(--mowa-space-1);
+    font-size: var(--mowa-text-sm);
+    font-weight: var(--mowa-weight-semibold);
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: var(--aora-text-faint);
+    color: var(--mowa-text-faint);
   }
 
   .site-menu__option {
     display: flex;
     align-items: baseline;
     justify-content: space-between;
-    gap: var(--aora-space-3);
+    gap: var(--mowa-space-3);
     width: 100%;
-    padding: 0.4375rem var(--aora-space-3);
+    padding: 0.4375rem var(--mowa-space-3);
     border: 0;
-    border-radius: var(--aora-radius-sm);
+    border-radius: var(--mowa-radius-sm);
     background: none;
     color: inherit;
     font: inherit;
-    font-size: var(--aora-text-sm);
+    font-size: var(--mowa-text-sm);
     text-align: start;
     cursor: pointer;
 
     & code {
-      font-size: var(--aora-text-xs);
-      color: var(--aora-text-muted);
+      font-size: var(--mowa-text-xs);
+      color: var(--mowa-text-muted);
     }
 
     &:hover,
     &[data-active='true'] {
-      background: var(--aora-fill);
+      background: var(--mowa-fill);
     }
 
     &[aria-selected='true'] {
-      background: var(--aora-text);
+      background: var(--mowa-text);
       color: var(--site-paper);
-      font-weight: var(--aora-weight-semibold);
+      font-weight: var(--mowa-weight-semibold);
 
       & code {
         color: inherit;

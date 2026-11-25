@@ -5,7 +5,7 @@ import { API } from '@theme';
 Language for every component below it.
 
 ```tsx preview
-import { LocaleProvider, CharacterSelector, ActivityBadge } from '@aora-bot/react';
+import { LocaleProvider, CharacterSelector, ActivityBadge } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -28,7 +28,7 @@ Shape, ink and state identifiers are part of the API (`'blob'`, `'blue'`, `'thin
 `useLabel()` wraps those families as functions, so a component iterating `SHAPE_IDS` does not have to build `'shape.' + id` and cast it to a key:
 
 ```tsx preview
-import { LocaleProvider, SHAPE_IDS, useLabel, type ShapeId } from '@aora-bot/react';
+import { LocaleProvider, SHAPE_IDS, useLabel, type ShapeId } from '@mowa-bot/react';
 
 function Names({ shapes }: { shapes: ShapeId[] }) {
   const label = useLabel();

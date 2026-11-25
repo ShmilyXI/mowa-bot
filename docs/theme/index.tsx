@@ -1,6 +1,6 @@
 import { Layout as BasicLayout } from '@rspress/core/theme-original';
 import { useLang } from '@rspress/core/runtime';
-import { LocaleProvider } from '@aora-bot/react';
+import { LocaleProvider } from '@mowa-bot/react';
 import { lazy } from 'react';
 import { CapsuleNav } from './components/CapsuleNav.js';
 import type * as DemoModule from './components/demos.js';
@@ -11,15 +11,14 @@ import { WaveBackdrop } from './components/WaveBackdrop.js';
 // `site-tokens.css` also declares the layer order, so it is imported before
 // anything else that opens a layer of its own.
 import './styles/site-tokens.css';
-import '@aora-bot/react/styles.css';
-import '@aora-bot/surfaces/styles.css';
+import '@mowa-bot/react/styles.css';
+import '@mowa-bot/surfaces/styles.css';
 import './styles/rspress-overrides.css';
 import './styles/shell.css';
 import './styles/controls.css';
 import './styles/doc-components.css';
 import './styles/pages/home.css';
 import './styles/pages/exhibit.css';
-import './styles/pages/sponsor.css';
 import './styles/pages/themes.css';
 
 /**
@@ -28,16 +27,16 @@ import './styles/pages/themes.css';
  * current docs language.
  *
  * The backdrop goes in `top` rather than `beforeDoc`: the doc slot exists only
- * on documentation pages, so the home page, the sponsor page and the 404 page
+ * on documentation pages, so the home page and the 404 page
  * would draw on a flat background while every article had the ambient light.
  *
  * The copyright line goes in `afterDocFooter`, so it sits in the doc column
- * and not under the fixed sidebar. The home, sponsor and 404 pages fill the
+ * and not under the fixed sidebar. The home and 404 pages fill the
  * screen, and a line below them would only add a scroll; the copyright page
  * in the docs covers them.
  *
- * The hero slots are empty. The home page and the sponsor page are
- * `pageType: custom` pages — a live console rather than a headline and a row
+ * The hero slots are empty. The home page is a
+ * `pageType: custom` page — a live console rather than a headline and a row
  * of cards — so there is no hero to decorate.
  */
 const Layout = () => {

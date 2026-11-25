@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react';
-import { cx } from '@aora-bot/react';
+import { cx } from '@mowa-bot/react';
 import { useSurfaceLocale, type SurfaceLocaleKey } from '../locale/index.js';
 import type { TemplateVisibility } from './normalizeTemplateDraft.js';
 
@@ -36,7 +36,7 @@ export function VisibilityControls({
 
   return (
     <div
-      className={cx('aora-s-visibility', className)}
+      className={cx('mowa-s-visibility', className)}
       role="radiogroup"
       aria-label={t('template.visibility')}
       style={style}
@@ -49,12 +49,12 @@ export function VisibilityControls({
           aria-checked={value === id}
           disabled={disabled}
           tabIndex={value === id ? 0 : -1}
-          className="aora-s-visibility__option"
+          className="mowa-s-visibility__option"
           data-selected={value === id || undefined}
           onClick={() => onSelect?.(id)}
         >
-          <span className="aora-s-visibility__label">{t(label)}</span>
-          <span className="aora-s-visibility__hint">{t(hint)}</span>
+          <span className="mowa-s-visibility__label">{t(label)}</span>
+          <span className="mowa-s-visibility__hint">{t(hint)}</span>
         </button>
       ))}
     </div>

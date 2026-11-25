@@ -1,2 +1,2 @@
-export { AoraBotElement, defineAoraBot } from './element.js';
-export type { AoraBotAttributes } from './element.js';
+export { MowaBotElement, defineMowaBot } from './element.js';
+export type { MowaBotAttributes } from './element.js';

@@ -5,7 +5,7 @@ import { API } from '@theme';
 A single animated character. Everything else in the library is built on it.
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 export default function Demo() {
   return <CharacterMark shape="blob" color="orange" state="excited" sizePx={150} />;
@@ -17,8 +17,8 @@ export default function Demo() {
 `styleId` picks the style and `variant` picks a variant within it. The geometry, the animation and the face are identical across all of them — only the paint changes, so a new state or a new character arrives in every style at once. Each style has a page: [Vector](/design/styles/vector), [Pixel](/design/styles/pixel), [Kaomoji](/design/styles/kaomoji), [ASCII](/design/styles/ascii). Here is every vector variant:
 
 ```tsx preview
-import { getStyle } from '@aora-bot/engine';
-import { CharacterMark } from '@aora-bot/react';
+import { getStyle } from '@mowa-bot/engine';
+import { CharacterMark } from '@mowa-bot/react';
 
 const variants = getStyle('vector').variants;
 
@@ -41,7 +41,7 @@ export default function Demo() {
 `outline` and `glass` turn that around. When the body is no longer filled, a face painted to read on it would vanish, so these two variants draw the face in the ink instead — the same silhouette read from the other side.
 
 ```tsx preview
-import { CharacterMark, SHAPE_IDS } from '@aora-bot/react';
+import { CharacterMark, SHAPE_IDS } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -61,7 +61,7 @@ The stroke is a constant width in shape space rather than in pixels, so it scale
 `face` chooses among the sixteen faces in `FACE_STYLES`: the default `cute`, `eyes`, the [line face](/design/face) `line`, which adds a nose and a mouth as strokes at one shared weight, and thirteen drawn faces such as `capsule`. `nose` only applies to `line` and picks one of six; omit it for one derived from `seed`, or pass `null` for none.
 
 ```tsx preview
-import { CharacterMark, NOSE_IDS } from '@aora-bot/react';
+import { CharacterMark, NOSE_IDS } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -98,7 +98,7 @@ Use `CharacterMark` for a character that is on its own — a hero, an empty stat
 ## Following the pointer
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -116,7 +116,7 @@ The mapping is not linear. Distance is passed through a square root, which keeps
 
 ```tsx preview
 import { useState } from 'react';
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 export default function Demo() {
   const [hover, setHover] = useState(false);
@@ -139,7 +139,7 @@ export default function Demo() {
 
 ```tsx preview
 import { useState } from 'react';
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 export default function Demo() {
   const [paused, setPaused] = useState(false);
@@ -158,7 +158,7 @@ export default function Demo() {
 
 ```tsx preview
 import { useRef } from 'react';
-import { CharacterMark, type CharacterHandle } from '@aora-bot/react';
+import { CharacterMark, type CharacterHandle } from '@mowa-bot/react';
 
 export default function Demo() {
   const ref = useRef<CharacterHandle>(null);
@@ -192,7 +192,7 @@ export default function Demo() {
 
 ```tsx preview
 import { useState } from 'react';
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 export default function Demo() {
   const [target, setTarget] = useState<{ x: number; y: number } | null>(null);
@@ -215,7 +215,7 @@ export default function Demo() {
 `ink` overrides the body paint with a flat colour or a two-stop gradient, for a character that has to match a brand swatch rather than the palette; `null` hands it back to the theme token. `eyeScale` is a static multiplier on eye size, applied on top of the emphasis spring. `lineWeight` scales the nose, the mouth and the HUD dials together, within `LINE_WEIGHT_RANGE` (0.8–1.25) — one pen per character, so the [face and the HUD](/design/face) always share one stroke weight.
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -272,7 +272,7 @@ export default function Demo() {
 `hud` draws a dial in the ring outside the body; `null` removes it. While a HUD is on, the face is hidden — the body stays a silhouette, the ring is the reading. The spec is the same `HudSpec` the [protocol](/design/protocol) carries and [`HudPlate`](/components/hud-plate) validates, and the dial is stroked at the character's `lineWeight`.
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -311,7 +311,7 @@ Finite states — `spawning`, `waking` — run their course (see `STATE_SETTLE_T
 
 ```tsx preview
 import { useState } from 'react';
-import { CharacterMark, type CharacterState } from '@aora-bot/react';
+import { CharacterMark, type CharacterState } from '@mowa-bot/react';
 
 export default function Demo() {
   const [state, setState] = useState<CharacterState>('idle');

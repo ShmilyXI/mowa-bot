@@ -1,23 +1,23 @@
-# @aora-bot/react
+# @mowa-bot/react
 
-React components for [Aora Bot](https://aora-bot.vercel.app), a procedural character engine
+React components for [Mowa Bot](https://mowa-bot.vercel.app), a procedural character engine
 for the web: a roster of generated characters and a named cast, ink colours, animation states,
 sixteen faces, vector, pixel, kaomoji and ASCII styles and an SVG HUD, all drawn by code and
-animated from one shared frame loop. Try them in the [console](https://aora-bot.vercel.app/en/).
+animated from one shared frame loop. Try them in the [console](https://mowa-bot.vercel.app/en/).
 
 ## Install
 
 ```bash
-pnpm add @aora-bot/react
+pnpm add @mowa-bot/react
 ```
 
-Requires React 19. `@aora-bot/engine` is a dependency and comes along automatically.
+Requires React 19. `@mowa-bot/engine` is a dependency and comes along automatically.
 
 ## First character
 
 ```tsx
-import { CharacterMark } from '@aora-bot/react';
-import '@aora-bot/react/styles.css';
+import { CharacterMark } from '@mowa-bot/react';
+import '@mowa-bot/react/styles.css';
 
 export function Hero() {
   return <CharacterMark shape="mochi" state="happy" sizePx={120} />;
@@ -50,12 +50,12 @@ your own rules win without `!important`.
 | `LocaleProvider`, `useLabel`                                              | Component copy and catalogue labels in `en-US` or `zh-CN`                   |
 
 Onboarding walkthroughs, scenes, the template dialog, the occupancy list and the cast lineup
-live in [`@aora-bot/surfaces`](https://github.com/sam70361/aora-bot/tree/main/packages/surfaces),
+live in [`@mowa-bot/surfaces`](https://github.com/ShmilyXI/mowa-bot/tree/main/packages/surfaces),
 which builds on this package.
 
 ## Server rendering
 
-`@aora-bot/react/static` contains only what can run without a DOM, and carries no
+`@mowa-bot/react/static` contains only what can run without a DOM, and carries no
 `'use client'` banner, so it is usable from a React Server Component. That is: the
 static rendering functions (`renderStaticSvg`, `renderStaticSvgDataUrl`,
 `renderAvatarDataUrl`, `shapeMaskImage`, `shapeRingMaskImage`), the
@@ -67,7 +67,7 @@ both locale tables (`enUS`, `zhCN`) so a server can render the copy in either
 language.
 
 ```tsx
-import { renderAvatarDataUrl } from '@aora-bot/react/static';
+import { renderAvatarDataUrl } from '@mowa-bot/react/static';
 
 export default function Page() {
   return <img src={renderAvatarDataUrl('ada@example.com')} width={40} height={40} alt="" />;
@@ -76,11 +76,11 @@ export default function Page() {
 
 ## Documentation
 
-- [Getting started](https://aora-bot.vercel.app/en/guide/getting-started)
-- [Component overview](https://aora-bot.vercel.app/en/components/overview)
-- [Performance: hundreds of characters](https://aora-bot.vercel.app/en/guide/performance)
-- [Server rendering](https://aora-bot.vercel.app/en/guide/server-rendering)
+- [Getting started](https://mowa-bot.vercel.app/en/guide/getting-started)
+- [Component overview](https://mowa-bot.vercel.app/en/components/overview)
+- [Performance: hundreds of characters](https://mowa-bot.vercel.app/en/guide/performance)
+- [Server rendering](https://mowa-bot.vercel.app/en/guide/server-rendering)
 
 ## License
 
-[MIT](https://github.com/sam70361/aora-bot/blob/main/LICENSE), code and character designs alike. A credit such as "Powered by Aora Bot" is welcome but not required. The name and logo are covered by the [trademark policy](https://github.com/sam70361/aora-bot/blob/main/TRADEMARKS.md).
+[MIT](https://github.com/ShmilyXI/mowa-bot/blob/main/LICENSE), code and character designs alike. Based on [Aora Bot](https://github.com/sam70361/aora-bot) by sam70361 (MIT); see [NOTICE.md](https://github.com/ShmilyXI/mowa-bot/blob/main/NOTICE.md).

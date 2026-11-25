@@ -1,4 +1,4 @@
-import type { FaceStyle, NoseId } from '@aora-bot/engine';
+import type { FaceStyle, NoseId } from '@mowa-bot/engine';
 import { useMemo, useRef, useState, type CSSProperties } from 'react';
 import {
   CelebrationLayer,
@@ -8,7 +8,7 @@ import {
   type AvatarStudioProps,
   CharacterMark,
   cx,
-} from '@aora-bot/react';
+} from '@mowa-bot/react';
 import { useSurfaceLocale } from '../locale/index.js';
 import { ShareCard } from './ShareCard.js';
 import { usePublishMark } from './usePublishMark.js';
@@ -110,11 +110,11 @@ export function TemplateDialog({
       role="dialog"
       aria-modal="true"
       aria-label={t('template.title')}
-      className={cx('aora-s-template', className)}
+      className={cx('mowa-s-template', className)}
       style={style}
     >
-      <div className="aora-s-template__head">
-        <span className="aora-s-template__mark">
+      <div className="mowa-s-template__head">
+        <span className="mowa-s-template__mark">
           {/* The confetti layer sits over the mark so a burst is not clipped
               by the character's own box. */}
           <CharacterMark
@@ -127,7 +127,7 @@ export function TemplateDialog({
             sizePx={sizePx}
             seed={seed ?? draft.name}
           />
-          <CelebrationLayer ref={confetti} className="aora-s-template__confetti" />
+          <CelebrationLayer ref={confetti} className="mowa-s-template__confetti" />
         </span>
 
         <AvatarButton
@@ -147,10 +147,10 @@ export function TemplateDialog({
         />
       </div>
 
-      <label className="aora-s-template__field">
-        <span className="aora-s-template__label">{t('template.name')}</span>
+      <label className="mowa-s-template__field">
+        <span className="mowa-s-template__label">{t('template.name')}</span>
         <input
-          className="aora-field"
+          className="mowa-field"
           value={input.name ?? ''}
           maxLength={TEMPLATE_LIMITS.name}
           placeholder={t('template.namePlaceholder')}
@@ -158,10 +158,10 @@ export function TemplateDialog({
         />
       </label>
 
-      <label className="aora-s-template__field">
-        <span className="aora-s-template__label">{t('template.instructions')}</span>
+      <label className="mowa-s-template__field">
+        <span className="mowa-s-template__label">{t('template.instructions')}</span>
         <textarea
-          className="aora-field"
+          className="mowa-field"
           rows={4}
           value={input.instructions ?? ''}
           maxLength={TEMPLATE_LIMITS.instructions}
@@ -170,8 +170,8 @@ export function TemplateDialog({
         />
       </label>
 
-      <div className="aora-s-template__field">
-        <span className="aora-s-template__label">{t('template.visibility')}</span>
+      <div className="mowa-s-template__field">
+        <span className="mowa-s-template__label">{t('template.visibility')}</span>
         <VisibilityControls value={draft.visibility} onSelect={(visibility) => patch({ visibility })} />
       </div>
 
@@ -191,23 +191,23 @@ export function TemplateDialog({
       {/* Errors appear after the first attempt, not while the first character
           is being typed: an empty name is not a mistake yet. */}
       {submitted && errors.length > 0 && (
-        <p className="aora-s-template__error" role="alert">
+        <p className="mowa-s-template__error" role="alert">
           {t(TEMPLATE_ERROR_KEYS[errors[0]!])}
         </p>
       )}
       {failed && (
-        <p className="aora-s-template__error" role="alert">
+        <p className="mowa-s-template__error" role="alert">
           {t('template.failed')}
         </p>
       )}
 
-      <div className="aora-s-template__actions">
-        <button type="button" className="aora-button" onClick={onCancel}>
+      <div className="mowa-s-template__actions">
+        <button type="button" className="mowa-button" onClick={onCancel}>
           {t('template.cancel')}
         </button>
         <button
           type="button"
-          className="aora-button aora-button--primary"
+          className="mowa-button mowa-button--primary"
           disabled={busy}
           onClick={() => void save()}
         >

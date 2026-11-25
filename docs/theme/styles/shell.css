@@ -34,7 +34,7 @@
    * in `rspress-overrides.css`.
    */
   .site-capsule {
-    border-radius: var(--aora-radius-pill);
+    border-radius: var(--mowa-radius-pill);
     background: var(--site-capsule-bg);
     -webkit-backdrop-filter: var(--site-capsule-blur);
     backdrop-filter: var(--site-capsule-blur);
@@ -61,8 +61,8 @@
   /* Two tints of the one brand hue: the page has no second colour to explain. */
   .site-backdrop__fallback {
     background:
-      radial-gradient(at 20% 15%, color-mix(in oklab, var(--aora-accent) 16%, transparent), transparent 55%),
-      radial-gradient(at 80% 30%, color-mix(in oklab, var(--aora-blue-300) 26%, transparent), transparent 55%);
+      radial-gradient(at 20% 15%, color-mix(in oklab, var(--mowa-accent) 16%, transparent), transparent 55%),
+      radial-gradient(at 80% 30%, color-mix(in oklab, var(--mowa-blue-300) 26%, transparent), transparent 55%);
     animation: site-breathe 9s ease-in-out infinite;
   }
 
@@ -99,8 +99,8 @@
     [role='radio'],
     [role='option']
   ):focus-visible {
-    outline: var(--aora-focus-ring);
-    outline-offset: var(--aora-focus-offset);
+    outline: var(--mowa-focus-ring);
+    outline-offset: var(--mowa-focus-offset);
   }
 
   /* ---- stage light ----------------------------------------------------------- */
@@ -120,7 +120,7 @@
    * `--site-swatch` is the preset's ink, set on the page element.
    */
   .site-glow {
-    --_ink: var(--site-swatch, var(--aora-accent));
+    --_ink: var(--site-swatch, var(--mowa-accent));
     --_core: light-dark(
       color-mix(in oklab, var(--_ink) 16%, transparent),
       color-mix(in oklab, var(--_ink) 22%, transparent)
@@ -145,15 +145,15 @@
   /* ---- footer ---------------------------------------------------------------- */
 
   .site-footer {
-    padding: var(--aora-space-6) var(--site-page-pad);
+    padding: var(--mowa-space-6) var(--site-page-pad);
     text-align: center;
   }
 
   .site-footer__text {
     margin: 0;
-    font-size: var(--aora-text-xs);
+    font-size: var(--mowa-text-xs);
     line-height: 1.6;
-    color: var(--aora-text-muted);
+    color: var(--mowa-text-muted);
     text-wrap: balance;
   }
 
@@ -162,7 +162,7 @@
     text-decoration: none;
 
     &:hover {
-      color: var(--aora-accent);
+      color: var(--mowa-accent);
       text-decoration: underline;
       text-underline-offset: 0.2em;
     }

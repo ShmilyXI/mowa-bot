@@ -10,8 +10,8 @@ import { StateMatrix } from '@theme';
 
 ```tsx preview
 import { useEffect, useState } from 'react';
-import { CharacterMark, CharacterStageProvider, type CharacterState } from '@aora-bot/react';
-import { Composer, OccupancyList } from '@aora-bot/surfaces';
+import { CharacterMark, CharacterStageProvider, type CharacterState } from '@mowa-bot/react';
+import { Composer, OccupancyList } from '@mowa-bot/surfaces';
 
 const me = { id: 'you', name: '你', shape: 'pebble', color: 'cyan' } as const;
 const agent = { id: 'echo', name: 'Echo', shape: 'pill', color: 'magenta' } as const;
@@ -114,7 +114,7 @@ export default function Demo() {
 
 ```tsx preview
 import { useState } from 'react';
-import { CharacterMark, HudPlate } from '@aora-bot/react';
+import { CharacterMark, HudPlate } from '@mowa-bot/react';
 
 export default function Demo() {
   const [level, setLevel] = useState(0.6);

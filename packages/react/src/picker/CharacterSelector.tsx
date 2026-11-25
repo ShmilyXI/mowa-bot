@@ -11,7 +11,7 @@ import {
   type FaceStyle,
   type NoseId,
   type ShapeId,
-} from '@aora-bot/engine';
+} from '@mowa-bot/engine';
 import { useMemo, type CSSProperties, type KeyboardEvent, type ReactNode } from 'react';
 import { useLabel, useLocale, type LocaleKey } from '../locale/index.js';
 import { CharacterMark } from '../mark/CharacterMark.js';
@@ -104,7 +104,7 @@ export function CharacterSelector({
   const previewNose = activeFace === 'line' ? activeNose : null;
 
   return (
-    <div className={cx('aora-picker', `aora-picker--${layout}`, className)} style={style}>
+    <div className={cx('mowa-picker', `mowa-picker--${layout}`, className)} style={style}>
       <RadioGroup
         label={t('picker.selectShape')}
         heading={t('picker.shape')}
@@ -119,7 +119,7 @@ export function CharacterSelector({
             aria-checked={id === shape}
             aria-label={label.shape(id)}
             tabIndex={selected ? 0 : -1}
-            className="aora-picker__item"
+            className="mowa-picker__item"
             data-selected={(showSelection && selected) || undefined}
             onClick={() => onSelectShape?.(id)}
             style={showSelection && selected ? ringStyle(id, markSize) : undefined}
@@ -152,13 +152,13 @@ export function CharacterSelector({
             aria-checked={id === color}
             aria-label={label.color(id)}
             tabIndex={selected ? 0 : -1}
-            className="aora-picker__swatch"
+            className="mowa-picker__swatch"
             data-selected={(showSelection && selected) || undefined}
             onClick={() => onSelectColor?.(id)}
             style={
               {
-                '--aora-swatch': getInkColorCss(id),
-                '--aora-swatch-edge': getInkVars(id)['--aora-rim'],
+                '--mowa-swatch': getInkColorCss(id),
+                '--mowa-swatch-edge': getInkVars(id)['--mowa-rim'],
               } as CSSProperties
             }
           />
@@ -180,7 +180,7 @@ export function CharacterSelector({
               role="radio"
               aria-checked={id === activeFace}
               tabIndex={selected ? 0 : -1}
-              className="aora-picker__segment"
+              className="mowa-picker__segment"
               data-selected={(showSelection && selected) || undefined}
               onClick={() => onSelectFace?.(id)}
             >
@@ -216,7 +216,7 @@ export function CharacterSelector({
               aria-label={t(NOSE_LABEL[id])}
               title={t(NOSE_LABEL[id])}
               tabIndex={selected ? 0 : -1}
-              className="aora-picker__item"
+              className="mowa-picker__item"
               data-selected={(showSelection && selected) || undefined}
               onClick={() => onSelectNose?.(id)}
               style={showSelection && selected ? ringStyle(shape, markSize) : undefined}
@@ -287,9 +287,9 @@ function RadioGroup<T extends string>({
   };
 
   return (
-    <div className="aora-picker__group" role="radiogroup" aria-label={label} onKeyDown={onKeyDown}>
-      <span className="aora-picker__label">{heading}</span>
-      <div className={cx('aora-picker__items', segmented && 'aora-picker__items--segments')}>
+    <div className="mowa-picker__group" role="radiogroup" aria-label={label} onKeyDown={onKeyDown}>
+      <span className="mowa-picker__label">{heading}</span>
+      <div className={cx('mowa-picker__items', segmented && 'mowa-picker__items--segments')}>
         {options.map((id) => renderOption(id, id === current))}
       </div>
     </div>
@@ -307,6 +307,6 @@ const KEY_STEPS: Record<string, 1 | -1 | 'first' | 'last' | undefined> = {
 
 function ringStyle(shape: ShapeId, sizePx: number): CSSProperties {
   return {
-    '--aora-picker-ring': shapeRingMaskImage({ shape, sizePx, inflatePx: 5, gapPx: 3 }),
+    '--mowa-picker-ring': shapeRingMaskImage({ shape, sizePx, inflatePx: 5, gapPx: 3 }),
   } as CSSProperties;
 }

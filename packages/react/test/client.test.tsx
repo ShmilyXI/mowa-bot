@@ -1,5 +1,5 @@
 // @vitest-environment happy-dom
-import { castMember, ticker, VIEWBOX_STR } from '@aora-bot/engine';
+import { castMember, ticker, VIEWBOX_STR } from '@mowa-bot/engine';
 import { act, createRef, type ReactNode } from 'react';
 import { createRoot, type Root } from 'react-dom/client';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
@@ -78,14 +78,14 @@ const appearances = [
 ] as const;
 
 /** The visible cells, as opposed to the hidden sources the stage hosts. */
-const roster = (el: HTMLElement) => [...el.querySelectorAll('.aora-roster > .aora-mark')];
-const sources = (el: HTMLElement) => [...el.querySelectorAll('.aora-stage > .aora-mark')];
+const roster = (el: HTMLElement) => [...el.querySelectorAll('.mowa-roster > .mowa-mark')];
+const sources = (el: HTMLElement) => [...el.querySelectorAll('.mowa-stage > .mowa-mark')];
 
 describe('CharacterStageProvider', () => {
   it('hosts one engine per appearance and mirrors every claim under the cap', () => {
     const el = render(
       <CharacterStageProvider maxSources={4}>
-        <div className="aora-roster">
+        <div className="mowa-roster">
           {appearances.map((a, i) => (
             <StagedMark key={i} {...a} sizePx={32} />
           ))}
@@ -101,7 +101,7 @@ describe('CharacterStageProvider', () => {
     const placeholders = roster(el);
     expect(placeholders).toHaveLength(8);
     for (const p of placeholders) {
-      expect(p.classList.contains('aora-mark--mirror')).toBe(false);
+      expect(p.classList.contains('mowa-mark--mirror')).toBe(false);
       expect((p as HTMLElement).style.aspectRatio).toBe('1 / 1');
     }
 
@@ -110,20 +110,20 @@ describe('CharacterStageProvider', () => {
     // Eight claims, four distinct appearances: four sources, eight mirrors.
     expect(sources(el)).toHaveLength(4);
     const cells = roster(el);
-    expect(cells.filter((c) => c.classList.contains('aora-mark--mirror'))).toHaveLength(8);
-    expect(cells.filter((c) => c.classList.contains('aora-mark--still'))).toHaveLength(0);
+    expect(cells.filter((c) => c.classList.contains('mowa-mark--mirror'))).toHaveLength(8);
+    expect(cells.filter((c) => c.classList.contains('mowa-mark--still'))).toHaveLength(0);
 
     // Every mirror points at a real, mounted source group.
-    for (const use of el.querySelectorAll('.aora-roster use')) {
+    for (const use of el.querySelectorAll('.mowa-roster use')) {
       const id = use.getAttribute('href')!.slice(1);
-      expect(el.querySelector(`.aora-stage [id="${id}"]`)).not.toBeNull();
+      expect(el.querySelector(`.mowa-stage [id="${id}"]`)).not.toBeNull();
     }
   });
 
   it('falls back to inline still images past maxSources instead of leaving blank cells', () => {
     const el = render(
       <CharacterStageProvider maxSources={2}>
-        <div className="aora-roster">
+        <div className="mowa-roster">
           {appearances.map((a, i) => (
             <StagedMark key={i} {...a} color="blue" sizePx={32} />
           ))}
@@ -134,8 +134,8 @@ describe('CharacterStageProvider', () => {
 
     expect(sources(el)).toHaveLength(2);
     const cells = roster(el);
-    expect(cells.map((c) => c.classList.contains('aora-mark--mirror'))).toEqual([true, true, false, false]);
-    expect(cells.map((c) => c.classList.contains('aora-mark--still'))).toEqual([false, false, true, true]);
+    expect(cells.map((c) => c.classList.contains('mowa-mark--mirror'))).toEqual([true, true, false, false]);
+    expect(cells.map((c) => c.classList.contains('mowa-mark--still'))).toEqual([false, false, true, true]);
 
     for (const still of cells.slice(2)) {
       // Inline SVG rather than an <img>, so it inherits the colour tokens and
@@ -152,20 +152,20 @@ describe('CharacterStageProvider', () => {
   it('keeps first-come claims hosted when a later one would push them over the cap', () => {
     const el = render(
       <CharacterStageProvider maxSources={1}>
-        <div className="aora-roster">
+        <div className="mowa-roster">
           <StagedMark key="blob" shape="blob" state="idle" />
         </div>
       </CharacterStageProvider>,
     );
     advance(FRAME_MS);
-    expect(roster(el)[0]!.classList.contains('aora-mark--mirror')).toBe(true);
+    expect(roster(el)[0]!.classList.contains('mowa-mark--mirror')).toBe(true);
 
     // The newcomer is placed *before* the running mark in the tree. Claim
     // order, not tree order, decides who stays under the cap, so the mark
     // that has been running must keep its engine.
     rerender(
       <CharacterStageProvider maxSources={1}>
-        <div className="aora-roster">
+        <div className="mowa-roster">
           <StagedMark key="hex" shape="hex" state="idle" />
           <StagedMark key="blob" shape="blob" state="idle" />
         </div>
@@ -178,8 +178,8 @@ describe('CharacterStageProvider', () => {
 
     const cells = roster(el);
     expect(cells[0]!.getAttribute('data-shape')).toBe('hex');
-    expect(cells[0]!.classList.contains('aora-mark--still')).toBe(true);
-    expect(cells[1]!.classList.contains('aora-mark--mirror')).toBe(true);
+    expect(cells[0]!.classList.contains('mowa-mark--still')).toBe(true);
+    expect(cells[1]!.classList.contains('mowa-mark--mirror')).toBe(true);
     expect(sources(el).map((s) => s.getAttribute('data-shape'))).toEqual(['blob']);
   });
 
@@ -203,7 +203,7 @@ describe('CharacterStageProvider', () => {
   it('treats face style and nose as part of the appearance, but ignores a nose on the default face', () => {
     const el = render(
       <CharacterStageProvider>
-        <div className="aora-roster">
+        <div className="mowa-roster">
           <StagedMark shape="blob" state="idle" />
           <StagedMark shape="blob" state="idle" nose="hook" />
           <StagedMark shape="blob" state="idle" face="line" nose="hook" />
@@ -235,7 +235,7 @@ describe('CharacterStageProvider', () => {
   it('splits sources by line weight, and tells each mirror the weight it is showing', () => {
     const el = render(
       <CharacterStageProvider>
-        <div className="aora-roster">
+        <div className="mowa-roster">
           <StagedMark shape="blob" state="idle" face="line" nose="hook" />
           <StagedMark shape="blob" state="idle" face="line" nose="hook" lineWeight={1.2} />
           <StagedMark shape="blob" state="idle" face="line" nose="hook" lineWeight={1.2} />
@@ -248,7 +248,7 @@ describe('CharacterStageProvider', () => {
     // its own engine rather than a mirror of the lighter one.
     expect(sources(el)).toHaveLength(2);
     const cells = roster(el);
-    expect(cells.every((c) => c.classList.contains('aora-mark--mirror'))).toBe(true);
+    expect(cells.every((c) => c.classList.contains('mowa-mark--mirror'))).toBe(true);
     expect(cells.map((c) => c.getAttribute('data-line-weight'))).toEqual([null, '1.2', '1.2']);
     // The two heavy ones mirror one source; the light one has its own.
     const hrefs = cells.map((c) => c.querySelector('use')!.getAttribute('href'));
@@ -262,7 +262,7 @@ describe('CharacterStageProvider', () => {
   it('splits sources by emphasis and by pause, which are how the engine is driven', () => {
     const el = render(
       <CharacterStageProvider>
-        <div className="aora-roster">
+        <div className="mowa-roster">
           <StagedMark shape="hex" state="idle" />
           <StagedMark shape="hex" state="idle" emphasis />
           <StagedMark shape="hex" state="idle" paused />
@@ -276,7 +276,7 @@ describe('CharacterStageProvider', () => {
   it('leaves the stage entirely for a mark with a HUD, which no two marks can share', () => {
     const el = render(
       <CharacterStageProvider>
-        <div className="aora-roster">
+        <div className="mowa-roster">
           <StagedMark shape="blob" state="working" />
           <StagedMark shape="blob" state="working" hud={{ kind: 'progress', value: 0.4 }} />
         </div>
@@ -288,8 +288,8 @@ describe('CharacterStageProvider', () => {
     // per frame. The mark runs its own engine instead.
     expect(sources(el)).toHaveLength(1);
     const cells = roster(el);
-    expect(cells[0]!.classList.contains('aora-mark--mirror')).toBe(true);
-    expect(cells[1]!.classList.contains('aora-mark--mirror')).toBe(false);
+    expect(cells[0]!.classList.contains('mowa-mark--mirror')).toBe(true);
+    expect(cells[1]!.classList.contains('mowa-mark--mirror')).toBe(false);
     expect(cells[1]!.querySelector('use')).toBeNull();
     expect(cells[1]!.querySelector('svg')).not.toBeNull();
   });
@@ -316,7 +316,7 @@ describe('CharacterStageProvider', () => {
 
 describe('ActivityLine', () => {
   const lines = (el: HTMLElement) =>
-    [...el.querySelectorAll('.aora-ticker__line')].map((n) => [
+    [...el.querySelectorAll('.mowa-ticker__line')].map((n) => [
       n.className.includes('--out') ? 'out' : 'in',
       n.textContent,
     ]);
@@ -330,7 +330,7 @@ describe('ActivityLine', () => {
       ['out', 'Reading files'],
       ['in', 'Running tests'],
     ]);
-    expect(el.querySelector('.aora-ticker__line--out')!.getAttribute('aria-hidden')).toBe('true');
+    expect(el.querySelector('.mowa-ticker__line--out')!.getAttribute('aria-hidden')).toBe('true');
 
     advance(199);
     expect(lines(el)).toHaveLength(2);
@@ -476,23 +476,23 @@ describe('SpriteMark', () => {
     // No manifest: this is the state a `src` sheet is in until it arrives,
     // and a black blob followed by a blue hexagon reads as two characters.
     const el = render(<SpriteMark state="thinking" shape="hex" color="blue" face="line" nose="hook" />);
-    const mark = el.querySelector('.aora-mark')!;
-    expect(el.querySelector('.aora-sprite')!.getAttribute('data-sprite-status')).toBe('loading');
+    const mark = el.querySelector('.mowa-mark')!;
+    expect(el.querySelector('.mowa-sprite')!.getAttribute('data-sprite-status')).toBe('loading');
     expect(mark.getAttribute('data-shape')).toBe('hex');
     expect(mark.getAttribute('data-face')).toBe('line');
-    expect((mark as HTMLElement).style.getPropertyValue('--aora-fg')).not.toBe('');
+    expect((mark as HTMLElement).style.getPropertyValue('--mowa-fg')).not.toBe('');
   });
 
   it('takes the fallback identity from a cast preset too', () => {
     const el = render(<SpriteMark state="idle" preset="hop" />);
-    const mark = el.querySelector('.aora-mark')!;
+    const mark = el.querySelector('.mowa-mark')!;
     expect(mark.getAttribute('data-shape')).toBe(castMember('hop')!.shape);
   });
 
   it('draws an empty box of the final size when the host asks for no fallback', () => {
     const el = render(<SpriteMark state="idle" sizePx={40} fallback="none" />);
-    const box = el.querySelector('.aora-sprite') as HTMLElement;
-    expect(box.querySelector('.aora-mark')).toBeNull();
+    const box = el.querySelector('.mowa-sprite') as HTMLElement;
+    expect(box.querySelector('.mowa-mark')).toBeNull();
     expect(box.style.width).toBe('40px');
   });
 });

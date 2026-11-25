@@ -1,4 +1,4 @@
-import { cx } from '@aora-bot/react';
+import { cx } from '@mowa-bot/react';
 import type { CSSProperties, ReactNode } from 'react';
 
 /** Status light states. `alert` is the only one that draws attention. */
@@ -52,25 +52,25 @@ export function DeviceBezel({
 
   return (
     <div
-      className={cx('aora-s-bezel', className)}
+      className={cx('mowa-s-bezel', className)}
       data-light={light}
       style={{ width: widthPx, aspectRatio: `100 / ${height}`, ...style }}
     >
-      <svg viewBox={`0 0 100 ${height}`} aria-hidden="true" className="aora-s-bezel__frame">
+      <svg viewBox={`0 0 100 ${height}`} aria-hidden="true" className="mowa-s-bezel__frame">
         <rect
           x={0.5}
           y={0.5}
           width={99}
           height={height - 1}
           rx={FRAME.radius}
-          className="aora-s-bezel__shell"
+          className="mowa-s-bezel__shell"
         />
-        <rect {...screen} rx={FRAME.screenRadius} className="aora-s-bezel__screen" />
-        <circle cx={50} cy={height - FRAME.chin / 2} r={FRAME.lightR} className="aora-s-bezel__light" />
+        <rect {...screen} rx={FRAME.screenRadius} className="mowa-s-bezel__screen" />
+        <circle cx={50} cy={height - FRAME.chin / 2} r={FRAME.lightR} className="mowa-s-bezel__light" />
       </svg>
 
       <div
-        className="aora-s-bezel__stage"
+        className="mowa-s-bezel__stage"
         style={{
           left: `${screen.x}%`,
           top: `${(screen.y / height) * 100}%`,

@@ -1,4 +1,4 @@
-import { onReducedMotionChange, prefersReducedMotion, type CharacterState } from '@aora-bot/engine';
+import { onReducedMotionChange, prefersReducedMotion, type CharacterState } from '@mowa-bot/engine';
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore, type RefObject } from 'react';
 import type { CharacterHandle } from '../mark/CharacterMark.js';
 

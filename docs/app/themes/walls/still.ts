@@ -1,5 +1,5 @@
-import { renderStaticSvg, type CharacterState } from '@aora-bot/react';
-import { mulberry32 } from '@aora-bot/engine';
+import { renderStaticSvg, type CharacterState } from '@mowa-bot/react';
+import { mulberry32 } from '@mowa-bot/engine';
 import { markOf, type ThemeCard } from '../catalog.js';
 
 /*

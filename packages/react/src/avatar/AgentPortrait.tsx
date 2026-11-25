@@ -6,7 +6,7 @@ import {
   type EmotionId,
   type FaceStyle,
   type NoseId,
-} from '@aora-bot/engine';
+} from '@mowa-bot/engine';
 import type { CSSProperties } from 'react';
 import { SETTLE_MS, useMarkSettle } from '../stage/hooks.js';
 import { StagedMark } from '../stage/CharacterStage.js';
@@ -101,14 +101,14 @@ export function AgentPortrait({
   const wrapperStyle = {
     width: px,
     height: px,
-    '--aora-avatar-fill': `${fill}px`,
+    '--mowa-avatar-fill': `${fill}px`,
     ...(halo ? { background: haloBackground(color) } : null),
     ...style,
   } as CSSProperties;
 
   if (hasPicture(agent)) {
     return (
-      <span className={cx('aora-avatar', 'aora-avatar--picture', className)} style={wrapperStyle}>
+      <span className={cx('mowa-avatar', 'mowa-avatar--picture', className)} style={wrapperStyle}>
         <img src={agent.pictureUrl} alt={agent.name ?? ''} width={px} height={px} />
       </span>
     );
@@ -116,7 +116,7 @@ export function AgentPortrait({
 
   if (isGroup(agent)) {
     return (
-      <span className={cx('aora-avatar', 'aora-avatar--group', className)} style={wrapperStyle}>
+      <span className={cx('mowa-avatar', 'mowa-avatar--group', className)} style={wrapperStyle}>
         <AvatarGroup
           members={agent.members ?? []}
           sizePx={fill}
@@ -130,7 +130,7 @@ export function AgentPortrait({
 
   if (still) {
     return (
-      <span className={cx('aora-avatar', className)} style={wrapperStyle}>
+      <span className={cx('mowa-avatar', className)} style={wrapperStyle}>
         <img
           src={renderAvatarDataUrl(agent.id, {
             shape: agentShape(agent),
@@ -149,7 +149,7 @@ export function AgentPortrait({
   }
 
   return (
-    <span className={cx('aora-avatar', className)} style={wrapperStyle}>
+    <span className={cx('mowa-avatar', className)} style={wrapperStyle}>
       <StagedMark
         shape={agentShape(agent)}
         state={state}

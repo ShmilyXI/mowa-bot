@@ -5,10 +5,10 @@ import {
   type FaceStyle,
   type NoseId,
   type ShapeId,
-} from '@aora-bot/engine';
+} from '@mowa-bot/engine';
 import type { CSSProperties } from 'react';
 import { useSurfaceLocale } from '../locale/index.js';
-import { CharacterMark, cx } from '@aora-bot/react';
+import { CharacterMark, cx } from '@mowa-bot/react';
 
 export interface SuggestionCard {
   id: string;
@@ -62,15 +62,15 @@ export function SuggestionCards({
 
   return (
     <ul
-      className={cx('aora-s-suggestions', className)}
+      className={cx('mowa-s-suggestions', className)}
       aria-label={t('walkthrough.suggestions')}
       style={style}
     >
       {list.map((card) => (
-        <li key={card.id} className="aora-s-suggestions__item">
+        <li key={card.id} className="mowa-s-suggestions__item">
           <button
             type="button"
-            className="aora-s-suggestions__card"
+            className="mowa-s-suggestions__card"
             aria-label={`${t('walkthrough.suggest.pick')}: ${card.title}`}
             onClick={() => onPick?.(card)}
           >
@@ -84,8 +84,8 @@ export function SuggestionCards({
               seed={card.id}
               state="curious"
             />
-            <span className="aora-s-suggestions__title">{card.title}</span>
-            {card.body && <span className="aora-s-suggestions__body">{card.body}</span>}
+            <span className="mowa-s-suggestions__title">{card.title}</span>
+            {card.body && <span className="mowa-s-suggestions__body">{card.body}</span>}
           </button>
         </li>
       ))}

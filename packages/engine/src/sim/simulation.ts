@@ -291,7 +291,7 @@ export function createSimulation(options: SimulationOptions = {}): Simulation {
     face: options.face ?? DEFAULT_FACE,
     emphasis: options.emphasis ?? false,
     badgeColor: options.badgeColor ?? null,
-    seed: options.seed ?? 'aora',
+    seed: options.seed ?? 'mowa',
     entryEffects: options.entryEffects ?? true,
     antics: options.antics ?? false,
   };

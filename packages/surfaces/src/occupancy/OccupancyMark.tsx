@@ -1,4 +1,4 @@
-import type { CharacterState, FaceStyle, NoseId } from '@aora-bot/engine';
+import type { CharacterState, FaceStyle, NoseId } from '@mowa-bot/engine';
 import type { CSSProperties } from 'react';
 import {
   agentColor,
@@ -10,7 +10,7 @@ import {
   CharacterMark,
   StagedMark,
   cx,
-} from '@aora-bot/react';
+} from '@mowa-bot/react';
 import { useSurfaceLocale } from '../locale/index.js';
 
 export interface OccupancyMarkProps {
@@ -58,7 +58,7 @@ export function OccupancyMark({
   const label = agent.name ?? agent.id;
 
   const mark = picture ? (
-    <img className="aora-s-occupancy__picture" src={agent.pictureUrl} alt="" width={sizePx} height={sizePx} />
+    <img className="mowa-s-occupancy__picture" src={agent.pictureUrl} alt="" width={sizePx} height={sizePx} />
   ) : lineWeight != null ? (
     <CharacterMark
       shape={agentShape(agent)}
@@ -83,7 +83,7 @@ export function OccupancyMark({
 
   if (!onSelect) {
     return (
-      <span className={cx('aora-s-occupancy__mark', className)} title={label} style={style}>
+      <span className={cx('mowa-s-occupancy__mark', className)} title={label} style={style}>
         {mark}
       </span>
     );
@@ -92,7 +92,7 @@ export function OccupancyMark({
   return (
     <button
       type="button"
-      className={cx('aora-s-occupancy__mark', 'aora-s-occupancy__mark--button', className)}
+      className={cx('mowa-s-occupancy__mark', 'mowa-s-occupancy__mark--button', className)}
       aria-label={`${t('occupancy.select')}: ${label}`}
       title={label}
       style={style}

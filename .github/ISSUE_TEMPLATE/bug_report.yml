@@ -8,10 +8,10 @@ body:
       label: Package / 涉及的包
       multiple: true
       options:
-        - '@aora-bot/engine'
-        - '@aora-bot/react'
-        - '@aora-bot/surfaces'
-        - '@aora-bot/element'
+        - '@mowa-bot/engine'
+        - '@mowa-bot/react'
+        - '@mowa-bot/surfaces'
+        - '@mowa-bot/element'
         - Avatar endpoint / 头像接口
         - Docs site / 文档站
     validations:

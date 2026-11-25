@@ -36,7 +36,7 @@ export function createPixelRenderer(host: Element, context: LiveRendererContext)
   host.appendChild(svg);
 
   const seed = `${fnv1a32(context.seed).toString(36)}-${(idSerial++).toString(36)}`;
-  const ids = { pattern: `aora-px-${seed}`, glow: `aora-pg-${seed}` };
+  const ids = { pattern: `mowa-px-${seed}`, glow: `mowa-pg-${seed}` };
 
   let options = readOptions(context.styleOptions);
   const table = createPaintTable();

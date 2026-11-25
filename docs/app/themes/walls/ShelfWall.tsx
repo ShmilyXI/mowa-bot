@@ -1,5 +1,5 @@
-import type { CharacterState } from '@aora-bot/react';
-import { getTheme, mulberry32 } from '@aora-bot/engine';
+import type { CharacterState } from '@mowa-bot/react';
+import { getTheme, mulberry32 } from '@mowa-bot/engine';
 import { memo, useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
 import { ALBUMS, buildAlbum, type ThemeCard } from '../catalog.js';
 import { lookFor } from '../looks/index.js';

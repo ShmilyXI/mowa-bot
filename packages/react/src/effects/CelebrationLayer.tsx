@@ -1,4 +1,4 @@
-import { createConfettiController, VIEWBOX_STR, type ConfettiController } from '@aora-bot/engine';
+import { createConfettiController, VIEWBOX_STR, type ConfettiController } from '@mowa-bot/engine';
 import { useEffect, useImperativeHandle, useRef, type CSSProperties, type Ref } from 'react';
 import { useReducedMotion } from '../stage/hooks.js';
 import { cx } from '../utils/cx.js';
@@ -75,7 +75,7 @@ export function CelebrationLayer({ radius = 114, className, style, ref }: Celebr
       ref={svgRef}
       viewBox={VIEWBOX_STR}
       aria-hidden="true"
-      className={cx('aora-confetti', className)}
+      className={cx('mowa-confetti', className)}
       style={style}
     />
   );

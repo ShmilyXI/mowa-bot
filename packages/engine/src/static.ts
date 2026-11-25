@@ -8,7 +8,7 @@
  *
  * A theme's characters, skins and colours are in the theme's own entry:
  * `await loadTheme(id)` (or `installTheme` with
- * `@aora-bot/engine/themes/<id>`) before rendering one, or the render throws
+ * `@mowa-bot/engine/themes/<id>`) before rendering one, or the render throws
  * `ThemeNotInstalledError`.
  */
 

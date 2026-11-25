@@ -6,7 +6,7 @@ One arbiter for a subtree; hooks to feed it and read it.
 
 ```tsx preview
 import { useState } from 'react';
-import { AgentStateProvider, useAgentState, CharacterMark, ActivityLine } from '@aora-bot/react';
+import { AgentStateProvider, useAgentState, CharacterMark, ActivityLine } from '@mowa-bot/react';
 
 function Sessions() {
   const agent = useAgentState();
@@ -131,7 +131,7 @@ function Sidebar() {
 A message may carry a `hud` alongside `tips` — see the [protocol](/design/protocol#hud). The arbiter keeps it on the winning session's `ArbiterResult`, and the value exposes it as `hud`, so the dial follows the same arbitration as the face: a session that loses on priority does not get to draw its progress ring over the winner's expression. Pass it straight to a character, or let [`AgentHud`](/components/agent-hud) read the provider for you.
 
 ```tsx preview
-import { AgentStateProvider, CharacterMark, useAgentState } from '@aora-bot/react';
+import { AgentStateProvider, CharacterMark, useAgentState } from '@mowa-bot/react';
 
 function Face() {
   const { state, hud, update } = useAgentState();
@@ -183,7 +183,7 @@ const status = useEventSourceChannel('http://127.0.0.1:27182/events');
 // 'idle' | 'connecting' | 'open' | 'error'
 ```
 
-`useStateChannel` accepts only `{ type: 'aora:state', payload }` messages from `allowOrigin`, which defaults to the page's own origin. Pass `'*'` only when the page is itself a sandboxed widget. `useEventSourceChannel` parses each event's `data` as one protocol message; `EventSource` reconnects on its own, so the hook only reports status. Both take `enabled: false` to disconnect without unmounting.
+`useStateChannel` accepts only `{ type: 'mowa:state', payload }` messages from `allowOrigin`, which defaults to the page's own origin. Pass `'*'` only when the page is itself a sandboxed widget. `useEventSourceChannel` parses each event's `data` as one protocol message; `EventSource` reconnects on its own, so the hook only reports status. Both take `enabled: false` to disconnect without unmounting.
 
 Both run every message through `normalize`, so a malformed one goes to `onError` and never reaches the arbiter.
 
@@ -192,8 +192,8 @@ Both run every message through `normalize`, so a malformed one goes to `onError`
 The provider is a thin wrapper. The same arbiter runs anywhere:
 
 ```ts
-import { createArbiter } from '@aora-bot/engine/agent';
-import { createCharacter, getInkColorCss } from '@aora-bot/engine';
+import { createArbiter } from '@mowa-bot/engine/agent';
+import { createCharacter, getInkColorCss } from '@mowa-bot/engine';
 
 const character = createCharacter(el, { shape: 'blob', ink: { flat: getInkColorCss('blue') } });
 const arbiter = createArbiter({ onApply: ({ state }) => character.update({ state }) });

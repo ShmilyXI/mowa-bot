@@ -70,7 +70,7 @@ Expressions blend field by field, so on a state change a part grows or fades in 
 
 ### Paint roles
 
-Layers carry a paint role, not a colour. `face` is the face colour (the whites), `pupil` what reads on it, `feature` what reads on the body (brows, lashes, eyes drawn straight onto the body, the colour of the cute face), `glint` the light that reads on `feature`, `iris` the body's ink deepened, and the rest fixed accents (a gold star, a tear, a tongue, a heart, an anger mark, a button's thread and face, dark glass) and a display's light. For colours off the middle of the range, `getInkVars` also writes `--aora-face-pupil` and `--aora-face-glint` by the face rule; where they turn with the page, as on `black`, static output switches them with its colour scheme.
+Layers carry a paint role, not a colour. `face` is the face colour (the whites), `pupil` what reads on it, `feature` what reads on the body (brows, lashes, eyes drawn straight onto the body, the colour of the cute face), `glint` the light that reads on `feature`, `iris` the body's ink deepened, and the rest fixed accents (a gold star, a tear, a tongue, a heart, an anger mark, a button's thread and face, dark glass) and a display's light. For colours off the middle of the range, `getInkVars` also writes `--mowa-face-pupil` and `--mowa-face-glint` by the face rule; where they turn with the page, as on `black`, static output switches them with its colour scheme.
 
 <DrawnFacePalette />
 
@@ -93,7 +93,7 @@ A design is drawn at its own size. Before it goes onto a body, the outline of ev
 
 ## cute: the default face
 
-The `cute` face is painted on the body in the features colour, `--aora-face-soft`, as the `eyes` and `line` faces are (dark on most hues, white on a dark ink; see [Palette](/design/palette#the-face-rule)). Every state has its own eyes, mouth and blush, and the eyes cycle on an interval. The tables and demos are on [Expressions](/design/expressions); the mood and activity effects of each state are on [States](/design/states).
+The `cute` face is painted on the body in the features colour, `--mowa-face-soft`, as the `eyes` and `line` faces are (dark on most hues, white on a dark ink; see [Palette](/design/palette#the-face-rule)). Every state has its own eyes, mouth and blush, and the eyes cycle on an interval. The tables and demos are on [Expressions](/design/expressions); the mood and activity effects of each state are on [States](/design/states).
 
 On the `cute` face the belt states do not shrink the body to a bead: the whole character, face included, stays, and what the belt says on the other faces is said by an effect beside it.
 
@@ -173,7 +173,7 @@ Both features are clamped inside the silhouette at their own height, and held ab
 
 ```tsx preview
 import { useState } from 'react';
-import { CharacterMark, FACE_STYLES, NOSE_IDS } from '@aora-bot/react';
+import { CharacterMark, FACE_STYLES, NOSE_IDS } from '@mowa-bot/react';
 
 export default function Demo() {
   const [face, setFace] = useState(0);
@@ -214,7 +214,7 @@ Every component that puts a character on a surface — [`HudPlate`](/components/
 `lineWeight` is the third trait, and like the nose it is chosen once per character. It is a multiplier on `LINE_WEIGHT`, clamped to `LINE_WEIGHT_RANGE` (0.8–1.25), and one number reaches the nose, the mouth **and the HUD dials**: the ring outside the body is stroked at the same weight as the features inside it, so the face and its dial are one drawing rather than a face with a chart beside it. The range is deliberately narrow. The weight is the one number that decides whether a character reads as drawn with a pen or with a marker; letting a host set it freely would let one character in a list arrive at a different weight from its neighbours and break the set.
 
 ```tsx preview
-import { CharacterMark, HudPlate } from '@aora-bot/react';
+import { CharacterMark, HudPlate } from '@mowa-bot/react';
 
 export default function Demo() {
   return (

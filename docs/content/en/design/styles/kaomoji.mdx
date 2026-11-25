@@ -3,7 +3,7 @@
 The `kaomoji` series writes a character as one line of text: `(・ω・)`, `☁(^▽^) ♪`, `ฅ(・ω・)ฅ`. The shape chooses the brackets, the state chooses the face and the tail. It has no body, so it is the lightest series, and it still reads as a particular character inside a line of prose.
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -33,7 +33,7 @@ The default series is `vector`; a character with no style set is drawn in it.
 ## Variants
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 const variants = ['plain', 'bubble'] as const;
 
@@ -68,8 +68,8 @@ export default function Demo() {
 Each shape's brackets come from `SHAPE_WRAPPERS` in the engine: a cat is `ฅ( )ฅ`, a bunny `૮( )ა`, a cloud `☁( )`, and a shape without brackets of its own gets a plain pair of parentheses.
 
 ```tsx preview
-import { SHAPE_IDS } from '@aora-bot/react';
-import { kaomoji } from '@aora-bot/engine';
+import { SHAPE_IDS } from '@mowa-bot/react';
+import { kaomoji } from '@mowa-bot/engine';
 
 export default function Demo() {
   return (
@@ -94,8 +94,8 @@ export default function Demo() {
 The face inside the brackets keeps the grammar of the `cute` face: dot eyes for attention, arcs for contentment, crosses for refusal. A drawn face writes its own glyphs for each state, so `capsule` or `specs` reads as itself in text too. The tail after the brackets is the state's mood effect written as a symbol: `zZ`, `♪`, `✎`, `!`. Every state has a face (`STATE_FACES`) and a tail (`STATE_TAILS`, which may be empty).
 
 ```tsx preview
-import { CHARACTER_STATES } from '@aora-bot/react';
-import { kaomoji } from '@aora-bot/engine';
+import { CHARACTER_STATES } from '@mowa-bot/react';
+import { kaomoji } from '@mowa-bot/engine';
 
 export default function Demo() {
   return (
@@ -118,7 +118,7 @@ export default function Demo() {
 `kaomoji(shape, state, face?)` returns exactly the line the series draws, so chat messages, terminal output and logs can use the same characters. `faceText(state, face?)` returns the face alone, without brackets or tail; both default to `cute`:
 
 ```ts
-import { kaomoji } from '@aora-bot/engine';
+import { kaomoji } from '@mowa-bot/engine';
 
 kaomoji('cat', 'happy'); // ฅ(^▽^)ฅ ♪
 kaomoji('mochi', 'thinking'); // (・_・)?

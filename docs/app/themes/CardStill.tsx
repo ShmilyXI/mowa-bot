@@ -1,4 +1,4 @@
-import { getInkColorCss, type CharacterState } from '@aora-bot/react';
+import { getInkColorCss, type CharacterState } from '@mowa-bot/react';
 import { memo, type CSSProperties } from 'react';
 import type { ThemeCard } from './catalog.js';
 import { stillOf } from './walls/still.js';
@@ -20,11 +20,11 @@ export const CardStill = memo(function CardStill({
   const { shape, color } = card.preset;
   return (
     <span
-      className="aora-mark aora-mark--still"
+      className="mowa-mark mowa-mark--still"
       data-shape={shape}
       data-color={color}
       data-state={state}
-      style={{ '--aora-fg': getInkColorCss(color), width: '100%', height: '100%' } as CSSProperties}
+      style={{ '--mowa-fg': getInkColorCss(color), width: '100%', height: '100%' } as CSSProperties}
       dangerouslySetInnerHTML={{ __html: stillOf(card, state, sizePx) }}
     />
   );

@@ -73,7 +73,7 @@ describe('emotion protocol', () => {
   });
 
   it('parses every accepted message form', () => {
-    expect(parseAgentMessage({ aoraBotId: '30', tips: 'hm' })).toEqual({
+    expect(parseAgentMessage({ mowaBotId: '30', tips: 'hm' })).toEqual({
       emotionId: '30',
       state: 'thinking',
       tips: 'hm',
@@ -86,18 +86,18 @@ describe('emotion protocol', () => {
 
   it('carries a valid dial and drops a broken one', () => {
     const hud = { kind: 'progress', value: 0.4 } as const;
-    expect(parseAgentMessage({ aoraBotId: '32', hud })).toEqual({
+    expect(parseAgentMessage({ mowaBotId: '32', hud })).toEqual({
       emotionId: '32',
       state: 'working',
       hud,
     });
     // The state is the part that matters, so a malformed dial costs the dial
     // and not the message.
-    expect(parseAgentMessage({ aoraBotId: '32', hud: { kind: 'progress' } })).toEqual({
+    expect(parseAgentMessage({ mowaBotId: '32', hud: { kind: 'progress' } })).toEqual({
       emotionId: '32',
       state: 'working',
     });
-    expect(parseAgentMessage({ aoraBotId: '32', hud: 'progress' })).toEqual({
+    expect(parseAgentMessage({ mowaBotId: '32', hud: 'progress' })).toEqual({
       emotionId: '32',
       state: 'working',
     });
@@ -117,7 +117,7 @@ describe('emotion protocol', () => {
     expect(parseAgentMessage({})).toBeNull();
     expect(parseAgentMessage([])).toBeNull();
     expect(parseAgentMessage(42)).toBeNull();
-    expect(parseAgentMessage({ aoraBotId: { nested: true } })).toBeNull();
+    expect(parseAgentMessage({ mowaBotId: { nested: true } })).toBeNull();
   });
 });
 
@@ -357,7 +357,7 @@ describe('arbiter', () => {
 
 describe('state channel', () => {
   it('normalises the three address forms', () => {
-    expect(normalize({ session_id: 's', aoraBotId: '32', tips: 'busy' })).toEqual({
+    expect(normalize({ session_id: 's', mowaBotId: '32', tips: 'busy' })).toEqual({
       ok: true,
       update: { sessionId: 's', emotionId: '32', state: 'working', headless: false, tips: 'busy' },
     });
@@ -373,14 +373,14 @@ describe('state channel', () => {
 
   it('reports what is wrong instead of throwing', () => {
     expect(normalize(null)).toMatchObject({ ok: false });
-    expect(normalize({ aoraBotId: '30' })).toMatchObject({
+    expect(normalize({ mowaBotId: '30' })).toMatchObject({
       ok: false,
       error: expect.stringContaining('session_id'),
     });
     expect(normalize({ session_id: 's' })).toMatchObject({ ok: false });
     expect(normalize({ session_id: 's', agent_id: 'nope', event: 'x' })).toMatchObject({ ok: false });
     expect(normalize({ session_id: 's', agent_id: 'cursor', event: 'nope' })).toMatchObject({ ok: false });
-    expect(normalize({ session_id: 's', aoraBotId: 'garbage' })).toMatchObject({ ok: false });
+    expect(normalize({ session_id: 's', mowaBotId: 'garbage' })).toMatchObject({ ok: false });
   });
 
   it('passes a dial through and drops an invalid one', () => {
@@ -409,7 +409,7 @@ describe('state channel', () => {
     const errors: string[] = [];
     async function* chunks() {
       yield '{"session_id":"s","state":"thi';
-      yield 'nking"}\n{"session_id":"s","aoraBotId":"33"}\nnot json\n';
+      yield 'nking"}\n{"session_id":"s","mowaBotId":"33"}\nnot json\n';
       yield '{"session_id":"s","state":"idle"}';
     }
     await readLineStream(chunks(), {
@@ -433,8 +433,8 @@ describe('state channel', () => {
     const send = (origin: string, data: unknown) => {
       for (const l of listeners) l({ origin, data } as MessageEvent);
     };
-    send('https://host.test', { type: 'aora:state', payload: { session_id: 's', state: 'happy' } });
-    send('https://evil.test', { type: 'aora:state', payload: { session_id: 's', state: 'angry' } });
+    send('https://host.test', { type: 'mowa:state', payload: { session_id: 's', state: 'happy' } });
+    send('https://evil.test', { type: 'mowa:state', payload: { session_id: 's', state: 'angry' } });
     send('https://host.test', { type: 'other', payload: { session_id: 's', state: 'angry' } });
 
     expect(updates).toEqual(['happy']);

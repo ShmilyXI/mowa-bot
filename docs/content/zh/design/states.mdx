@@ -89,7 +89,7 @@ impulse(70); // 加到 y 弹簧的速度上
 `eyes` 和 `line` 脸用腰带来绘制这些状态：身体收缩成核心，由腰带接管。下面的演示使用 `face="eyes"`，这样腰带本身是可见的。
 
 ```tsx preview
-import { CharacterStageProvider, StagedMark, STATE_BELT } from '@aora-bot/react';
+import { CharacterStageProvider, StagedMark, STATE_BELT } from '@mowa-bot/react';
 
 export default function Demo() {
   const entries = Object.entries(STATE_BELT) as [string, string][];
@@ -124,7 +124,7 @@ export default function Demo() {
 大多数应用不会用这些状态来描述自己，所以有两个辅助函数负责转换。
 
 ```tsx preview
-import { characterStateForAgent, activityForTool, TOOL_ACTIVITIES } from '@aora-bot/react';
+import { characterStateForAgent, activityForTool, TOOL_ACTIVITIES } from '@mowa-bot/react';
 
 export default function Demo() {
   return (

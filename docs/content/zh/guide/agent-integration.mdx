@@ -5,7 +5,7 @@
 整体由四部分组成：任何脚本都能发出的[数字协议](/design/protocol)；把多个来源的嘈杂状态合成为一个平稳状态的**仲裁器**；经 HTTP、stdin、`postMessage` 或服务端事件传递消息的**通道**；以及把结果接到角色上的 React Hook。
 
 ```tsx preview
-import { AgentStateProvider, useAgentState, CharacterMark, ActivityLine } from '@aora-bot/react';
+import { AgentStateProvider, useAgentState, CharacterMark, ActivityLine } from '@mowa-bot/react';
 
 function Face() {
   const { state, tips, update, remove } = useAgentState();
@@ -52,14 +52,14 @@ export default function Demo() {
 所有传输方式使用同一种消息格式：
 
 ```json
-{ "session_id": "s1", "aoraBotId": "32", "tips": "Editing src/app.ts" }
+{ "session_id": "s1", "mowaBotId": "32", "tips": "Editing src/app.ts" }
 { "session_id": "s1", "agent_id": "claude-code", "event": "PreToolUse" }
 { "session_id": "s1", "state": "thinking" }
-{ "session_id": "s1", "aoraBotId": "47", "tips": "Indexing 3 of 8", "hud": { "kind": "progress", "value": 0.375 } }
+{ "session_id": "s1", "mowaBotId": "47", "tips": "Indexing 3 of 8", "hud": { "kind": "progress", "value": 0.375 } }
 ```
 
 - `session_id` 必填。同一 id 的后续消息更新同一个会话。
-- 此外还需要**三选一**：协议编号（`aoraBotId` 或 `emotionId`）、状态名（`state`），或 `agent_id` 加上工具自己的 `event` 名，后者由[适配器](#适配器)翻译。
+- 此外还需要**三选一**：协议编号（`mowaBotId` 或 `emotionId`）、状态名（`state`），或 `agent_id` 加上工具自己的 `event` 名，后者由[适配器](#适配器)翻译。
 - `tips` 是可选的说明文字，宿主可以显示在角色旁边。
 - `hud` 是可选的表盘，即画在身体外圈环上的 [`HudSpec`](/design/protocol#hud)，用 `isHudSpec` 校验。格式不合法的会被丢弃，消息本身照常生效。
 - `headless: true` 标记只记录、从不显示的会话，用于不该占用脸的后台任务。
@@ -67,19 +67,19 @@ export default function Demo() {
 `normalize(message)` 把上述任一形式转换成仲裁器更新，或返回一条错误字符串，不会抛出异常。
 
 ```ts
-import { normalize } from '@aora-bot/engine/agent';
+import { normalize } from '@mowa-bot/engine/agent';
 
-normalize({ session_id: 's1', aoraBotId: '32' });
+normalize({ session_id: 's1', mowaBotId: '32' });
 // { ok: true, update: { sessionId: 's1', emotionId: '32', state: 'working', headless: false } }
 
 normalize({ session_id: 's1', agent_id: 'claude-code', event: 'Stop' });
 // { ok: true, update: { …, emotionId: '33', state: 'celebrate' } }
 
-normalize({ aoraBotId: '32' });
+normalize({ mowaBotId: '32' });
 // { ok: false, error: 'missing session_id' }
 ```
 
-`@aora-bot/engine/agent` 是独立的入口，不含 DOM 和动画代码，因此在 Node 中继里和在浏览器里都能加载。
+`@mowa-bot/engine/agent` 是独立的入口，不含 DOM 和动画代码，因此在 Node 中继里和在浏览器里都能加载。
 
 ## 仲裁
 
@@ -91,7 +91,7 @@ normalize({ aoraBotId: '32' });
 4. **过期。** 超过 `sessionTtlMs`（两分钟）没有消息的会话会被清除，这样没有会话结束钩子的工具也不会让角色永远停在某个状态。
 
 ```ts
-import { createArbiter } from '@aora-bot/engine/agent';
+import { createArbiter } from '@mowa-bot/engine/agent';
 
 const arbiter = createArbiter({
   minDisplayMs: { defaultMs: 900, byState: { celebrate: 2000, alerting: 1500 } },
@@ -126,7 +126,7 @@ arbiter.resolve().hud; // { kind: 'progress', value: 0.2 }：胜者的表盘，�
 适配器把某个工具的事件名映射到协议编号上。它是纯数据：要支持另一个智能体，只需新增一个对象，不用写新的逻辑。
 
 ```tsx preview
-import { AGENT_ADAPTERS, stateForEmotion } from '@aora-bot/react';
+import { AGENT_ADAPTERS, stateForEmotion } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -167,7 +167,7 @@ export default function Demo() {
 第三张表回答第三个问题。`TOOL_STATES` 回答「哪个工具在运行」；`ACTIVITY_VERBS` 回答「该告诉用户它在做什么」，也就是角色旁边已经显示的那句话。`stateForActivity('coding')` 把动词解析为状态，不认识的动词一律按通用的工作状态处理，所以宿主只有「Running commands…」这样一句话时，也能驱动角色。查表时使用 `Object.hasOwn`：动词来自传输的消息，不能让 `"constructor"` 之类的名字命中原型链上的属性。
 
 ```tsx preview
-import { ACTIVITY_VERB_IDS, CharacterStageProvider, StagedMark, stateForActivity } from '@aora-bot/react';
+import { ACTIVITY_VERB_IDS, CharacterStageProvider, StagedMark, stateForActivity } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -212,7 +212,7 @@ my-agent --emit-json | node examples/agent-relay/relay.mjs --stdin
 ```bash
 curl -X POST http://127.0.0.1:27182/state \
   -H 'content-type: application/json' \
-  -d '{"session_id":"s1","aoraBotId":"47","tips":"Indexing 3 of 8","hud":{"kind":"progress","value":0.375}}'
+  -d '{"session_id":"s1","mowaBotId":"47","tips":"Indexing 3 of 8","hud":{"kind":"progress","value":0.375}}'
 ```
 
 ```tsx
@@ -222,7 +222,7 @@ import {
   useAgentState,
   CharacterMark,
   AgentHud,
-} from '@aora-bot/react';
+} from '@mowa-bot/react';
 
 function Pet() {
   const status = useEventSourceChannel('http://127.0.0.1:27182/events');
@@ -252,20 +252,20 @@ Claude Code 会在生命周期事件上触发 shell 钩子。每个钩子带着�
 ```json
 {
   "hooks": {
-    "UserPromptSubmit": [{ "hooks": [{ "type": "command", "command": "aora-report UserPromptSubmit" }] }],
-    "PreToolUse": [{ "hooks": [{ "type": "command", "command": "aora-report PreToolUse" }] }],
-    "PostToolUse": [{ "hooks": [{ "type": "command", "command": "aora-report PostToolUse" }] }],
-    "PostToolUseFailure": [{ "hooks": [{ "type": "command", "command": "aora-report PostToolUseFailure" }] }],
-    "Notification": [{ "hooks": [{ "type": "command", "command": "aora-report Notification" }] }],
-    "Stop": [{ "hooks": [{ "type": "command", "command": "aora-report Stop" }] }],
-    "SessionEnd": [{ "hooks": [{ "type": "command", "command": "aora-report SessionEnd" }] }]
+    "UserPromptSubmit": [{ "hooks": [{ "type": "command", "command": "mowa-report UserPromptSubmit" }] }],
+    "PreToolUse": [{ "hooks": [{ "type": "command", "command": "mowa-report PreToolUse" }] }],
+    "PostToolUse": [{ "hooks": [{ "type": "command", "command": "mowa-report PostToolUse" }] }],
+    "PostToolUseFailure": [{ "hooks": [{ "type": "command", "command": "mowa-report PostToolUseFailure" }] }],
+    "Notification": [{ "hooks": [{ "type": "command", "command": "mowa-report Notification" }] }],
+    "Stop": [{ "hooks": [{ "type": "command", "command": "mowa-report Stop" }] }],
+    "SessionEnd": [{ "hooks": [{ "type": "command", "command": "mowa-report SessionEnd" }] }]
   }
 }
 ```
 
 ```bash
 #!/bin/sh
-# aora-report —— 钩子从 stdin 收到 JSON；session_id 就在里面。
+# mowa-report —— 钩子从 stdin 收到 JSON；session_id 就在里面。
 SESSION=$(jq -r .session_id)
 curl -s -o /dev/null -X POST http://127.0.0.1:27182/state \
   -H 'Content-Type: application/json' \
@@ -280,7 +280,7 @@ curl -s -o /dev/null -X POST http://127.0.0.1:27182/state \
 
 ```bash
 curl -X POST http://127.0.0.1:27182/state -H 'Content-Type: application/json' \
-  -d '{"session_id":"cursor-1","aoraBotId":"39","tips":"正在撰写回答"}'
+  -d '{"session_id":"cursor-1","mowaBotId":"39","tips":"正在撰写回答"}'
 ```
 
 ### iframe 或扩展面板
@@ -290,7 +290,7 @@ curl -X POST http://127.0.0.1:27182/state -H 'Content-Type: application/json' \
 ```ts
 // 宿主文档
 frame.contentWindow.postMessage(
-  { type: 'aora:state', payload: { session_id: 'host', state: 'thinking' } },
+  { type: 'mowa:state', payload: { session_id: 'host', state: 'thinking' } },
   'https://widget.example',
 );
 ```
@@ -304,7 +304,7 @@ function Widget() {
 }
 ```
 
-`useStateChannel` 只接受来自允许的来源（默认是页面自身的来源）、类型为 `aora:state` 的消息，并把它们交给最近的 `AgentStateProvider`。
+`useStateChannel` 只接受来自允许的来源（默认是页面自身的来源）、类型为 `mowa:state` 的消息，并把它们交给最近的 `AgentStateProvider`。
 
 ## 访客走神时一起打盹
 

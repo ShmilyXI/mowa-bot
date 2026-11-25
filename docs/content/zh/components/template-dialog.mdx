@@ -4,11 +4,11 @@ import { API } from '@theme';
 
 创建或编辑智能体模板：名称、要做什么，以及谁可以使用。
 
-> 属于 `@aora-bot/surfaces`，不在 `@aora-bot/react` 中：`pnpm add @aora-bot/surfaces @aora-bot/react`，并在 React 样式之后引入 `@aora-bot/surfaces/styles.css`。
+> 属于 `@mowa-bot/surfaces`，不在 `@mowa-bot/react` 中：`pnpm add @mowa-bot/surfaces @mowa-bot/react`，并在 React 样式之后引入 `@mowa-bot/surfaces/styles.css`。
 
 ```tsx preview
 import { useState } from 'react';
-import { TemplateDialog, type TemplateDraft } from '@aora-bot/surfaces';
+import { TemplateDialog, type TemplateDraft } from '@mowa-bot/surfaces';
 
 export default function Demo() {
   const [saved, setSaved] = useState<TemplateDraft | null>(null);
@@ -56,7 +56,7 @@ const { draft, errors, valid } = normalizeTemplateDraft(input, { seed: template.
 
 ```tsx preview
 import { useState } from 'react';
-import { ShareCard, VisibilityControls, type TemplateVisibility } from '@aora-bot/surfaces';
+import { ShareCard, VisibilityControls, type TemplateVisibility } from '@mowa-bot/surfaces';
 
 export default function Demo() {
   const [visibility, setVisibility] = useState<TemplateVisibility>('private');

@@ -35,7 +35,7 @@ import { ShapeGrid } from '@theme';
 | `parts`      | 身体之外的配件                       |
 
 ```tsx preview
-import { getShape, SHAPE_IDS } from '@aora-bot/react';
+import { getShape, SHAPE_IDS } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -83,7 +83,7 @@ export default function Demo() {
 | `tone`  | 画成                                                                                              |
 | ------- | ------------------------------------------------------------------------------------------------- |
 | `body`  | 身体自己的墨色，像是轮廓的一部分（兔耳、天线、仙人掌的手臂）                                      |
-| `leaf`  | 绿色，读取 `--aora-leaf`（绿色身体上自动换成更亮的绿）                                            |
+| `leaf`  | 绿色，读取 `--mowa-leaf`（绿色身体上自动换成更亮的绿）                                            |
 | `inner` | 墨色与白色各占一半，用于耳朵内侧和包子的褶                                                        |
 | `hair`  | 实心类变体里比墨色深一档（浅色模式下的黑色身体上则浅一档），`outline` 与 `glass` 里用墨色实心填满 |
 
@@ -92,7 +92,7 @@ export default function Demo() {
 向量系列的每种变体都会绘制配件：`outline` 与 `glass` 把配件并入身体轮廓，一起描边，不留接缝；`sticker` 的白边和 `paper` 的硬阴影也会把配件包在里面。像素系列把配件栅格化到同一张网格里。
 
 ```tsx preview
-import { CharacterMark, SHAPE_IDS, getShape } from '@aora-bot/react';
+import { CharacterMark, SHAPE_IDS, getShape } from '@mowa-bot/react';
 
 export default function Demo() {
   return (

@@ -1,6 +1,6 @@
 /**
  * A theme's extras: mood decorations, signature motions, the vivid mood
- * accent and the effect anchor (`@aora-bot/engine/themes/extras`).
+ * accent and the effect anchor (`@mowa-bot/engine/themes/extras`).
  *
  * Only themes use them, so they are not in the core. A theme's entry
  * imports `EXTRAS` and hands it over as `ThemePackage.extras`; the first
@@ -233,14 +233,14 @@ function createScene(live: boolean, phaseSeed: string | undefined, registry: Reg
       if (!live && setKey === null) return null;
       // A live scene with nothing to show and nothing fading keeps only the empty layer.
       if (live && setKey === null && slots[0] === null && slots[1] === null)
-        return (emptyLayer ??= node('g', { 'data-aora-decor': '' }, []));
+        return (emptyLayer ??= node('g', { 'data-mowa-decor': '' }, []));
       // The decorations fade with the body as a belt or a dial takes it over.
       const fade = (1 - (frame.belt?.blend ?? 0)) * (1 - frame.hud.opacity);
       const alpha = Math.round(fade * 100) / 100;
       if (!live)
         return node(
           'g',
-          { 'data-aora-decor': '', opacity: fade < 0.999 ? alpha : undefined },
+          { 'data-mowa-decor': '', opacity: fade < 0.999 ? alpha : undefined },
           nodesFor(setKey),
         );
 
@@ -289,7 +289,7 @@ function createScene(live: boolean, phaseSeed: string | undefined, registry: Reg
         return layer.node;
       }
       const fadeStyle = decorFade();
-      layer.node = node('g', { 'data-aora-decor': '', opacity: alpha, style: 'pointer-events:none' }, [
+      layer.node = node('g', { 'data-mowa-decor': '', opacity: alpha, style: 'pointer-events:none' }, [
         node('g', { opacity: showing === 0 ? 1 : 0, style: fadeStyle }, nodesFor(slots[0])),
         node('g', { opacity: showing === 1 ? 1 : 0, style: fadeStyle }, nodesFor(slots[1])),
       ]);

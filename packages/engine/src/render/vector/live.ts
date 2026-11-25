@@ -41,10 +41,10 @@ export function createVectorRenderer(host: Element, context: LiveRendererContext
   // Seed-derived so the DOM is reproducible for a given seed; the counter keeps
   // two characters with the same seed on one page from sharing an id.
   const seedHash = fnv1a32(context.seed);
-  const clipId = `aora-clip-${seedHash.toString(36)}-${(idSerial++).toString(36)}`;
-  const inkId = `aora-ink-${seedHash.toString(36)}-${(idSerial++).toString(36)}`;
+  const clipId = `mowa-clip-${seedHash.toString(36)}-${(idSerial++).toString(36)}`;
+  const inkId = `mowa-ink-${seedHash.toString(36)}-${(idSerial++).toString(36)}`;
 
-  const shadowId = inkId.replace('aora-ink-', 'aora-shadow-');
+  const shadowId = inkId.replace('mowa-ink-', 'mowa-shadow-');
 
   let params = readVectorParams(context.styleOptions);
   /*
@@ -63,10 +63,10 @@ export function createVectorRenderer(host: Element, context: LiveRendererContext
     clipId,
     inkId,
     shadowId,
-    softId: inkId.replace('aora-ink-', 'aora-soft-'),
-    halftoneId: inkId.replace('aora-ink-', 'aora-halftone-'),
-    glossId: inkId.replace('aora-ink-', 'aora-gloss-'),
-    mediaId: inkId.replace('aora-ink-', 'aora-media-'),
+    softId: inkId.replace('mowa-ink-', 'mowa-soft-'),
+    halftoneId: inkId.replace('mowa-ink-', 'mowa-halftone-'),
+    glossId: inkId.replace('mowa-ink-', 'mowa-gloss-'),
+    mediaId: inkId.replace('mowa-ink-', 'mowa-media-'),
     phaseSeed: context.seed,
     get params() {
       return params;
@@ -85,8 +85,8 @@ export function createVectorRenderer(host: Element, context: LiveRendererContext
   let visible = true;
   let held = false;
   const play = () => {
-    if (held || !visible) svg.style.setProperty('--aora-play', 'paused');
-    else svg.style.removeProperty('--aora-play');
+    if (held || !visible) svg.style.setProperty('--mowa-play', 'paused');
+    else svg.style.removeProperty('--mowa-play');
   };
   const sight =
     context.sourceId || typeof IntersectionObserver === 'undefined'

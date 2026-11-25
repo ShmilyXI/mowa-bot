@@ -9,7 +9,7 @@ import {
   type HudKind,
   type ShapeFamilyId,
   type StateGroupId,
-} from '@aora-bot/engine/labels';
+} from '@mowa-bot/engine/labels';
 
 /**
  * Prefix every id in a table with a family name, keeping the key literals.

@@ -28,7 +28,7 @@ export class ThemeNotInstalledError extends Error {
       (kind === 'theme'
         ? `The "${theme}" theme is not installed. `
         : `The ${kind} "${id}" belongs to the "${theme}" theme, which is not installed. `) +
-        `Call \`await loadTheme('${theme}')\`, or \`installTheme\` with the \`@aora-bot/engine/themes/${theme}\` entry, first.`,
+        `Call \`await loadTheme('${theme}')\`, or \`installTheme\` with the \`@mowa-bot/engine/themes/${theme}\` entry, first.`,
     );
   }
 }
@@ -42,7 +42,7 @@ const installed = new Set<string>();
  * copy adopts it the first time it meets one of the theme's ids, so one
  * `loadTheme` serves every copy on the page.
  */
-const SHARED = Symbol.for('@aora-bot/engine/themes');
+const SHARED = Symbol.for('@mowa-bot/engine/themes');
 const shared: Map<string, unknown> = ((
   globalThis as unknown as Record<symbol, Map<string, unknown> | undefined>
 )[SHARED] ??= new Map());

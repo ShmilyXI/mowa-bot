@@ -1,26 +1,26 @@
-@layer aora.base {
+@layer mowa.base {
   /*
-   * The two variables every character reads. `--aora-fg` is set per instance
-   * by the component; `--aora-bg` defaults to the page background, which a
+   * The two variables every character reads. `--mowa-fg` is set per instance
+   * by the component; `--mowa-bg` defaults to the page background, which a
    * face shows where it is drawn in the page: the whites of a drawn face on a
-   * line body, the ring round a badge. Overriding `--aora-bg-base` on any
+   * line body, the ring round a badge. Overriding `--mowa-bg-base` on any
    * ancestor re-themes it for that subtree, which is what lets a character
    * sit on a coloured card.
    */
-  .aora-mark {
+  .mowa-mark {
     position: relative;
     display: inline-flex;
     flex-shrink: 0;
-    --aora-bg: var(--aora-bg-base, Canvas);
+    --mowa-bg: var(--mowa-bg-base, Canvas);
     /*
-     * A host that wants a lift under a character sets `--aora-mark-filter` on
-     * a container, rather than reaching into `.aora-mark` with a descendant
+     * A host that wants a lift under a character sets `--mowa-mark-filter` on
+     * a container, rather than reaching into `.mowa-mark` with a descendant
      * selector. Inherited, so it reaches every mark below the container.
      */
-    filter: var(--aora-mark-filter, none);
+    filter: var(--mowa-mark-filter, none);
   }
 
-  .aora-mark > svg {
+  .mowa-mark > svg {
     display: block;
     width: 100%;
     height: auto;
@@ -30,7 +30,7 @@
   }
 
   /*
-   * `.aora-mark--mirror` and `.aora-mark--still` carry no styles of their own.
+   * `.mowa-mark--mirror` and `.mowa-mark--still` carry no styles of their own.
    * They mark how a character is being drawn — a `<use>` of a shared source,
    * or a frozen SVG past the stage's cap — so a consumer or a test can tell
    * the three cases apart without reading the markup.
@@ -39,7 +39,7 @@
   /* Hidden host for shared animation sources. Off-screen rather than
      `display: none`, because a display-none SVG is not rendered and `<use>`
      would have nothing to mirror. */
-  .aora-stage {
+  .mowa-stage {
     position: fixed;
     top: 0;
     inset-inline-start: 0;
@@ -51,32 +51,32 @@
   }
 }
 
-@layer aora.components {
+@layer mowa.components {
   /* ---- avatar ---------------------------------------------------------- */
 
-  .aora-avatar {
+  .mowa-avatar {
     position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    border-radius: var(--aora-radius-pill);
+    border-radius: var(--mowa-radius-pill);
   }
 
   /*
-   * `--aora-avatar-fill` lets the character be smaller than the circle it sits
+   * `--mowa-avatar-fill` lets the character be smaller than the circle it sits
    * in without the circle changing size, which is what keeps a row of avatars
    * aligned when one of them is inset.
    */
-  .aora-avatar img {
+  .mowa-avatar img {
     display: block;
-    width: var(--aora-avatar-fill, 100%);
-    height: var(--aora-avatar-fill, 100%);
+    width: var(--mowa-avatar-fill, 100%);
+    height: var(--mowa-avatar-fill, 100%);
     object-fit: cover;
   }
 
-  .aora-avatar--picture img {
-    border-radius: var(--aora-radius-pill);
+  .mowa-avatar--picture img {
+    border-radius: var(--mowa-radius-pill);
   }
 
   /*
@@ -85,58 +85,58 @@
    * hook — a host that wants a plate behind its groups has somewhere to put
    * it — and squares off the box while it is here.
    */
-  .aora-avatar--group {
+  .mowa-avatar--group {
     border-radius: 0;
   }
 
   /* ---- stack ----------------------------------------------------------- */
 
-  .aora-stack {
+  .mowa-stack {
     position: relative;
     display: inline-block;
     flex-shrink: 0;
   }
 
-  .aora-stack__item {
+  .mowa-stack__item {
     position: absolute;
     top: 0;
     display: block;
   }
 
-  .aora-stack__item img {
+  .mowa-stack__item img {
     display: block;
     width: 100%;
     height: 100%;
   }
 
-  .aora-stack__overflow {
+  .mowa-stack__overflow {
     position: absolute;
     top: 0;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border-radius: var(--aora-radius-pill);
-    background: var(--aora-fill);
-    color: var(--aora-text-muted);
-    font-size: var(--aora-text-xs);
-    font-weight: var(--aora-weight-semibold);
+    border-radius: var(--mowa-radius-pill);
+    background: var(--mowa-fill);
+    color: var(--mowa-text-muted);
+    font-size: var(--mowa-text-xs);
+    font-weight: var(--mowa-weight-semibold);
     font-variant-numeric: tabular-nums;
   }
 
   /* ---- badges ---------------------------------------------------------- */
 
-  .aora-badge {
+  .mowa-badge {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     min-width: 1.125rem;
     height: 1.125rem;
-    padding: 0 var(--aora-space-1);
-    border-radius: var(--aora-radius-pill);
-    background: var(--aora-accent);
-    color: var(--aora-on-accent);
-    font-size: var(--aora-text-xs);
-    font-weight: var(--aora-weight-semibold);
+    padding: 0 var(--mowa-space-1);
+    border-radius: var(--mowa-radius-pill);
+    background: var(--mowa-accent);
+    color: var(--mowa-on-accent);
+    font-size: var(--mowa-text-xs);
+    font-weight: var(--mowa-weight-semibold);
     font-variant-numeric: tabular-nums;
     line-height: 1;
   }
@@ -145,110 +145,110 @@
    * `isolate` so the halo ring, which sits at `z-index: -1` to get behind the
    * dot's own background, cannot also slide behind the avatar it is pinned to.
    */
-  .aora-status {
+  .mowa-status {
     position: relative;
     isolation: isolate;
     display: inline-block;
     width: 0.5625rem;
     height: 0.5625rem;
-    border-radius: var(--aora-radius-pill);
-    box-shadow: 0 0 0 2px var(--aora-bg-base);
-    background: var(--aora-status-ink, var(--aora-text-faint));
+    border-radius: var(--mowa-radius-pill);
+    box-shadow: 0 0 0 2px var(--mowa-bg-base);
+    background: var(--mowa-status-ink, var(--mowa-text-faint));
   }
 
-  .aora-status[data-tone='online'] {
-    --aora-status-ink: var(--aora-status-online);
+  .mowa-status[data-tone='online'] {
+    --mowa-status-ink: var(--mowa-status-online);
   }
-  .aora-status[data-tone='busy'] {
-    --aora-status-ink: var(--aora-status-busy);
+  .mowa-status[data-tone='busy'] {
+    --mowa-status-ink: var(--mowa-status-busy);
   }
-  .aora-status[data-tone='away'] {
-    --aora-status-ink: var(--aora-status-away);
+  .mowa-status[data-tone='away'] {
+    --mowa-status-ink: var(--mowa-status-away);
   }
-  .aora-status[data-tone='offline'] {
-    --aora-status-ink: var(--aora-status-offline);
+  .mowa-status[data-tone='offline'] {
+    --mowa-status-ink: var(--mowa-status-offline);
   }
-  .aora-status[data-tone='working'] {
-    --aora-status-ink: var(--aora-status-working);
+  .mowa-status[data-tone='working'] {
+    --mowa-status-ink: var(--mowa-status-working);
   }
-  .aora-status[data-tone='attention'] {
-    --aora-status-ink: var(--aora-status-attention);
+  .mowa-status[data-tone='attention'] {
+    --mowa-status-ink: var(--mowa-status-attention);
   }
-  .aora-status[data-tone='error'] {
-    --aora-status-ink: var(--aora-status-error);
+  .mowa-status[data-tone='error'] {
+    --mowa-status-ink: var(--mowa-status-error);
   }
-  .aora-status[data-tone='info'] {
-    --aora-status-ink: var(--aora-status-info);
+  .mowa-status[data-tone='info'] {
+    --mowa-status-ink: var(--mowa-status-info);
   }
 
-  .aora-status--pulse {
-    animation: aora-pulse 1.8s ease-in-out infinite;
+  .mowa-status--pulse {
+    animation: mowa-pulse 1.8s ease-in-out infinite;
   }
 
   /* Expanding halo. Fades as it grows, so the eye is caught by the movement
      rather than by a second solid ring competing with the dot. */
-  .aora-status--ring::after {
+  .mowa-status--ring::after {
     content: '';
     position: absolute;
     inset: 0;
     z-index: -1;
     border-radius: inherit;
-    background: var(--aora-status-ink, var(--aora-text-faint));
-    animation: aora-status-ring 1900ms ease-out infinite;
+    background: var(--mowa-status-ink, var(--mowa-text-faint));
+    animation: mowa-status-ring 1900ms ease-out infinite;
   }
 
   /* ---- working badge ---------------------------------------------------- */
 
-  .aora-working {
+  .mowa-working {
     display: inline-flex;
     align-items: center;
-    gap: calc(var(--aora-working-size, 8px) * 0.55);
-    color: var(--aora-text-faint);
+    gap: calc(var(--mowa-working-size, 8px) * 0.55);
+    color: var(--mowa-text-faint);
   }
 
-  .aora-working__dot {
-    width: var(--aora-working-size, 8px);
-    height: var(--aora-working-size, 8px);
-    border-radius: var(--aora-radius-pill);
+  .mowa-working__dot {
+    width: var(--mowa-working-size, 8px);
+    height: var(--mowa-working-size, 8px);
+    border-radius: var(--mowa-radius-pill);
     background: currentColor;
-    animation: aora-working-dot 1300ms ease-in-out infinite;
+    animation: mowa-working-dot 1300ms ease-in-out infinite;
   }
 
   /* ---- picker ---------------------------------------------------------- */
 
-  .aora-picker {
+  .mowa-picker {
     display: flex;
     flex-direction: column;
-    gap: var(--aora-space-4);
+    gap: var(--mowa-space-4);
   }
 
   /* Wraps rather than overflowing: a row of groups has no container to
      query, since it sizes to its content, so it adapts the intrinsic way. */
-  .aora-picker--row {
+  .mowa-picker--row {
     flex-direction: row;
     flex-wrap: wrap;
-    gap: var(--aora-space-4) var(--aora-space-6);
+    gap: var(--mowa-space-4) var(--mowa-space-6);
     align-items: flex-start;
   }
 
-  .aora-picker__group {
+  .mowa-picker__group {
     display: flex;
     flex-direction: column;
-    gap: var(--aora-space-2);
+    gap: var(--mowa-space-2);
   }
 
-  .aora-picker__label {
-    font-size: var(--aora-text-sm);
-    font-weight: var(--aora-weight-semibold);
+  .mowa-picker__label {
+    font-size: var(--mowa-text-sm);
+    font-weight: var(--mowa-weight-semibold);
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    color: var(--aora-text-faint);
+    color: var(--mowa-text-faint);
   }
 
-  .aora-picker__items {
+  .mowa-picker__items {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--aora-space-1);
+    gap: var(--mowa-space-1);
   }
 
   /*
@@ -260,69 +260,69 @@
    * width is a definite `rem` capped by `max-inline-size` rather than a
    * percentage: a container query needs size containment, and a percentage
    * width inside a shrink-to-fit parent would contain down to nothing. A host
-   * that wants the picker to fill its parent sets `--aora-picker-width: 100%`.
+   * that wants the picker to fill its parent sets `--mowa-picker-width: 100%`.
    *
    * A default cell is a `SELECTOR_MARK_PX` mark and its padding, 2.75rem, with a
    * 0.25rem gap between cells, so n columns need 3n − 0.25rem. Each breakpoint
    * is where the next count fits.
    */
-  .aora-picker--grid {
-    container: aora-picker / inline-size;
-    inline-size: var(--aora-picker-width, 17.75rem);
+  .mowa-picker--grid {
+    container: mowa-picker / inline-size;
+    inline-size: var(--mowa-picker-width, 17.75rem);
     max-inline-size: 100%;
 
-    & .aora-picker__items {
+    & .mowa-picker__items {
       display: grid;
       grid-template-columns: repeat(6, max-content);
       justify-content: space-between;
     }
 
     /* The face choice is a segmented control, not a cell of the roster. */
-    & .aora-picker__items--segments {
+    & .mowa-picker__items--segments {
       display: flex;
       flex-wrap: wrap;
       justify-content: flex-start;
     }
   }
 
-  @container aora-picker (inline-size >= 32.75rem) {
-    .aora-picker--grid .aora-picker__items {
+  @container mowa-picker (inline-size >= 32.75rem) {
+    .mowa-picker--grid .mowa-picker__items {
       grid-template-columns: repeat(11, max-content);
     }
   }
 
-  @container aora-picker (inline-size >= 23.75rem) and (inline-size < 32.75rem) {
-    .aora-picker--grid .aora-picker__items {
+  @container mowa-picker (inline-size >= 23.75rem) and (inline-size < 32.75rem) {
+    .mowa-picker--grid .mowa-picker__items {
       grid-template-columns: repeat(8, max-content);
     }
   }
 
-  @container aora-picker (inline-size < 17.75rem) {
-    .aora-picker--grid .aora-picker__items {
+  @container mowa-picker (inline-size < 17.75rem) {
+    .mowa-picker--grid .mowa-picker__items {
       grid-template-columns: repeat(4, max-content);
     }
   }
 
-  @container aora-picker (inline-size < 11.75rem) {
-    .aora-picker--grid .aora-picker__items {
+  @container mowa-picker (inline-size < 11.75rem) {
+    .mowa-picker--grid .mowa-picker__items {
       grid-template-columns: repeat(3, max-content);
     }
   }
 
-  .aora-picker__item {
+  .mowa-picker__item {
     position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: var(--aora-space-1);
+    padding: var(--mowa-space-1);
     border: 0;
-    border-radius: var(--aora-radius-md);
+    border-radius: var(--mowa-radius-md);
     background: transparent;
     cursor: pointer;
-    transition: background-color var(--aora-duration-fast) var(--aora-ease-standard);
+    transition: background-color var(--mowa-duration-fast) var(--mowa-ease-standard);
 
     &:hover {
-      background: var(--aora-fill);
+      background: var(--mowa-fill);
     }
   }
 
@@ -331,63 +331,63 @@
    * and the body come from the same generator, so a custom shape registered
    * with `defineShape` gets a correct ring for free.
    */
-  .aora-picker__item[data-selected]::after {
+  .mowa-picker__item[data-selected]::after {
     content: '';
     position: absolute;
-    inset: var(--aora-space-1);
-    background: var(--aora-accent);
-    mask-image: var(--aora-picker-ring);
+    inset: var(--mowa-space-1);
+    background: var(--mowa-accent);
+    mask-image: var(--mowa-picker-ring);
     mask-size: 100% 100%;
     mask-repeat: no-repeat;
-    -webkit-mask-image: var(--aora-picker-ring);
+    -webkit-mask-image: var(--mowa-picker-ring);
     -webkit-mask-size: 100% 100%;
     -webkit-mask-repeat: no-repeat;
     pointer-events: none;
   }
 
-  .aora-picker__swatch {
+  .mowa-picker__swatch {
     width: 1.5rem;
     height: 1.5rem;
     padding: 0;
     border: 0;
-    border-radius: var(--aora-radius-pill);
-    background: var(--aora-swatch);
+    border-radius: var(--mowa-radius-pill);
+    background: var(--mowa-swatch);
     cursor: pointer;
-    box-shadow: inset 0 0 0 1px var(--aora-swatch-edge, var(--aora-line));
-    transition: box-shadow var(--aora-duration-fast) var(--aora-ease-standard);
+    box-shadow: inset 0 0 0 1px var(--mowa-swatch-edge, var(--mowa-line));
+    transition: box-shadow var(--mowa-duration-fast) var(--mowa-ease-standard);
 
     &[data-selected] {
       box-shadow:
-        inset 0 0 0 1px var(--aora-swatch-edge, var(--aora-line)),
-        0 0 0 2px var(--aora-bg-base),
-        0 0 0 4px var(--aora-accent);
+        inset 0 0 0 1px var(--mowa-swatch-edge, var(--mowa-line)),
+        0 0 0 2px var(--mowa-bg-base),
+        0 0 0 4px var(--mowa-accent);
     }
   }
 
   /* Face style toggle: a small preview beside its name, in a pill segment. */
-  .aora-picker__segment {
+  .mowa-picker__segment {
     display: inline-flex;
     align-items: center;
-    gap: var(--aora-space-1);
-    padding: var(--aora-space-1) var(--aora-space-3) var(--aora-space-1) var(--aora-space-2);
-    border: 1px solid var(--aora-line);
-    border-radius: var(--aora-radius-pill);
+    gap: var(--mowa-space-1);
+    padding: var(--mowa-space-1) var(--mowa-space-3) var(--mowa-space-1) var(--mowa-space-2);
+    border: 1px solid var(--mowa-line);
+    border-radius: var(--mowa-radius-pill);
     background: transparent;
-    color: var(--aora-text);
+    color: var(--mowa-text);
     font: inherit;
-    font-size: var(--aora-text-sm);
+    font-size: var(--mowa-text-sm);
     cursor: pointer;
     transition:
-      background-color var(--aora-duration-fast) var(--aora-ease-standard),
-      border-color var(--aora-duration-fast) var(--aora-ease-standard);
+      background-color var(--mowa-duration-fast) var(--mowa-ease-standard),
+      border-color var(--mowa-duration-fast) var(--mowa-ease-standard);
 
     &:hover {
-      background: var(--aora-fill);
+      background: var(--mowa-fill);
     }
 
     &[data-selected] {
-      border-color: var(--aora-accent);
-      box-shadow: inset 0 0 0 1px var(--aora-accent);
+      border-color: var(--mowa-accent);
+      box-shadow: inset 0 0 0 1px var(--mowa-accent);
     }
   }
 
@@ -396,9 +396,9 @@
    * The surfaces carry their own copy of the list in `surfaces.css`, so a host
    * that replaces that file keeps a visible focus state here.
    */
-  :is(.aora-picker__item, .aora-picker__swatch, .aora-picker__segment, .aora-activity__mark):focus-visible {
-    outline: var(--aora-focus-ring);
-    outline-offset: var(--aora-focus-offset);
+  :is(.mowa-picker__item, .mowa-picker__swatch, .mowa-picker__segment, .mowa-activity__mark):focus-visible {
+    outline: var(--mowa-focus-ring);
+    outline-offset: var(--mowa-focus-offset);
   }
 
   /* ---- activity -------------------------------------------------------- */
@@ -406,14 +406,14 @@
   /* Raster character: a box the size of the mark with the frame image
      contained inside. `image-rendering` is left at the default; sprites are
      exported large and downscaled, so smoothing is wanted. */
-  .aora-sprite {
+  .mowa-sprite {
     position: relative;
     display: inline-flex;
     flex-shrink: 0;
     overflow: hidden;
   }
 
-  .aora-sprite > img {
+  .mowa-sprite > img {
     user-select: none;
     -webkit-user-drag: none;
   }
@@ -423,26 +423,26 @@
    * lives at the start of a message, and something that scales about its
    * middle appears to slide leftwards on the way in.
    */
-  .aora-activity {
+  .mowa-activity {
     display: inline-flex;
     align-items: center;
-    gap: var(--aora-space-2);
+    gap: var(--mowa-space-2);
     transform-origin: left center;
-    color: var(--aora-text-muted);
-    font-size: var(--aora-text-sm);
+    color: var(--mowa-text-muted);
+    font-size: var(--mowa-text-sm);
   }
 
-  .aora-activity--entering {
-    animation: aora-spawn 320ms var(--aora-ease-spring);
+  .mowa-activity--entering {
+    animation: mowa-spawn 320ms var(--mowa-ease-spring);
   }
 
-  .aora-activity--leaving {
-    animation: aora-activity-out var(--aora-duration-fast) var(--aora-ease-in) both;
+  .mowa-activity--leaving {
+    animation: mowa-activity-out var(--mowa-duration-fast) var(--mowa-ease-in) both;
   }
 
   /* The character itself. Also a `<button>` when the host passed `onPoke`,
      hence the reset. */
-  .aora-activity__mark {
+  .mowa-activity__mark {
     display: inline-flex;
     align-items: center;
     padding: 0;
@@ -453,28 +453,28 @@
     cursor: pointer;
   }
 
-  .aora-activity__mark:focus-visible {
-    border-radius: var(--aora-radius-pill);
+  .mowa-activity__mark:focus-visible {
+    border-radius: var(--mowa-radius-pill);
   }
 
-  .aora-activity__mark--poked {
-    animation: aora-poke-hop 420ms var(--aora-ease-spring);
+  .mowa-activity__mark--poked {
+    animation: mowa-poke-hop 420ms var(--mowa-ease-spring);
   }
 
   /* The arrival overshoots. Delayed so the row has faded in first and the
      character lands into a box that already exists. */
-  .aora-activity--spawning .aora-activity__mark {
-    animation: aora-spawn-pop 380ms var(--aora-ease-spring) 180ms both;
+  .mowa-activity--spawning .mowa-activity__mark {
+    animation: mowa-spawn-pop 380ms var(--mowa-ease-spring) 180ms both;
   }
 
-  .aora-activity__label--hover {
+  .mowa-activity__label--hover {
     opacity: 0;
-    transition: opacity var(--aora-duration-base) var(--aora-ease-standard);
+    transition: opacity var(--mowa-duration-base) var(--mowa-ease-standard);
   }
 
-  .aora-activity:hover .aora-activity__label--hover,
-  .aora-activity:focus-within .aora-activity__label--hover,
-  .aora-activity--emphasis .aora-activity__label--hover {
+  .mowa-activity:hover .mowa-activity__label--hover,
+  .mowa-activity:focus-within .mowa-activity__label--hover,
+  .mowa-activity--emphasis .mowa-activity__label--hover {
     opacity: 1;
   }
 
@@ -484,57 +484,57 @@
    * marks inherit is the animated one — a transition on the mark itself would
    * have nothing to animate, since its own declaration never changes.
    */
-  .aora-activity-group {
+  .mowa-activity-group {
     display: inline-flex;
     align-items: center;
-    transition: --aora-activity-ink var(--aora-activity-ink-ms, 600ms) var(--aora-ease-in-out);
+    transition: --mowa-activity-ink var(--mowa-activity-ink-ms, 600ms) var(--mowa-ease-in-out);
   }
 
-  .aora-activity-group__picture {
+  .mowa-activity-group__picture {
     display: block;
-    border-radius: var(--aora-radius-pill);
+    border-radius: var(--mowa-radius-pill);
     object-fit: cover;
-    animation: aora-picture-swap 220ms ease both;
+    animation: mowa-picture-swap 220ms ease both;
   }
 
   /* Speech bubble for a label that needs to stand off the page rather than
      sit in the text flow. */
-  .aora-bubble {
+  .mowa-bubble {
     display: inline-block;
-    padding: var(--aora-space-1) var(--aora-space-3);
-    border-radius: var(--aora-radius-md);
-    background: var(--aora-fill);
-    color: var(--aora-text);
-    line-height: var(--aora-leading-snug);
-    animation: aora-bubble-in 240ms var(--aora-ease-spring) both;
+    padding: var(--mowa-space-1) var(--mowa-space-3);
+    border-radius: var(--mowa-radius-md);
+    background: var(--mowa-fill);
+    color: var(--mowa-text);
+    line-height: var(--mowa-leading-snug);
+    animation: mowa-bubble-in 240ms var(--mowa-ease-spring) both;
   }
 
   /*
    * Both lines occupy the same grid cell so the row height is the taller of
    * the two throughout the swap, instead of collapsing between them.
    */
-  .aora-ticker {
+  .mowa-ticker {
     display: inline-grid;
     grid-template-areas: 'line';
     align-items: center;
   }
 
-  .aora-ticker__line {
+  .mowa-ticker__line {
     grid-area: line;
     white-space: nowrap;
   }
 
-  .aora-ticker__line--in {
-    animation: aora-ticker-in var(--aora-ticker-duration, 220ms) var(--aora-ease-out) both;
+  .mowa-ticker__line--in {
+    animation: mowa-ticker-in var(--mowa-ticker-duration, 220ms) var(--mowa-ease-out) both;
   }
 
-  .aora-ticker__line--out {
-    animation: aora-ticker-out var(--aora-ticker-duration, 220ms) var(--aora-ease-in) both;
+  .mowa-ticker__line--out {
+    animation: mowa-ticker-out var(--mowa-ticker-duration, 220ms) var(--mowa-ease-in) both;
   }
 
   /* Text for assistive technology only, for a label the design shows as a
      character alone. */
-  .aora-visually-hidden {
+  .mowa-visually-hidden {
     position: absolute;
     width: 1px;
     height: 1px;
@@ -550,7 +550,7 @@
 
   /* Pieces fly past the character's box, and the layer sits over whatever it
      is celebrating, so it must not swallow that element's clicks. */
-  .aora-confetti {
+  .mowa-confetti {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -561,7 +561,7 @@
 
   /* ---- keyframes ------------------------------------------------------- */
 
-  @keyframes aora-pulse {
+  @keyframes mowa-pulse {
     0%,
     100% {
       opacity: 1;
@@ -573,7 +573,7 @@
     }
   }
 
-  @keyframes aora-spawn {
+  @keyframes mowa-spawn {
     from {
       opacity: 0;
       transform: scale(0.8);
@@ -585,7 +585,7 @@
   }
 
   /* The arrival: small, then slightly too big, then right. */
-  @keyframes aora-spawn-pop {
+  @keyframes mowa-spawn-pop {
     from {
       opacity: 0;
       transform: scale(0.6);
@@ -600,7 +600,7 @@
     }
   }
 
-  @keyframes aora-activity-out {
+  @keyframes mowa-activity-out {
     from {
       opacity: 1;
       transform: none;
@@ -611,7 +611,7 @@
     }
   }
 
-  @keyframes aora-poke-hop {
+  @keyframes mowa-poke-hop {
     0% {
       transform: none;
     }
@@ -626,7 +626,7 @@
     }
   }
 
-  @keyframes aora-picture-swap {
+  @keyframes mowa-picture-swap {
     from {
       opacity: 0;
       transform: scale(0.72);
@@ -639,7 +639,7 @@
 
   /* The outgoing line leaves upwards and the incoming one follows it, so the
      sequence has a direction instead of dissolving in place. */
-  @keyframes aora-ticker-in {
+  @keyframes mowa-ticker-in {
     from {
       opacity: 0;
       transform: translateY(0.55em);
@@ -650,7 +650,7 @@
     }
   }
 
-  @keyframes aora-ticker-out {
+  @keyframes mowa-ticker-out {
     from {
       opacity: 1;
       transform: none;
@@ -661,7 +661,7 @@
     }
   }
 
-  @keyframes aora-bubble-in {
+  @keyframes mowa-bubble-in {
     from {
       opacity: 0;
       transform: scale(0.88) translateY(3px);
@@ -672,7 +672,7 @@
     }
   }
 
-  @keyframes aora-working-dot {
+  @keyframes mowa-working-dot {
     0%,
     100% {
       opacity: 0.3;
@@ -684,7 +684,7 @@
     }
   }
 
-  @keyframes aora-status-ring {
+  @keyframes mowa-status-ring {
     from {
       opacity: 0.45;
       transform: scale(1);
@@ -704,33 +704,33 @@
    * 30% opacity would both read as disabled.
    */
   @media (prefers-reduced-motion: reduce) {
-    .aora-status--pulse,
-    .aora-status--ring::after,
-    .aora-activity--entering,
-    .aora-activity--leaving,
-    .aora-activity--spawning .aora-activity__mark,
-    .aora-activity__mark--poked,
-    .aora-activity-group__picture,
-    .aora-bubble,
-    .aora-ticker__line--in,
-    .aora-ticker__line--out {
+    .mowa-status--pulse,
+    .mowa-status--ring::after,
+    .mowa-activity--entering,
+    .mowa-activity--leaving,
+    .mowa-activity--spawning .mowa-activity__mark,
+    .mowa-activity__mark--poked,
+    .mowa-activity-group__picture,
+    .mowa-bubble,
+    .mowa-ticker__line--in,
+    .mowa-ticker__line--out {
       animation: none;
     }
 
-    .aora-status--ring::after {
+    .mowa-status--ring::after {
       display: none;
     }
 
-    .aora-working__dot {
+    .mowa-working__dot {
       animation: none;
       opacity: 0.65;
     }
 
-    .aora-activity-group {
+    .mowa-activity-group {
       transition: none;
     }
 
-    .aora-activity__label--hover {
+    .mowa-activity__label--hover {
       transition: none;
     }
   }
@@ -742,30 +742,30 @@
    * the mask-drawn ring is repainted as `Highlight`.
    */
   @media (forced-colors: active) {
-    .aora-picker__item[data-selected]::after {
+    .mowa-picker__item[data-selected]::after {
       background: Highlight;
     }
 
-    .aora-picker__swatch {
+    .mowa-picker__swatch {
       border: 1px solid CanvasText;
     }
 
-    .aora-picker__swatch[data-selected],
-    .aora-picker__segment[data-selected] {
+    .mowa-picker__swatch[data-selected],
+    .mowa-picker__segment[data-selected] {
       outline: 2px solid Highlight;
       outline-offset: 1px;
     }
 
-    .aora-picker__segment {
+    .mowa-picker__segment {
       border-color: ButtonText;
     }
 
-    .aora-status,
-    .aora-working__dot {
+    .mowa-status,
+    .mowa-working__dot {
       forced-color-adjust: none;
     }
 
-    .aora-badge {
+    .mowa-badge {
       border: 1px solid CanvasText;
       background: Canvas;
       color: CanvasText;

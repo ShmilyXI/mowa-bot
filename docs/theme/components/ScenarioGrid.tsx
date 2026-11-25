@@ -1,5 +1,5 @@
-import { CharacterMark } from '@aora-bot/react';
-import type { CharacterState, ColorId, HudSpec, ShapeId } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
+import type { CharacterState, ColorId, HudSpec, ShapeId } from '@mowa-bot/react';
 import { Link } from '@rspress/core/theme-original';
 import { useI18n } from '../../app/shared/i18n.js';
 import { useLocalePath } from '../../app/shared/locale-path.js';

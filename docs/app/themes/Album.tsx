@@ -1,4 +1,4 @@
-import { getInkColorCss, useLabel } from '@aora-bot/react';
+import { getInkColorCss, useLabel } from '@mowa-bot/react';
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { useI18n, useLocalized } from '../shared/i18n.js';
 import { DiceIcon, PrevIcon } from '../shared/icons.js';

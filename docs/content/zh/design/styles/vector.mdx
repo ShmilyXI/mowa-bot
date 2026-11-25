@@ -5,8 +5,8 @@ import { StyleParamsDemo } from '@theme';
 `vector` 系列把角色画成平滑的 SVG 路径。它有十六种变体，区别只在颜料：几何、动画和脸在所有变体里都一样，所以新增的状态或形状会同时出现在每一种变体里。其中七种是画材，用铅笔、马克笔、蜡笔、水彩、霓虹灯管、粉笔和暗黑手绘的墨线画出同一个角色；另有两种是纸艺：折纸和浮雕。
 
 ```tsx preview
-import { getStyle } from '@aora-bot/engine';
-import { CharacterMark } from '@aora-bot/react';
+import { getStyle } from '@mowa-bot/engine';
+import { CharacterMark } from '@mowa-bot/react';
 
 const variants = getStyle('vector').variants;
 
@@ -26,7 +26,7 @@ export default function Demo() {
 
 | 变体         | 身体                                             | `cute` 脸的颜色                 | 参数                                         |
 | ------------ | ------------------------------------------------ | ------------------------------- | -------------------------------------------- |
-| `solid`      | 用墨色平涂                                       | 五官色（`--aora-face-soft`）    | —                                            |
+| `solid`      | 用墨色平涂                                       | 五官色（`--mowa-face-soft`）    | —                                            |
 | `outline`    | 描边，内部填 8% 的墨色                           | 墨色                            | `strokeWidth`                                |
 | `glass`      | 半透明身体，细边，顶部和内沿有光泽               | 墨色                            | `strokeWidth`                                |
 | `sticker`    | 填色，外面一圈白边和阴影                         | 与 `solid` 相同                 | `stickerWidth`、`stickerShadow`              |
@@ -50,7 +50,7 @@ export default function Demo() {
 贴纸在角色外面剪出一圈白边，底下有一个小而柔的投影，像贴在页面上。白边把身体和通知徽标作为一个整体轮廓包住，并且画在身体自己的变换里，所以弹跳、旋转或腰带变形时，白边会随身体一起挤压、转动和淡出。
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 export default function Demo() {
   const surfaces = ['#fcfcfc', '#16161a', '#2b1a3d'];
@@ -74,18 +74,18 @@ export default function Demo() {
 }
 ```
 
-纸的颜色不跟随页面。贴纸自带边缘，所以在深色页面上白边仍是浅色，这种对比让它从页面上凸显出来。出于同样的原因，手绘脸的眼白也是纸色，而不是页面色。想要奶油色或带色调的边，可以在任意祖先元素上设置 `--aora-paper`：
+纸的颜色不跟随页面。贴纸自带边缘，所以在深色页面上白边仍是浅色，这种对比让它从页面上凸显出来。出于同样的原因，手绘脸的眼白也是纸色，而不是页面色。想要奶油色或带色调的边，可以在任意祖先元素上设置 `--mowa-paper`：
 
 ```css
 .card {
-  --aora-paper: #fff7e6;
+  --mowa-paper: #fff7e6;
 }
 ```
 
 `stickerWidth` 是白边超出身体的距离，单位是形状空间，所以会随角色缩放：24 像素的头像，白边约一像素宽。`stickerShadow` 可以关掉投影，在花哨的背景或长列表里很有用。
 
 ```tsx preview
-import { renderStaticSvgDataUrl } from '@aora-bot/react';
+import { renderStaticSvgDataUrl } from '@mowa-bot/react';
 
 const cases = [
   { label: 'stickerWidth 4', styleOptions: { stickerWidth: 4 } },
@@ -124,7 +124,7 @@ export default function Demo() {
 剪纸叠在一层更深色的自身副本上，副本向下并偏向一侧，没有模糊，形成一道硬阴影。`paperOffset` 是偏移距离（形状空间单位），`paperAngle` 是方向（单位为度，从正右方顺时针计，`90` 是正下方）。
 
 ```tsx preview
-import { renderStaticSvgDataUrl } from '@aora-bot/react';
+import { renderStaticSvgDataUrl } from '@mowa-bot/react';
 
 const cases = [
   { label: 'offset 4', styleOptions: { paperOffset: 4 } },
@@ -161,7 +161,7 @@ export default function Demo() {
 
 有两点设计取舍需要了解。
 
-- **阴影的深浅来自墨色，而不是第二种颜色。** 阴影是用同一份颜料画的身体副本，再盖上 32% 的黑，所以就是加深后的墨色。无论墨色是 `--aora-fg` 令牌、纯色还是渐变，这个做法都成立；对渐变墨色，用 `color-mix()` 计算出一个颜色则做不到。
+- **阴影的深浅来自墨色，而不是第二种颜色。** 阴影是用同一份颜料画的身体副本，再盖上 32% 的黑，所以就是加深后的墨色。无论墨色是 `--mowa-fg` 令牌、纯色还是渐变，这个做法都成立；对渐变墨色，用 `color-mix()` 计算出一个颜色则做不到。
 - **阴影方向不随身体转动。** 偏移施加在身体变换之外。角色旋转时，阴影会跟着挤压、转动，但始终朝同一个方向落下，就像光源没有动。
 
 角色本身保持端正。轻微倾斜属于姿态，由模拟（`poseHome`）负责，而不是由颜料负责，所以 `paper` 不会改变脸或腰带的位置。
@@ -171,7 +171,7 @@ export default function Demo() {
 `soft` 像一个圆润的玩具：平涂的身体上盖一层径向渐变（左上偏亮，右下偏暗），脚下有一块不随身体弹跳的地面阴影。腮红更深、偏粉，透过渐变也看得出来。左上角的小高光默认关闭（`softGloss`），因为脸的位置偏上的形状，高光会正好落在眼睛上。渐变和高光都是叠在身体上的覆盖层，而不是由墨色计算出的渐变，所以对令牌、纯色和渐变墨色都适用。耳朵这类配件也会套上这层渐变，明暗与它在整个形象中的位置一致。
 
 ```tsx preview
-import { renderStaticSvgDataUrl } from '@aora-bot/react';
+import { renderStaticSvgDataUrl } from '@mowa-bot/react';
 
 const cases = [
   { label: '默认', styleOptions: {} },
@@ -206,10 +206,10 @@ export default function Demo() {
 
 ## 孔版
 
-`riso` 模仿两色孔版印刷：身体用自己的墨色印在原位，底下垫一份用第二种墨印的副本，两者错开一点距离并正片叠底，表面再罩一层半调网点。第二种墨是 `--aora-ink2`，默认为粉红；身体与它色相相同时（红、粉、洋红）改用金色；墨色本身较浅时沿用墨色自身，所以奶油色仍是奶油色。两遍印刷没有对准的边缘，正是这个变体的特色。`risoOffset` 是错位距离（形状空间单位），`risoHalftone` 控制是否加网点。
+`riso` 模仿两色孔版印刷：身体用自己的墨色印在原位，底下垫一份用第二种墨印的副本，两者错开一点距离并正片叠底，表面再罩一层半调网点。第二种墨是 `--mowa-ink2`，默认为粉红；身体与它色相相同时（红、粉、洋红）改用金色；墨色本身较浅时沿用墨色自身，所以奶油色仍是奶油色。两遍印刷没有对准的边缘，正是这个变体的特色。`risoOffset` 是错位距离（形状空间单位），`risoHalftone` 控制是否加网点。
 
 ```tsx preview
-import { renderStaticSvgDataUrl } from '@aora-bot/react';
+import { renderStaticSvgDataUrl } from '@mowa-bot/react';
 
 const cases = [
   { label: 'offset 0', styleOptions: { risoOffset: 0 } },
@@ -250,7 +250,7 @@ export default function Demo() {
 它们都不画背景，放在浅色或深色页面上都读得清，用的是与其他变体相同的一套墨色令牌：
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 const media = ['pencil', 'marker', 'crayon', 'watercolor', 'neon', 'chalk', 'gothic', 'origami', 'relief'];
 const surfaces = [
@@ -293,7 +293,7 @@ export default function Demo() {
 淡淡的墨色底，背光一侧排线，轮廓画两遍：一遍闭合，一遍更松散，越过起点。`wobble` 是手抖的幅度，`grain` 是石墨漏出多少纸纹，`hatching` 控制是否排线。
 
 ```tsx preview
-import { renderStaticSvgDataUrl } from '@aora-bot/react';
+import { renderStaticSvgDataUrl } from '@mowa-bot/react';
 
 const cases = [
   { label: '默认', styleOptions: {} },
@@ -333,7 +333,7 @@ export default function Demo() {
 一层稍微错位的淡色底，一道不抬笔、来回涂满形状的笔触，外加一圈深色双重描边。笔触之间的空隙会透出淡色底。脸和特效也用同一支深色马克笔描边。`strokeWidth` 决定马克笔的宽度，涂抹的笔触随之变化。
 
 ```tsx preview
-import { renderStaticSvgDataUrl } from '@aora-bot/react';
+import { renderStaticSvgDataUrl } from '@mowa-bot/react';
 
 const cases = [
   { label: '默认', styleOptions: {} },
@@ -372,7 +372,7 @@ export default function Demo() {
 蜡质填色，透出纸纹，边缘毛糙，沿轮廓用力压过的地方有一圈更深的外沿。`grain` 控制透出多少纸面，`wobble` 控制边缘的毛糙程度。
 
 ```tsx preview
-import { renderStaticSvgDataUrl } from '@aora-bot/react';
+import { renderStaticSvgDataUrl } from '@mowa-bot/react';
 
 const cases = [
   { label: '默认', styleOptions: {} },
@@ -411,7 +411,7 @@ export default function Demo() {
 比墨色略浅的晕染，包括一处积色、一处被水推开且边缘发深的水渍、沉在纸面凹处的颜料，以及晕染干后留下的深边。积色和水渍只画在不会越出晕染范围的地方，所以有凹口的形状里这些会少一些。
 
 ```tsx preview
-import { renderStaticSvgDataUrl } from '@aora-bot/react';
+import { renderStaticSvgDataUrl } from '@mowa-bot/react';
 
 const cases = [
   { label: '默认', styleOptions: {} },
@@ -450,7 +450,7 @@ export default function Demo() {
 墨色的灯管，中间有一道灯芯。身体上和身体周围的一切（脸、特效、表盘、腰带）都以自己的颜色发光，所以粉色的心发粉光。`neonGlow` 是光晕半径（形状空间单位）；设为 `0` 只剩灯管本身，绘制几乎没有开销。
 
 ```tsx preview
-import { renderStaticSvgDataUrl } from '@aora-bot/react';
+import { renderStaticSvgDataUrl } from '@mowa-bot/react';
 
 const cases = [
   { label: 'neonGlow 0', styleOptions: { neonGlow: 0 } },
@@ -493,7 +493,7 @@ export default function Demo() {
 沿线有一层粉尘，用斜向排线填色，线条本身和旁边一道更淡的重描，都在颗粒上碎开。`hatching` 控制斜向排线，`grain` 控制表面吃掉多少粉笔。
 
 ```tsx preview
-import { renderStaticSvgDataUrl } from '@aora-bot/react';
+import { renderStaticSvgDataUrl } from '@mowa-bot/react';
 
 const cases = [
   { label: '默认', styleOptions: {} },
@@ -532,7 +532,7 @@ export default function Demo() {
 暗色调的绘本墨画。每个部件从边缘向内压暗，背光一侧先排线、再交叉排线，外围是一圈暖黑色的毛笔墨线，背光处更粗，提笔处变细。底色带有一层细细的纸纹。脸和 `solid` 一样，画在阴影之上。`hatching` 控制排线，`grain` 控制纸纹；比耳朵还小的部件不排线。
 
 ```tsx preview
-import { renderStaticSvgDataUrl } from '@aora-bot/react';
+import { renderStaticSvgDataUrl } from '@mowa-bot/react';
 
 const cases = [
   { label: 'default', styleOptions: {} },
@@ -588,7 +588,7 @@ export default function Demo() {
 折纸不读取参数。揉皱的随机种子取自轮廓本身，每个轮廓只计算一次并缓存，所以静态渲染每次的结果都一样。
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 const cast = [
   { shape: 'circle', color: 'cream', face: 'capsule' },
@@ -619,7 +619,7 @@ export default function Demo() {
 浮雕不读取参数，也没有纹理，重绘开销与 `paper` 相当。
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 const cast = [
   { shape: 'circle', color: 'cream', face: 'capsule' },
@@ -645,10 +645,10 @@ export default function Demo() {
 
 ## 单线
 
-`outline` 变体本身就是单线画法，是否单色取决于墨色。不指定 `ink` 时，描边、眼睛和五官使用 `--aora-fg`，而 `CharacterMark` 会把它设成调色板里的颜色，所以轮廓是蓝色还是紫色，由 `color` 决定。想改用文字颜色，就把 `ink` 设为 `currentColor`：
+`outline` 变体本身就是单线画法，是否单色取决于墨色。不指定 `ink` 时，描边、眼睛和五官使用 `--mowa-fg`，而 `CharacterMark` 会把它设成调色板里的颜色，所以轮廓是蓝色还是紫色，由 `color` 决定。想改用文字颜色，就把 `ink` 设为 `currentColor`：
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 const surfaces = [
   { bg: '#fcfcfc', fg: '#1f2937', scheme: 'light' },

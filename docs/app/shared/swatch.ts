@@ -1,4 +1,4 @@
-import { getInkColorCss, getInkVars, getSwatch, type ColorId } from '@aora-bot/react';
+import { getInkColorCss, getInkVars, getSwatch, type ColorId } from '@mowa-bot/react';
 import type { CSSProperties } from 'react';
 
 /**
@@ -12,10 +12,10 @@ const TEXT_LIGHTNESS = { light: 0.55, dark: 0.72 } as const;
  * A colour as the site paints with it, all four always written so an inner
  * element never inherits another colour's: `--site-swatch` the body as it is
  * on this page, for fills and tints; `--site-swatch-line` the ink as a line,
- * which still reads on the page (`--aora-ink-line`), for rings and controls;
+ * which still reads on the page (`--mowa-ink-line`), for rings and controls;
  * `--site-swatch-text` the ink at the lightness text reads at on this page,
  * for words; `--site-swatch-edge` the hairline a fill takes where it all but
- * matches the page (`--aora-rim`).
+ * matches the page (`--mowa-rim`).
  */
 export function swatchVars(color: ColorId): CSSProperties {
   const ink = getInkColorCss(color);
@@ -23,8 +23,8 @@ export function swatchVars(color: ColorId): CSSProperties {
   const { light, dark } = getSwatch(color).ink;
   return {
     '--site-swatch': ink,
-    '--site-swatch-line': vars['--aora-ink-line'] ?? ink,
+    '--site-swatch-line': vars['--mowa-ink-line'] ?? ink,
     '--site-swatch-text': `light-dark(oklch(from ${light} min(l, ${TEXT_LIGHTNESS.light}) c h), oklch(from ${dark} max(l, ${TEXT_LIGHTNESS.dark}) c h))`,
-    '--site-swatch-edge': vars['--aora-rim'] ?? 'transparent',
+    '--site-swatch-edge': vars['--mowa-rim'] ?? 'transparent',
   } as CSSProperties;
 }

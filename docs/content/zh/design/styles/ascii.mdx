@@ -5,7 +5,7 @@ import { StyleParamsDemo } from '@theme';
 同一个角色，用字符敲出来。所有状态、形状和脸（包括默认的 `cute` 脸和周围的特效）在字符画系列里都能用：它复用像素系列的栅格器，只决定每个格子写成哪个字符。它也是唯一一个输出本身就是纯文本、可以直接复制的系列。
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -28,7 +28,7 @@ export default function Demo() {
 ## 变体
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 const variants = ['ansi', 'mono', 'crt'] as const;
 
@@ -66,7 +66,7 @@ export default function Demo() {
 `charset` 决定格子用哪一套字符。
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 const charsets = ['ascii', 'block', 'braille'] as const;
 
@@ -102,7 +102,7 @@ export default function Demo() {
 `fill` 决定身体内部怎么写。
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 const fills = ['shade', 'solid', 'hollow'] as const;
 
@@ -138,7 +138,7 @@ export default function Demo() {
 `effect` 让字符自己动起来。
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 const effects = ['none', 'decode', 'shimmer', 'glitch'] as const;
 
@@ -197,7 +197,7 @@ export default function Demo() {
 `renderAsciiText` 把角色返回为多行文字，行与行用 `\n` 连接，并去掉行尾空格。它的选项与 `renderStaticSvg` 相同，所以聊天消息、终端、命令行横幅、智能体日志和 README 里都能显示与该系列完全一致的角色。
 
 ```tsx preview
-import { renderAsciiText } from '@aora-bot/engine';
+import { renderAsciiText } from '@mowa-bot/engine';
 
 export default function Demo() {
   const text = renderAsciiText({ shape: 'mochi', state: 'happy' });
@@ -212,7 +212,7 @@ export default function Demo() {
 在终端里加上 `ansi: true`，会输出 24 位颜色的转义码，直接打印即可：
 
 ```ts
-import { renderAsciiText } from '@aora-bot/engine/static';
+import { renderAsciiText } from '@mowa-bot/engine/static';
 
 // 纯文本：可以放心复制、写进日志或贴进 README。
 console.log(renderAsciiText({ shape: 'mochi', state: 'happy' }));
@@ -221,7 +221,7 @@ console.log(renderAsciiText({ shape: 'mochi', state: 'happy' }));
 console.log(renderAsciiText({ shape: 'mochi', state: 'thinking', ansi: true }));
 ```
 
-`@aora-bot/engine` 和 `@aora-bot/engine/static` 都导出 `renderAsciiText`，所以在 Node、worker 或命令行里无需 DOM 就能运行。
+`@mowa-bot/engine` 和 `@mowa-bot/engine/static` 都导出 `renderAsciiText`，所以在 Node、worker 或命令行里无需 DOM 就能运行。
 
 ## 一个格子怎么定
 
@@ -237,7 +237,7 @@ console.log(renderAsciiText({ shape: 'mochi', state: 'thinking', ansi: true }));
 ## 在引擎里
 
 ```ts
-import { createCharacter, renderAsciiText, renderStaticSvg } from '@aora-bot/engine';
+import { createCharacter, renderAsciiText, renderStaticSvg } from '@mowa-bot/engine';
 
 const mark = createCharacter(host, {
   style: 'ascii',
@@ -265,7 +265,7 @@ const text = renderAsciiText({ shape: 'star', state: 'thinking' });
 `AppearanceProvider` 为整棵子树统一设置这三个 prop。标记自己的 prop 优先，嵌套的 Provider 按字段逐项合并。
 
 ```tsx
-import { AppearanceProvider, CharacterMark, StagedMark } from '@aora-bot/react';
+import { AppearanceProvider, CharacterMark, StagedMark } from '@mowa-bot/react';
 
 <AppearanceProvider styleId="ascii" variant="mono" styleOptions={{ cols: 20 }}>
   <CharacterMark shape="blob" />

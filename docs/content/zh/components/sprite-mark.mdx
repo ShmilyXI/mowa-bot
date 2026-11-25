@@ -6,7 +6,7 @@ import { API } from '@theme';
 
 ```tsx preview
 import { useState } from 'react';
-import { SpriteMark, CharacterMark, EMOTION_IDS, getEmotion } from '@aora-bot/react';
+import { SpriteMark, CharacterMark, EMOTION_IDS, getEmotion } from '@mowa-bot/react';
 
 const ids = ['02', '30', '32', '33', '34', '10', '13', '21', '00'];
 
@@ -35,7 +35,7 @@ export default function Demo() {
 
 ## 什么时候用
 
-矢量角色是 Aora Bot 的核心：由程序生成，可随主题变化，体积极小。`SpriteMark` 用来处理矢量角色做不到的一件事：呈现一张特定的插画，例如品牌吉祥物、手绘宠物、由照片衍生的形象，这些外观无法由程序生成。
+矢量角色是 Mowa Bot 的核心：由程序生成，可随主题变化，体积极小。`SpriteMark` 用来处理矢量角色做不到的一件事：呈现一张特定的插画，例如品牌吉祥物、手绘宠物、由照片衍生的形象，这些外观无法由程序生成。
 
 代价也是实实在在的。一套精灵图是几十个 PNG 文件，而不是几 KB 的绘制代码；它不会随主题换色；只有画过的状态才有对应的帧。请把它当作资源，而不是可配置的组件。
 
@@ -85,7 +85,7 @@ export default function Demo() {
 导入的 JSON 文件会把 `kind` 推断为 `string`，因此要先用 `isSpriteManifest` 收窄类型：
 
 ```tsx
-import { SpriteMark, isSpriteManifest } from '@aora-bot/react';
+import { SpriteMark, isSpriteManifest } from '@mowa-bot/react';
 import manifest from './sprites/bao/manifest.json';
 
 if (!isSpriteManifest(manifest)) throw new Error('不是 sprite-mate 清单');

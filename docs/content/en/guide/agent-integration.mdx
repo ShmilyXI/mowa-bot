@@ -5,7 +5,7 @@ Show what an AI agent is doing, as a face.
 The pieces: a [numeric protocol](/design/protocol) any script can emit; an **arbiter** that turns several noisy sources into one calm state; **channels** that carry messages over HTTP, stdin, `postMessage` or server-sent events; and React hooks that wire the result into a character.
 
 ```tsx preview
-import { AgentStateProvider, useAgentState, CharacterMark, ActivityLine } from '@aora-bot/react';
+import { AgentStateProvider, useAgentState, CharacterMark, ActivityLine } from '@mowa-bot/react';
 
 function Face() {
   const { state, tips, update, remove } = useAgentState();
@@ -52,14 +52,14 @@ Press _b: 34 error_ while _a_ is searching: the error wins. Press _a: 33 done_ i
 One message shape, every transport:
 
 ```json
-{ "session_id": "s1", "aoraBotId": "32", "tips": "Editing src/app.ts" }
+{ "session_id": "s1", "mowaBotId": "32", "tips": "Editing src/app.ts" }
 { "session_id": "s1", "agent_id": "claude-code", "event": "PreToolUse" }
 { "session_id": "s1", "state": "thinking" }
-{ "session_id": "s1", "aoraBotId": "47", "tips": "Indexing 3 of 8", "hud": { "kind": "progress", "value": 0.375 } }
+{ "session_id": "s1", "mowaBotId": "47", "tips": "Indexing 3 of 8", "hud": { "kind": "progress", "value": 0.375 } }
 ```
 
 - `session_id` is required. Later messages with the same id update the same session.
-- Then **one** of: a protocol id (`aoraBotId` or `emotionId`), a state name (`state`), or an `agent_id` plus the tool's own `event` name, translated through an [adapter](#adapters).
+- Then **one** of: a protocol id (`mowaBotId` or `emotionId`), a state name (`state`), or an `agent_id` plus the tool's own `event` name, translated through an [adapter](#adapters).
 - `tips` is an optional caption the host may show beside the character.
 - `hud` is an optional dial — a [`HudSpec`](/design/protocol#hud) drawn in the ring outside the body. It is validated with `isHudSpec`; a malformed one is dropped and the message still applies.
 - `headless: true` marks a session that should be tracked but never shown — a background job that must not take over the face.
@@ -67,19 +67,19 @@ One message shape, every transport:
 `normalize(message)` turns any of these into an arbiter update, or an error string. It never throws.
 
 ```ts
-import { normalize } from '@aora-bot/engine/agent';
+import { normalize } from '@mowa-bot/engine/agent';
 
-normalize({ session_id: 's1', aoraBotId: '32' });
+normalize({ session_id: 's1', mowaBotId: '32' });
 // { ok: true, update: { sessionId: 's1', emotionId: '32', state: 'working', headless: false } }
 
 normalize({ session_id: 's1', agent_id: 'claude-code', event: 'Stop' });
 // { ok: true, update: { …, emotionId: '33', state: 'celebrate' } }
 
-normalize({ aoraBotId: '32' });
+normalize({ mowaBotId: '32' });
 // { ok: false, error: 'missing session_id' }
 ```
 
-`@aora-bot/engine/agent` is a separate entry with no DOM or animation code, so it loads in a Node relay as readily as in the browser.
+`@mowa-bot/engine/agent` is a separate entry with no DOM or animation code, so it loads in a Node relay as readily as in the browser.
 
 ## Arbitration
 
@@ -91,7 +91,7 @@ One character, several sources: a coding agent with three sub-agents, or a chat 
 4. **Expiry.** A session silent for `sessionTtlMs` (two minutes) is forgotten, so a tool with no end-of-session hook cannot pin the character forever.
 
 ```ts
-import { createArbiter } from '@aora-bot/engine/agent';
+import { createArbiter } from '@mowa-bot/engine/agent';
 
 const arbiter = createArbiter({
   minDisplayMs: { defaultMs: 900, byState: { celebrate: 2000, alerting: 1500 } },
@@ -126,7 +126,7 @@ In React, [`useArbiter`](/components/agent-state) runs an arbiter for the lifeti
 An adapter maps one tool's event vocabulary onto the protocol. It is pure data: supporting another agent is a new object, not new logic.
 
 ```tsx preview
-import { AGENT_ADAPTERS, stateForEmotion } from '@aora-bot/react';
+import { AGENT_ADAPTERS, stateForEmotion } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -167,7 +167,7 @@ For hosts that know which _tool_ is running rather than which lifecycle event fi
 A third table answers a third question. `TOOL_STATES` answers "which tool is running"; `ACTIVITY_VERBS` answers "what would you tell the user it is doing" — the sentence already on screen next to the character. `stateForActivity('coding')` resolves a verb to a state, and anything unrecognised is generic work, so a host that has only the sentence — "Running commands…" — can still drive a character. The lookup uses `Object.hasOwn`, because the verb comes off the wire and `"constructor"` must not find something on the prototype.
 
 ```tsx preview
-import { ACTIVITY_VERB_IDS, CharacterStageProvider, StagedMark, stateForActivity } from '@aora-bot/react';
+import { ACTIVITY_VERB_IDS, CharacterStageProvider, StagedMark, stateForActivity } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -212,7 +212,7 @@ A message may carry a `hud` block. The relay validates it like the rest of the p
 ```bash
 curl -X POST http://127.0.0.1:27182/state \
   -H 'content-type: application/json' \
-  -d '{"session_id":"s1","aoraBotId":"47","tips":"Indexing 3 of 8","hud":{"kind":"progress","value":0.375}}'
+  -d '{"session_id":"s1","mowaBotId":"47","tips":"Indexing 3 of 8","hud":{"kind":"progress","value":0.375}}'
 ```
 
 ```tsx
@@ -222,7 +222,7 @@ import {
   useAgentState,
   CharacterMark,
   AgentHud,
-} from '@aora-bot/react';
+} from '@mowa-bot/react';
 
 function Pet() {
   const status = useEventSourceChannel('http://127.0.0.1:27182/events');
@@ -252,20 +252,20 @@ Claude Code fires shell hooks on lifecycle events. Each one posts to the relay w
 ```json
 {
   "hooks": {
-    "UserPromptSubmit": [{ "hooks": [{ "type": "command", "command": "aora-report UserPromptSubmit" }] }],
-    "PreToolUse": [{ "hooks": [{ "type": "command", "command": "aora-report PreToolUse" }] }],
-    "PostToolUse": [{ "hooks": [{ "type": "command", "command": "aora-report PostToolUse" }] }],
-    "PostToolUseFailure": [{ "hooks": [{ "type": "command", "command": "aora-report PostToolUseFailure" }] }],
-    "Notification": [{ "hooks": [{ "type": "command", "command": "aora-report Notification" }] }],
-    "Stop": [{ "hooks": [{ "type": "command", "command": "aora-report Stop" }] }],
-    "SessionEnd": [{ "hooks": [{ "type": "command", "command": "aora-report SessionEnd" }] }]
+    "UserPromptSubmit": [{ "hooks": [{ "type": "command", "command": "mowa-report UserPromptSubmit" }] }],
+    "PreToolUse": [{ "hooks": [{ "type": "command", "command": "mowa-report PreToolUse" }] }],
+    "PostToolUse": [{ "hooks": [{ "type": "command", "command": "mowa-report PostToolUse" }] }],
+    "PostToolUseFailure": [{ "hooks": [{ "type": "command", "command": "mowa-report PostToolUseFailure" }] }],
+    "Notification": [{ "hooks": [{ "type": "command", "command": "mowa-report Notification" }] }],
+    "Stop": [{ "hooks": [{ "type": "command", "command": "mowa-report Stop" }] }],
+    "SessionEnd": [{ "hooks": [{ "type": "command", "command": "mowa-report SessionEnd" }] }]
   }
 }
 ```
 
 ```bash
 #!/bin/sh
-# aora-report — hooks receive JSON on stdin; session_id is in it.
+# mowa-report — hooks receive JSON on stdin; session_id is in it.
 SESSION=$(jq -r .session_id)
 curl -s -o /dev/null -X POST http://127.0.0.1:27182/state \
   -H 'Content-Type: application/json' \
@@ -280,7 +280,7 @@ The same shape with `agent_id: "cursor"` and Cursor's event names — `toolCall`
 
 ```bash
 curl -X POST http://127.0.0.1:27182/state -H 'Content-Type: application/json' \
-  -d '{"session_id":"cursor-1","aoraBotId":"39","tips":"Writing the answer"}'
+  -d '{"session_id":"cursor-1","mowaBotId":"39","tips":"Writing the answer"}'
 ```
 
 ### An iframe or extension panel
@@ -290,7 +290,7 @@ When the agent lives in another document, post to the frame:
 ```ts
 // host document
 frame.contentWindow.postMessage(
-  { type: 'aora:state', payload: { session_id: 'host', state: 'thinking' } },
+  { type: 'mowa:state', payload: { session_id: 'host', state: 'thinking' } },
   'https://widget.example',
 );
 ```
@@ -304,7 +304,7 @@ function Widget() {
 }
 ```
 
-`useStateChannel` accepts messages of type `aora:state` from the allowed origin only — the page's own origin by default — and feeds the nearest `AgentStateProvider`.
+`useStateChannel` accepts messages of type `mowa:state` from the allowed origin only — the page's own origin by default — and feeds the nearest `AgentStateProvider`.
 
 ## Sleeping when the visitor does
 

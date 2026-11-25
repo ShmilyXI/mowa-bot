@@ -4,12 +4,12 @@ import { API } from '@theme';
 
 哪些智能体正在占用哪些资源。
 
-> 属于 `@aora-bot/surfaces`，不在 `@aora-bot/react` 中：`pnpm add @aora-bot/surfaces @aora-bot/react`，并在 React 样式之后引入 `@aora-bot/surfaces/styles.css`。
+> 属于 `@mowa-bot/surfaces`，不在 `@mowa-bot/react` 中：`pnpm add @mowa-bot/surfaces @mowa-bot/react`，并在 React 样式之后引入 `@mowa-bot/surfaces/styles.css`。
 
 ```tsx preview
 import { useState } from 'react';
-import { CharacterStageProvider } from '@aora-bot/react';
-import { OccupancyList, type OccupancyRow } from '@aora-bot/surfaces';
+import { CharacterStageProvider } from '@mowa-bot/react';
+import { OccupancyList, type OccupancyRow } from '@mowa-bot/surfaces';
 
 const rows: OccupancyRow[] = [
   {

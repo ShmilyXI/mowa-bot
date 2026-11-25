@@ -1,6 +1,6 @@
 # Browser support
 
-Aora Bot targets browsers released from roughly mid-2024 onward. The binding constraint is `light-dark()`, which the entire ink system is built on.
+Mowa Bot targets browsers released from roughly mid-2024 onward. The binding constraint is `light-dark()`, which the entire ink system is built on.
 
 | Browser       | Minimum |
 | ------------- | ------- |
@@ -11,7 +11,7 @@ Aora Bot targets browsers released from roughly mid-2024 onward. The binding con
 All three paint styles below are running in the browser you are reading this in — plain SVG, one `light-dark()` ink per character, no canvas and no WebGL.
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 const variants = ['solid', 'outline', 'glass'] as const;
 
@@ -35,14 +35,14 @@ export default function Demo() {
 
 Every ink value is a `light-dark()` pair. This is what lets a character re-theme with no JavaScript and no re-render.
 
-Below the minimum, `--aora-fg` fails to parse and characters fall back to `currentColor`. They still render and still animate; they lose their ink. If you must support older browsers, set the ink yourself:
+Below the minimum, `--mowa-fg` fails to parse and characters fall back to `currentColor`. They still render and still animate; they lose their ink. If you must support older browsers, set the ink yourself:
 
 ```css
-.aora-mark {
-  --aora-fg: #2a92fe;
+.mowa-mark {
+  --mowa-fg: #2a92fe;
 }
-:root.dark .aora-mark {
-  --aora-fg: #0e74e0;
+:root.dark .mowa-mark {
+  --mowa-fg: #0e74e0;
 }
 ```
 

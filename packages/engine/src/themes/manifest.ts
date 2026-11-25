@@ -3,7 +3,7 @@
  * its names, the ids it owns and how to load it.
  *
  * This is the only per-theme data in the core. A theme's art, skins, cast and
- * stored face data live in its own entry (`@aora-bot/engine/themes/<id>`),
+ * stored face data live in its own entry (`@mowa-bot/engine/themes/<id>`),
  * which `loadTheme` imports on demand. The ids are here so the core can tell
  * an id that needs its theme from an id nobody knows, and so a host can load
  * the theme before drawing. Nothing in this module may import the rest of the
@@ -240,7 +240,7 @@ export const THEME_MANIFEST = [
       { style: 'vector', variant: 'grainy' },
     ],
     colors: [],
-    load: () => import('@aora-bot/engine/themes/halloween'),
+    load: () => import('@mowa-bot/engine/themes/halloween'),
   },
   {
     id: 'christmas',
@@ -251,7 +251,7 @@ export const THEME_MANIFEST = [
     cards: [...CHRISTMAS, 'twinkle', 'joy', 'nimbo'],
     variants: [{ style: 'vector', variant: 'felt' }],
     colors: ['peach', 'pine', 'crimson', 'snow'],
-    load: () => import('@aora-bot/engine/themes/christmas'),
+    load: () => import('@mowa-bot/engine/themes/christmas'),
   },
   {
     id: 'spring-festival',
@@ -262,7 +262,7 @@ export const THEME_MANIFEST = [
     cards: [...SPRING_FESTIVAL, 'bao', 'ember', 'finn'],
     variants: [{ style: 'vector', variant: 'papercut' }],
     colors: [],
-    load: () => import('@aora-bot/engine/themes/spring-festival'),
+    load: () => import('@mowa-bot/engine/themes/spring-festival'),
   },
   {
     id: 'mid-autumn',
@@ -273,7 +273,7 @@ export const THEME_MANIFEST = [
     cards: [...MID_AUTUMN, 'luna', 'lumi', 'orbi'],
     variants: [{ style: 'vector', variant: 'lantern' }],
     colors: ['indigo', 'crust', 'jade', 'peel'],
-    load: () => import('@aora-bot/engine/themes/mid-autumn'),
+    load: () => import('@mowa-bot/engine/themes/mid-autumn'),
   },
   {
     id: 'easter',
@@ -284,7 +284,7 @@ export const THEME_MANIFEST = [
     cards: [...EASTER, 'lucky', 'bloom', 'sprout'],
     variants: [{ style: 'vector', variant: 'pastel' }],
     colors: ['mint', 'carrot', 'caramel'],
-    load: () => import('@aora-bot/engine/themes/easter'),
+    load: () => import('@mowa-bot/engine/themes/easter'),
   },
   {
     id: 'summer',
@@ -295,7 +295,7 @@ export const THEME_MANIFEST = [
     cards: [...SUMMER, 'melo', 'puff', 'dew'],
     variants: [{ style: 'vector', variant: 'soda' }],
     colors: ['lagoon', 'lemon', 'aqua', 'sand', 'grass'],
-    load: () => import('@aora-bot/engine/themes/summer'),
+    load: () => import('@mowa-bot/engine/themes/summer'),
   },
   {
     id: 'valentine',
@@ -306,7 +306,7 @@ export const THEME_MANIFEST = [
     cards: [...VALENTINE, 'luv', 'cheri', 'cuppy'],
     variants: [{ style: 'vector', variant: 'candy' }],
     colors: ['wine', 'plum'],
-    load: () => import('@aora-bot/engine/themes/valentine'),
+    load: () => import('@mowa-bot/engine/themes/valentine'),
   },
 ] as const satisfies readonly ThemeManifestEntry[];
 

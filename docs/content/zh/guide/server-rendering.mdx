@@ -6,13 +6,13 @@
 
 | 导入                     | 包含            | 没有 DOM 也安全 |
 | ------------------------ | --------------- | --------------- |
-| `@aora-bot/react`        | 全部组件与 Hook | 否              |
-| `@aora-bot/react/static` | 渲染函数与哈希  | 是              |
+| `@mowa-bot/react`        | 全部组件与 Hook | 否              |
+| `@mowa-bot/react/static` | 渲染函数与哈希  | 是              |
 
 静态入口有意不包含动画运行时。它导出的内容都不会访问 `window`、`document` 或 `requestAnimationFrame`，因此可以在 React Server Component、静态生成或 worker 里使用。
 
 ```ts
-import { renderAvatarDataUrl } from '@aora-bot/react/static';
+import { renderAvatarDataUrl } from '@mowa-bot/react/static';
 
 export default async function Page() {
   return <img src={renderAvatarDataUrl('ada@example.com')} width={40} height={40} alt="" />;
@@ -25,7 +25,7 @@ export default async function Page() {
 
 ```tsx
 // app/page.tsx — 服务端组件
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 export default function Page() {
   return <CharacterMark shape="blob" color="blue" />;
@@ -36,7 +36,7 @@ export default function Page() {
 
 ```tsx
 // app/layout.tsx
-import '@aora-bot/react/styles.css';
+import '@mowa-bot/react/styles.css';
 ```
 
 ### 能用静态入口就用静态入口
@@ -48,7 +48,7 @@ import '@aora-bot/react/styles.css';
 组件在服务端渲染的是没有动画的标记。角色以静止姿态出现，水合后由引擎接管。因此不会产生布局偏移：服务端 SVG 占据的盒子，和动画角色之后占据的盒子完全一致。
 
 ```tsx preview
-import { renderStaticSvg } from '@aora-bot/react';
+import { renderStaticSvg } from '@mowa-bot/react';
 
 export default function Demo() {
   const svg = renderStaticSvg({ shape: 'hex', color: 'green', expression: 'happy' });

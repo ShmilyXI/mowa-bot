@@ -4,7 +4,7 @@
  * The core holds the mechanism and the manifest (`THEME_MANIFEST`): every
  * shipped theme's names, the ids it owns and a loader. A theme's art, skins,
  * cast and stored face data live in its own entry,
- * `@aora-bot/engine/themes/<id>`, and reach the engine through
+ * `@mowa-bot/engine/themes/<id>`, and reach the engine through
  * `installTheme(entry)` or `await loadTheme(id)`. Until then a synchronous
  * call that names one of its ids throws `ThemeNotInstalledError`.
  */

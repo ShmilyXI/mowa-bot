@@ -3,7 +3,7 @@ import {
   type CharacterState,
   type RosterFacts,
   type RosterSurface,
-} from '@aora-bot/engine';
+} from '@mowa-bot/engine';
 import { createContext, useCallback, useContext, useSyncExternalStore } from 'react';
 
 /**

@@ -47,7 +47,7 @@ export function createAsciiRenderer(host: Element, context: LiveRendererContext)
   host.appendChild(svg);
 
   const seed = `${fnv1a32(context.seed).toString(36)}-${(idSerial++).toString(36)}`;
-  const ids = { glow: `aora-ag-${seed}`, scanlines: `aora-as-${seed}` };
+  const ids = { glow: `mowa-ag-${seed}`, scanlines: `mowa-as-${seed}` };
 
   let options = readAsciiOptions(context.styleOptions);
   const table = createPaintTable();

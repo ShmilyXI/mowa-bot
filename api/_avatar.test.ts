@@ -6,7 +6,7 @@ import {
   getTheme,
   mulberry32,
   renderStaticSvg,
-} from '@aora-bot/engine/static';
+} from '@mowa-bot/engine/static';
 import { describe, expect, it } from 'vitest';
 import { AVATAR_POOL, AVATAR_POOL_BASE, THEME_POOL_BASE, avatarFromUrl, poolIndex } from './_avatar.js';
 

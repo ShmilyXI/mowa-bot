@@ -5,26 +5,26 @@ import { pathToFileURL } from 'node:url';
 import { describe, expect, it } from 'vitest';
 
 /*
- * The CDN file is a build product, so this needs `pnpm --filter @aora-bot/element build`
+ * The CDN file is a build product, so this needs `pnpm --filter @mowa-bot/element build`
  * to have run, as the React package needs the engine's `dist`.
  */
 
-const file = join(import.meta.dirname, '../dist/aora-bot.js');
+const file = join(import.meta.dirname, '../dist/mowa-bot.js');
 
 describe('CDN bundle', () => {
   it('is one self-contained file', () => {
     expect(existsSync(file)).toBe(true);
-    expect(readFileSync(file, 'utf8')).not.toMatch(/from\s*["']@aora-bot/);
+    expect(readFileSync(file, 'utf8')).not.toMatch(/from\s*["']@mowa-bot/);
   });
 
-  it('defines <aora-bot> when it loads', async () => {
-    expect(customElements.get('aora-bot')).toBeUndefined();
+  it('defines <mowa-bot> when it loads', async () => {
+    expect(customElements.get('mowa-bot')).toBeUndefined();
     await import(/* @vite-ignore */ pathToFileURL(file).href);
 
-    const Constructor = customElements.get('aora-bot')!;
+    const Constructor = customElements.get('mowa-bot')!;
     expect(Constructor).toBeTypeOf('function');
 
-    const el = document.createElement('aora-bot');
+    const el = document.createElement('mowa-bot');
     el.setAttribute('character', 'mochi');
     el.setAttribute('reduced-motion', '');
     document.body.appendChild(el);

@@ -7,7 +7,7 @@ import {
   type FaceStyle,
   type ShapeFamily,
   type ShapeId,
-} from '@aora-bot/react';
+} from '@mowa-bot/react';
 import { memo, useEffect, useRef, useState, type CSSProperties } from 'react';
 import { useI18n, useLocalized } from '../shared/i18n.js';
 import type { Preset } from '../shared/share.js';

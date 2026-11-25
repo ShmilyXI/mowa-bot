@@ -89,7 +89,7 @@ Like the mood effects these are pure functions of time, carried on the snapshot 
 The `eyes` and `line` faces draw these states with a belt: the body collapses to a core and the belt takes over. The demo below uses `face="eyes"` so the belts themselves are visible.
 
 ```tsx preview
-import { CharacterStageProvider, StagedMark, STATE_BELT } from '@aora-bot/react';
+import { CharacterStageProvider, StagedMark, STATE_BELT } from '@mowa-bot/react';
 
 export default function Demo() {
   const entries = Object.entries(STATE_BELT) as [string, string][];
@@ -124,7 +124,7 @@ Every state in one table: the eyes it cycles, its mouth, its effect (`cute` face
 Most applications do not think in these terms. Two helpers translate.
 
 ```tsx preview
-import { characterStateForAgent, activityForTool, TOOL_ACTIVITIES } from '@aora-bot/react';
+import { characterStateForAgent, activityForTool, TOOL_ACTIVITIES } from '@mowa-bot/react';
 
 export default function Demo() {
   return (

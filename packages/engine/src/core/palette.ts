@@ -223,23 +223,23 @@ export const RISO_INK = '#FF78A6';
 /** What hair is shaded towards: black, except on a body too dark for black to show. */
 export const HAIR_SHADE = '#000000';
 /** The hair shade in a live scene: a token, so the host can turn it white for a dark body (`getInkVars`). */
-export const HAIR_SHADE_TOKEN = `var(--aora-hair-shade, ${HAIR_SHADE})`;
+export const HAIR_SHADE_TOKEN = `var(--mowa-hair-shade, ${HAIR_SHADE})`;
 
 /** The theme's foreground token: the default body ink. */
-export const INK_TOKEN = 'var(--aora-fg, currentColor)';
+export const INK_TOKEN = 'var(--mowa-fg, currentColor)';
 /** What state effects are drawn in: the ink, unless the host sets an ink of their own (`getInkVars`). */
-export const FX_TOKEN = `var(--aora-fx, ${INK_TOKEN})`;
+export const FX_TOKEN = `var(--mowa-fx, ${INK_TOKEN})`;
 /** What the ink is drawn in as a line on the page: the ink, unless it is too faint there (`getInkVars`). */
-export const LINE_TOKEN = `var(--aora-ink-line, ${INK_TOKEN})`;
+export const LINE_TOKEN = `var(--mowa-ink-line, ${INK_TOKEN})`;
 
 /**
  * The page itself, where a face shows it: the whites of a drawn face on a
- * hollow body, and the ring round a badge. `--aora-bg` is what a host sets to
- * re-theme it; it defaults to `--aora-bg-base` in the stylesheet, and the
+ * hollow body, and the ring round a badge. `--mowa-bg` is what a host sets to
+ * re-theme it; it defaults to `--mowa-bg-base` in the stylesheet, and the
  * fallback here is that token's own default, so an unstyled page agrees with
  * a styled one.
  */
-export const PAGE_TOKEN = 'var(--aora-bg, var(--aora-bg-base, #fcfcfc))';
+export const PAGE_TOKEN = 'var(--mowa-bg, var(--mowa-bg-base, #fcfcfc))';
 
 /*
  * The face rule's paints in a live scene (`faceInks`), each defaulting to what
@@ -247,15 +247,15 @@ export const PAGE_TOKEN = 'var(--aora-bg, var(--aora-bg-base, #fcfcfc))';
  * colour changes (`getInkVars`).
  */
 /** The face colour: a drawn face's whites. */
-export const FACE_TOKEN = `var(--aora-face, ${FACE_INK})`;
+export const FACE_TOKEN = `var(--mowa-face, ${FACE_INK})`;
 /** The features' colour: everything a face draws straight on the body. */
-export const FEATURE_TOKEN = `var(--aora-face-soft, ${FEATURE_INK})`;
+export const FEATURE_TOKEN = `var(--mowa-face-soft, ${FEATURE_INK})`;
 /** A drawn face's pupils: what reads on the face colour. */
-export const PUPIL_TOKEN = `var(--aora-face-pupil, ${FEATURE_INK})`;
+export const PUPIL_TOKEN = `var(--mowa-face-pupil, ${FEATURE_INK})`;
 /** The light on an eye drawn straight on the body: what reads on the features' colour. */
-export const GLINT_TOKEN = `var(--aora-face-glint, ${FACE_INK})`;
+export const GLINT_TOKEN = `var(--mowa-face-glint, ${FACE_INK})`;
 /** The eyes of the cute, `eyes` and `line` faces when the host names a colour for them (`eyeColor`). */
-export const eyeToken = (paint: string): string => `var(--aora-eye, ${paint})`;
+export const eyeToken = (paint: string): string => `var(--mowa-eye, ${paint})`;
 
 /** A `#rrggbb` colour's channels in linear light. */
 const channels = (hex: string): number[] =>
@@ -523,17 +523,17 @@ const pairCss = (light: string, dark: string): string =>
 /**
  * The CSS custom properties a host puts on a character for this colour.
  *
- * `--aora-fg` is the body ink. The rest follow the face rule (`faceInks`):
- * on a hue in the middle of the range only `--aora-face` is written, white,
+ * `--mowa-fg` is the body ink. The rest follow the face rule (`faceInks`):
+ * on a hue in the middle of the range only `--mowa-face` is written, white,
  * and the tokens' defaults do the rest. A colour with a dark or a light ink
- * writes them all: `--aora-face`, `--aora-face-soft` (every feature drawn on
- * the body), `--aora-face-sticker`, `--aora-hair-shade`, `--aora-face-pupil`
- * (what reads on the face) and `--aora-face-glint` (what reads on the
- * features). `--aora-fx` is what state effects are drawn in, written only for
- * an ink lost on one of the pages (`effectInks`), `--aora-ink-line` what lines
+ * writes them all: `--mowa-face`, `--mowa-face-soft` (every feature drawn on
+ * the body), `--mowa-face-sticker`, `--mowa-hair-shade`, `--mowa-face-pupil`
+ * (what reads on the face) and `--mowa-face-glint` (what reads on the
+ * features). `--mowa-fx` is what state effects are drawn in, written only for
+ * an ink lost on one of the pages (`effectInks`), `--mowa-ink-line` what lines
  * on the page are drawn in, only for an ink too faint on one of them
- * (`lineInks`), and `--aora-rim` the edge of a filled body on a page it all
- * but matches (`rimInks`). `--aora-ink2` is the riso variant's second ink, for
+ * (`lineInks`), and `--mowa-rim` the edge of a filled body on a page it all
+ * but matches (`rimInks`). `--mowa-ink2` is the riso variant's second ink, for
  * the light inks and the second ink's own hues (`risoSecondInk`).
  */
 export const getInkVars = (id: ColorId): Record<string, string> => {
@@ -545,28 +545,28 @@ export const getInkVars = (id: ColorId): Record<string, string> => {
   const second = risoSecondInk(id);
   const { ink } = getSwatch(id);
   return {
-    '--aora-fg': getInkColorCss(id),
+    '--mowa-fg': getInkColorCss(id),
     ...(plain
-      ? { '--aora-face': FACE_INK }
+      ? { '--mowa-face': FACE_INK }
       : {
-          '--aora-face': pair('face'),
-          '--aora-face-soft': pair('feature'),
-          '--aora-face-sticker': pair('sticker'),
-          '--aora-hair-shade': pair('hair'),
-          '--aora-face-pupil': pair('pupil'),
-          '--aora-face-glint': pair('glint'),
+          '--mowa-face': pair('face'),
+          '--mowa-face-soft': pair('feature'),
+          '--mowa-face-sticker': pair('sticker'),
+          '--mowa-hair-shade': pair('hair'),
+          '--mowa-face-pupil': pair('pupil'),
+          '--mowa-face-glint': pair('glint'),
         }),
     ...(effects.light || effects.dark
-      ? { '--aora-fx': pairCss(effects.light ?? ink.light, effects.dark ?? ink.dark) }
+      ? { '--mowa-fx': pairCss(effects.light ?? ink.light, effects.dark ?? ink.dark) }
       : null),
     ...(lines.light || lines.dark
-      ? { '--aora-ink-line': pairCss(lines.light ?? ink.light, lines.dark ?? ink.dark) }
+      ? { '--mowa-ink-line': pairCss(lines.light ?? ink.light, lines.dark ?? ink.dark) }
       : null),
     ...(rim.light || rim.dark
-      ? { '--aora-rim': pairCss(rim.light ?? 'transparent', rim.dark ?? 'transparent') }
+      ? { '--mowa-rim': pairCss(rim.light ?? 'transparent', rim.dark ?? 'transparent') }
       : null),
     ...(second.light || second.dark
-      ? { '--aora-ink2': pairCss(second.light ?? RISO_INK, second.dark ?? RISO_INK) }
+      ? { '--mowa-ink2': pairCss(second.light ?? RISO_INK, second.dark ?? RISO_INK) }
       : null),
   };
 };

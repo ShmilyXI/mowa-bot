@@ -10,7 +10,7 @@ import { StateMatrix } from '@theme';
 
 ```tsx preview
 import { useState } from 'react';
-import { AgentHud, AgentStateProvider, useAgentState } from '@aora-bot/react';
+import { AgentHud, AgentStateProvider, useAgentState } from '@mowa-bot/react';
 
 function Job() {
   const { update } = useAgentState();
@@ -96,7 +96,7 @@ export default function Demo() {
 六种表盘，用于表示可度量的事物。`progress` 与 `gauge` 表示相对上限的比例；`context` 用格子计数而不是填充弧线，因为最后几格才最要紧；`balance` 只表现量级，具体数字留给铭牌；`kpi` 把一组数据画成迷你折线；`sync` 表示一个生命周期。每种表盘都是 `(spec, time)` 的纯函数，所以暂停的角色、服务端渲染和截图的结果一致。
 
 ```tsx preview
-import { CharacterMark, HudPlate, type HudSpec } from '@aora-bot/react';
+import { CharacterMark, HudPlate, type HudSpec } from '@mowa-bot/react';
 
 const dials: { spec: HudSpec; title: string; value: string | number; unit?: string }[] = [
   { spec: { kind: 'progress', value: 0.83 }, title: '导出', value: 83, unit: '%' },

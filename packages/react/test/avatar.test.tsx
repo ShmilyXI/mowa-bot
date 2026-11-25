@@ -102,14 +102,14 @@ describe('groupMetricsForPx', () => {
 
 describe('AvatarGroup', () => {
   const members = [{ id: 'a' }, { id: 'b' }, { id: 'c' }, { id: 'd' }];
-  const discs = (el: HTMLElement) => [...el.querySelectorAll('.aora-stack__item')];
+  const discs = (el: HTMLElement) => [...el.querySelectorAll('.mowa-stack__item')];
   const lefts = (el: HTMLElement) => discs(el).map((d) => (d as HTMLElement).style.left);
 
   it('applies the size band, so a small cluster shows fewer faces and overlaps harder', () => {
     const small = render(<AvatarGroup members={members} sizePx={AVATAR_SIZES.xs} />);
     // Two at xs, not three: three 16px discs at the usual overlap are a smear.
     expect(discs(small)).toHaveLength(groupMetrics('xs').maxVisible);
-    expect(small.querySelector('.aora-stack__overflow')!.textContent).toBe('+2');
+    expect(small.querySelector('.mowa-stack__overflow')!.textContent).toBe('+2');
     const smallStep = Number.parseFloat(lefts(small)[1]!);
 
     act(() => root!.unmount());
@@ -127,7 +127,7 @@ describe('AvatarGroup', () => {
     const el = render(<AvatarGroup members={members} sizePx={AVATAR_SIZES.xs} overlap={0} maxVisible={4} />);
     expect(discs(el)).toHaveLength(4);
     expect(lefts(el)).toEqual(['0px', '16px', '32px', '48px']);
-    expect(el.querySelector('.aora-stack__overflow')).toBeNull();
+    expect(el.querySelector('.mowa-stack__overflow')).toBeNull();
   });
 
   it('overrides the face of every member, not only the first', () => {
@@ -143,13 +143,13 @@ describe('GroupAvatar', () => {
     const el = render(
       <GroupAvatar group={{ id: 'team', members: [{ id: 'a' }, { id: 'b' }] }} sizePx={28} />,
     );
-    expect(el.querySelectorAll('.aora-stack__item')).toHaveLength(2);
+    expect(el.querySelectorAll('.mowa-stack__item')).toHaveLength(2);
   });
 
   it('draws nothing but the empty cluster for a group with no members', () => {
     const el = render(<GroupAvatar group={{ id: 'empty' }} />);
-    expect(el.querySelector('.aora-stack')).not.toBeNull();
-    expect(el.querySelectorAll('.aora-stack__item')).toHaveLength(0);
+    expect(el.querySelector('.mowa-stack')).not.toBeNull();
+    expect(el.querySelectorAll('.mowa-stack__item')).toHaveLength(0);
   });
 
   it('takes a style and a class of its own', () => {
@@ -160,7 +160,7 @@ describe('GroupAvatar', () => {
         style={{ opacity: 0.5 }}
       />,
     );
-    const cluster = el.querySelector('.aora-stack') as HTMLElement;
+    const cluster = el.querySelector('.mowa-stack') as HTMLElement;
     expect(cluster.classList.contains('mine')).toBe(true);
     expect(cluster.style.opacity).toBe('0.5');
   });
@@ -182,7 +182,7 @@ describe('participantsFromMembers', () => {
 });
 
 describe('AvatarStatusDot', () => {
-  const dot = (el: HTMLElement) => el.querySelector('.aora-status')!;
+  const dot = (el: HTMLElement) => el.querySelector('.mowa-status')!;
 
   it('carries every tone as data, so the colour comes from a token', () => {
     const tones = ['online', 'busy', 'away', 'offline', 'working', 'attention', 'error', 'info'] as const;
@@ -197,16 +197,16 @@ describe('AvatarStatusDot', () => {
 
   it('rings the tones that are asking to be noticed, and only those', () => {
     const el = render(<AvatarStatusDot tone="working" />);
-    expect(dot(el).classList.contains('aora-status--ring')).toBe(true);
+    expect(dot(el).classList.contains('mowa-status--ring')).toBe(true);
 
     rerender(<AvatarStatusDot tone="online" />);
-    expect(dot(el).classList.contains('aora-status--ring')).toBe(false);
+    expect(dot(el).classList.contains('mowa-status--ring')).toBe(false);
 
     // Explicit wins either way.
     rerender(<AvatarStatusDot tone="online" ring />);
-    expect(dot(el).classList.contains('aora-status--ring')).toBe(true);
+    expect(dot(el).classList.contains('mowa-status--ring')).toBe(true);
     rerender(<AvatarStatusDot tone="working" ring={false} />);
-    expect(dot(el).classList.contains('aora-status--ring')).toBe(false);
+    expect(dot(el).classList.contains('mowa-status--ring')).toBe(false);
   });
 
   it('is hidden from readers unless it carries a name, since colour alone says nothing', () => {
@@ -223,22 +223,22 @@ describe('AvatarStatusDot', () => {
 describe('WorkingBadge', () => {
   it('announces itself once, as a named image rather than three anonymous dots', () => {
     const el = render(<WorkingBadge />);
-    const badge = el.querySelector('.aora-working')!;
+    const badge = el.querySelector('.mowa-working')!;
     expect(badge.getAttribute('role')).toBe('img');
     expect(badge.getAttribute('aria-label')).toBe('Working');
-    expect(badge.querySelectorAll('.aora-working__dot')).toHaveLength(3);
+    expect(badge.querySelectorAll('.mowa-working__dot')).toHaveLength(3);
   });
 
   it('takes a translated name and scales from one number', () => {
     const el = render(<WorkingBadge label="处理中" sizePx={12} />);
-    const badge = el.querySelector('.aora-working') as HTMLElement;
+    const badge = el.querySelector('.mowa-working') as HTMLElement;
     expect(badge.getAttribute('aria-label')).toBe('处理中');
     expect(badge.getAttribute('style')).toContain('12px');
   });
 
   it('staggers the dots so the badge reads as travel rather than as a blink', () => {
     const el = render(<WorkingBadge />);
-    const delays = [...el.querySelectorAll('.aora-working__dot')].map(
+    const delays = [...el.querySelectorAll('.mowa-working__dot')].map(
       (d) => (d as HTMLElement).style.animationDelay,
     );
     expect(new Set(delays).size).toBe(3);
@@ -248,7 +248,7 @@ describe('WorkingBadge', () => {
 describe('UnreadBadge', () => {
   it('caps the text but not the announcement', () => {
     const el = render(<UnreadBadge count={128} />);
-    const badge = el.querySelector('.aora-badge')!;
+    const badge = el.querySelector('.mowa-badge')!;
     expect(badge.textContent).toBe('99+');
     expect(badge.getAttribute('aria-label')).toContain('128');
   });
@@ -259,22 +259,22 @@ describe('AgentPortrait', () => {
 
   it('draws the mark smaller than the circle when asked, without moving the circle', () => {
     const el = render(<AgentPortrait agent={agent} sizePx={64} fillPx={40} still />);
-    const wrapper = el.querySelector('.aora-avatar') as HTMLElement;
+    const wrapper = el.querySelector('.mowa-avatar') as HTMLElement;
     expect(wrapper.style.width).toBe('64px');
-    expect(wrapper.getAttribute('style')).toContain('--aora-avatar-fill: 40px');
+    expect(wrapper.getAttribute('style')).toContain('--mowa-avatar-fill: 40px');
     expect(el.querySelector('img')!.getAttribute('width')).toBe('40');
   });
 
   it('fills the circle by default', () => {
     const el = render(<AgentPortrait agent={agent} sizePx={44} still />);
-    expect((el.querySelector('.aora-avatar') as HTMLElement).getAttribute('style')).toContain(
-      '--aora-avatar-fill: 44px',
+    expect((el.querySelector('.mowa-avatar') as HTMLElement).getAttribute('style')).toContain(
+      '--mowa-avatar-fill: 44px',
     );
   });
 
   it('holds the state through a shape morph, so the change is one thing and not two', () => {
     const el = render(<AgentPortrait agent={agent} state="idle" isMorphingShape />);
-    const state = () => el.querySelector('.aora-mark')!.getAttribute('data-state');
+    const state = () => el.querySelector('.mowa-mark')!.getAttribute('data-state');
     expect(state()).toBe('idle');
 
     rerender(<AgentPortrait agent={agent} state="happy" isMorphingShape />);
@@ -288,11 +288,11 @@ describe('AgentPortrait', () => {
   it('changes state immediately when nothing is morphing', () => {
     const el = render(<AgentPortrait agent={agent} state="idle" />);
     rerender(<AgentPortrait agent={agent} state="happy" />);
-    expect(el.querySelector('.aora-mark')!.getAttribute('data-state')).toBe('happy');
+    expect(el.querySelector('.mowa-mark')!.getAttribute('data-state')).toBe('happy');
   });
 
   it('keeps the face and nose passthrough', () => {
     const el = render(<AgentPortrait agent={{ ...agent, face: 'line', nose: 'hook' }} />);
-    expect(el.querySelector('.aora-mark')!.getAttribute('data-face')).toBe('line');
+    expect(el.querySelector('.mowa-mark')!.getAttribute('data-face')).toBe('line');
   });
 });

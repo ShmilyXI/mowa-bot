@@ -1,4 +1,4 @@
-import type { CharacterState } from '@aora-bot/engine';
+import type { CharacterState } from '@mowa-bot/engine';
 import { useEffect, useRef, useState } from 'react';
 
 export interface UseIdleSleepOptions {

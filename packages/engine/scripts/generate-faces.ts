@@ -7,7 +7,7 @@
  * (`THEME_SOURCES`): `src/themes/<id>/art.generated.ts`, its characters
  * baked into points, `src/themes/<id>/cast.generated.ts`, its members where
  * its source names them, and `src/themes/<id>/faces.generated.ts`, their face
- * boxes and fits. Run with `pnpm --filter @aora-bot/engine generate:faces`
+ * boxes and fits. Run with `pnpm --filter @mowa-bot/engine generate:faces`
  * after changing a design or a body; `test/stored.test.ts` fails until what
  * is stored matches again.
  *

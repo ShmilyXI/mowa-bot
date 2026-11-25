@@ -1,3 +1,3 @@
-import { defineAoraBot } from './element.js';
+import { defineMowaBot } from './element.js';
 
-defineAoraBot();
+defineMowaBot();

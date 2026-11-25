@@ -16,14 +16,14 @@ import {
   renderStaticSvg,
   themeLook,
   validateStyleOptions,
-} from '@aora-bot/engine/static';
-import { CHRISTMAS } from '@aora-bot/engine/themes/christmas';
-import { SPRING_FESTIVAL } from '@aora-bot/engine/themes/spring-festival';
-import { MID_AUTUMN } from '@aora-bot/engine/themes/mid-autumn';
-import { EASTER } from '@aora-bot/engine/themes/easter';
-import { SUMMER } from '@aora-bot/engine/themes/summer';
-import { VALENTINE } from '@aora-bot/engine/themes/valentine';
-import { HALLOWEEN } from '@aora-bot/engine/themes/halloween';
+} from '@mowa-bot/engine/static';
+import { CHRISTMAS } from '@mowa-bot/engine/themes/christmas';
+import { SPRING_FESTIVAL } from '@mowa-bot/engine/themes/spring-festival';
+import { MID_AUTUMN } from '@mowa-bot/engine/themes/mid-autumn';
+import { EASTER } from '@mowa-bot/engine/themes/easter';
+import { SUMMER } from '@mowa-bot/engine/themes/summer';
+import { VALENTINE } from '@mowa-bot/engine/themes/valentine';
+import { HALLOWEEN } from '@mowa-bot/engine/themes/halloween';
 import type {
   CastId,
   CharacterPreset,
@@ -33,7 +33,7 @@ import type {
   ShapeId,
   StyleParam,
   ThemeDefinition,
-} from '@aora-bot/engine/static';
+} from '@mowa-bot/engine/static';
 
 /**
  * Every shipped theme, installed up front: a server has no layout to hold while a theme loads,

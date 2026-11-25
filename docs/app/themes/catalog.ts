@@ -11,7 +11,7 @@ import {
   type ColorId,
   type NoseId,
   type ThemeDefinition,
-} from '@aora-bot/engine';
+} from '@mowa-bot/engine';
 import { useEffect, useState } from 'react';
 import type { Bilingual } from '../shared/i18n.js';
 import type { Preset } from '../shared/share.js';

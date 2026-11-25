@@ -5,10 +5,10 @@ import {
   type FaceStyle,
   type NoseId,
   type ShapeId,
-} from '@aora-bot/engine';
+} from '@mowa-bot/engine';
 import { useEffect, useState, type CSSProperties, type ReactNode } from 'react';
 import { useSurfaceLocale, type SurfaceLocaleKey } from '../locale/index.js';
-import { CharacterMark, useReducedMotion, cx } from '@aora-bot/react';
+import { CharacterMark, useReducedMotion, cx } from '@mowa-bot/react';
 import { DeviceBezel, type BezelLight } from './DeviceBezel.js';
 
 /** Which flavour of "no" this is. Picks the default copy. */
@@ -105,7 +105,7 @@ export function RestrictedScene({
   const shape = shapeProp ?? shapePool[index % shapePool.length] ?? shapePool[0];
 
   return (
-    <div className={cx('aora-s-scene', className)} style={style}>
+    <div className={cx('mowa-s-scene', className)} style={style}>
       <DeviceBezel widthPx={widthPx} light={copy.light}>
         <CharacterMark
           shape={shape}
@@ -115,14 +115,14 @@ export function RestrictedScene({
           lineWeight={lineWeight}
           state={state}
           sizePx={markSize}
-          className="aora-s-scene__mark"
+          className="mowa-s-scene__mark"
         />
       </DeviceBezel>
 
-      <div className="aora-s-scene__text">
-        <h2 className="aora-s-scene__title">{title ?? t(copy.title)}</h2>
-        <p className="aora-s-scene__body">{body ?? t(copy.body)}</p>
-        {action && <div className="aora-s-scene__action">{action}</div>}
+      <div className="mowa-s-scene__text">
+        <h2 className="mowa-s-scene__title">{title ?? t(copy.title)}</h2>
+        <p className="mowa-s-scene__body">{body ?? t(copy.body)}</p>
+        {action && <div className="mowa-s-scene__action">{action}</div>}
       </div>
     </div>
   );

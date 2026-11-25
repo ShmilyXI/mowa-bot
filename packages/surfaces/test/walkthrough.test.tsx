@@ -3,7 +3,7 @@ import { act, type ReactNode } from 'react';
 import { createRoot, type Root } from 'react-dom/client';
 import { renderToString } from 'react-dom/server';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { LocaleProvider } from '@aora-bot/react';
+import { LocaleProvider } from '@mowa-bot/react';
 import { Composer } from '../src/walkthrough/Composer.js';
 import { DemoDesktop } from '../src/walkthrough/DemoDesktop.js';
 import { HandOff } from '../src/walkthrough/HandOff.js';
@@ -27,7 +27,7 @@ const advance = (ms: number) =>
     vi.advanceTimersByTime(ms);
   });
 
-const markState = (el: HTMLElement, selector = '.aora-mark') =>
+const markState = (el: HTMLElement, selector = '.mowa-mark') =>
   el.querySelector(selector)!.getAttribute('data-state');
 
 /**
@@ -115,7 +115,7 @@ describe('HandOff', () => {
 
   it('runs three beats and stops', () => {
     const el = render(<HandOff from={from} to={to} beatMs={500} />);
-    const states = () => [...el.querySelectorAll('.aora-mark')].map((m) => m.getAttribute('data-state'));
+    const states = () => [...el.querySelectorAll('.mowa-mark')].map((m) => m.getAttribute('data-state'));
 
     expect(states()).toEqual(['idle', 'idle']);
     advance(500);
@@ -129,7 +129,7 @@ describe('HandOff', () => {
   it('starts over when looping', () => {
     const el = render(<HandOff from={from} to={to} beatMs={500} loop />);
     advance(1500);
-    expect([...el.querySelectorAll('.aora-mark')].map((m) => m.getAttribute('data-state'))).toEqual([
+    expect([...el.querySelectorAll('.mowa-mark')].map((m) => m.getAttribute('data-state'))).toEqual([
       'idle',
       'idle',
     ]);
@@ -139,7 +139,7 @@ describe('HandOff', () => {
 describe('LandingWait', () => {
   it('counts up while there is no deadline', () => {
     const el = render(<LandingWait />);
-    const value = () => el.querySelector('.aora-hud-plate__value')!.textContent;
+    const value = () => el.querySelector('.mowa-hud-plate__value')!.textContent;
     expect(value()).toBe('0:00');
     advance(65_000);
     expect(value()).toBe('1:05');
@@ -147,12 +147,12 @@ describe('LandingWait', () => {
 
   it('counts down to a deadline and carries the dial', () => {
     const el = render(<LandingWait waitMs={30_000} />);
-    expect(el.querySelector('.aora-hud-plate__value')!.textContent).toBe('0:30');
+    expect(el.querySelector('.mowa-hud-plate__value')!.textContent).toBe('0:30');
     advance(25_000);
-    expect(el.querySelector('.aora-hud-plate__value')!.textContent).toBe('0:05');
+    expect(el.querySelector('.mowa-hud-plate__value')!.textContent).toBe('0:05');
     advance(10_000);
-    expect(el.querySelector('.aora-hud-plate__value')!.textContent).toBe('0:00');
-    expect(el.querySelector('.aora-hud-plate')!.getAttribute('data-level')).toBe('warn');
+    expect(el.querySelector('.mowa-hud-plate__value')!.textContent).toBe('0:00');
+    expect(el.querySelector('.mowa-hud-plate')!.getAttribute('data-level')).toBe('warn');
   });
 
   it('waits rather than idles', () => {
@@ -163,7 +163,7 @@ describe('LandingWait', () => {
 describe('SuggestionCards', () => {
   it('gives each card a face derived from its id', () => {
     const el = render(<SuggestionCards />);
-    const shapes = [...el.querySelectorAll('.aora-mark')].map((m) => m.getAttribute('data-shape'));
+    const shapes = [...el.querySelectorAll('.mowa-mark')].map((m) => m.getAttribute('data-shape'));
     expect(shapes).toHaveLength(3);
     expect(new Set(shapes).size).toBeGreaterThan(1);
   });

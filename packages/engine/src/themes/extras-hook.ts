@@ -3,7 +3,7 @@
  * the vivid mood accent and the effect anchor.
  *
  * Only themes use them, so their engine is not in the core: it is the
- * `@aora-bot/engine/themes/extras` entry (`src/themes/extras/`), which a
+ * `@mowa-bot/engine/themes/extras` entry (`src/themes/extras/`), which a
  * theme's entry imports and hands over as `ThemePackage.extras`.
  * `installTheme` builds it once per copy of the core, on the helpers below,
  * so it reads nothing of the core's state and the core imports none of it.
@@ -121,7 +121,7 @@ export interface ThemeExtras {
   share(element: Element, rules: readonly string[]): void;
 }
 
-/** The `@aora-bot/engine/themes/extras` entry's export: builds the extras for one copy of the core. */
+/** The `@mowa-bot/engine/themes/extras` entry's export: builds the extras for one copy of the core. */
 export type ThemeExtrasFactory = (kit: ExtrasKit) => ThemeExtras;
 
 const KIT: ExtrasKit = {

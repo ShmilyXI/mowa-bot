@@ -5,7 +5,7 @@ import { API } from '@theme';
 放进列表里直接使用的头像。
 
 ```tsx preview
-import { CharacterStageProvider, AgentPortrait } from '@aora-bot/react';
+import { CharacterStageProvider, AgentPortrait } from '@mowa-bot/react';
 
 const people = [
   { id: 'ada@example.com', name: 'Ada' },
@@ -45,7 +45,7 @@ export default function Demo() {
 未显式指定时，形状和墨色由 `id` 哈希得出，所以每个用户都对应一个固定的角色，无需存储任何数据。不同的客户端、不同的会话以及服务端渲染，得到的结果都一致。
 
 ```tsx preview
-import { AgentPortrait } from '@aora-bot/react';
+import { AgentPortrait } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -65,7 +65,7 @@ export default function Demo() {
 在 agent 上加 `face: 'line'` 即可使用[线条脸](/design/face)。鼻子和形状、墨色一样从 `id` 哈希而来，所以同样稳定；设置 `nose` 可以指定鼻子，设为 `null` 则不画。
 
 ```tsx preview
-import { AgentPortrait } from '@aora-bot/react';
+import { AgentPortrait } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -83,7 +83,7 @@ export default function Demo() {
 ## 尺寸
 
 ```tsx preview
-import { AgentPortrait, AVATAR_SIZES } from '@aora-bot/react';
+import { AgentPortrait, AVATAR_SIZES } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -106,7 +106,7 @@ export default function Demo() {
 `still` 渲染静态图片而不是动画，适合长列表。`halo` 会加一层柔和的底色，颜色由角色自身的色相推导而来。
 
 ```tsx preview
-import { AgentPortrait } from '@aora-bot/react';
+import { AgentPortrait } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -124,7 +124,7 @@ export default function Demo() {
 `fillPx` 设定圆内角色的大小。圆本身的尺寸不变，变的只是里面绘制的内容：比圆小会留出边距，比圆大则会被裁掉。默认正好填满圆。它通过自定义属性设置，而不是设置子元素的宽度，因为三种渲染方式中有两种的子元素是 `img`，样式表已经为它们设定了尺寸。
 
 ```tsx preview
-import { AgentPortrait } from '@aora-bot/react';
+import { AgentPortrait } from '@mowa-bot/react';
 
 export default function Demo() {
   return (

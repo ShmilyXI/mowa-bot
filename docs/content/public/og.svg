@@ -21,7 +21,7 @@
   <rect width="1200" height="630" fill="url(#bg)"/>
 
   <g transform="translate(96 168)">
-    <text x="0" y="0" font-family="Inter, system-ui, sans-serif" font-size="72" font-weight="700" fill="#F2F2F2">Aora Bot</text>
+    <text x="0" y="0" font-family="Inter, system-ui, sans-serif" font-size="72" font-weight="700" fill="#F2F2F2">Mowa Bot</text>
     <text x="0" y="82" font-family="Inter, system-ui, sans-serif" font-size="42" font-weight="500" fill="#9BA3B4">A procedural character engine</text>
     <text x="0" y="168" font-family="Inter, system-ui, sans-serif" font-size="25" fill="#7C8598">Generated characters, animated states, one render loop</text>
   </g>

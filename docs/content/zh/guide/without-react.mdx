@@ -1,26 +1,26 @@
 # 不用 React
 
-用 `<aora-bot>` 自定义元素，可以在纯 HTML 或任何框架里使用 Aora Bot；如果不想用自定义元素，也可以直接调用引擎。
+用 `<mowa-bot>` 自定义元素，可以在纯 HTML 或任何框架里使用 Mowa Bot；如果不想用自定义元素，也可以直接调用引擎。
 
 ## 从 CDN 引入
 
-只需要一个 script 标签。这个文件自带引擎，加载时自动注册 `<aora-bot>`，不需要构建步骤。
+只需要一个 script 标签。这个文件自带引擎，加载时自动注册 `<mowa-bot>`，不需要构建步骤。
 
 ```html
 <!doctype html>
 <html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
-    <title>Aora Bot</title>
-    <script type="module" src="https://cdn.jsdelivr.net/npm/@aora-bot/element"></script>
+    <title>Mowa Bot</title>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@mowa-bot/element"></script>
   </head>
   <body>
-    <aora-bot character="mochi" state="happy" size="120"></aora-bot>
+    <mowa-bot character="mochi" state="happy" size="120"></mowa-bot>
   </body>
 </html>
 ```
 
-建议在地址里固定版本，例如 `@aora-bot/element@0.3.0`，这样之后发布的新版本不会改变已经上线的页面。
+建议在地址里固定版本，例如 `@mowa-bot/element@0.3.0`，这样之后发布的新版本不会改变已经上线的页面。
 
 :::warning 中国大陆暂不可用
 jsDelivr 在中国大陆访问不稳定，从 CDN 引入的页面在大陆可能无法加载。用 npm 安装、随项目一起打包的方式不受影响。面向大陆用户的访问方案已在计划中。
@@ -31,16 +31,16 @@ jsDelivr 在中国大陆访问不稳定，从 CDN 引入的页面在大陆可能
 使用打包工具时，安装这个包，并在入口文件靠前的位置注册一次元素：
 
 ```bash
-pnpm add @aora-bot/element
+pnpm add @mowa-bot/element
 ```
 
 ```ts
-import { defineAoraBot } from '@aora-bot/element';
+import { defineMowaBot } from '@mowa-bot/element';
 
-defineAoraBot();
+defineMowaBot();
 ```
 
-`defineAoraBot(tagName = 'aora-bot')` 返回元素类，可以重复调用。导入这个包不会访问 DOM，所以在服务端渲染或构建脚本里导入也没问题，只是在那里调用 `defineAoraBot` 不会注册任何元素。`@aora-bot/engine` 会作为依赖一并安装。如果想从自己的域名提供打包好的单文件，请导入 `@aora-bot/element/cdn`。
+`defineMowaBot(tagName = 'mowa-bot')` 返回元素类，可以重复调用。导入这个包不会访问 DOM，所以在服务端渲染或构建脚本里导入也没问题，只是在那里调用 `defineMowaBot` 不会注册任何元素。`@mowa-bot/engine` 会作为依赖一并安装。如果想从自己的域名提供打包好的单文件，请导入 `@mowa-bot/element/cdn`。
 
 和其他包一样，它只提供 ESM。
 
@@ -76,12 +76,12 @@ defineAoraBot();
 `style-options` 接收所选画风的参数，参数列表见各画风页面（[vector](/design/styles/vector)、[pixel](/design/styles/pixel)、[kaomoji](/design/styles/kaomoji)、[ascii](/design/styles/ascii)）。把参数写成 JSON 对象，放进用单引号包起来的属性值里；不是 JSON 对象的值会被忽略，移除这个属性则恢复默认值。
 
 ```html
-<aora-bot shape="mochi" color="blue" variant="paper" style-options='{"paperOffset":12}'></aora-bot>
+<mowa-bot shape="mochi" color="blue" variant="paper" style-options='{"paperOffset":12}'></mowa-bot>
 ```
 
 元素带有 `role="img"`，`aria-label` 是阵容成员的名字；最近的 `lang` 是 `zh` 时用中文名。如果你自己设置了 `aria-label` 或 `role`，元素不会改动它们。
 
-角色画在 shadow root 里，页面的 CSS 无法影响其内部。宿主元素是 `display: inline-block`；用 `size` 设置大小，也可以自己写 `width` 和 `height`。墨色跟随页面的 `color-scheme`；任意祖先上的 `--aora-bg-base` 决定脸上露出的页面色，例如线条身体上手绘脸的眼白，详见[主题](/guide/theming)。
+角色画在 shadow root 里，页面的 CSS 无法影响其内部。宿主元素是 `display: inline-block`；用 `size` 设置大小，也可以自己写 `width` 和 `height`。墨色跟随页面的 `color-scheme`；任意祖先上的 `--mowa-bg-base` 决定脸上露出的页面色，例如线条身体上手绘脸的眼白，详见[主题](/guide/theming)。
 
 ## 方法
 
@@ -100,7 +100,7 @@ defineAoraBot();
 每个 HTML 属性都有对应的驼峰命名的 JavaScript 属性，所以 `el.state = 'happy'` 和 `el.setAttribute('state', 'happy')` 等价。正在运行的角色会被就地更新，弹簧状态也会保留，所以状态切换看起来像是一次反应，而不是重新开始。
 
 ```html
-<aora-bot id="bot" character="luna" size="120"></aora-bot>
+<mowa-bot id="bot" character="luna" size="120"></mowa-bot>
 <button id="ask">提问</button>
 
 <script type="module">
@@ -123,10 +123,10 @@ bot.controller.update({ hud: { kind: 'progress', value: 0.4 } });
 
 ## 不用自定义元素
 
-如果不想注册自定义元素，`@aora-bot/engine` 以函数的形式提供同样的角色，`@aora-bot/element` 只是它外面薄薄的一层封装。
+如果不想注册自定义元素，`@mowa-bot/engine` 以函数的形式提供同样的角色，`@mowa-bot/element` 只是它外面薄薄的一层封装。
 
 ```ts
-import { createCharacter } from '@aora-bot/engine';
+import { createCharacter } from '@mowa-bot/engine';
 
 const host = document.querySelector('#avatar')!;
 const character = createCharacter(host, { shape: 'mochi', state: 'happy', seed: 'mochi:blue' });
@@ -136,7 +136,7 @@ character.spin(2);
 character.destroy();
 ```
 
-`createCharacter` 把一个 SVG 挂载到宿主上并返回控制器；移除宿主时记得调用 `destroy()`。需要在宿主上设置 `--aora-fg` 自定义属性，或传入 `ink`，才会使用你指定的墨色；否则角色使用周围的文字颜色。其余内容见[引擎 README](https://github.com/sam70361/aora-bot/tree/main/packages/engine)。
+`createCharacter` 把一个 SVG 挂载到宿主上并返回控制器；移除宿主时记得调用 `destroy()`。需要在宿主上设置 `--mowa-fg` 自定义属性，或传入 `ink`，才会使用你指定的墨色；否则角色使用周围的文字颜色。其余内容见[引擎 README](https://github.com/ShmilyXI/mowa-bot/tree/main/packages/engine)。
 
 ## 接下来
 

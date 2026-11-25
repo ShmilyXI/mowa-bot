@@ -10,7 +10,7 @@ One session reporting a fraction to the arbiter. `AgentHud` reads the state, the
 
 ```tsx preview
 import { useState } from 'react';
-import { AgentHud, AgentStateProvider, useAgentState } from '@aora-bot/react';
+import { AgentHud, AgentStateProvider, useAgentState } from '@mowa-bot/react';
 
 function Job() {
   const { update } = useAgentState();
@@ -96,7 +96,7 @@ On the `eyes` and `line` faces, four of these hand their body to a belt. Because
 Six dials for measured things. `progress` and `gauge` are a fraction against a ceiling; `context` counts cells rather than filling an arc, because the last few slots are the ones that matter; `balance` shows the magnitude and leaves the figure to the plate; `kpi` spark-lines a series; `sync` is a lifecycle. Every one is a pure function of `(spec, time)`, so a paused character, a server render and a screenshot agree.
 
 ```tsx preview
-import { CharacterMark, HudPlate, type HudSpec } from '@aora-bot/react';
+import { CharacterMark, HudPlate, type HudSpec } from '@mowa-bot/react';
 
 const dials: { spec: HudSpec; title: string; value: string | number; unit?: string }[] = [
   { spec: { kind: 'progress', value: 0.83 }, title: 'Export', value: 83, unit: '%' },

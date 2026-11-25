@@ -6,7 +6,7 @@ import { API } from '@theme';
 
 ```tsx preview
 import { useState } from 'react';
-import { CharacterSelector, CharacterMark, type FaceStyle } from '@aora-bot/react';
+import { CharacterSelector, CharacterMark, type FaceStyle } from '@mowa-bot/react';
 
 export default function Demo() {
   const [shape, setShape] = useState('blob' as const);
@@ -33,7 +33,7 @@ export default function Demo() {
 ## 布局
 
 ```tsx preview
-import { CharacterSelector } from '@aora-bot/react';
+import { CharacterSelector } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -55,7 +55,7 @@ export default function Demo() {
 
 ```tsx preview
 import { useState } from 'react';
-import { CharacterSelector, CharacterMark, type FaceStyle } from '@aora-bot/react';
+import { CharacterSelector, CharacterMark, type FaceStyle } from '@mowa-bot/react';
 
 export default function Demo() {
   const [shape, setShape] = useState('pear' as const);
@@ -88,7 +88,7 @@ export default function Demo() {
 ## 限制选项
 
 ```tsx preview
-import { CharacterSelector } from '@aora-bot/react';
+import { CharacterSelector } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -107,7 +107,7 @@ export default function Demo() {
 `sizePx` 设置每个形状预览的大小，脸型和鼻子的预览随之缩放。默认值是 `SELECTOR_MARK_PX`（36）。`lineWeight` 会传给各个预览，使选择器的线宽与正在编辑的角色一致。
 
 ```tsx preview
-import { CharacterSelector } from '@aora-bot/react';
+import { CharacterSelector } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -125,7 +125,7 @@ export default function Demo() {
 
 ## 颜色色块
 
-每个色块显示身体在当前页面上的实际颜色（`getInkColorCss`），所以 `black` 的色块在深色模式下是白色。与页面背景几乎同色的色块，会带上与身体相同的细边（`--aora-rim`）。参见[配色](/design/palette)。
+每个色块显示身体在当前页面上的实际颜色（`getInkColorCss`），所以 `black` 的色块在深色模式下是白色。与页面背景几乎同色的色块，会带上与身体相同的细边（`--mowa-rim`）。参见[配色](/design/palette)。
 
 ## `onSelectColor`
 

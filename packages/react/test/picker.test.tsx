@@ -1,5 +1,5 @@
 // @vitest-environment happy-dom
-import { ASSIGNABLE_COLOR_IDS, AUTO_SHAPE_POOL } from '@aora-bot/engine';
+import { ASSIGNABLE_COLOR_IDS, AUTO_SHAPE_POOL } from '@mowa-bot/engine';
 import { act, type ReactNode } from 'react';
 import { createRoot, type Root } from 'react-dom/client';
 import { renderToString } from 'react-dom/server';
@@ -76,7 +76,7 @@ describe('AgentCharacterSelector', () => {
 
     click(byLabel(el, 'Star'));
     expect(onCommit).toHaveBeenCalledWith({ shape: 'star', color: 'blue' });
-    expect(el.querySelector('.aora-staged-picker__actions')).toBeNull();
+    expect(el.querySelector('.mowa-staged-picker__actions')).toBeNull();
   });
 
   it('shows no selection ring while the agent has a picture of its own', () => {
@@ -113,14 +113,14 @@ describe('CharacterSelector', () => {
 describe('CompactCharacterSelector', () => {
   it('offers the eight small-size shapes and the ten assignable colours', () => {
     const el = render(<CompactCharacterSelector shape="blob" color="blue" />);
-    expect(el.querySelectorAll('.aora-picker__item')).toHaveLength(AUTO_SHAPE_POOL.length);
-    expect(el.querySelectorAll('.aora-picker__swatch')).toHaveLength(ASSIGNABLE_COLOR_IDS.length);
+    expect(el.querySelectorAll('.mowa-picker__item')).toHaveLength(AUTO_SHAPE_POOL.length);
+    expect(el.querySelectorAll('.mowa-picker__swatch')).toHaveLength(ASSIGNABLE_COLOR_IDS.length);
     expect(el.querySelector('[aria-label="Black"]')).toBeNull();
   });
 
   it('renders on the server', () => {
     const html = renderToString(<CompactCharacterSelector shape="hex" color="green" lineWeight={1.1} />);
-    expect(html).toContain('aora-picker--compact');
+    expect(html).toContain('mowa-picker--compact');
     expect(html).not.toContain('NaN');
   });
 });

@@ -1,100 +1,19 @@
 ---
 title: What's New
-description: The changes in each Aora Bot release, newest first.
+description: The changes in each Mowa Bot release, newest first.
 sidebar: false
 ---
 
 # What's New
 
-The changes in each release, newest first. Every package, export and parameter change is listed in full in the [changelog](https://github.com/sam70361/aora-bot/blob/main/CHANGELOG.md).
+The changes in each release, newest first. Every package, export and parameter change is listed in full in the [changelog](https://github.com/ShmilyXI/mowa-bot/blob/main/CHANGELOG.md).
 
 ## 0.3.0
 
-### Open source under MIT
+### Forked from Aora Bot
 
-- Aora Bot is now [MIT licensed](/guide/license): the code, the character designs, the documentation, the images and the examples. Anyone may use it for free, commercial use included, as long as copies you distribute keep the copyright and license notice. The commercial license and the tiered terms are gone; a "Powered by Aora Bot" credit is welcome but optional.
-- This applies to earlier releases too: 0.1.1 to 0.2.0 may also be used under MIT.
-- The "Aora Bot" name and logo are not covered by MIT; see the [trademark policy](https://github.com/sam70361/aora-bot/blob/main/TRADEMARKS.md). The classic Emotion Ball in the `emotion-ball` branch keeps its own license.
-- Contributions are welcome. They are licensed under MIT too; sign off under the DCO with `git commit -s`. There is no CLA. See the [contributing guide](https://github.com/sam70361/aora-bot/blob/main/CONTRIBUTING.md).
+- Mowa Bot starts from [Aora Bot](https://github.com/sam70361/aora-bot) 0.3.0 by sam70361, used under the [MIT License](/guide/license).
+- Every public name changed: the packages are `@mowa-bot/*`, the custom element is `<mowa-bot>`, and CSS variables use the `--mowa-` prefix.
+- New logo and favicon.
 
-### ASCII style
-
-- `ascii`, the fourth style series, types the character out in glyphs. Every shape, state, face, part, belt and HUD works without a drawing of its own. Three variants: `ansi` (coloured glyphs, the default), `mono` (one ink, pure copyable text) and `crt` (a dark terminal plate with glowing glyphs and scanlines).
-- Parameters: `cols`, `charset` (`ascii`, `block` or `braille`), `fill` (`shade`, `solid` or `hollow`) and `effect` (`decode`, `shimmer` or `glitch`; off under reduced motion). See [ASCII style](/design/styles/ascii).
-- `renderAsciiText` exports the character as plain text for terminals, CLIs, agent logs and READMEs; `ansi: true` adds 24-bit colour.
-- Enum parameters are labelled in the console and the docs parameter panel, instead of showing the raw option id.
-
-### Docs site
-
-- The home console fits 13 and 14 inch laptop screens: the view switch no longer slides under the navbar, and the state chips no longer slide under the shape strip.
-
-## 0.2.0
-
-This release has breaking changes; read "Breaking changes" below before upgrading.
-
-### Characters and faces
-
-- 25 new characters, each with a cast member, including a `treat` family, an `object` family and a `coal` family; `ghost` is redrawn rounder. The coal family is three black lumps with uneven edges: Cinder (`chunk`), all blunt corners; Sooty (`lump`), round and bumpy all over; and Ashy (`fluff`), a tuft of soot bristling all the way round.
-- 13 new drawn faces. `capsule` now comes first in the face list and pickers. Among them, `teardrop` is a tall dark drop with one highlight, and `specs` is a pair of small, bold round glasses with a flat bridge and one dark eye with a highlight in each lens. Each drawn face covers all 44 states and works in every vector variant as well as in pixel and kaomoji. `defineFace` registers a face of your own.
-- Dot (`dot`) is a cream-white ball with the `capsule` face and now comes first in the cast.
-
-### Styles
-
-- Six drawing media: `pencil`, `marker`, `crayon`, `watercolor`, `neon` and `chalk`.
-- Two paper media: `origami`, a sheet crumpled and pressed flat into soft facets, and `relief`, a thick card pressed up from behind. See [Vector styles](/design/styles/vector).
-- `gothic` is the sixteenth vector variant: each piece darkened from the edge in, hatched and cross-hatched in ink on the side away from the light, and ringed by a brushed ink line that is heavier in shadow, over a paper grain.
-- `defineVectorMedium` registers a vector variant of your own.
-- A shape part can carry its own colour, and `defineShapeWithProps` dresses a character in props.
-
-### Colours
-
-- Cream (`cream`) is now in the colour list, in first place: it is Dot's colour. Ivory (`ivory`), the palette's white, follows it. Both take a one-pixel edge on a light page, so they never melt into it.
-- Four muted colours: `sage`, `clay`, `navy` and `mauve`, each tuned for a light and a dark page. `night`, a near-black that stays dark on a dark page, is accepted by id but not listed.
-- Avatars keep the colour they had: an id is hashed onto a fixed list of colours (`ASSIGNABLE_COLOR_IDS`), so new colours never move an existing avatar.
-- Face colours follow one contrast rule: every paint on a face is measured against the body, separately on a light and a dark page, and replaced only where another colour reads better. Every face draws its eyes and mouth in the same features colour, so on one body they all match: dark on a mid hue such as blue or red, white on a dark one such as navy or cocoa, in every style and face. The cute face, which used to be white on every hue, now follows the rule too. A drawn face's whites stay white, turning dark only on a light body (cream, yellow). Wherever the body keeps its colour between light and dark mode, so does the face.
-- Light and very dark colours stay legible on both light and dark pages: outlines, kaomoji and the line face are deepened on a light page, keeping their hue, and lifted on a dark one; in riso, cream is no longer covered by pink, and red, pink and magenta print over gold; on the LED panel, black lights up white. Picker chips show the colour on the current page, so black is white in dark mode, and a chip that all but matches the page gets a hairline edge.
-
-### Avatars and components
-
-- The avatar endpoint keeps every avatar it has handed out as the cast grows: an id picks its character by a consistent hash, and `pool=46` pins the original 46. `theme=<id>` picks from a theme's cast and fills in its skin, face and colour.
-- Avatar sizes are `xs` 16, `sm` 24, `md` 32, `lg` 40 and `xl` 80 px. An activity badge is 32 px; a group badge is 24 px and moves on to the next member every 2.4 s.
-- A `CharacterMark` or `<aora-bot>` that names a theme's character, skin or colour holds its box, loads the theme and then draws.
-- A static document's class names carry the style, variant and parameters, so two looks of one character inlined on one page no longer overwrite each other.
-
-### Website
-
-- The home page has two views. The console is where you build a character. The exhibit steps through the cast and every state, with autoplay and an attribute panel for shape, colour, face, style and parameters. The view is remembered, and `?view=exhibit` links to it.
-- The wall of characters behind the home page is drawn as line art by default; a switch turns it back to colour.
-- The site opens in dark mode on a first visit. The switch is still there, and your choice is remembered.
-- The home page's characters wear a soft light: the body rolls into shade at the lower right and turns to the light, with a thin bright rim, at the upper left, so a dark body shows its volume by the light and a light one by the shade, while the faces and effects stay flat. The console's thumbnail strips use the same face colours as the big character, and the docs' still figures follow the site's light or dark switch.
-- The home page title and the console's rings, toggles and sliders use the character's colour as a line, so light and very dark colours read on either page.
-
-### Themes
-
-- Seven holiday and seasonal themes with 122 characters between them: Halloween, Christmas, Spring Festival, Mid-Autumn, Easter, Summer and Valentine's Day.
-- Themes are separate entries (`@aora-bot/engine/themes/<id>`) that are loaded only when needed, each with its own characters, cast, skins and labels. The [Themes](/themes/) page shows every theme.
-
-### Breaking changes
-
-- Shape space is now 240 units (`SHAPE_SPACE`), with a `-24 -24 288 288` view box. Custom outlines are normalised automatically.
-- `FaceTune` fields are ratios of the fitted face: 1 means as fitted.
-- React and surfaces components have new names: for example, `CharacterPicker` is now `CharacterSelector`, `AvatarStack` is `AvatarGroup`, `AgentAvatar` is `AgentPortrait` and `CastStage` is `CastLineup`. The changelog lists every rename.
-- Characters default to 32 px in React and in `<aora-bot>`.
-- Confetti and ribbons are redesigned, with a new palette. `Trail` carries `squash` and `reel` in place of `tilt` and `retract`.
-- `eyeColor` (and `eye-color` on the element) sets `--aora-eye` and no longer re-themes `--aora-bg`. Set `--aora-bg-base` yourself where a hollow character sits on a surface other than the page.
-
-## 0.1.3
-
-- All four packages are released under the Aora Bot License 1.1. Once a product that uses Aora Bot is publicly released, free users credit it once. The code is unchanged.
-- A new [Copyright](/guide/copyright) page, and a copyright notice at the end of every page.
-
-## 0.1.2
-
-- `<aora-bot>` accepts `style-options`, a JSON object of style parameters.
-- The avatar endpoint accepts `shape`, `color`, `face` and each style parameter by name.
-- The console can copy a character as React code, an `<aora-bot>` tag or an avatar link.
-
-## 0.1.1
-
-- First release: the engine, React components, the `<aora-bot>` Web Component, product surfaces, the avatar endpoint and this documentation site.
-- 46 characters, three faces, 44 animation states, and three style series: vector, pixel and kaomoji.
+Releases before the fork are described in the [Aora Bot changelog](https://github.com/sam70361/aora-bot/blob/63c6c4f/CHANGELOG.md).

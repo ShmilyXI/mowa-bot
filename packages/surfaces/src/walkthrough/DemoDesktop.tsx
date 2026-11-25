@@ -1,5 +1,5 @@
 import type { CSSProperties, ReactNode } from 'react';
-import { cx } from '@aora-bot/react';
+import { cx } from '@mowa-bot/react';
 import { useSurfaceLocale } from '../locale/index.js';
 
 export interface DemoDesktopProps {
@@ -27,17 +27,17 @@ export function DemoDesktop({ title, widthPx = 420, children, toolbar, className
   const { t } = useSurfaceLocale();
 
   return (
-    <div className={cx('aora-s-desktop', className)} style={{ width: widthPx, ...style }}>
-      <div className="aora-s-desktop__bar">
-        <span className="aora-s-desktop__dots" aria-hidden="true">
+    <div className={cx('mowa-s-desktop', className)} style={{ width: widthPx, ...style }}>
+      <div className="mowa-s-desktop__bar">
+        <span className="mowa-s-desktop__dots" aria-hidden="true">
           <i />
           <i />
           <i />
         </span>
-        <span className="aora-s-desktop__title">{title ?? t('walkthrough.window')}</span>
+        <span className="mowa-s-desktop__title">{title ?? t('walkthrough.window')}</span>
       </div>
-      {toolbar && <div className="aora-s-desktop__toolbar">{toolbar}</div>}
-      <div className="aora-s-desktop__body">{children}</div>
+      {toolbar && <div className="mowa-s-desktop__toolbar">{toolbar}</div>}
+      <div className="mowa-s-desktop__body">{children}</div>
     </div>
   );
 }

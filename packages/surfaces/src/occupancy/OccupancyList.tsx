@@ -1,6 +1,6 @@
-import type { CharacterState, FaceStyle, NoseId } from '@aora-bot/engine';
+import type { CharacterState, FaceStyle, NoseId } from '@mowa-bot/engine';
 import type { CSSProperties } from 'react';
-import { type AgentLike, cx } from '@aora-bot/react';
+import { type AgentLike, cx } from '@mowa-bot/react';
 import { useSurfaceLocale } from '../locale/index.js';
 import { OccupancyMark } from './OccupancyMark.js';
 
@@ -54,20 +54,20 @@ export function OccupancyList({
   const { t } = useSurfaceLocale();
 
   return (
-    <ul className={cx('aora-s-occupancy', className)} style={style}>
+    <ul className={cx('mowa-s-occupancy', className)} style={style}>
       {rows.map((row) => {
         const visible = row.agents.slice(0, Math.max(0, maxVisible));
         const overflow = row.agents.length - visible.length;
 
         return (
-          <li key={row.id} className="aora-s-occupancy__row">
-            <span className="aora-s-occupancy__label">{row.label}</span>
+          <li key={row.id} className="mowa-s-occupancy__row">
+            <span className="mowa-s-occupancy__label">{row.label}</span>
 
             {row.agents.length === 0 ? (
-              <span className="aora-s-occupancy__idle">{t('occupancy.idle')}</span>
+              <span className="mowa-s-occupancy__idle">{t('occupancy.idle')}</span>
             ) : (
               <span
-                className="aora-s-occupancy__marks"
+                className="mowa-s-occupancy__marks"
                 aria-label={`${t('occupancy.inUse')}: ${row.agents
                   .map((agent) => agent.name ?? agent.id)
                   .join(', ')}`}
@@ -85,7 +85,7 @@ export function OccupancyList({
                   />
                 ))}
                 {overflow > 0 && (
-                  <span className="aora-s-occupancy__overflow" style={{ width: sizePx, height: sizePx }}>
+                  <span className="mowa-s-occupancy__overflow" style={{ width: sizePx, height: sizePx }}>
                     +{overflow}
                   </span>
                 )}

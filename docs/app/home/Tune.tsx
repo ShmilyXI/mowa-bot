@@ -1,4 +1,4 @@
-import { useLabel } from '@aora-bot/react';
+import { useLabel } from '@mowa-bot/react';
 import { useEffect, useId, useRef } from 'react';
 import { useI18n, useLocalized } from '../shared/i18n.js';
 import type { Preset } from '../shared/share.js';

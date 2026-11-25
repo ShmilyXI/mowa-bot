@@ -1,6 +1,6 @@
 // @vitest-environment happy-dom
-import { mapPointerToGaze as engineMapPointerToGaze, type CharacterOptions } from '@aora-bot/engine';
-import type * as Engine from '@aora-bot/engine';
+import { mapPointerToGaze as engineMapPointerToGaze, type CharacterOptions } from '@mowa-bot/engine';
+import type * as Engine from '@mowa-bot/engine';
 import { act, type ReactNode } from 'react';
 import { createRoot, type Root } from 'react-dom/client';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
@@ -16,8 +16,8 @@ import { CharacterMark, mapPointerToGaze } from '../src/mark/CharacterMark.js';
 const updates: Partial<CharacterOptions>[] = [];
 const created: CharacterOptions[] = [];
 
-vi.mock('@aora-bot/engine', async () => {
-  const actual = await vi.importActual<typeof Engine>('@aora-bot/engine');
+vi.mock('@mowa-bot/engine', async () => {
+  const actual = await vi.importActual<typeof Engine>('@mowa-bot/engine');
   return {
     ...actual,
     createCharacter: (host: HTMLElement, options: CharacterOptions) => {
@@ -117,7 +117,7 @@ describe('CharacterMark option passthrough', () => {
     const el = render(<CharacterMark shape="blob" hud={{ kind: 'progress', value: 0.6 }} />);
     advance(400);
 
-    const layer = svg(el).querySelector('[data-aora-hud]')!;
+    const layer = svg(el).querySelector('[data-mowa-hud]')!;
     expect(layer.querySelectorAll('path, circle, rect, line').length).toBeGreaterThan(0);
     expect(Number(layer.getAttribute('opacity'))).toBeGreaterThan(0);
 

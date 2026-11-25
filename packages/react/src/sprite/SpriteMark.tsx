@@ -10,14 +10,14 @@ import {
   type NoseId,
   type ShapeId,
   type SpriteManifest,
-} from '@aora-bot/engine';
+} from '@mowa-bot/engine';
 import { useEffect, useMemo, useState, type CSSProperties } from 'react';
 import { useLocale } from '../locale/index.js';
 import { useReducedMotion } from '../stage/hooks.js';
 import { StagedMark } from '../stage/CharacterStage.js';
 import { cx } from '../utils/cx.js';
 
-export type { SpriteManifest, SpriteClip } from '@aora-bot/engine';
+export type { SpriteManifest, SpriteClip } from '@mowa-bot/engine';
 
 const manifestCache = new Map<string, Promise<SpriteManifest>>();
 
@@ -196,7 +196,7 @@ export function SpriteMark({
     }
   }, [urls]);
 
-  const classes = cx('aora-sprite', className);
+  const classes = cx('mowa-sprite', className);
   const box: CSSProperties = { width: sizePx, height: sizePx, ...style };
   const error = given ? null : fetched.error;
 

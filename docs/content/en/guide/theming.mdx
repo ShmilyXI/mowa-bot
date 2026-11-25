@@ -10,25 +10,25 @@ A character's colours come down to a few CSS custom properties.
 
 | Variable              | Role                                                                                                                                                                                                        |
 | --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--aora-fg`           | The ink. Set per instance from the `color` prop.                                                                                                                                                            |
-| `--aora-face`         | The face colour: a drawn face's whites, by the face rule.                                                                                                                                                   |
-| `--aora-face-soft`    | The features colour: the `cute`, `eyes` and `line` faces, and brows, lids and eyes on the body.                                                                                                             |
-| `--aora-face-sticker` | The `sticker` variant's face: dark where the white face does not read on the body.                                                                                                                          |
-| `--aora-hair-shade`   | The shade laid over hair on a filled body, `#000000` by default, white on a nearly black body.                                                                                                              |
-| `--aora-ink2`         | The second ink of the `riso` variant. Written only for a light ink, which prints over itself, and for a vivid hue close to the default pink, which takes gold; every other ink keeps the stylesheet's pink. |
-| `--aora-ink-line`     | Lines drawn in the ink, written where the ink is too faint on a page.                                                                                                                                       |
-| `--aora-eye`          | The eyes of the `cute`, `eyes` and `line` faces in a colour of your own, set from `eyeColor`.                                                                                                               |
-| `--aora-rim`          | The hairline edge of a filled body on a page it all but matches, `transparent` elsewhere.                                                                                                                   |
-| `--aora-bg`           | The page where a face shows it: a drawn face's whites on a line body. Defaults to `--aora-bg-base`.                                                                                                         |
+| `--mowa-fg`           | The ink. Set per instance from the `color` prop.                                                                                                                                                            |
+| `--mowa-face`         | The face colour: a drawn face's whites, by the face rule.                                                                                                                                                   |
+| `--mowa-face-soft`    | The features colour: the `cute`, `eyes` and `line` faces, and brows, lids and eyes on the body.                                                                                                             |
+| `--mowa-face-sticker` | The `sticker` variant's face: dark where the white face does not read on the body.                                                                                                                          |
+| `--mowa-hair-shade`   | The shade laid over hair on a filled body, `#000000` by default, white on a nearly black body.                                                                                                              |
+| `--mowa-ink2`         | The second ink of the `riso` variant. Written only for a light ink, which prints over itself, and for a vivid hue close to the default pink, which takes gold; every other ink keeps the stylesheet's pink. |
+| `--mowa-ink-line`     | Lines drawn in the ink, written where the ink is too faint on a page.                                                                                                                                       |
+| `--mowa-eye`          | The eyes of the `cute`, `eyes` and `line` faces in a colour of your own, set from `eyeColor`.                                                                                                               |
+| `--mowa-rim`          | The hairline edge of a filled body on a page it all but matches, `transparent` elsewhere.                                                                                                                   |
+| `--mowa-bg`           | The page where a face shows it: a drawn face's whites on a line body. Defaults to `--mowa-bg-base`.                                                                                                         |
 
-The component sets the first few for you, from the engine's `getInkVars(color)`. `--aora-bg-base` is the one you may need to change.
+The component sets the first few for you, from the engine's `getInkVars(color)`. `--mowa-bg-base` is the one you may need to change.
 
 ## Light and dark
 
 The ink is written as a [`light-dark()`](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/light-dark) pair:
 
 ```css
---aora-fg: light-dark(#2a92fe, #0e74e0);
+--mowa-fg: light-dark(#2a92fe, #0e74e0);
 ```
 
 This is why the engine never subscribes to a theme change. The value is written once, and the browser re-resolves it when `color-scheme` flips. A thousand characters re-theme with no JavaScript, no re-render, and no flash.
@@ -55,12 +55,12 @@ Several class names are supported because application shells and documentation f
 
 ## The page behind a face
 
-Every face is painted on the body, in colours the face rule picks for that body, so it reads the same on any surface. A body that is a line (`outline`, `glass`) is mostly page, and there a drawn face's whites and the ring round a badge are drawn in the page itself: `--aora-bg`, which follows `--aora-bg-base`. That only holds while `--aora-bg-base` matches what is actually behind the character.
+Every face is painted on the body, in colours the face rule picks for that body, so it reads the same on any surface. A body that is a line (`outline`, `glass`) is mostly page, and there a drawn face's whites and the ring round a badge are drawn in the page itself: `--mowa-bg`, which follows `--mowa-bg-base`. That only holds while `--mowa-bg-base` matches what is actually behind the character.
 
 Override it on any ancestor and the whole subtree follows:
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 const surfaces = ['#0b1220', '#2b1a3d', '#12281f'];
 
@@ -74,7 +74,7 @@ export default function Demo() {
             padding: 18,
             borderRadius: 14,
             background: bg,
-            ['--aora-bg-base' as string]: bg,
+            ['--mowa-bg-base' as string]: bg,
           }}
         >
           <CharacterMark shape="tofu" color="yellow" face="capsule" variant="outline" sizePx={72} />
@@ -89,13 +89,13 @@ To paint the eyes of the `cute`, `eyes` and `line` faces in a colour of your own
 
 ## Cascade layers
 
-The stylesheet puts its rules in three layers, from lowest to highest priority: `aora.tokens`, `aora.base` and `aora.components`.
+The stylesheet puts its rules in three layers, from lowest to highest priority: `mowa.tokens`, `mowa.base` and `mowa.components`.
 
 One consequence is worth knowing. Any rule you write _outside_ a layer beats every rule inside one, regardless of specificity — so overriding a component style never needs `!important`.
 
 ```css
 /* Wins, despite being a single class against a single class. */
-.aora-badge {
+.mowa-badge {
   border-radius: 4px;
 }
 ```
@@ -111,7 +111,7 @@ Click any token to copy its name.
 The inks are data, not CSS. Each carries three layers, because a 20px picker chip and a large filled silhouette have opposite requirements: the chip must be told apart from its neighbours, and the body must stay legible on both a white and a near-black page.
 
 ```tsx preview
-import { COLOR_SWATCHES, getSwatchHex, getInkColor } from '@aora-bot/react';
+import { COLOR_SWATCHES, getSwatchHex, getInkColor } from '@mowa-bot/react';
 
 export default function Demo() {
   return (

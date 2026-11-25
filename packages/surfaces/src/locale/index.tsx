@@ -1,4 +1,4 @@
-import { useLocale, type LocaleId } from '@aora-bot/react';
+import { useLocale, type LocaleId } from '@mowa-bot/react';
 import { createContext, useContext, useMemo, type ReactNode } from 'react';
 import { surfaceEnUS } from './en-US.js';
 import { surfaceZhCN } from './zh-CN.js';
@@ -30,7 +30,7 @@ export interface SurfaceLocaleProviderProps {
  * Copy overrides for the surfaces.
  *
  * The language is not chosen here: it follows the `LocaleProvider` from
- * `@aora-bot/react`, so a surface and the primitives inside it cannot end up
+ * `@mowa-bot/react`, so a surface and the primitives inside it cannot end up
  * in different languages. This provider only carries overrides, because the
  * react provider's `overrides` are typed to its own keys.
  */

@@ -2,12 +2,12 @@
 
 用三个状态表现表单里唯一值得做动画的时刻。
 
-> 属于 `@aora-bot/surfaces`，不在 `@aora-bot/react` 中：`pnpm add @aora-bot/surfaces @aora-bot/react`，并在 React 样式之后引入 `@aora-bot/surfaces/styles.css`。
+> 属于 `@mowa-bot/surfaces`，不在 `@mowa-bot/react` 中：`pnpm add @mowa-bot/surfaces @mowa-bot/react`，并在 React 样式之后引入 `@mowa-bot/surfaces/styles.css`。
 
 ```tsx preview
 import { useRef } from 'react';
-import { CharacterMark, CelebrationLayer, type ConfettiHandle } from '@aora-bot/react';
-import { usePublishMark } from '@aora-bot/surfaces';
+import { CharacterMark, CelebrationLayer, type ConfettiHandle } from '@mowa-bot/react';
+import { usePublishMark } from '@mowa-bot/surfaces';
 
 export default function Demo() {
   const confetti = useRef<ConfettiHandle>(null);

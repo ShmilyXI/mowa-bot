@@ -1,7 +1,7 @@
 // @vitest-environment happy-dom
-import { isThemeInstalled, loadTheme } from '@aora-bot/engine';
+import { isThemeInstalled, loadTheme } from '@mowa-bot/engine';
 import { beforeAll, describe, expect, it } from 'vitest';
-import { defineAoraBot, type AoraBotElement } from '../src/index.js';
+import { defineMowaBot, type MowaBotElement } from '../src/index.js';
 
 /*
  * An element that names a theme's character, member or skin holds its box,
@@ -9,15 +9,15 @@ import { defineAoraBot, type AoraBotElement } from '../src/index.js';
  */
 
 beforeAll(() => {
-  defineAoraBot();
+  defineMowaBot();
 });
 
-const mark = (el: AoraBotElement) => el.shadowRoot!.querySelector<HTMLElement>('.mark')!;
+const mark = (el: MowaBotElement) => el.shadowRoot!.querySelector<HTMLElement>('.mark')!;
 
-describe('<aora-bot> naming a theme', () => {
+describe('<mowa-bot> naming a theme', () => {
   it('holds its size, loads the theme and then draws', async () => {
     expect(isThemeInstalled('halloween')).toBe(false);
-    const el = document.createElement('aora-bot') as AoraBotElement;
+    const el = document.createElement('mowa-bot') as MowaBotElement;
     el.setAttribute('reduced-motion', '');
     el.setAttribute('character', 'coal');
     el.setAttribute('variant', 'doodle');

@@ -5,7 +5,7 @@ import { API } from '@theme';
 单个动画角色，库中的其他组件都建立在它之上。
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 export default function Demo() {
   return <CharacterMark shape="blob" color="orange" state="excited" sizePx={150} />;
@@ -17,8 +17,8 @@ export default function Demo() {
 `styleId` 选画风，`variant` 选该画风下的变体。各画风的几何、动画和脸完全相同，只有绘制方式不同，所以新增的状态或角色会同时出现在所有画风里。每种画风都有单独的页面：[Vector](/design/styles/vector)、[Pixel](/design/styles/pixel)、[Kaomoji](/design/styles/kaomoji)、[ASCII](/design/styles/ascii)。下面是 vector 的全部变体：
 
 ```tsx preview
-import { getStyle } from '@aora-bot/engine';
-import { CharacterMark } from '@aora-bot/react';
+import { getStyle } from '@mowa-bot/engine';
+import { CharacterMark } from '@mowa-bot/react';
 
 const variants = getStyle('vector').variants;
 
@@ -41,7 +41,7 @@ export default function Demo() {
 `outline` 和 `glass` 正好相反。身体不再填满，按实心身体配的脸色会看不清，所以这两种变体改用墨色画脸。剪影不变，只是脸与身体的深浅对调。
 
 ```tsx preview
-import { CharacterMark, SHAPE_IDS } from '@aora-bot/react';
+import { CharacterMark, SHAPE_IDS } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -61,7 +61,7 @@ export default function Demo() {
 `face` 可选 `FACE_STYLES` 中的十六种脸：默认的 `cute`、`eyes`、[线条脸](/design/face) `line`（用同一线宽的笔画画出鼻子和嘴），以及 `capsule` 等十三种手绘脸。`nose` 只对 `line` 有效，可从六种鼻子里选一种；省略时由 `seed` 推导，传 `null` 则不画鼻子。
 
 ```tsx preview
-import { CharacterMark, NOSE_IDS } from '@aora-bot/react';
+import { CharacterMark, NOSE_IDS } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -98,7 +98,7 @@ export default function Demo() {
 ## 跟随指针
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -116,7 +116,7 @@ export default function Demo() {
 
 ```tsx preview
 import { useState } from 'react';
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 export default function Demo() {
   const [hover, setHover] = useState(false);
@@ -139,7 +139,7 @@ export default function Demo() {
 
 ```tsx preview
 import { useState } from 'react';
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 export default function Demo() {
   const [paused, setPaused] = useState(false);
@@ -158,7 +158,7 @@ export default function Demo() {
 
 ```tsx preview
 import { useRef } from 'react';
-import { CharacterMark, type CharacterHandle } from '@aora-bot/react';
+import { CharacterMark, type CharacterHandle } from '@mowa-bot/react';
 
 export default function Demo() {
   const ref = useRef<CharacterHandle>(null);
@@ -192,7 +192,7 @@ export default function Demo() {
 
 ```tsx preview
 import { useState } from 'react';
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 export default function Demo() {
   const [target, setTarget] = useState<{ x: number; y: number } | null>(null);
@@ -215,7 +215,7 @@ export default function Demo() {
 `ink` 用纯色或两段渐变覆盖身体的颜色，适合必须匹配品牌色、不能用调色板的角色；传 `null` 则交还给主题 token。`eyeScale` 是眼睛大小的静态倍数，叠加在强调弹簧之上。`lineWeight` 同时缩放鼻子、嘴和 HUD 表盘，范围为 `LINE_WEIGHT_RANGE`（0.8–1.25）。每个角色只用一支笔，所以[脸和 HUD](/design/face) 的笔画粗细始终一致。
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -272,7 +272,7 @@ export default function Demo() {
 `hud` 在身体外圈画一个表盘，传 `null` 则移除。显示 HUD 时五官会隐藏：身体只剩剪影，读数画在外圈上。规格是同一个 `HudSpec`，[协议](/design/protocol)传递它，[`HudPlate`](/components/hud-plate) 校验它。表盘按角色的 `lineWeight` 描边。
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -311,7 +311,7 @@ export default function Demo() {
 
 ```tsx preview
 import { useState } from 'react';
-import { CharacterMark, type CharacterState } from '@aora-bot/react';
+import { CharacterMark, type CharacterState } from '@mowa-bot/react';
 
 export default function Demo() {
   const [state, setState] = useState<CharacterState>('idle');

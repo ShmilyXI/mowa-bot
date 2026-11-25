@@ -1,4 +1,4 @@
-import { CharacterMark, useLabel, type CharacterState } from '@aora-bot/react';
+import { CharacterMark, useLabel, type CharacterState } from '@mowa-bot/react';
 import { useEffect, useRef, useState, type RefObject } from 'react';
 import { CodeChip, ShareButton } from '../shared/CopyControls.js';
 import { useI18n, useLocalized } from '../shared/i18n.js';

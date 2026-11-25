@@ -4,11 +4,11 @@ import { API } from '@theme';
 
 请求被拒绝时用户看到的页面。
 
-> 属于 `@aora-bot/surfaces`，不在 `@aora-bot/react` 里：`pnpm add @aora-bot/surfaces @aora-bot/react`，并在 React 样式之后引入 `@aora-bot/surfaces/styles.css`。
+> 属于 `@mowa-bot/surfaces`，不在 `@mowa-bot/react` 里：`pnpm add @mowa-bot/surfaces @mowa-bot/react`，并在 React 样式之后引入 `@mowa-bot/surfaces/styles.css`。
 
 ```tsx preview
 import { useState } from 'react';
-import { RestrictedScene, type RestrictedTone } from '@aora-bot/surfaces';
+import { RestrictedScene, type RestrictedTone } from '@mowa-bot/surfaces';
 
 const tones: RestrictedTone[] = ['restricted', 'offline', 'unauthorised'];
 
@@ -52,8 +52,8 @@ export default function Demo() {
 围在角色外面的边框，包括圆角外壳、内嵌屏幕和状态灯，全部由程序绘制。在这种尺寸下，如果用窗口截图，就需要深色模式、高密度、窄栏三个版本，还会让界面带上截图时的操作系统样式。
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
-import { DeviceBezel } from '@aora-bot/surfaces';
+import { CharacterMark } from '@mowa-bot/react';
+import { DeviceBezel } from '@mowa-bot/surfaces';
 
 export default function Demo() {
   return (

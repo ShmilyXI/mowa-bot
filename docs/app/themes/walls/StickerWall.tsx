@@ -1,5 +1,5 @@
-import { STATE_GROUPS, type CharacterState } from '@aora-bot/react';
-import { fnv1a32, mulberry32 } from '@aora-bot/engine';
+import { STATE_GROUPS, type CharacterState } from '@mowa-bot/react';
+import { fnv1a32, mulberry32 } from '@mowa-bot/engine';
 import { useEffect, useMemo, useRef, type CSSProperties } from 'react';
 import { useI18n } from '../../shared/i18n.js';
 import type { Album } from '../catalog.js';

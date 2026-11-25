@@ -55,7 +55,7 @@ export const LED_EYE = FACE_INK;
 
 /**
  * An eye on the LED panel in a live scene, where the panel resolves the
- * tokens as a dark page does: the face rule's face there (`--aora-face`), lit
+ * tokens as a dark page does: the face rule's face there (`--mowa-face`), lit
  * on most inks and unlit on a light one, else unlit, the plate's own colour.
  */
-export const LED_EYE_TOKEN = `var(--aora-face, ${PLATE_COLOUR})`;
+export const LED_EYE_TOKEN = `var(--mowa-face, ${PLATE_COLOUR})`;

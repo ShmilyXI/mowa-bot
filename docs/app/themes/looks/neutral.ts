@@ -11,7 +11,7 @@ export const NEUTRAL: ThemeLook = {
     cover: ['oklch(0.32 0.03 260)', 'oklch(0.3 0.03 260)'],
     coverDeep: ['oklch(0.22 0.03 260)', 'oklch(0.2 0.03 260)'],
     coverInk: ['oklch(0.96 0.01 85)', 'oklch(0.96 0.01 85)'],
-    accent: ['var(--aora-blue-500)', 'var(--aora-blue-400)'],
+    accent: ['var(--mowa-blue-500)', 'var(--mowa-blue-400)'],
     accentInk: ['#ffffff', 'oklch(0.2 0.03 260)'],
     stock: ['oklch(0.995 0.003 85)', 'oklch(0.24 0.006 85)'],
     stockInk: ['oklch(0.24 0.01 85)', 'oklch(0.955 0.004 85)'],

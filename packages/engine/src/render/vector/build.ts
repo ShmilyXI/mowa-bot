@@ -72,19 +72,19 @@ import {
 } from './parts.js';
 
 /** The edge of a filled body on a page it all but matches: none, unless the host sets one (`getInkVars`). */
-export const RIM_TOKEN = 'var(--aora-rim, transparent)';
+export const RIM_TOKEN = 'var(--mowa-rim, transparent)';
 
 /**
  * The sticker's paper: its border, its eyes and the ring round its badge.
  *
- * Deliberately not `--aora-bg`. A sticker is a physical thing with its own
+ * Deliberately not `--mowa-bg`. A sticker is a physical thing with its own
  * white edge, so it stays light on a dark page instead of dissolving into it;
- * a host re-tints the paper with `--aora-paper`.
+ * a host re-tints the paper with `--mowa-paper`.
  */
-export const PAPER_TOKEN = 'var(--aora-paper, #fff)';
+export const PAPER_TOKEN = 'var(--mowa-paper, #fff)';
 
 /** The sticker's face: its paper, unless the host has a body that turns white (black, on a dark page). */
-export const STICKER_FACE_TOKEN = `var(--aora-face-sticker, ${PAPER_TOKEN})`;
+export const STICKER_FACE_TOKEN = `var(--mowa-face-sticker, ${PAPER_TOKEN})`;
 
 /**
  * What a hollow body's face is mixed towards: black on a light page, white on
@@ -126,8 +126,8 @@ const HOLLOW_ACCENT_SHARE: Record<FaceAccent, number> = {
 /** A drawn plate's rim on a body that is a line, as a share of the body's stroke. */
 const PLATE_RIM = 0.32;
 
-/** The riso variant's second ink. `--aora-ink2` swaps it, as pink needs. */
-export const RISO_TOKEN = `var(--aora-ink2, ${RISO_INK})`;
+/** The riso variant's second ink. `--mowa-ink2` swaps it, as pink needs. */
+export const RISO_TOKEN = `var(--mowa-ink2, ${RISO_INK})`;
 
 /** How much black is laid over the ink to make the paper variant's cast shadow. */
 const PAPER_SHADOW_DARKNESS = 0.32;
@@ -243,7 +243,7 @@ export interface VectorSceneContext {
   /**
    * The eyes of the cute, `eyes` and `line` faces on a filled body, whatever
    * the face rule chose (`eyeColor`). Absent: the rule, which a live host can
-   * still override with `--aora-eye`.
+   * still override with `--mowa-eye`.
    */
   eyeFill?: string;
   /** The palette ink as a line on the page, where `solidInk` is that ink. Defaults to `LINE_TOKEN` for the token. */
@@ -1005,7 +1005,7 @@ export function createVectorScene(ctx: VectorSceneContext): VectorScene {
    * own ink, shifted by a fixed vector.
    *
    * The darker shade is black laid over a copy in the ink, not a computed
-   * colour. That works for a token (`var(--aora-fg)`), a flat colour and a
+   * colour. That works for a token (`var(--mowa-fg)`), a flat colour and a
    * gradient alike, which `color-mix` cannot do for the last. The shift is
    * applied outside the body's transform, so the shadow keeps squashing and
    * turning with the body while its direction stays put, like a light that
@@ -1154,7 +1154,7 @@ export function createVectorScene(ctx: VectorSceneContext): VectorScene {
     const palette = facePalette(variant, solid);
 
     const attrs = {
-      'data-aora-face': '',
+      'data-mowa-face': '',
       'clip-path': live && ctx.clipId ? `url(#${ctx.clipId})` : undefined,
       opacity: opacity(f.opacity),
     };
@@ -1472,7 +1472,7 @@ export function createVectorScene(ctx: VectorSceneContext): VectorScene {
     const paint =
       effects ?? fx?.color ?? ctx.fxFill ?? ctx.solidInk ?? ctx.beltPaint ?? flatInk(frame) ?? FX_TOKEN;
     const nodes = items.filter((item) => keep(item.opacity > 0.01)).map((item) => fxItem(item, paint));
-    return node('g', { 'data-aora-fx': '', style: live ? 'pointer-events:none' : undefined }, nodes, {
+    return node('g', { 'data-mowa-fx': '', style: live ? 'pointer-events:none' : undefined }, nodes, {
       fragment: !live && nodes.length === 0,
     });
   }
@@ -1695,7 +1695,7 @@ export function createVectorScene(ctx: VectorSceneContext): VectorScene {
     return node(
       'g',
       {
-        'data-aora-hud': '',
+        'data-mowa-hud': '',
         opacity: opacity(hud.opacity),
         style: live ? 'pointer-events:none' : undefined,
       },

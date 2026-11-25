@@ -141,13 +141,13 @@ describe('editor surfaces', () => {
 
   it('opens on the Upload tab when there is already a picture', () => {
     const html = renderToString(<AvatarStudio value={{ ...value, pictureUrl: '/a.png' }} />);
-    expect(html).toContain('id="aora-editor-panel-upload"');
+    expect(html).toContain('id="mowa-editor-panel-upload"');
   });
 
   it('hides the Generate tab when no generator is injected', () => {
-    expect(renderToString(<AvatarStudio value={value} />)).not.toContain('aora-editor-tab-generate');
+    expect(renderToString(<AvatarStudio value={value} />)).not.toContain('mowa-editor-tab-generate');
     expect(renderToString(<AvatarStudio value={value} generateImage={async () => '/a.png'} />)).toContain(
-      'aora-editor-tab-generate',
+      'mowa-editor-tab-generate',
     );
   });
 

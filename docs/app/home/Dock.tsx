@@ -1,4 +1,4 @@
-import { useLabel, type CharacterState } from '@aora-bot/react';
+import { useLabel, type CharacterState } from '@mowa-bot/react';
 import { memo, useEffect, useState } from 'react';
 import { useI18n } from '../shared/i18n.js';
 import type { StateGroup } from '../shared/state-groups.js';

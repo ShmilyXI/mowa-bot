@@ -11,7 +11,7 @@ coverage/
 test-results/
 playwright-report/
 
-# Generated from the packages' TypeScript by `pnpm --filter @aora-bot/docs api`
+# Generated from the packages' TypeScript by `pnpm --filter @mowa-bot/docs api`
 # before every docs dev/build/typecheck. Never edited by hand.
 docs/theme/generated/
 

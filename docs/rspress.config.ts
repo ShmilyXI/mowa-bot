@@ -1,4 +1,4 @@
-import { THEME_MANIFEST } from '@aora-bot/engine';
+import { THEME_MANIFEST } from '@mowa-bot/engine';
 import { defineConfig, type RspressPlugin } from '@rspress/core';
 import { pluginPreview } from '@rspress/plugin-preview';
 import { readFileSync } from 'node:fs';
@@ -44,11 +44,11 @@ const themeAlbums = (): RspressPlugin => ({
 export default defineConfig({
   root: 'content',
   outDir: 'doc_build',
-  title: 'Aora Bot',
+  title: 'Mowa Bot',
   description: 'A procedural character engine for the web',
   icon: '/favicon.svg',
   logo: '/logo.svg',
-  logoText: 'Aora Bot',
+  logoText: 'Mowa Bot',
 
   /*
    * Chinese is the default locale, so its routes have no language prefix:
@@ -64,13 +64,13 @@ export default defineConfig({
     {
       lang: 'zh',
       label: '简体中文',
-      title: 'Aora Bot',
+      title: 'Mowa Bot',
       description: '一套程序化生成的网页角色引擎',
     },
     {
       lang: 'en',
       label: 'English',
-      title: 'Aora Bot',
+      title: 'Mowa Bot',
       description: 'A procedural character engine for the web',
     },
   ],
@@ -83,7 +83,7 @@ export default defineConfig({
 
   head: [
     ['meta', { property: 'og:type', content: 'website' }],
-    ['meta', { property: 'og:site_name', content: 'Aora Bot' }],
+    ['meta', { property: 'og:site_name', content: 'Mowa Bot' }],
     ['meta', { property: 'og:image', content: '/og.svg' }],
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
     ['meta', { name: 'theme-color', content: '#1084fe' }],
@@ -102,13 +102,13 @@ export default defineConfig({
       { lang: 'zh', label: '简体中文', nav: navFor('zh'), sidebar: sidebarFor('zh') },
       { lang: 'en', label: 'English', nav: navFor('en'), sidebar: sidebarFor('en') },
     ],
-    socialLinks: [{ icon: 'github', mode: 'link', content: 'https://github.com/sam70361/aora-bot' }],
+    socialLinks: [{ icon: 'github', mode: 'link', content: 'https://github.com/ShmilyXI/mowa-bot' }],
     // A first visit opens dark, where the characters' colours carry best; the switch stays, and a choice is remembered.
     darkMode: 'dark',
     enableContentAnimation: false,
     enableScrollToTop: true,
     editLink: {
-      docRepoBaseUrl: 'https://github.com/sam70361/aora-bot/tree/main/docs/content',
+      docRepoBaseUrl: 'https://github.com/ShmilyXI/mowa-bot/tree/main/docs/content',
     },
     lastUpdated: true,
   },
@@ -137,14 +137,14 @@ export default defineConfig({
     resolve: {
       alias: {
         '@app': resolve(here, 'app'),
-        '@aora-bot/react/styles.css': resolve(here, '../packages/react/src/styles/index.css'),
-        '@aora-bot/react$': resolve(here, '../packages/react/src/index.ts'),
-        '@aora-bot/react/static$': resolve(here, '../packages/react/src/static.ts'),
-        '@aora-bot/surfaces/styles.css': resolve(here, '../packages/surfaces/src/styles/index.css'),
-        '@aora-bot/surfaces$': resolve(here, '../packages/surfaces/src/index.ts'),
-        '@aora-bot/surfaces/static$': resolve(here, '../packages/surfaces/src/static.ts'),
-        '@aora-bot/engine$': resolve(here, '../packages/engine/src/index.ts'),
-        '@aora-bot/engine/static$': resolve(here, '../packages/engine/src/static.ts'),
+        '@mowa-bot/react/styles.css': resolve(here, '../packages/react/src/styles/index.css'),
+        '@mowa-bot/react$': resolve(here, '../packages/react/src/index.ts'),
+        '@mowa-bot/react/static$': resolve(here, '../packages/react/src/static.ts'),
+        '@mowa-bot/surfaces/styles.css': resolve(here, '../packages/surfaces/src/styles/index.css'),
+        '@mowa-bot/surfaces$': resolve(here, '../packages/surfaces/src/index.ts'),
+        '@mowa-bot/surfaces/static$': resolve(here, '../packages/surfaces/src/static.ts'),
+        '@mowa-bot/engine$': resolve(here, '../packages/engine/src/index.ts'),
+        '@mowa-bot/engine/static$': resolve(here, '../packages/engine/src/static.ts'),
       },
     },
     tools: {

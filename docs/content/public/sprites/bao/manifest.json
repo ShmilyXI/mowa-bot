@@ -11,7 +11,7 @@
     "license": "MIT",
     "basedOn": "The procedural bao character",
     "generator": "Rendered from the procedural bao character; two frames per state at 900 ms and 2100 ms of the breathing loop.",
-    "engine": "aora@1.0.0",
+    "engine": "mowa@1.0.0",
     "exported": "2026-08-26T08:32:23.302Z",
     "seed": 7,
     "frameTs": [900, 2100]

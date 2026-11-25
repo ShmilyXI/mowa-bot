@@ -387,18 +387,18 @@ describe('palette', () => {
 
   it('keeps night dark on a dark page and gives it the dark-body face', () => {
     const vars = getInkVars('night');
-    expect(vars['--aora-fg']).not.toContain('#FFFFFF');
-    expect(vars['--aora-face']).toBe('#FFFFFF');
-    expect(vars['--aora-face-soft']).toBe('#FFFFFF');
-    expect(vars['--aora-hair-shade']).toBe('#FFFFFF');
+    expect(vars['--mowa-fg']).not.toContain('#FFFFFF');
+    expect(vars['--mowa-face']).toBe('#FFFFFF');
+    expect(vars['--mowa-face-soft']).toBe('#FFFFFF');
+    expect(vars['--mowa-hair-shade']).toBe('#FFFFFF');
   });
 
   it('gives cream and yellow the light-body face black has on a dark page', () => {
     for (const color of ['cream', 'yellow'] as const) {
       const vars = getInkVars(color);
-      expect(vars['--aora-face'], color).toBe('#2B2420');
-      expect(vars['--aora-face-pupil'], color).toBe('#FFFFFF');
-      expect(vars['--aora-face-glint'], color).toBe('#FFFFFF');
+      expect(vars['--mowa-face'], color).toBe('#2B2420');
+      expect(vars['--mowa-face-pupil'], color).toBe('#FFFFFF');
+      expect(vars['--mowa-face-glint'], color).toBe('#FFFFFF');
       // The grainy skin splits its face by the body's lightness, with the rule's light-body face at the dark end.
       const svg = renderStaticSvg({ color, variant: 'grainy', state: 'happy' });
       const [dark] = oklch('#2B2420');
@@ -408,32 +408,32 @@ describe('palette', () => {
   });
 
   it('draws effects in the face colour where the ink is lost on the page', () => {
-    expect(getInkVars('cream')['--aora-fx']).toBe('light-dark(#2B2420, #EADBB9)');
-    expect(getInkVars('night')['--aora-fx']).toBe('light-dark(#2A2433, #FFFFFF)');
+    expect(getInkVars('cream')['--mowa-fx']).toBe('light-dark(#2B2420, #EADBB9)');
+    expect(getInkVars('night')['--mowa-fx']).toBe('light-dark(#2A2433, #FFFFFF)');
     for (const color of ['blue', 'yellow', 'orange', 'black'] as const)
-      expect(getInkVars(color)['--aora-fx'], color).toBeUndefined();
+      expect(getInkVars(color)['--mowa-fx'], color).toBeUndefined();
   });
 
   it('keeps black inverting, with its face turning as it does', () => {
     expect(getInkVars('black')).toEqual({
-      '--aora-fg': 'light-dark(#1F1F1F, #FFFFFF)',
-      '--aora-face': 'light-dark(#FFFFFF, #2B2420)',
-      '--aora-face-soft': 'light-dark(#FFFFFF, #2B2420)',
-      '--aora-face-sticker': 'light-dark(#FFFFFF, #1F1F1F)',
-      '--aora-hair-shade': 'light-dark(#FFFFFF, #000000)',
-      '--aora-face-pupil': 'light-dark(#2B2420, #FFFFFF)',
-      '--aora-face-glint': 'light-dark(#2B2420, #FFFFFF)',
-      '--aora-ink2': 'light-dark(#FF78A6, #FFFFFF)',
+      '--mowa-fg': 'light-dark(#1F1F1F, #FFFFFF)',
+      '--mowa-face': 'light-dark(#FFFFFF, #2B2420)',
+      '--mowa-face-soft': 'light-dark(#FFFFFF, #2B2420)',
+      '--mowa-face-sticker': 'light-dark(#FFFFFF, #1F1F1F)',
+      '--mowa-hair-shade': 'light-dark(#FFFFFF, #000000)',
+      '--mowa-face-pupil': 'light-dark(#2B2420, #FFFFFF)',
+      '--mowa-face-glint': 'light-dark(#2B2420, #FFFFFF)',
+      '--mowa-ink2': 'light-dark(#FF78A6, #FFFFFF)',
     });
-    expect(getInkVars('blue')).toEqual({ '--aora-fg': expect.any(String), '--aora-face': '#FFFFFF' });
+    expect(getInkVars('blue')).toEqual({ '--mowa-fg': expect.any(String), '--mowa-face': '#FFFFFF' });
   });
 
   it('draws lines on the page in a deeper or lighter ink where the ink is too faint there', () => {
-    const cream = getInkVars('cream')['--aora-ink-line']!;
+    const cream = getInkVars('cream')['--mowa-ink-line']!;
     expect(cream).toMatch(/^light-dark\(#[0-9A-F]{6}, #EADBB9\)$/);
-    expect(getInkVars('night')['--aora-ink-line']).toMatch(/^light-dark\(#2A2433, #[0-9A-F]{6}\)$/);
+    expect(getInkVars('night')['--mowa-ink-line']).toMatch(/^light-dark\(#2A2433, #[0-9A-F]{6}\)$/);
     for (const color of ['blue', 'orange', 'black', 'navy'] as const)
-      expect(getInkVars(color)['--aora-ink-line'], color).toBeUndefined();
+      expect(getInkVars(color)['--mowa-ink-line'], color).toBeUndefined();
     // Cream's line on a light page keeps its hue: still warmer in red than in blue.
     const [r, , b] = [1, 3, 5].map((i) => Number.parseInt(cream.slice(12 + i, 14 + i), 16));
     expect(r!).toBeGreaterThan(b!);
@@ -443,7 +443,7 @@ describe('palette', () => {
 
   it('draws the eyes face in the features colour, the same on either page', () => {
     for (const color of ['blue', 'cream', 'navy', 'night', 'black'] as const)
-      expect(getInkVars(color)['--aora-eye'], color).toBeUndefined();
+      expect(getInkVars(color)['--mowa-eye'], color).toBeUndefined();
     expect(renderStaticSvg({ color: 'cream', face: 'eyes', flat: true })).toContain('fill="#2B2420"');
     expect(renderStaticSvg({ color: 'navy', face: 'eyes', flat: true })).toContain('fill="#FFFFFF"');
     expect(renderStaticSvg({ color: 'navy', face: 'eyes' })).not.toContain('-feature');
@@ -457,18 +457,18 @@ describe('palette', () => {
   it('keeps the white face on a dark ink and turns its features white too', () => {
     for (const color of ['navy', 'cocoa', 'night'] as const) {
       const vars = getInkVars(color);
-      expect(vars['--aora-face'], color).toBe('#FFFFFF');
-      expect(vars['--aora-face-soft'], color).toBe('#FFFFFF');
-      expect(vars['--aora-face-pupil'], color).toBe('#2B2420');
+      expect(vars['--mowa-face'], color).toBe('#FFFFFF');
+      expect(vars['--mowa-face-soft'], color).toBe('#FFFFFF');
+      expect(vars['--mowa-face-pupil'], color).toBe('#2B2420');
     }
   });
 
   it('edges a filled body in a hairline on a page it all but matches', () => {
-    expect(getInkVars('cream')['--aora-rim']).toMatch(/^light-dark\(#[0-9A-F]{6}, transparent\)$/);
-    expect(getInkVars('ivory')['--aora-rim']).toMatch(/^light-dark\(#[0-9A-F]{6}, transparent\)$/);
-    expect(getInkVars('night')['--aora-rim']).toMatch(/^light-dark\(transparent, #[0-9A-F]{6}\)$/);
+    expect(getInkVars('cream')['--mowa-rim']).toMatch(/^light-dark\(#[0-9A-F]{6}, transparent\)$/);
+    expect(getInkVars('ivory')['--mowa-rim']).toMatch(/^light-dark\(#[0-9A-F]{6}, transparent\)$/);
+    expect(getInkVars('night')['--mowa-rim']).toMatch(/^light-dark\(transparent, #[0-9A-F]{6}\)$/);
     for (const color of ['blue', 'black', 'yellow', 'pink', 'blush'] as const)
-      expect(getInkVars(color)['--aora-rim'], color).toBeUndefined();
+      expect(getInkVars(color)['--mowa-rim'], color).toBeUndefined();
     const solid = renderStaticSvg({ color: 'ivory', flat: true });
     expect(solid).toContain('vector-effect="non-scaling-stroke"');
     // A line variant is its own edge, and a drawing medium draws its own.
@@ -478,9 +478,9 @@ describe('palette', () => {
   });
 
   it('prints a light ink over itself in riso, and pink over gold', () => {
-    expect(getInkVars('cream')['--aora-ink2']).toBe('light-dark(#F1E2C1, #EADBB9)');
-    expect(getInkVars('pink')['--aora-ink2']).toBe('#F5B428');
-    expect(getInkVars('blue')['--aora-ink2']).toBeUndefined();
+    expect(getInkVars('cream')['--mowa-ink2']).toBe('light-dark(#F1E2C1, #EADBB9)');
+    expect(getInkVars('pink')['--mowa-ink2']).toBe('#F5B428');
+    expect(getInkVars('blue')['--mowa-ink2']).toBeUndefined();
   });
 });
 
@@ -506,7 +506,7 @@ describe('small sizes', () => {
     expect(svg).toMatch(/stroke-width="\d/);
     // The mood decorations, drawn from 64 px, stroke their own glyphs.
     const large = renderStaticSvg({ shape: 'candle', color: 'pink', variant: 'doodle', sizePx: 400 }).replace(
-      /<g data-aora-decor[\s\S]*$/,
+      /<g data-mowa-decor[\s\S]*$/,
       '',
     );
     expect(large.match(/stroke-linejoin="round"/g)?.length ?? 0).toBeLessThan(
@@ -603,7 +603,7 @@ describe('the main entry', () => {
     expect(main).not.toContain(loop);
     expect(main).not.toContain('doodle-under');
     expect(main).not.toContain('Lollipop ghost');
-    expect(main).toMatch(/import\(["']@aora-bot\/engine\/themes\/halloween["']\)/);
+    expect(main).toMatch(/import\(["']@mowa-bot\/engine\/themes\/halloween["']\)/);
     const staticEntry = readFileSync(built.replace('index.js', 'static.js'), 'utf8');
     expect(staticEntry).not.toContain(loop);
   });

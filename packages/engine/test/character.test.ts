@@ -159,7 +159,7 @@ describe('createCharacter', () => {
   it('keeps the whole figure on a belt state with the cute face and throws its effect beside it', () => {
     const character = createCharacter(mount(), { state: 'idle', face: 'cute', reducedMotion: false });
     const pieces = () =>
-      [...character.element.querySelectorAll('[data-aora-fx]')].reduce(
+      [...character.element.querySelectorAll('[data-mowa-fx]')].reduce(
         (n, layer) => n + layer.childElementCount,
         0,
       );
@@ -178,7 +178,7 @@ describe('createCharacter', () => {
 
     const clipA = a.element.querySelector('clipPath')!.id;
     const clipB = b.element.querySelector('clipPath')!.id;
-    expect(clipA).toMatch(/^aora-clip-/);
+    expect(clipA).toMatch(/^mowa-clip-/);
     expect(clipA).not.toBe(clipB);
 
     expect(a.element.querySelector('g')!.id).toBe('src-a');
@@ -360,13 +360,13 @@ describe('createCharacter', () => {
       const outline = createCharacter(mount(), { face: 'line', variant: 'outline', reducedMotion: true });
       const [nose] = featuresOf(outline.element);
       expect(nose?.getAttribute('stroke')).toBe(
-        'color-mix(in oklab, var(--aora-ink-line, var(--aora-fg, currentColor)), light-dark(#000, #fff) 22%)',
+        'color-mix(in oklab, var(--mowa-ink-line, var(--mowa-fg, currentColor)), light-dark(#000, #fff) 22%)',
       );
       outline.destroy();
 
       const solid = createCharacter(mount(), { face: 'line', variant: 'solid', reducedMotion: true });
       const [mouth] = featuresOf(solid.element).slice(1);
-      expect(mouth?.getAttribute('stroke')).toBe('var(--aora-eye, var(--aora-face-soft, #2B2420))');
+      expect(mouth?.getAttribute('stroke')).toBe('var(--mowa-eye, var(--mowa-face-soft, #2B2420))');
       solid.destroy();
     });
   });
@@ -420,7 +420,7 @@ describe('createCharacter', () => {
   });
 
   describe('HUD', () => {
-    const hudOf = (el: Element) => el.querySelector('g[data-aora-hud]')!;
+    const hudOf = (el: Element) => el.querySelector('g[data-mowa-hud]')!;
     const countOf = (el: Element) =>
       Array.from(hudOf(el).children).reduce((n, g) => n + g.childElementCount, 0);
 
@@ -464,7 +464,7 @@ describe('createCharacter', () => {
         seed: 'hud',
       });
       run(1500);
-      const face = character.element.querySelector('[data-aora-face]')!;
+      const face = character.element.querySelector('[data-mowa-face]')!;
       expect(Number(face.getAttribute('opacity'))).toBeLessThan(0.05);
       const dots = character.element.querySelector('g > g:nth-of-type(4)');
       expect(dots?.childElementCount ?? 0).toBe(0);
@@ -500,7 +500,7 @@ describe('createCharacter', () => {
 
     gradient.update({ ink: null });
     expect(bodyOf(gradient.element).getAttribute('stroke')).toBe(
-      'var(--aora-ink-line, var(--aora-fg, currentColor))',
+      'var(--mowa-ink-line, var(--mowa-fg, currentColor))',
     );
     gradient.destroy();
   });
@@ -606,8 +606,8 @@ describe('createCharacter', () => {
 });
 
 describe('createCharacter with the cute face', () => {
-  const faceNodes = (el: Element) => Array.from(el.querySelectorAll('[data-aora-face] > path'));
-  const fxNodes = (el: Element) => Array.from(el.querySelectorAll('[data-aora-fx] > *'));
+  const faceNodes = (el: Element) => Array.from(el.querySelectorAll('[data-mowa-face] > path'));
+  const fxNodes = (el: Element) => Array.from(el.querySelectorAll('[data-mowa-fx] > *'));
 
   it('is the default: eyes, mouth and cheeks on the body', () => {
     const cute = createDefault(mount(), { state: 'happy', reducedMotion: true });

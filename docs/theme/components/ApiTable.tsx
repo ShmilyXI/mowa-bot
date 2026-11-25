@@ -22,7 +22,7 @@ export function API({ component }: ApiProps) {
   if (!entry) {
     return (
       <p className="site-api__empty">
-        {t('api.missing')} <code>{component}</code> — <code>pnpm --filter @aora-bot/docs api</code>
+        {t('api.missing')} <code>{component}</code> — <code>pnpm --filter @mowa-bot/docs api</code>
       </p>
     );
   }
@@ -106,7 +106,7 @@ export function ApiIndex({ source, kind }: ApiIndexProps) {
               </td>
               <td>{row.kind}</td>
               <td>
-                <code>@aora-bot/{row.source}</code>
+                <code>@mowa-bot/{row.source}</code>
               </td>
               <td>{row.description.split('\n')[0] || '—'}</td>
             </tr>

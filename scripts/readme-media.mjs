@@ -7,7 +7,7 @@
  *   .github/media/cast.png    the whole listed cast, smiling, by id
  *   .github/media/themes.png  six members of every shipped theme, a row each
  *
- * The page drives each character through `<aora-bot>`, so what is recorded
+ * The page drives each character through `<mowa-bot>`, so what is recorded
  * is exactly what a host gets. Time is Chrome's virtual time, advanced one
  * frame at a time, so a recording does not depend on the machine's speed.
  * The lists (cast, styles) are read from the engine, so a new member or
@@ -24,7 +24,7 @@ import { createServer } from 'node:http';
 import { tmpdir } from 'node:os';
 import { extname, join, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { CAST, listStyles, loadThemes, THEME_MANIFEST, themeLook } from '@aora-bot/engine';
+import { CAST, listStyles, loadThemes, THEME_MANIFEST, themeLook } from '@mowa-bot/engine';
 import gifenc from 'gifenc';
 import { PNG } from 'pngjs';
 
@@ -86,9 +86,9 @@ const themeMember = (theme, id, seed) => {
 };
 
 const element = (attrs) =>
-  `<aora-bot ${Object.entries(attrs)
+  `<mowa-bot ${Object.entries(attrs)
     .map(([key, value]) => `${key}="${value}"`)
-    .join(' ')}></aora-bot>`;
+    .join(' ')}></mowa-bot>`;
 
 const CAST_PER_ROW = 8;
 /** A cast row: a 112 px cell and the 6 px gap below it. */
@@ -142,7 +142,7 @@ const SCENES = {
     script: `
       const POOL = ${JSON.stringify(HERO_POOL)};
       const STEP = ${HERO_STEP_MS};
-      const bots = [...document.querySelectorAll('aora-bot')];
+      const bots = [...document.querySelectorAll('mowa-bot')];
       window.scene = (t) => bots.forEach((bot, i) => {
         const slot = Math.floor((t + (i * STEP) / bots.length) / STEP) % 5;
         const state = POOL[(i + slot * 2) % POOL.length];
@@ -172,7 +172,7 @@ const SCENES = {
       .join('')}</div>`,
     script: `
       const STATES = ${JSON.stringify(STYLE_STATES)};
-      const bots = [...document.querySelectorAll('aora-bot')];
+      const bots = [...document.querySelectorAll('mowa-bot')];
       window.scene = (t) => {
         const state = STATES[Math.floor(t / ${STYLE_STEP_MS}) % STATES.length];
         for (const bot of bots) if (bot.getAttribute('state') !== state) bot.setAttribute('state', state);
@@ -221,13 +221,13 @@ const PAGES = Object.fromEntries(
 const page = (scene) => `<!doctype html>
 <html><head><meta charset="utf-8">
 <style>
-  :root { color-scheme: dark; --aora-bg-base: ${PAPER}; }
+  :root { color-scheme: dark; --mowa-bg-base: ${PAPER}; }
   html, body { margin: 0; background: ${PAPER}; }
   body { width: ${scene.width}px; height: ${scene.height}px; overflow: hidden; color: ${LABEL};
     font: 13px/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
   ${scene.css}
 </style>
-<script type="module" src="/element/aora-bot.js"></script>
+<script type="module" src="/element/mowa-bot.js"></script>
 </head><body>${scene.body}<script>${scene.script}</script></body></html>`;
 
 // ---- a static server for the element and the scenes --------------------------
@@ -371,7 +371,7 @@ async function record(cdp, origin, name) {
   await send('Page.navigate', { url: `${origin}/scene/${name}` });
   await loaded;
   await send('Runtime.evaluate', {
-    expression: `customElements.whenDefined('aora-bot').then(() => document.fonts.ready)`,
+    expression: `customElements.whenDefined('mowa-bot').then(() => document.fonts.ready)`,
     awaitPromise: true,
   });
   if (scene.settle) {
@@ -475,12 +475,12 @@ async function main() {
   const unknown = names.filter((name) => !SCENES[name]);
   if (unknown.length > 0)
     throw new Error(`Unknown scene: ${unknown.join(', ')} (have ${Object.keys(SCENES).join(', ')})`);
-  if (!existsSync(join(ELEMENT_DIST, 'aora-bot.js')))
+  if (!existsSync(join(ELEMENT_DIST, 'mowa-bot.js')))
     throw new Error('Build the element first: pnpm build:lib');
 
   const server = await serve();
   const origin = `http://127.0.0.1:${server.address().port}`;
-  const profile = mkdtempSync(join(tmpdir(), 'aora-media-'));
+  const profile = mkdtempSync(join(tmpdir(), 'mowa-media-'));
   const { chrome, endpoint } = launch(profile);
   try {
     const cdp = await connect(await endpoint);

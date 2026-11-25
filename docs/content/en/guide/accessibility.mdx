@@ -6,7 +6,7 @@ What to write next to a character, and why a character is never allowed to be th
 
 Every character renders with `aria-hidden="true"`. This is the right default: a character next to a name is a visual flourish, and announcing "image" before every row of a conversation makes a screen reader unusable.
 
-It also means **a character never conveys information on its own**. That is a constraint on you, not just on Aora Bot.
+It also means **a character never conveys information on its own**. That is a constraint on you, not just on Mowa Bot.
 
 ## Where the meaning has to live
 
@@ -51,7 +51,7 @@ This is not excess caution. Some states can trigger vestibular symptoms: `celebr
 If you drive motion yourself, check the same preference:
 
 ```ts
-import { prefersReducedMotion, onReducedMotionChange } from '@aora-bot/engine';
+import { prefersReducedMotion, onReducedMotionChange } from '@mowa-bot/engine';
 
 if (!prefersReducedMotion()) confetti.current?.burst();
 ```

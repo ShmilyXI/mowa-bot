@@ -1,5 +1,5 @@
-import { getStyle, paramsForVariant } from '@aora-bot/engine';
-import { CharacterMark, useLabel, type ColorId, type ShapeId } from '@aora-bot/react';
+import { getStyle, paramsForVariant } from '@mowa-bot/engine';
+import { CharacterMark, useLabel, type ColorId, type ShapeId } from '@mowa-bot/react';
 import { useState } from 'react';
 import { useI18n } from '../../app/shared/i18n.js';
 

@@ -1,6 +1,6 @@
-import type { CharacterState } from '@aora-bot/engine';
+import type { CharacterState } from '@mowa-bot/engine';
 import { useCallback, useEffect, useRef, useState, type RefObject } from 'react';
-import { type ConfettiHandle } from '@aora-bot/react';
+import { type ConfettiHandle } from '@mowa-bot/react';
 
 export type PublishPhase = 'idle' | 'publishing' | 'celebrate';
 

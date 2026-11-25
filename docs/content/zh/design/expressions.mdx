@@ -24,7 +24,7 @@ interface EyeSpec {
 笔画的中心线半长为 `len`，沿 `angle` 方向延伸，向侧面弯曲 `bend`，再加上厚度 `width`，两端是圆头。圆点眼是几乎没有长度的笔画，`width` 就是它的半径；笑眼是 `bend` 为负的水平笔画，闭眼是 `bend` 为正的水平笔画。`sad` 和 `mad` 在圆点上方多一道眉毛，`cross` 和 `star` 分别是叉和四角星。
 
 ```tsx preview
-import { CUTE_EYE_TOPOLOGIES, CUTE_EYE_IDS } from '@aora-bot/engine';
+import { CUTE_EYE_TOPOLOGIES, CUTE_EYE_IDS } from '@mowa-bot/engine';
 
 export default function Demo() {
   return (
@@ -80,8 +80,8 @@ export default function Demo() {
 腮红是脸颊上两片扁平的淡粉色椭圆，强度在 0 到 1 之间，按状态在 `STATE_BLUSH` 中指定，由弹簧渐变。只有开心一类的情绪、害羞和熟睡会脸红，各种处理中的状态都不脸红：腮红出现得太多，就没有意义了。
 
 ```tsx preview
-import { STATE_BLUSH } from '@aora-bot/engine';
-import { CharacterMark } from '@aora-bot/react';
+import { STATE_BLUSH } from '@mowa-bot/engine';
+import { CharacterMark } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -109,7 +109,7 @@ export default function Demo() {
 `STATE_FX` 记录各状态对应的特效。下表直接读取它，其中也包括腰带状态改用的活动特效（见[状态](/design/states#腰带状态在-cute-脸下的样子)）。
 
 ```tsx preview
-import { FX_KINDS, STATE_FX } from '@aora-bot/engine';
+import { FX_KINDS, STATE_FX } from '@mowa-bot/engine';
 
 export default function Demo() {
   return (
@@ -145,7 +145,7 @@ export default function Demo() {
 每个状态指定一组眼型，按随机间隔轮流切换。`idle` 多数时候是圆点眼，偶尔向左或向右看一眼；`searching` 大约每半秒换一次。
 
 ```tsx preview
-import { STATE_CUTE_EYES, STATE_EYE_SWITCH_MS } from '@aora-bot/engine';
+import { STATE_CUTE_EYES, STATE_EYE_SWITCH_MS } from '@mowa-bot/engine';
 
 const rows = ['idle', 'thinking', 'searching', 'sleeping', 'angry', 'celebrate'] as const;
 

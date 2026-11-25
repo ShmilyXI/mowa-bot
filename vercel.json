@@ -8,24 +8,21 @@
   "github": {
     "silent": true
   },
-  "redirects": [
+  "rewrites": [
     {
-      "source": "/(emotion-ball|mood-mates)(/.*)?",
-      "destination": "https://sam70361.github.io/aora-bot/$1$2",
-      "permanent": true
-    },
-    {
-      "source": "/(.*)",
-      "has": [{ "type": "host", "value": "emotion-balls.vercel.app" }],
-      "destination": "https://aora-bot.vercel.app/$1",
-      "permanent": true
+      "source": "/avatar/:id",
+      "destination": "/api/avatar?id=:id"
     }
   ],
-  "rewrites": [{ "source": "/avatar/:id", "destination": "/api/avatar?id=:id" }],
   "headers": [
     {
       "source": "/static/(.*)",
-      "headers": [{ "key": "cache-control", "value": "public, max-age=31536000, immutable" }]
+      "headers": [
+        {
+          "key": "cache-control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     }
   ]
 }

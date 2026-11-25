@@ -32,7 +32,7 @@ const LEAF = getLeafColor('blue').toLowerCase();
 const PARTED = SHAPE_IDS.filter((id) => getShape(id).parts.length > 0);
 
 /** Markup with the per-instance ids taken out, so two characters can be compared. */
-const bare = (markup: string): string => markup.replace(/aora-(clip|ink|shadow)-[\w-]+/g, 'ID');
+const bare = (markup: string): string => markup.replace(/mowa-(clip|ink|shadow)-[\w-]+/g, 'ID');
 
 /** The smallest y a path's coordinates reach; the paths here are absolute `M`/`C`/`L` lists. */
 const minY = (d: string): number =>
@@ -187,7 +187,7 @@ describe('parts', () => {
       expect(svg.toLowerCase(), `static ${variant}`).toContain(LEAF);
 
       const live = mount({ shape: 'sprout', variant }).element.outerHTML;
-      expect(live, `live ${variant}`).toContain('var(--aora-leaf');
+      expect(live, `live ${variant}`).toContain('var(--mowa-leaf');
     }
   });
 
@@ -218,7 +218,7 @@ describe('parts', () => {
       'fill="#000000" fill-opacity="0.4"',
     );
     const live = mount({ shape: 'bob' }).element.outerHTML;
-    expect(live).toContain('var(--aora-hair-shade, #000000)');
+    expect(live).toContain('var(--mowa-hair-shade, #000000)');
   });
 
   it('paints a leaf in every pixel variant, static and live', () => {
@@ -228,7 +228,7 @@ describe('parts', () => {
 
       const live = mount({ shape: 'sprout', style: 'pixel', variant });
       run(64);
-      expect(live.element.outerHTML.toLowerCase(), `live ${variant}`).toMatch(/aora-leaf|34b36b/);
+      expect(live.element.outerHTML.toLowerCase(), `live ${variant}`).toMatch(/mowa-leaf|34b36b/);
     }
   });
 
@@ -269,15 +269,15 @@ describe('parts', () => {
   it('fades parts out when a character morphs to a shape without them, and back in', () => {
     const c = mount({ shape: 'sprout', state: 'idle' });
     run(400);
-    expect(c.element.outerHTML).toContain('var(--aora-leaf');
+    expect(c.element.outerHTML).toContain('var(--mowa-leaf');
 
     c.update({ shape: 'mochi' });
     run(1500);
-    expect(c.element.outerHTML).not.toContain('var(--aora-leaf');
+    expect(c.element.outerHTML).not.toContain('var(--mowa-leaf');
 
     c.update({ shape: 'sprout' });
     run(1500);
-    expect(c.element.outerHTML).toContain('var(--aora-leaf');
+    expect(c.element.outerHTML).toContain('var(--mowa-leaf');
   });
 });
 

@@ -4,4 +4,4 @@
  * face data. Tests that check a generated module against what it is worked
  * out from name it when they fail.
  */
-export const GENERATE_COMMAND = 'pnpm --filter @aora-bot/engine generate:faces';
+export const GENERATE_COMMAND = 'pnpm --filter @mowa-bot/engine generate:faces';

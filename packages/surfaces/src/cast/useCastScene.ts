@@ -1,4 +1,4 @@
-import type { CharacterState } from '@aora-bot/engine';
+import type { CharacterState } from '@mowa-bot/engine';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 /** Where a member stands during a step, in pixels from the stage's centre. */

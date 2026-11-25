@@ -1,4 +1,4 @@
-import { onReducedMotionChange, prefersReducedMotion } from '@aora-bot/engine';
+import { onReducedMotionChange, prefersReducedMotion } from '@mowa-bot/engine';
 import { Fragment, useEffect, useId, useSyncExternalStore, type CSSProperties, type ReactNode } from 'react';
 import { seeded } from './looks/draw.js';
 import type { Markup, ThemeLook, TitleLayout } from './looks/index.js';

@@ -4,7 +4,7 @@ import {
   type NoseId,
   type RosterFacts,
   type RosterSurface,
-} from '@aora-bot/engine';
+} from '@mowa-bot/engine';
 import { useCallback, useEffect, useRef, useState, type CSSProperties } from 'react';
 import { useLocale } from '../locale/index.js';
 import type { CharacterHandle } from '../mark/CharacterMark.js';
@@ -190,15 +190,15 @@ export function ActivityBadge({
   const label = text ?? t(activityMode === 'facts' ? activityLabelForState(activity) : descriptor.labelKey);
 
   const rootClass = cx(
-    'aora-activity',
-    (entering || spawn.isFirst) && 'aora-activity--entering',
-    spawn.state != null && 'aora-activity--spawning',
-    presence.leaving && 'aora-activity--leaving',
-    snapshot.emphasis && 'aora-activity--emphasis',
+    'mowa-activity',
+    (entering || spawn.isFirst) && 'mowa-activity--entering',
+    spawn.state != null && 'mowa-activity--spawning',
+    presence.leaving && 'mowa-activity--leaving',
+    snapshot.emphasis && 'mowa-activity--emphasis',
     className,
   );
 
-  const markClass = cx('aora-activity__mark', hopping && 'aora-activity__mark--poked');
+  const markClass = cx('mowa-activity__mark', hopping && 'mowa-activity__mark--poked');
 
   const handlers = {
     onClick: handlePoke,
@@ -217,7 +217,7 @@ export function ActivityBadge({
       nose={nose !== undefined ? nose : agentNose(face ? { ...agent, face } : agent)}
       lineWeight={lineWeight}
       sizePx={sizePx}
-      style={inkCss ? ({ '--aora-fg': inkCss } as CSSProperties) : undefined}
+      style={inkCss ? ({ '--mowa-fg': inkCss } as CSSProperties) : undefined}
     />
   );
 
@@ -242,7 +242,7 @@ export function ActivityBadge({
         // Still in the accessibility tree: the label is the only part of the
         // row a screen reader can use, and hiding it visually is a layout
         // decision rather than a decision to say less.
-        <span className="aora-visually-hidden">{label}</span>
+        <span className="mowa-visually-hidden">{label}</span>
       ) : (
         <ActivityLine text={label} className={labelClass(showLabel, bubble)} />
       )}
@@ -251,7 +251,7 @@ export function ActivityBadge({
 }
 
 const labelClass = (mode: ActivityLabelMode, bubble: boolean): string | undefined =>
-  cx(mode === 'hover' && 'aora-activity__label--hover', bubble && 'aora-bubble') || undefined;
+  cx(mode === 'hover' && 'mowa-activity__label--hover', bubble && 'mowa-bubble') || undefined;
 
 export interface GroupActivityBadgeProps {
   members: AgentLike[];
@@ -306,13 +306,13 @@ export function GroupActivityBadge({
   if (!current) return null;
 
   const rootStyle = {
-    '--aora-activity-ink': getInkColorCss(agentColor(current)),
-    '--aora-activity-ink-ms': `${GROUP_INK_MS}ms`,
+    '--mowa-activity-ink': getInkColorCss(agentColor(current)),
+    '--mowa-activity-ink-ms': `${GROUP_INK_MS}ms`,
     ...style,
   } as CSSProperties;
 
   return (
-    <span className={cx('aora-activity-group', className)} style={rootStyle}>
+    <span className={cx('mowa-activity-group', className)} style={rootStyle}>
       {hasPicture(current) ? (
         /*
          * A member with an uploaded picture has no ink to fade, so the swap
@@ -321,7 +321,7 @@ export function GroupActivityBadge({
          */
         <img
           key={current.id}
-          className="aora-activity-group__picture"
+          className="mowa-activity-group__picture"
           src={current.pictureUrl}
           alt={current.name ?? ''}
           width={sizePx}
@@ -337,7 +337,7 @@ export function GroupActivityBadge({
           lineWeight={lineWeight}
           showLabel={showLabel}
           onPoke={onPoke}
-          inkCss="var(--aora-activity-ink)"
+          inkCss="var(--mowa-activity-ink)"
         />
       )}
     </span>
@@ -364,7 +364,7 @@ function useActivityInk(): void {
 
     try {
       api.registerProperty({
-        name: '--aora-activity-ink',
+        name: '--mowa-activity-ink',
         syntax: '<color>',
         inherits: true,
         initialValue: 'currentColor',

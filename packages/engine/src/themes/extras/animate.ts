@@ -9,7 +9,7 @@
  * go into one `<style>` element inside its SVG (the same tree as the
  * elements, so a shadow root works too). A host's `prefers-reduced-motion`
  * stops every one of them, and a paused character holds them through
- * `--aora-play`. Static output never uses any of this: it draws the rest
+ * `--mowa-play`. Static output never uses any of this: it draws the rest
  * pose.
  */
 import type { SceneNode } from '../../render/scene.js';
@@ -68,7 +68,7 @@ export function compile(
       return `${n3(stop.at * 100)}%{${decls}}`;
     })
     .join('');
-  const name = `aora-k${K.hash(frames).toString(36)}`;
+  const name = `mowa-k${K.hash(frames).toString(36)}`;
   const duration = Math.max(0.05, period);
   const delay = -n3((((phase % 1) + 1) % 1) * duration);
   const key = `${name}|${duration}|${delay}|${easing}`;
@@ -78,7 +78,7 @@ export function compile(
       name,
       rule: `@keyframes ${name}{${frames}}`,
       // The play state after the shorthand, which would otherwise reset it to running.
-      style: `animation:${name} ${n3(duration)}s ${TIMING[easing]} ${delay}s infinite;animation-play-state:var(--aora-play,running)`,
+      style: `animation:${name} ${n3(duration)}s ${TIMING[easing]} ${delay}s infinite;animation-play-state:var(--mowa-play,running)`,
     };
     compiled.set(key, found);
   }
@@ -90,7 +90,7 @@ export const about = (x: number, y: number, transform: string, unit: 'px' | '%' 
   `translate(${n3(x)}${unit},${n3(y)}${unit}) ${transform} translate(${n3(-x)}${unit},${n3(-y)}${unit})`;
 
 /** The class every animated element carries: what the reduced-motion rule and the pause read. */
-export const ANIMATED = 'aora-anim';
+export const ANIMATED = 'mowa-anim';
 
 const BASE =
   `.${ANIMATED}{transform-box:view-box;transform-origin:0 0}` +

@@ -1,25 +1,25 @@
-# @aora-bot/engine
+# @mowa-bot/engine
 
-The character engine behind [Aora Bot](https://aora-bot.vercel.app): shapes and a named cast,
+The character engine behind [Mowa Bot](https://mowa-bot.vercel.app): shapes and a named cast,
 animation states, sixteen faces, the vector, pixel, kaomoji and ASCII style series, face fitting,
 pose projection, a damped-spring state machine, effects and belts, HUD dials, particles and a
 numeric emotion protocol. It needs no React, and the `/static` and `/agent` entries need no DOM.
-Pick a character in the [console](https://aora-bot.vercel.app/en/).
+Pick a character in the [console](https://mowa-bot.vercel.app/en/).
 
-Most applications want [`@aora-bot/react`](https://www.npmjs.com/package/@aora-bot/react)
+Most applications want [`@mowa-bot/react`](https://www.npmjs.com/package/@mowa-bot/react)
 instead, which wraps this engine in components. Install the engine directly when you need
 the geometry or animation without React.
 
 ## Install
 
 ```bash
-pnpm add @aora-bot/engine
+pnpm add @mowa-bot/engine
 ```
 
 ## Animate a character
 
 ```ts
-import { createCharacter } from '@aora-bot/engine';
+import { createCharacter } from '@mowa-bot/engine';
 
 const host = document.querySelector('#avatar')!;
 const character = createCharacter(host, { shape: 'mochi', state: 'thinking' });
@@ -34,21 +34,21 @@ character.destroy();
 
 `createCharacter` mounts one SVG into the host and drives it from a single
 `requestAnimationFrame` loop shared by every character on the page. Ink colour is a CSS
-custom property, `--aora-fg`, so the same running character can be tinted per instance;
+custom property, `--mowa-fg`, so the same running character can be tinted per instance;
 `ink` overrides it with any paint. The HUD is drawn by `evaluateHud`, a pure function of
 the spec, time and stroke weight, so hosts can also draw the dials themselves.
 
 ## Render without a DOM
 
 ```ts
-import { renderStaticSvg, renderAvatarDataUrl, autoShapeForKey } from '@aora-bot/engine/static';
+import { renderStaticSvg, renderAvatarDataUrl, autoShapeForKey } from '@mowa-bot/engine/static';
 
 const svg = renderStaticSvg({ shape: 'hex', color: 'green', state: 'happy' });
 const url = renderAvatarDataUrl('ada@example.com');
 const shape = autoShapeForKey('ada@example.com'); // deterministic: 'hex'
 ```
 
-Everything exported from `@aora-bot/engine/static` is safe to call on a server, in a
+Everything exported from `@mowa-bot/engine/static` is safe to call on a server, in a
 worker, or during static generation.
 
 The ink follows the operating system's light/dark setting, which is right for `<img>`, data
@@ -59,7 +59,7 @@ For a terminal, a CLI or an agent log, `renderAsciiText` draws the `ascii` serie
 `{ ansi: true }` adds 24-bit colour:
 
 ```ts
-import { renderAsciiText } from '@aora-bot/engine/static';
+import { renderAsciiText } from '@mowa-bot/engine/static';
 
 console.log(renderAsciiText({ shape: 'mochi', state: 'happy', ansi: true }));
 ```
@@ -67,7 +67,7 @@ console.log(renderAsciiText({ shape: 'mochi', state: 'happy', ansi: true }));
 ## Simulate without drawing
 
 ```ts
-import { createSimulation, getStyle } from '@aora-bot/engine';
+import { createSimulation, getStyle } from '@mowa-bot/engine';
 
 const sim = createSimulation({ shape: 'flower', state: 'thinking', seed: 'ada' });
 sim.step(1 / 60);
@@ -86,7 +86,7 @@ it with `styleOptions`; `defineStyle` registers another.
 ## Drive a character from an agent
 
 ```ts
-import { createArbiter, normalizeLine } from '@aora-bot/engine/agent';
+import { createArbiter, normalizeLine } from '@mowa-bot/engine/agent';
 
 const arbiter = createArbiter({
   onApply: (result) => character.update({ state: result.state }),
@@ -100,9 +100,9 @@ arbiter, adapters, the state channel, and sprite-manifest helpers.
 
 ## Documentation
 
-- [Getting started](https://aora-bot.vercel.app/en/guide/getting-started)
-- [Shapes](https://aora-bot.vercel.app/en/design/shapes) | [States](https://aora-bot.vercel.app/en/design/states) | [Palette](https://aora-bot.vercel.app/en/design/palette)
+- [Getting started](https://mowa-bot.vercel.app/en/guide/getting-started)
+- [Shapes](https://mowa-bot.vercel.app/en/design/shapes) | [States](https://mowa-bot.vercel.app/en/design/states) | [Palette](https://mowa-bot.vercel.app/en/design/palette)
 
 ## License
 
-[MIT](https://github.com/sam70361/aora-bot/blob/main/LICENSE), code and character designs alike. A credit such as "Powered by Aora Bot" is welcome but not required. The name and logo are covered by the [trademark policy](https://github.com/sam70361/aora-bot/blob/main/TRADEMARKS.md).
+[MIT](https://github.com/ShmilyXI/mowa-bot/blob/main/LICENSE), code and character designs alike. Based on [Aora Bot](https://github.com/sam70361/aora-bot) by sam70361 (MIT); see [NOTICE.md](https://github.com/ShmilyXI/mowa-bot/blob/main/NOTICE.md).

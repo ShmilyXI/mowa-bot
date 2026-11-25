@@ -17,7 +17,7 @@ right one.
 
 ```
 packages/engine/   the character engine: geometry, motion, rendering
-packages/element/  the <aora-bot> Web Component and its CDN build
+packages/element/  the <mowa-bot> Web Component and its CDN build
 packages/react/    React primitives
 packages/surfaces/ product components built on the React package
 docs/              Rspress documentation site
@@ -25,7 +25,7 @@ api/               the avatar endpoint (a Vercel Function)
 examples/          runnable integration samples, not part of the workspace build
 ```
 
-The docs site aliases `@aora-bot/engine`, `@aora-bot/react` and `@aora-bot/surfaces` to their sources,
+The docs site aliases `@mowa-bot/engine`, `@mowa-bot/react` and `@mowa-bot/surfaces` to their sources,
 so editing a component reloads the site without a separate watch process.
 
 ## Before opening a pull request
@@ -38,7 +38,7 @@ That is the same sequence CI runs, in the same order. The libraries are built
 first because the React and surfaces packages and the docs resolve their workspace
 dependencies through `dist/`.
 
-Aora Bot is [MIT](./LICENSE) licensed, and so is every contribution: by opening a
+Mowa Bot is [MIT](./LICENSE) licensed, and so is every contribution: by opening a
 pull request you agree that your work is released under the same license. There is
 no CLA. Instead, sign off each commit (`git commit -s`) to certify the
 [Developer Certificate of Origin](https://developercertificate.org/): that you wrote
@@ -46,15 +46,12 @@ the change, or otherwise have the right to submit it under MIT. Do not submit
 characters, art or code copied from another project unless its license is compatible
 with MIT, and say where it came from in the pull request.
 
-The `emotion-ball` branch is the classic edition under its own license and is not
-open to contributions.
-
 ## Tests
 
 The engine's deterministic half is snapshot tested: shape outlines, derived
 metrics, expression geometry, belt frames and spring curves. If your change
 moves a curve, the snapshots will fail — inspect the diff, and update with
-`pnpm --filter @aora-bot/engine test -- -u` only once you are satisfied the new
+`pnpm --filter @mowa-bot/engine test -- -u` only once you are satisfied the new
 output is correct. The runtime renderer has lifecycle tests under `happy-dom`
 with fake timers, so blinks, belt entry and cleanup are covered without a
 browser.
@@ -111,12 +108,12 @@ the site. Nothing else names it, so the steps below are the whole job:
    cast, and the shapes, colours, skins, faces and states it opens),
    `skins.ts` for any skin of its own, and `index.ts` exporting the
    `ThemePackage`. The theme is its own build entry and subpath,
-   `@aora-bot/engine/themes/<id>`, and the core never bundles it.
+   `@mowa-bot/engine/themes/<id>`, and the core never bundles it.
 2. **Art.** A theme is first designed as a lab sheet: a standalone page that
    draws the cast, its doodles and its motions. Comments that say "the lab"
    mean that sheet. Draw the characters as fields in `packages/engine/scripts/art/<id>`,
    add the source to `THEME_SOURCES`, and run
-   `pnpm --filter @aora-bot/engine generate:faces` to write
+   `pnpm --filter @mowa-bot/engine generate:faces` to write
    `art.generated.ts`, `cast.generated.ts` and `faces.generated.ts`. Do not
    edit those by hand.
 3. **Manifest.** An entry in `packages/engine/src/themes/manifest.ts`: names,
@@ -124,7 +121,7 @@ the site. Nothing else names it, so the steps below are the whole job:
    order, borrowed core members included. `cards` is what the site counts
    before the theme loads.
 4. **React subpath.** `packages/react/src/themes/<id>.ts` re-exporting the
-   entry, so a React app installs it from `@aora-bot/react/themes/<id>`.
+   entry, so a React app installs it from `@mowa-bot/react/themes/<id>`.
 5. **Avatar pool.** Install the entry in `api/_avatar.ts` and give it a
    `THEME_POOL_BASE` (its cast's size when it first serves avatars). The pool
    is the cast, append only: never reorder or remove a member once it ships.
@@ -149,7 +146,7 @@ Before opening the pull request, check both walls:
 - screenshots of `/themes/` and `/themes/<id>`, light and dark, Chinese and
   English, desktop and a phone width, with the sticker wall in view;
 - the shelf's and the album's first-load JavaScript, LCP, TBT and CLS against
-  `main` (a production build, `pnpm --filter @aora-bot/docs build`), and the
+  `main` (a production build, `pnpm --filter @mowa-bot/docs build`), and the
   frame rate while the walls move. CLS stays at zero: the walls' boxes are set
   before any theme loads. A skin heavy enough to make a still take more than
   a frame to draw shows up here first;
@@ -174,7 +171,7 @@ its own. Do not annotate what the next line does.
 
 ## Releasing
 
-The four packages are published to npm under the `@aora-bot` scope; the docs
+The four packages are published to npm under the `@mowa-bot` scope; the docs
 and the workspace root are private. Give the four the same version and move the
 `Unreleased` section of `CHANGELOG.md` under it, then push a tag from a clean `main`:
 

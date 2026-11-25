@@ -5,7 +5,7 @@
 ## 一个 Provider，而不是每个组件一个 prop
 
 ```tsx preview
-import { LocaleProvider, ActivityBadge, CharacterSelector } from '@aora-bot/react';
+import { LocaleProvider, ActivityBadge, CharacterSelector } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -35,10 +35,10 @@ export default function Demo() {
 
 ## 产品界面的文案
 
-`@aora-bot/surfaces` 有自己的文案表（`template.*`、`walkthrough.*`、`restricted.*` 等），这些键不属于 `@aora-bot/react`。语言仍然由唯一的 `LocaleProvider` 决定，所以产品界面和其中的基础组件不会语言不一致。只有覆盖文案要通过 `SurfaceLocaleProvider`，因为 React 侧 provider 的 `overrides` 只接受它自己的键。
+`@mowa-bot/surfaces` 有自己的文案表（`template.*`、`walkthrough.*`、`restricted.*` 等），这些键不属于 `@mowa-bot/react`。语言仍然由唯一的 `LocaleProvider` 决定，所以产品界面和其中的基础组件不会语言不一致。只有覆盖文案要通过 `SurfaceLocaleProvider`，因为 React 侧 provider 的 `overrides` 只接受它自己的键。
 
 ```tsx
-import { SurfaceLocaleProvider } from '@aora-bot/surfaces';
+import { SurfaceLocaleProvider } from '@mowa-bot/surfaces';
 
 <SurfaceLocaleProvider overrides={{ 'template.title': '新建模板' }}>{children}</SurfaceLocaleProvider>;
 ```
@@ -48,7 +48,7 @@ import { SurfaceLocaleProvider } from '@aora-bot/surfaces';
 键的集合以英文表为准，所以新语言就是基于同一组键的一份 `Record`，TypeScript 会强制要求补全所有键。
 
 ```ts
-import { enUS, type Locale } from '@aora-bot/react';
+import { enUS, type Locale } from '@mowa-bot/react';
 
 const frFR: Locale = {
   ...enUS,
@@ -63,7 +63,7 @@ const frFR: Locale = {
 ## 自己读取文案
 
 ```tsx
-import { useLocale } from '@aora-bot/react';
+import { useLocale } from '@mowa-bot/react';
 
 function Label() {
   const { t, id } = useLocale();

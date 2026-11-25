@@ -6,7 +6,7 @@ import { API } from '@theme';
 
 ```tsx preview
 import { useEffect, useState } from 'react';
-import { CharacterMark, HudPlate, useHudSpec } from '@aora-bot/react';
+import { CharacterMark, HudPlate, useHudSpec } from '@mowa-bot/react';
 
 export default function Demo() {
   const [used, setUsed] = useState(9_000);
@@ -45,7 +45,7 @@ export default function Demo() {
 `placement` 决定文字显示在角色的下方、上方还是右侧。`level` 给底盘着色，可选 `info`、`ok`、`warn`、`alert`，应当少用：如果每次状态变化都换颜色，一轮对话里底盘就会在四种颜色之间闪烁。
 
 ```tsx preview
-import { CharacterMark, HudPlate } from '@aora-bot/react';
+import { CharacterMark, HudPlate } from '@mowa-bot/react';
 
 export default function Demo() {
   return (

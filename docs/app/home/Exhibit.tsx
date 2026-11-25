@@ -7,7 +7,7 @@ import {
   type CharacterHandle,
   type CharacterPreset,
   type CharacterState,
-} from '@aora-bot/react';
+} from '@mowa-bot/react';
 import {
   useCallback,
   useDeferredValue,

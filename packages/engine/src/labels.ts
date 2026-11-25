@@ -1,5 +1,5 @@
 /**
- * Ids and names only (`@aora-bot/engine/labels`).
+ * Ids and names only (`@mowa-bot/engine/labels`).
  *
  * For a page that shows names, not characters: a locale table, a menu, a
  * settings form. Nothing here reaches a shape, a renderer or a theme's art,

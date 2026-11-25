@@ -6,7 +6,7 @@ The words around a dial.
 
 ```tsx preview
 import { useEffect, useState } from 'react';
-import { CharacterMark, HudPlate, useHudSpec } from '@aora-bot/react';
+import { CharacterMark, HudPlate, useHudSpec } from '@mowa-bot/react';
 
 export default function Demo() {
   const [used, setUsed] = useState(9_000);
@@ -45,7 +45,7 @@ The plate does no rounding or formatting. `value` is shown as given, so the host
 `placement` puts the text below, above or to the right of the character. `level` colours the plate (`info`, `ok`, `warn` or `alert`) and should be used sparingly: a plate that changes colour on every state flickers through four colours in a single turn.
 
 ```tsx preview
-import { CharacterMark, HudPlate } from '@aora-bot/react';
+import { CharacterMark, HudPlate } from '@mowa-bot/react';
 
 export default function Demo() {
   return (

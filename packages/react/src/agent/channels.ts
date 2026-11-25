@@ -3,7 +3,7 @@ import {
   openMessageChannel,
   type ArbiterUpdate,
   type MessageChannelOptions,
-} from '@aora-bot/engine';
+} from '@mowa-bot/engine';
 import { useEffect, useState } from 'react';
 import { useLatest } from '../utils/hooks.js';
 import { useOptionalAgentState } from './AgentState.js';
@@ -20,7 +20,7 @@ export interface UseStateChannelOptions extends Pick<MessageChannelOptions, 'all
  * Accept `postMessage` state updates for as long as the component is mounted.
  *
  * The transport for a character embedded in an iframe or a browser
- * extension panel: the host document posts `{ type: 'aora:state', payload }`
+ * extension panel: the host document posts `{ type: 'mowa:state', payload }`
  * and the character reacts. Without an explicit `onUpdate` the updates go to
  * the nearest arbiter.
  */

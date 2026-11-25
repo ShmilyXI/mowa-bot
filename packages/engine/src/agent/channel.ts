@@ -10,11 +10,11 @@ import { resolveEmotionId, stateForEmotion } from './protocol.js';
  * event all carry the same object, so one normaliser serves every transport
  * and a relay script written for one works unchanged with another.
  *
- *     { "session_id": "s1", "aoraBotId": "32", "tips": "Editing…" }
+ *     { "session_id": "s1", "mowaBotId": "32", "tips": "Editing…" }
  *     { "session_id": "s1", "agent_id": "claude-code", "event": "PreToolUse" }
  *     { "session_id": "s1", "state": "thinking" }
  *
- * `session_id` is required. Then one of: a protocol id (`aoraBotId` or
+ * `session_id` is required. Then one of: a protocol id (`mowaBotId` or
  * `emotionId`), a state name (`state`), or an adapter id plus event name.
  * `tips` is an optional caption, `hud` an optional dial; `headless: true`
  * marks a session that should be tracked but never shown.
@@ -40,10 +40,10 @@ export function normalize(message: unknown, options: NormalizeOptions = {}): Nor
   const lookup = options.getAdapter ?? getAdapter;
   let emotionId: string | null = null;
 
-  const direct = m.aoraBotId ?? m.emotionId ?? m.state;
+  const direct = m.mowaBotId ?? m.emotionId ?? m.state;
   if (direct != null) {
     if (typeof direct !== 'string' && typeof direct !== 'number') {
-      return { ok: false, error: 'aoraBotId / emotionId / state must be a string' };
+      return { ok: false, error: 'mowaBotId / emotionId / state must be a string' };
     }
     emotionId = resolveEmotionId(direct);
     if (!emotionId) return { ok: false, error: `unknown state or id "${String(direct)}"` };
@@ -56,7 +56,7 @@ export function normalize(message: unknown, options: NormalizeOptions = {}): Nor
     if (!mapped) return { ok: false, error: `agent "${adapter.id}" has no event "${event}"` };
     emotionId = mapped;
   } else {
-    return { ok: false, error: 'need aoraBotId, state, or agent_id + event' };
+    return { ok: false, error: 'need mowaBotId, state, or agent_id + event' };
   }
 
   const update: ArbiterUpdate = {
@@ -94,7 +94,7 @@ export interface ChannelHandlers {
 }
 
 /** Wire shape for the `postMessage` transport. */
-export const MESSAGE_TYPE = 'aora:state';
+export const MESSAGE_TYPE = 'mowa:state';
 
 export interface MessageChannelOptions extends ChannelHandlers, NormalizeOptions {
   /**
@@ -108,7 +108,7 @@ export interface MessageChannelOptions extends ChannelHandlers, NormalizeOptions
 }
 
 /**
- * Listen for `{ type: 'aora:state', payload }` messages. Returns a closer.
+ * Listen for `{ type: 'mowa:state', payload }` messages. Returns a closer.
  *
  * This is the transport for iframes and browser extensions, where the agent
  * lives in another document.

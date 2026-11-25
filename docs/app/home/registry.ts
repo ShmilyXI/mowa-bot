@@ -1,4 +1,4 @@
-import { DEFAULT_STYLE_ID, listStyles } from '@aora-bot/engine';
+import { DEFAULT_STYLE_ID, listStyles } from '@mowa-bot/engine';
 import {
   CAST,
   FACE_STYLES,
@@ -6,7 +6,7 @@ import {
   type CharacterPreset,
   type FaceStyle,
   type ShapeFamily,
-} from '@aora-bot/react';
+} from '@mowa-bot/react';
 import { buildStateGroups, type StateGroup } from '../shared/state-groups.js';
 
 /*

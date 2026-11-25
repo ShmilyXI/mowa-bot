@@ -1,4 +1,4 @@
-import { renderAvatarDataUrl, shapeMaskImage, type FaceStyle, type NoseId } from '@aora-bot/engine';
+import { renderAvatarDataUrl, shapeMaskImage, type FaceStyle, type NoseId } from '@mowa-bot/engine';
 import type { CSSProperties } from 'react';
 import { useLocale } from '../locale/index.js';
 import {
@@ -165,7 +165,7 @@ export function AvatarGroup({
   const step = sizePx * (1 - layout.overlap);
 
   return (
-    <span className={cx('aora-stack', className)} style={{ width: layout.width, height: sizePx, ...style }}>
+    <span className={cx('mowa-stack', className)} style={{ width: layout.width, height: sizePx, ...style }}>
       {visible.map((member, index) => {
         const next = visible[index + 1];
         const cut = next ?? (withOverflow ? member : undefined);
@@ -173,7 +173,7 @@ export function AvatarGroup({
         return (
           <span
             key={member.id}
-            className="aora-stack__item"
+            className="mowa-stack__item"
             style={{
               left: layout.offsets[index],
               width: sizePx,
@@ -201,7 +201,7 @@ export function AvatarGroup({
 
       {withOverflow && (
         <span
-          className="aora-stack__overflow"
+          className="mowa-stack__overflow"
           role="img"
           aria-label={`${hidden} ${t('avatar.more')}`}
           style={{ left: step * visible.length, width: sizePx, height: sizePx }}

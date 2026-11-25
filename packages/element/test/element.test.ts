@@ -1,7 +1,7 @@
 // @vitest-environment happy-dom
-import { castMember, FACE_STYLES } from '@aora-bot/engine';
+import { castMember, FACE_STYLES } from '@mowa-bot/engine';
 import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
-import { AoraBotElement, defineAoraBot } from '../src/index.js';
+import { MowaBotElement, defineMowaBot } from '../src/index.js';
 
 /*
  * Reduced motion keeps the shared ticker out of these tests: the character
@@ -9,49 +9,49 @@ import { AoraBotElement, defineAoraBot } from '../src/index.js';
  */
 
 beforeAll(() => {
-  defineAoraBot();
+  defineMowaBot();
 });
 
 afterEach(() => {
   document.body.replaceChildren();
 });
 
-function mount(attributes: Record<string, string> = {}): AoraBotElement {
-  const el = document.createElement('aora-bot') as AoraBotElement;
+function mount(attributes: Record<string, string> = {}): MowaBotElement {
+  const el = document.createElement('mowa-bot') as MowaBotElement;
   el.setAttribute('reduced-motion', '');
   for (const [name, value] of Object.entries(attributes)) el.setAttribute(name, value);
   document.body.appendChild(el);
   return el;
 }
 
-const mark = (el: AoraBotElement) => el.shadowRoot!.querySelector<HTMLElement>('.mark')!;
+const mark = (el: MowaBotElement) => el.shadowRoot!.querySelector<HTMLElement>('.mark')!;
 
 /** The markup without its generated ids and references to them, so two characters compare equal. */
-const markup = (el: AoraBotElement) => mark(el).innerHTML.replace(/ id="[^"]*"|url\(#[^)]*\)/g, '');
+const markup = (el: MowaBotElement) => mark(el).innerHTML.replace(/ id="[^"]*"|url\(#[^)]*\)/g, '');
 
-describe('defineAoraBot', () => {
+describe('defineMowaBot', () => {
   it('registers the tag and returns the constructor', () => {
-    expect(customElements.get('aora-bot')).toBe(AoraBotElement);
-    expect(defineAoraBot()).toBe(AoraBotElement);
-    expect(document.createElement('aora-bot')).toBeInstanceOf(AoraBotElement);
+    expect(customElements.get('mowa-bot')).toBe(MowaBotElement);
+    expect(defineMowaBot()).toBe(MowaBotElement);
+    expect(document.createElement('mowa-bot')).toBeInstanceOf(MowaBotElement);
   });
 
   it('is safe to call twice', () => {
     expect(() => {
-      defineAoraBot();
-      defineAoraBot();
+      defineMowaBot();
+      defineMowaBot();
     }).not.toThrow();
   });
 
   it('registers another tag name with a subclass', () => {
-    const Constructor = defineAoraBot('x-aora-bot');
-    expect(customElements.get('x-aora-bot')).toBe(Constructor);
-    expect(new Constructor()).toBeInstanceOf(AoraBotElement);
-    expect(defineAoraBot('x-aora-bot')).toBe(Constructor);
+    const Constructor = defineMowaBot('x-mowa-bot');
+    expect(customElements.get('x-mowa-bot')).toBe(Constructor);
+    expect(new Constructor()).toBeInstanceOf(MowaBotElement);
+    expect(defineMowaBot('x-mowa-bot')).toBe(Constructor);
   });
 });
 
-describe('<aora-bot>', () => {
+describe('<mowa-bot>', () => {
   it('draws one SVG into its shadow root and destroys it on disconnect', () => {
     const el = mount({ character: 'mochi' });
     const controller = el.controller!;
@@ -81,8 +81,8 @@ describe('<aora-bot>', () => {
     const reference = mount({ shape: member.shape, color: member.color });
 
     expect(markup(el)).toBe(markup(reference));
-    expect(mark(el).style.getPropertyValue('--aora-fg')).toBe(
-      mark(reference).style.getPropertyValue('--aora-fg'),
+    expect(mark(el).style.getPropertyValue('--mowa-fg')).toBe(
+      mark(reference).style.getPropertyValue('--mowa-fg'),
     );
   });
 
@@ -90,8 +90,8 @@ describe('<aora-bot>', () => {
     const el = mount({ character: 'byte', color: 'pink' });
     const preset = mount({ character: 'byte' });
 
-    expect(mark(el).style.getPropertyValue('--aora-fg')).not.toBe(
-      mark(preset).style.getPropertyValue('--aora-fg'),
+    expect(mark(el).style.getPropertyValue('--mowa-fg')).not.toBe(
+      mark(preset).style.getPropertyValue('--mowa-fg'),
     );
   });
 
@@ -191,14 +191,14 @@ describe('<aora-bot>', () => {
 
   it('paints the colour through custom properties and clears the old ones', () => {
     const el = mount({ color: 'black' });
-    expect(mark(el).style.getPropertyValue('--aora-face-soft')).not.toBe('');
+    expect(mark(el).style.getPropertyValue('--mowa-face-soft')).not.toBe('');
 
     el.setAttribute('color', 'blue');
-    expect(mark(el).style.getPropertyValue('--aora-fg')).not.toBe('');
-    expect(mark(el).style.getPropertyValue('--aora-face-soft')).toBe('');
+    expect(mark(el).style.getPropertyValue('--mowa-fg')).not.toBe('');
+    expect(mark(el).style.getPropertyValue('--mowa-face-soft')).toBe('');
 
     el.setAttribute('eye-color', '#ff0000');
-    expect(mark(el).style.getPropertyValue('--aora-eye')).toBe('#ff0000');
+    expect(mark(el).style.getPropertyValue('--mowa-eye')).toBe('#ff0000');
   });
 
   it('builds a new character when an option the engine reads once changes', () => {
@@ -248,7 +248,7 @@ describe('<aora-bot>', () => {
   });
 
   it('ignores the methods while disconnected', () => {
-    const el = document.createElement('aora-bot') as AoraBotElement;
+    const el = document.createElement('mowa-bot') as MowaBotElement;
 
     expect(el.controller).toBeNull();
     expect(() => {
@@ -303,11 +303,11 @@ describe('accessibility', () => {
   });
 
   it('has a generic name without a character', () => {
-    expect(mount().getAttribute('aria-label')).toBe('Aora Bot');
+    expect(mount().getAttribute('aria-label')).toBe('Mowa Bot');
   });
 
   it('keeps a label and a role the author set', () => {
-    const el = document.createElement('aora-bot') as AoraBotElement;
+    const el = document.createElement('mowa-bot') as MowaBotElement;
     el.setAttribute('reduced-motion', '');
     el.setAttribute('aria-label', 'Support assistant');
     el.setAttribute('role', 'presentation');

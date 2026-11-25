@@ -4,11 +4,11 @@ import { API } from '@theme';
 
 Six pieces for showing an agent product without being the product: a window frame, work in flight, starting points, a waiting screen, a hand-off and a message field.
 
-> Part of `@aora-bot/surfaces`, not `@aora-bot/react`: `pnpm add @aora-bot/surfaces @aora-bot/react`, and import `@aora-bot/surfaces/styles.css` after the React stylesheet.
+> Part of `@mowa-bot/surfaces`, not `@mowa-bot/react`: `pnpm add @mowa-bot/surfaces @mowa-bot/react`, and import `@mowa-bot/surfaces/styles.css` after the React stylesheet.
 
 ```tsx preview
-import { CharacterStageProvider } from '@aora-bot/react';
-import { Composer, DemoDesktop, JobBubbles } from '@aora-bot/surfaces';
+import { CharacterStageProvider } from '@mowa-bot/react';
+import { Composer, DemoDesktop, JobBubbles } from '@mowa-bot/surfaces';
 
 export default function Demo() {
   return (
@@ -47,7 +47,7 @@ Work in flight, as words around a character. It uses bubbles rather than a list,
 
 ```tsx preview
 import { useState } from 'react';
-import { SuggestionCards, type SuggestionCard } from '@aora-bot/surfaces';
+import { SuggestionCards, type SuggestionCard } from '@mowa-bot/surfaces';
 
 const cards: SuggestionCard[] = [
   { id: 'triage', title: 'Triage the inbox', body: 'Sort what arrived overnight by who needs to see it.' },
@@ -71,7 +71,7 @@ Three starting points, each with a face. The characters are derived from the car
 ## LandingWait
 
 ```tsx preview
-import { LandingWait } from '@aora-bot/surfaces';
+import { LandingWait } from '@mowa-bot/surfaces';
 
 export default function Demo() {
   return (
@@ -93,8 +93,8 @@ The screen before anything has happened. A blank state with a waiting character 
 ## HandOff
 
 ```tsx preview
-import { CharacterStageProvider } from '@aora-bot/react';
-import { HandOff } from '@aora-bot/surfaces';
+import { CharacterStageProvider } from '@mowa-bot/react';
+import { HandOff } from '@mowa-bot/surfaces';
 
 export default function Demo() {
   return (

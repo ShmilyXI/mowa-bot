@@ -57,24 +57,24 @@ export function HudPlate({
     <div
       role="status"
       aria-live="polite"
-      className={cx('aora-hud-plate', className)}
+      className={cx('mowa-hud-plate', className)}
       data-level={level}
       data-placement={placement}
-      style={{ '--aora-hud-size': `${sizePx}px`, ...style } as CSSProperties}
+      style={{ '--mowa-hud-size': `${sizePx}px`, ...style } as CSSProperties}
     >
-      {children != null && <div className="aora-hud-plate__mark">{children}</div>}
+      {children != null && <div className="mowa-hud-plate__mark">{children}</div>}
 
       {hasText && (
-        <div className="aora-hud-plate__text">
-          {title != null && <span className="aora-hud-plate__title">{title}</span>}
+        <div className="mowa-hud-plate__text">
+          {title != null && <span className="mowa-hud-plate__title">{title}</span>}
           {value != null && (
-            <span className="aora-hud-plate__value">
+            <span className="mowa-hud-plate__value">
               {value}
-              {unit != null && <span className="aora-hud-plate__unit">{unit}</span>}
+              {unit != null && <span className="mowa-hud-plate__unit">{unit}</span>}
             </span>
           )}
           {lines?.map((line) => (
-            <span key={line} className="aora-hud-plate__line">
+            <span key={line} className="mowa-hud-plate__line">
               {line}
             </span>
           ))}

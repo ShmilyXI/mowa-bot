@@ -51,7 +51,7 @@ export {
   themeLook,
   themesNeeded,
   isFixed,
-} from '@aora-bot/engine/static';
+} from '@mowa-bot/engine/static';
 export type {
   ShapeId,
   ShapeFamily,
@@ -67,7 +67,7 @@ export type {
   ThemePackage,
   ThemeSource,
   StyleChoice,
-} from '@aora-bot/engine/static';
+} from '@mowa-bot/engine/static';
 
 /*
  * The crop maths lets a route compute the same crop the browser would without

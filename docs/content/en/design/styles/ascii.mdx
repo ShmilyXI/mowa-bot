@@ -5,7 +5,7 @@ import { StyleParamsDemo } from '@theme';
 The same character, typed out in glyphs. Every state, shape and face is available, including the default `cute` face and the effects around it, because the ascii series reuses the pixel series' rasteriser and only decides which character each cell is written as. It is the only series whose output is also plain text you can copy.
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -28,7 +28,7 @@ The default series is `vector`; a character that does not name a style is drawn 
 ## Variants
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 const variants = ['ansi', 'mono', 'crt'] as const;
 
@@ -66,7 +66,7 @@ The plate behind `crt` is part of the picture and does not follow the theme: a t
 `charset` chooses the glyph set the cells are written from.
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 const charsets = ['ascii', 'block', 'braille'] as const;
 
@@ -102,7 +102,7 @@ export default function Demo() {
 `fill` chooses how the inside of the body is written.
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 const fills = ['shade', 'solid', 'hollow'] as const;
 
@@ -138,7 +138,7 @@ export default function Demo() {
 `effect` adds motion to the glyphs themselves.
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 const effects = ['none', 'decode', 'shimmer', 'glitch'] as const;
 
@@ -197,7 +197,7 @@ Because `cols` is measured in shape space, the number of characters does not cha
 `renderAsciiText` returns the character as rows of text, joined by `\n` with trailing spaces trimmed. It takes the same options as `renderStaticSvg`, so a chat message, a terminal, a CLI banner, an agent log or a README can show exactly the character the series draws.
 
 ```tsx preview
-import { renderAsciiText } from '@aora-bot/engine';
+import { renderAsciiText } from '@mowa-bot/engine';
 
 export default function Demo() {
   const text = renderAsciiText({ shape: 'mochi', state: 'happy' });
@@ -212,7 +212,7 @@ export default function Demo() {
 In a terminal, add `ansi: true` to get 24-bit colour escape codes, then print the result:
 
 ```ts
-import { renderAsciiText } from '@aora-bot/engine/static';
+import { renderAsciiText } from '@mowa-bot/engine/static';
 
 // Plain text: safe to copy, log or paste into a README.
 console.log(renderAsciiText({ shape: 'mochi', state: 'happy' }));
@@ -221,7 +221,7 @@ console.log(renderAsciiText({ shape: 'mochi', state: 'happy' }));
 console.log(renderAsciiText({ shape: 'mochi', state: 'thinking', ansi: true }));
 ```
 
-`renderAsciiText` is exported from `@aora-bot/engine` and from `@aora-bot/engine/static`, so it runs in Node, a worker or a CLI without a DOM.
+`renderAsciiText` is exported from `@mowa-bot/engine` and from `@mowa-bot/engine/static`, so it runs in Node, a worker or a CLI without a DOM.
 
 ## How a cell is chosen
 
@@ -237,7 +237,7 @@ The output is still an SVG root: one `<text>` per colour and one `<tspan>` per r
 ## In the engine
 
 ```ts
-import { createCharacter, renderAsciiText, renderStaticSvg } from '@aora-bot/engine';
+import { createCharacter, renderAsciiText, renderStaticSvg } from '@mowa-bot/engine';
 
 const mark = createCharacter(host, {
   style: 'ascii',
@@ -265,7 +265,7 @@ A variant the series does not have falls back to its default, so a `vector` char
 `AppearanceProvider` sets them for a subtree. A prop on the mark wins over it, and nested providers merge field by field.
 
 ```tsx
-import { AppearanceProvider, CharacterMark, StagedMark } from '@aora-bot/react';
+import { AppearanceProvider, CharacterMark, StagedMark } from '@mowa-bot/react';
 
 <AppearanceProvider styleId="ascii" variant="mono" styleOptions={{ cols: 20 }}>
   <CharacterMark shape="blob" />

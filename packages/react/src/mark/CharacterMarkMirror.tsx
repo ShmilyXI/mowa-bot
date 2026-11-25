@@ -8,7 +8,7 @@ import {
   type NoseId,
   type StyleId,
   type StyleVariant,
-} from '@aora-bot/engine';
+} from '@mowa-bot/engine';
 import type { CSSProperties, ReactNode } from 'react';
 import { optionsKey } from '../appearance/AppearanceProvider.js';
 import { cx } from '../utils/cx.js';
@@ -87,7 +87,7 @@ export function CharacterMarkMirror({
 
   return (
     <span
-      className={cx('aora-mark', 'aora-mark--mirror', className)}
+      className={cx('mowa-mark', 'mowa-mark--mirror', className)}
       data-state={state}
       data-face={face}
       data-nose={nose ?? undefined}
@@ -98,8 +98,8 @@ export function CharacterMarkMirror({
       style={
         {
           ...getInkVars(color),
-          '--aora-leaf': getLeafColor(color),
-          ...(eyeColor ? { '--aora-eye': eyeColor } : null),
+          '--mowa-leaf': getLeafColor(color),
+          ...(eyeColor ? { '--mowa-eye': eyeColor } : null),
           width: size,
           ...style,
         } as CSSProperties

@@ -5,7 +5,7 @@ import { API } from '@theme';
 成员头像相互重叠的群组头像。
 
 ```tsx preview
-import { AvatarGroup } from '@aora-bot/react';
+import { AvatarGroup } from '@mowa-bot/react';
 
 const members = [{ id: 'a' }, { id: 'b' }, { id: 'c' }, { id: 'd' }, { id: 'e' }, { id: 'f' }];
 
@@ -30,7 +30,7 @@ export default function Demo() {
 圆形缺口只有在前方形状也是圆时才好看。遇到六边形，它会咬进一侧，又在另一侧留下楔形空隙，沿着边缘看缝隙的宽度也不一致。用真实轮廓挖缺口，任何形状的间隔都是均匀的。
 
 ```tsx preview
-import { AvatarGroup } from '@aora-bot/react';
+import { AvatarGroup } from '@mowa-bot/react';
 
 const shaped = [
   { id: 'a', shape: 'hex' as const },
@@ -53,7 +53,7 @@ export default function Demo() {
 超过 `maxVisible` 的成员会合并成一个 `+N` 标记。
 
 ```tsx preview
-import { AvatarGroup } from '@aora-bot/react';
+import { AvatarGroup } from '@mowa-bot/react';
 
 const many = Array.from({ length: 12 }, (_, i) => ({ id: `m-${i}` }));
 
@@ -77,7 +77,7 @@ export default function Demo() {
 - `participantsFromMembers(members, max)` 把成员列表拆成要绘制的脸 `visible`，以及隐藏成员的数量 `hidden`（供 `+N` 标记使用）。`max` 默认为 `GROUP_MAX_VISIBLE`（3），默认重叠为 `STACK_OVERLAP`（0.36）。
 
 ```tsx preview
-import { AvatarGroup, layoutAvatarGroup, participantsFromMembers, groupMetrics } from '@aora-bot/react';
+import { AvatarGroup, layoutAvatarGroup, participantsFromMembers, groupMetrics } from '@mowa-bot/react';
 
 const members = Array.from({ length: 7 }, (_, i) => ({ id: `p-${i}` }));
 

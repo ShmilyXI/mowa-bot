@@ -1,5 +1,5 @@
 // @vitest-environment happy-dom
-import { DEFAULT_TOOL_STATE, type CharacterState, type RosterSurface } from '@aora-bot/engine';
+import { DEFAULT_TOOL_STATE, type CharacterState, type RosterSurface } from '@mowa-bot/engine';
 import { act, useMemo, type ReactNode } from 'react';
 import { createRoot, type Root } from 'react-dom/client';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';

@@ -28,7 +28,7 @@ export default defineConfig({
       source: {
         entry: {
           static: './src/static.ts',
-          // Each theme's entry, re-exported from the engine (`@aora-bot/react/themes/<id>`).
+          // Each theme's entry, re-exported from the engine (`@mowa-bot/react/themes/<id>`).
           ...Object.fromEntries(THEME_MANIFEST.map(({ id }) => [`themes/${id}`, `./src/themes/${id}.ts`])),
         },
       },

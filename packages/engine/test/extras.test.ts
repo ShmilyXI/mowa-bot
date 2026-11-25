@@ -68,8 +68,8 @@ describe('mood decorations', () => {
     };
     const a = renderStaticSvg(options);
     expect(renderStaticSvg(options)).toBe(a);
-    expect(a).toContain('data-aora-decor');
-    expect(a).not.toContain('aora-anim');
+    expect(a).toContain('data-mowa-decor');
+    expect(a).not.toContain('mowa-anim');
     expect(a).not.toContain('<style>@keyframes');
     // Two kinds, one of them twice.
     expect(a.match(/<path d="M12 1.5C/g)).toHaveLength(3);
@@ -77,10 +77,10 @@ describe('mood decorations', () => {
 
   it('show nothing on a calm state with no set, and nothing on a core variant', () => {
     expect(renderStaticSvg({ shape: 'mochi', variant: 'fixdoodle', state: 'idle' })).not.toContain(
-      'data-aora-decor',
+      'data-mowa-decor',
     );
     expect(renderStaticSvg({ shape: 'mochi', variant: 'solid', state: 'happy' })).not.toContain(
-      'data-aora-decor',
+      'data-mowa-decor',
     );
   });
 
@@ -93,9 +93,9 @@ describe('mood decorations', () => {
   it('leave a character shown smaller than the set allows bare', () => {
     expect(
       renderStaticSvg({ shape: 'mochi', variant: 'fixdoodle', state: 'happy', sizePx: 48 }),
-    ).not.toContain('data-aora-decor');
+    ).not.toContain('data-mowa-decor');
     expect(renderStaticSvg({ shape: 'mochi', variant: 'fixdoodle', state: 'happy', sizePx: 96 })).toContain(
-      'data-aora-decor',
+      'data-mowa-decor',
     );
   });
 
@@ -163,13 +163,13 @@ describe('live decorations and motions', () => {
     document.body.replaceChildren();
   });
 
-  const decorOf = (el: Element) => el.querySelector('[data-aora-decor]')!;
-  const layerOf = (el: Element, name: string) => el.querySelector(`[data-aora-layer="${name}"]`)!;
-  const layerNameOf = (el: Element) => el.closest('[data-aora-layer]')?.getAttribute('data-aora-layer');
+  const decorOf = (el: Element) => el.querySelector('[data-mowa-decor]')!;
+  const layerOf = (el: Element, name: string) => el.querySelector(`[data-mowa-layer="${name}"]`)!;
+  const layerNameOf = (el: Element) => el.closest('[data-mowa-layer]')?.getAttribute('data-mowa-layer');
   /** A group's opacity, as an SVG attribute or, lifted into a box, as CSS. */
   const opacityOf = (el: Element) => el.getAttribute('opacity') ?? (el as HTMLElement).style.opacity;
   /** The stylesheet the page's characters share. */
-  const sheet = () => document.querySelectorAll('style[data-aora-motion]');
+  const sheet = () => document.querySelectorAll('style[data-mowa-motion]');
   const rules = () => Array.from(sheet(), (style) => style.textContent).join('');
 
   it('play in CSS, with the reduced-motion rule and the pause in one stylesheet the page shares', () => {
@@ -190,18 +190,18 @@ describe('live decorations and motions', () => {
     expect(character.element.querySelector('style')).toBeNull();
     expect(sheet()).toHaveLength(1);
     const text = rules();
-    expect(text).toContain('@keyframes aora-k');
+    expect(text).toContain('@keyframes mowa-k');
     expect(text).toContain('prefers-reduced-motion:reduce');
     // Each rule once, however many characters play it.
     const names = text.match(/@keyframes [\w-]+/g)!;
     expect(new Set(names).size).toBe(names.length);
     other.destroy();
-    const animated = decorOf(character.element).querySelector('.aora-anim')!;
-    expect(animated.getAttribute('style')).toContain('animation-play-state:var(--aora-play,running)');
+    const animated = decorOf(character.element).querySelector('.mowa-anim')!;
+    expect(animated.getAttribute('style')).toContain('animation-play-state:var(--mowa-play,running)');
     character.pause();
-    expect(character.element.style.getPropertyValue('--aora-play')).toBe('paused');
+    expect(character.element.style.getPropertyValue('--mowa-play')).toBe('paused');
     character.resume();
-    expect(character.element.style.getPropertyValue('--aora-play')).toBe('');
+    expect(character.element.style.getPropertyValue('--mowa-play')).toBe('');
     character.destroy();
   });
 
@@ -230,7 +230,7 @@ describe('live decorations and motions', () => {
       reducedMotion: true,
     });
     expect(decorOf(character.element).querySelectorAll('path').length).toBe(3);
-    expect(character.element.querySelector('.aora-anim')).toBeNull();
+    expect(character.element.querySelector('.mowa-anim')).toBeNull();
     expect(character.element.querySelector('style')).toBeNull();
     character.destroy();
   });
@@ -250,8 +250,8 @@ describe('live decorations and motions', () => {
     const [minX, minY, width] = svg.getAttribute('viewBox')!.split(' ');
     expect(object.getAttribute('transform')).toBe(`translate(${minX} ${minY})`);
     expect(object.getAttribute('width')).toBe(width);
-    const names = Array.from(object.querySelectorAll('[data-aora-layer]'), (el) =>
-      el.getAttribute('data-aora-layer'),
+    const names = Array.from(object.querySelectorAll('[data-mowa-layer]'), (el) =>
+      el.getAttribute('data-mowa-layer'),
     );
     expect(names).toEqual(['body', 'below', 'skin', 'above', 'face', 'streams', 'front', 'decor']);
     const skin = layerOf(svg, 'skin');
@@ -270,7 +270,7 @@ describe('live decorations and motions', () => {
     // Nothing of the body's motion is left inside the layers.
     expect(skin.querySelector('[transform*="rotate"]')).toBeNull();
     // The face is a layer of its own, clipped by the body the root defines.
-    const face = object.querySelector('[data-aora-face]')!;
+    const face = object.querySelector('[data-mowa-face]')!;
     expect(face.closest('svg')).toBe(layerOf(svg, 'face'));
     const clip = svg.querySelector('clipPath')!;
     expect(face.getAttribute('clip-path')).toBe(`url(#${clip.id})`);
@@ -305,18 +305,18 @@ describe('live decorations and motions', () => {
     vi.advanceTimersByTime(48);
     const halo = character.element.querySelector('circle[r="130"]')!;
     expect(layerNameOf(halo)).toBe('below');
-    expect(halo.closest('.aora-anim')).not.toBeNull();
+    expect(halo.closest('.mowa-anim')).not.toBeNull();
     expect(rules()).toMatch(/opacity:0\.55/);
     // A shape the skin does not breathe for keeps its underlay in the skin, still.
     character.update({ shape: 'mochi' });
     vi.advanceTimersByTime(48);
     const still = character.element.querySelector('circle[r="130"]')!;
     expect(layerNameOf(still)).toBe('skin');
-    expect(still.closest('.aora-anim')).toBeNull();
+    expect(still.closest('.mowa-anim')).toBeNull();
     character.destroy();
     const svg = renderStaticSvg({ shape: FLAG, variant: 'fixhalo', state: 'happy' });
     expect(svg).toContain('r="130"');
-    expect(svg).not.toContain('aora-anim');
+    expect(svg).not.toContain('mowa-anim');
     // A skin whose underlay reaches past the box lets a static document overflow.
     expect(svg).toMatch(/^<svg[^>]* overflow="visible"/);
     expect(renderStaticSvg({ shape: FLAG, variant: 'fixplain' })).not.toContain('overflow="visible"');
@@ -334,7 +334,7 @@ describe('live decorations and motions', () => {
     expect(character.element.querySelector('foreignObject')).toBeNull();
     expect(character.element.querySelector('g')!.id).toBe('mirrored');
     // A `<use>` copies the tree, so the keyframes stay in it.
-    expect(character.element.querySelector('style')!.textContent).toContain('@keyframes aora-k');
+    expect(character.element.querySelector('style')!.textContent).toContain('@keyframes mowa-k');
     character.destroy();
   });
 
@@ -372,8 +372,8 @@ describe('live decorations and motions', () => {
       reducedMotion: false,
     });
     vi.advanceTimersByTime(48);
-    const moving = Array.from(character.element.querySelectorAll('.aora-anim')).filter(
-      (el) => !el.closest('[data-aora-decor]'),
+    const moving = Array.from(character.element.querySelectorAll('.mowa-anim')).filter(
+      (el) => !el.closest('[data-mowa-decor]'),
     );
     // The wave, and the bubbles' three copies; the glow waits for a drowsy mood.
     expect(moving).toHaveLength(4);
@@ -388,8 +388,8 @@ describe('live decorations and motions', () => {
     character.update({ state: 'sleeping' });
     vi.advanceTimersByTime(48);
     expect(
-      Array.from(character.element.querySelectorAll('.aora-anim')).filter(
-        (el) => !el.closest('[data-aora-decor]'),
+      Array.from(character.element.querySelectorAll('.mowa-anim')).filter(
+        (el) => !el.closest('[data-mowa-decor]'),
       ),
     ).toHaveLength(5);
     character.destroy();
@@ -397,9 +397,9 @@ describe('live decorations and motions', () => {
 
   it('draw the rest pose in static output', () => {
     const svg = renderStaticSvg({ shape: FLAG, variant: 'fixdoodle', state: 'sleeping' });
-    expect(svg).not.toContain('aora-anim');
-    expect(renderStaticSvg({ shape: FLAG, variant: 'solid', state: 'sleeping' })).not.toContain('aora-anim');
-    expect(renderStaticSvg({ shape: ROCKER, variant: 'solid', state: 'happy' })).not.toContain('aora-anim');
+    expect(svg).not.toContain('mowa-anim');
+    expect(renderStaticSvg({ shape: FLAG, variant: 'solid', state: 'sleeping' })).not.toContain('mowa-anim');
+    expect(renderStaticSvg({ shape: ROCKER, variant: 'solid', state: 'happy' })).not.toContain('mowa-anim');
   });
 
   it('move a whole figure inside the body’s own motion, and stream glyphs round it', () => {
@@ -410,9 +410,9 @@ describe('live decorations and motions', () => {
       reducedMotion: false,
     });
     vi.advanceTimersByTime(48);
-    const face = character.element.querySelector('[data-aora-face]')!;
+    const face = character.element.querySelector('[data-mowa-face]')!;
     // The figure's motion plays on the HTML box that holds its layers.
-    const rocking = face.closest('div.aora-anim')!;
+    const rocking = face.closest('div.mowa-anim')!;
     expect(rocking).not.toBeNull();
     // The body's transform (hop and squash) is the box outside the figure's motion.
     const body = rocking.parentElement!;
@@ -420,19 +420,19 @@ describe('live decorations and motions', () => {
     const rule = rules();
     expect(rule).toContain('skew(0deg,3deg)');
     // In shares of the box, so it plays at any size.
-    expect(rocking.getAttribute('style')).toMatch(/animation:aora-k/);
+    expect(rocking.getAttribute('style')).toMatch(/animation:mowa-k/);
     expect(rule).toMatch(/translate\([\d.-]+%,[\d.-]+%\) rotate\([\d.-]+deg\) skew/);
     // The keyframe that only fades leaves the transform to the stops round it.
     expect(rule).toMatch(/80%\{opacity:0\.9\}/);
     // Four flakes beside the rocking figure, riding the body but not the rock.
-    const streams = body.querySelector(':scope > [data-aora-layer="streams"]')!;
-    expect(streams.querySelectorAll('.aora-anim')).toHaveLength(4);
+    const streams = body.querySelector(':scope > [data-mowa-layer="streams"]')!;
+    expect(streams.querySelectorAll('.mowa-anim')).toHaveLength(4);
     character.update({ state: 'sleeping' });
     vi.advanceTimersByTime(48);
     // The rock rests while drowsy; the snow keeps falling.
-    const still = character.element.querySelector('[data-aora-face]')!.closest('.aora-anim');
+    const still = character.element.querySelector('[data-mowa-face]')!.closest('.mowa-anim');
     expect(still).toBeNull();
-    expect(streams.querySelectorAll('.aora-anim')).toHaveLength(4);
+    expect(streams.querySelectorAll('.mowa-anim')).toHaveLength(4);
     character.destroy();
   });
 
@@ -445,10 +445,10 @@ describe('live decorations and motions', () => {
       reducedMotion: false,
     });
     vi.advanceTimersByTime(48);
-    const rocking = character.element.querySelector('[data-aora-face]')!.closest('.aora-anim')!;
+    const rocking = character.element.querySelector('[data-mowa-face]')!.closest('.mowa-anim')!;
     // Inside the body's transform, in the art's units.
     expect(rocking.parentElement!.getAttribute('transform')).toMatch(/scale\(/);
-    expect(rocking.parentElement!.querySelectorAll(':scope > .aora-anim')).toHaveLength(5);
+    expect(rocking.parentElement!.querySelectorAll(':scope > .mowa-anim')).toHaveLength(5);
     character.destroy();
   });
 
@@ -681,7 +681,7 @@ describe('the effect anchor', () => {
   it('moves the effect the character draws, and mirrors its pieces with it', () => {
     const svg = renderStaticSvg({ shape: FLAG, state: 'sleeping', face: 'cute' });
     const plain = renderStaticSvg({ shape: 'mochi', state: 'sleeping', face: 'cute' });
-    const zOf = (doc: string) => Number(/data-aora-fx=""><path d="M([0-9.-]+)/.exec(doc)?.[1]);
+    const zOf = (doc: string) => Number(/data-mowa-fx=""><path d="M([0-9.-]+)/.exec(doc)?.[1]);
     expect(zOf(plain)).toBeGreaterThan(CENTER);
     if (fxPlacement(getShape(FLAG), 'zz', getShapeScale(FLAG)).mirror) expect(zOf(svg)).toBeLessThan(CENTER);
   });
@@ -733,10 +733,10 @@ describe('the core bundle', () => {
           'function planFor',
           'function fxPlacement',
           '@keyframes',
-          'aora-anim',
-          'data-aora-decor',
-          'data-aora-layer',
-          'data-aora-motion',
+          'mowa-anim',
+          'data-mowa-decor',
+          'data-mowa-layer',
+          'data-mowa-motion',
         ])
           expect(text, `${file}: ${mark}`).not.toContain(mark);
       }

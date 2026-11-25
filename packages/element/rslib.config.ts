@@ -28,7 +28,7 @@ export default defineConfig({
       autoExternal: false,
       source: {
         entry: {
-          'aora-bot': './src/cdn.ts',
+          'mowa-bot': './src/cdn.ts',
         },
       },
       output: {

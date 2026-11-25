@@ -45,8 +45,8 @@ export function ActivityLine({ text, durationMs = 220, className, style }: Activ
 
   return (
     <span
-      className={cx('aora-ticker', className)}
-      style={{ '--aora-ticker-duration': `${durationMs}ms`, ...style } as CSSProperties}
+      className={cx('mowa-ticker', className)}
+      style={{ '--mowa-ticker-duration': `${durationMs}ms`, ...style } as CSSProperties}
     >
       {/*
        * Under reduced motion the swap is the whole animation, so the outgoing
@@ -55,11 +55,11 @@ export function ActivityLine({ text, durationMs = 220, className, style }: Activ
        * keeps track of what it is showing.
        */}
       {!reduced && previous != null && (
-        <span key={previous} className="aora-ticker__line aora-ticker__line--out" aria-hidden="true">
+        <span key={previous} className="mowa-ticker__line mowa-ticker__line--out" aria-hidden="true">
           {previous}
         </span>
       )}
-      <span key={text} className="aora-ticker__line aora-ticker__line--in">
+      <span key={text} className="mowa-ticker__line mowa-ticker__line--in">
         {text}
       </span>
     </span>

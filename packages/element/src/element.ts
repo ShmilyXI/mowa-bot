@@ -29,14 +29,14 @@ import {
   type ShapeId,
   type StyleId,
   type StyleVariant,
-} from '@aora-bot/engine';
+} from '@mowa-bot/engine';
 
 /**
- * The attributes `<aora-bot>` reads, as an author writes them. Every value is
+ * The attributes `<mowa-bot>` reads, as an author writes them. Every value is
  * a string in the document; the types say which ones the element understands
  * and fall back from the rest.
  */
-export interface AoraBotAttributes {
+export interface MowaBotAttributes {
   /** A named character from the cast. Supplies `shape`, `color`, `face` and `nose` when they are not given. */
   character?: CastId;
   shape?: ShapeId;
@@ -87,7 +87,7 @@ const ATTRIBUTES = [
   'emphasis',
   'antics',
   'auto-pause',
-] as const satisfies readonly (keyof AoraBotAttributes)[];
+] as const satisfies readonly (keyof MowaBotAttributes)[];
 
 /** What the engine reads once, when a character is created. A change to one of them builds a new character. */
 const FIXED = new Set<string>(['seed', 'reduced-motion', 'auto-pause']);
@@ -99,7 +99,7 @@ const BASE_STYLES = `
   display: flex;
   width: 100%;
   height: 100%;
-  --aora-bg: var(--aora-bg-base, Canvas);
+  --mowa-bg: var(--mowa-bg-base, Canvas);
 }
 .mark > svg {
   display: block;
@@ -159,7 +159,7 @@ function cssLength(value: string | null): string | null {
  * a removed attribute a no-op.
  */
 function resolve(el: Element): Resolved {
-  const get = (name: keyof AoraBotAttributes) => el.getAttribute(name);
+  const get = (name: keyof MowaBotAttributes) => el.getAttribute(name);
   const member = castMember(get('character'));
   const shape = pick(get('shape'), ALL_SHAPE_IDS) ?? member?.shape ?? DEFAULT_SHAPE;
   const color = pick(get('color'), ALL_COLOR_IDS) ?? member?.color ?? 'black';
@@ -200,7 +200,7 @@ function resolve(el: Element): Resolved {
       emphasis: el.hasAttribute('emphasis'),
       eyeScale: eyeScale !== undefined && eyeScale > 0 ? eyeScale : 1,
       lineWeight: finite(get('line-weight')) ?? 1,
-      badgeColor: get('badge-color') ?? 'var(--aora-accent)',
+      badgeColor: get('badge-color') ?? 'var(--mowa-accent)',
       antics: el.hasAttribute('antics'),
     },
     fixed: {
@@ -221,13 +221,13 @@ function resolve(el: Element): Resolved {
 const Base = (typeof HTMLElement === 'undefined' ? class {} : HTMLElement) as typeof HTMLElement;
 
 /**
- * `<aora-bot>`: one animated character, configured by attributes.
+ * `<mowa-bot>`: one animated character, configured by attributes.
  *
  * The character is drawn into a shadow root, so page CSS cannot reach it. It
  * is `role="img"`, labelled with the cast member's name unless the author gave
  * it a label of their own.
  */
-export class AoraBotElement extends Base {
+export class MowaBotElement extends Base {
   static readonly observedAttributes: readonly string[] = ATTRIBUTES;
 
   declare character: string | null;
@@ -326,10 +326,10 @@ export class AoraBotElement extends Base {
 
     this.#style.textContent = size ? `${BASE_STYLES}:host { width: ${size}; height: ${size}; }` : BASE_STYLES;
 
-    const vars = { ...getInkVars(color), '--aora-leaf': getLeafColor(color) };
+    const vars = { ...getInkVars(color), '--mowa-leaf': getLeafColor(color) };
     this.#mark.removeAttribute('style');
     for (const [name, value] of Object.entries(vars)) this.#mark.style.setProperty(name, value);
-    if (eyeColor) this.#mark.style.setProperty('--aora-eye', eyeColor);
+    if (eyeColor) this.#mark.style.setProperty('--mowa-eye', eyeColor);
 
     this.#label(member);
 
@@ -345,7 +345,7 @@ export class AoraBotElement extends Base {
     const own = this.getAttribute('aria-label');
     if (own !== null && own !== this.#autoLabel) return;
     const language = this.closest('[lang]')?.getAttribute('lang') ?? '';
-    const label = member ? member.name[/^zh/i.test(language) ? 'zh' : 'en'] : 'Aora Bot';
+    const label = member ? member.name[/^zh/i.test(language) ? 'zh' : 'en'] : 'Mowa Bot';
     this.setAttribute('aria-label', label);
     this.#autoLabel = label;
   }
@@ -379,7 +379,7 @@ const PROPERTIES = {
 
 /** A property for each attribute: `el.state = 'happy'` is `el.setAttribute('state', 'happy')`. */
 function defineProperty(name: string, attribute: string, kind: keyof typeof PROPERTIES): void {
-  Object.defineProperty(AoraBotElement.prototype, name, {
+  Object.defineProperty(MowaBotElement.prototype, name, {
     configurable: true,
     enumerable: true,
     get(this: Element) {
@@ -404,15 +404,15 @@ for (const [kind, names] of Object.entries(PROPERTIES)) {
 let defined = false;
 
 /**
- * Register `<aora-bot>`, or another tag name, and return the constructor.
+ * Register `<mowa-bot>`, or another tag name, and return the constructor.
  * Safe to call twice and safe to call without a DOM, where it registers nothing.
  */
-export function defineAoraBot(tagName = 'aora-bot'): typeof AoraBotElement {
-  if (typeof customElements === 'undefined') return AoraBotElement;
+export function defineMowaBot(tagName = 'mowa-bot'): typeof MowaBotElement {
+  if (typeof customElements === 'undefined') return MowaBotElement;
   const existing = customElements.get(tagName);
-  if (existing) return existing as typeof AoraBotElement;
+  if (existing) return existing as typeof MowaBotElement;
   // A constructor can only be registered once, so a second tag gets a subclass.
-  const constructor = defined ? class extends AoraBotElement {} : AoraBotElement;
+  const constructor = defined ? class extends MowaBotElement {} : MowaBotElement;
   customElements.define(tagName, constructor);
   defined = true;
   return constructor;
@@ -420,6 +420,6 @@ export function defineAoraBot(tagName = 'aora-bot'): typeof AoraBotElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'aora-bot': AoraBotElement;
+    'mowa-bot': MowaBotElement;
   }
 }

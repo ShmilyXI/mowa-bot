@@ -7,7 +7,7 @@ import {
   useLabel,
   type CharacterPreset,
   type CharacterState,
-} from '@aora-bot/react';
+} from '@mowa-bot/react';
 import { useEffect, useState, type CSSProperties } from 'react';
 import { useI18n, useLocalized } from '../../app/shared/i18n.js';
 import { COPIED_RESET_MS, copyText } from '../../app/shared/clipboard.js';

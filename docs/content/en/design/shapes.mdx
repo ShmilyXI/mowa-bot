@@ -35,7 +35,7 @@ A shape is derived the first time it is used: the outline is scaled to 239.4 uni
 | `parts`      | The pieces outside the body                       |
 
 ```tsx preview
-import { getShape, SHAPE_IDS } from '@aora-bot/react';
+import { getShape, SHAPE_IDS } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -83,7 +83,7 @@ Each part is painted one of four ways:
 | `tone`  | Painted as                                                                                                                 |
 | ------- | -------------------------------------------------------------------------------------------------------------------------- |
 | `body`  | The body's own ink, as if part of the outline (bunny ears, antenna, the cactus's arms)                                     |
-| `leaf`  | Green, read from `--aora-leaf` (a lighter green on a green body)                                                           |
+| `leaf`  | Green, read from `--mowa-leaf` (a lighter green on a green body)                                                           |
 | `inner` | Half ink, half white, for the inside of an ear and the bun's creases                                                       |
 | `hair`  | A step darker than the ink on a filled variant (lighter on a black body in light mode), solid ink in `outline` and `glass` |
 
@@ -92,7 +92,7 @@ Each part is painted one of four ways:
 Every vector variant draws parts: `outline` and `glass` merge them into the body outline and stroke it once, with no seam; the `sticker` border and the `paper` hard shadow wrap them too. The pixel series rasterises them onto the same grid.
 
 ```tsx preview
-import { CharacterMark, SHAPE_IDS, getShape } from '@aora-bot/react';
+import { CharacterMark, SHAPE_IDS, getShape } from '@mowa-bot/react';
 
 export default function Demo() {
   return (

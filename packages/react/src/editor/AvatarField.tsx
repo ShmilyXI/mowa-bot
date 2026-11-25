@@ -1,4 +1,4 @@
-import { pencilGlyphPath, type FaceStyle, type NoseId } from '@aora-bot/engine';
+import { pencilGlyphPath, type FaceStyle, type NoseId } from '@mowa-bot/engine';
 import { useState, type CSSProperties } from 'react';
 import { useLocale } from '../locale/index.js';
 import { CharacterMark } from '../mark/CharacterMark.js';
@@ -47,10 +47,10 @@ export function AvatarField({
   const [open, setOpen] = useState(false);
 
   return (
-    <span className={cx('aora-editable', className)} style={style}>
+    <span className={cx('mowa-editable', className)} style={style}>
       <button
         type="button"
-        className="aora-editable__button"
+        className="mowa-editable__button"
         aria-label={t('avatar.edit')}
         aria-expanded={open}
         onClick={() => setOpen((was) => !was)}
@@ -69,7 +69,7 @@ export function AvatarField({
           />
         )}
 
-        <span className="aora-editable__overlay" aria-hidden="true">
+        <span className="mowa-editable__overlay" aria-hidden="true">
           {/* The glyph is built around the origin, so the box is centred too. */}
           <svg
             viewBox={`${-GLYPH_SIZE / 2} ${-GLYPH_SIZE / 2} ${GLYPH_SIZE} ${GLYPH_SIZE}`}
@@ -91,7 +91,7 @@ export function AvatarField({
           face={face}
           nose={nose}
           lineWeight={lineWeight}
-          className="aora-editable__editor"
+          className="mowa-editable__editor"
         />
       )}
     </span>

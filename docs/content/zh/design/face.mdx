@@ -70,7 +70,7 @@ import {
 
 ### 颜色角色
 
-图层带的是颜色角色，不是具体颜色。`face` 是脸色（眼白）；`pupil` 是在脸色上看得清的颜色；`feature` 是在身体上看得清的颜色，用于眉毛、睫毛和直接画在身体上的眼睛，也就是 cute 脸的颜色；`glint` 是在 `feature` 上看得清的高光；`iris` 是加深后的身体墨色；其余是固定的强调色（金色星星、泪滴、舌头、爱心、怒气、纽扣的线和底色、深色玻璃）和屏幕的发光色。对于中间色相以外的颜色，`getInkVars` 还会按脸的配色规则写入 `--aora-face-pupil` 和 `--aora-face-glint`；它们随页面变化时（例如 `black`），静态输出也会随配色方案切换。
+图层带的是颜色角色，不是具体颜色。`face` 是脸色（眼白）；`pupil` 是在脸色上看得清的颜色；`feature` 是在身体上看得清的颜色，用于眉毛、睫毛和直接画在身体上的眼睛，也就是 cute 脸的颜色；`glint` 是在 `feature` 上看得清的高光；`iris` 是加深后的身体墨色；其余是固定的强调色（金色星星、泪滴、舌头、爱心、怒气、纽扣的线和底色、深色玻璃）和屏幕的发光色。对于中间色相以外的颜色，`getInkVars` 还会按脸的配色规则写入 `--mowa-face-pupil` 和 `--mowa-face-glint`；它们随页面变化时（例如 `black`），静态输出也会随配色方案切换。
 
 <DrawnFacePalette />
 
@@ -93,7 +93,7 @@ import {
 
 ## cute：默认的脸
 
-`cute` 脸直接涂在身体上，和 `eyes`、`line` 脸一样使用五官色 `--aora-face-soft`（大多数色相上是深色，深色墨上是白色，见[配色](/design/palette#脸的配色规则)）。每个状态各有一组眼型、嘴型和腮红，眼型按一定间隔轮换。所有表和演示在[表情](/design/expressions)，各状态的情绪特效和活动特效在[状态](/design/states)。
+`cute` 脸直接涂在身体上，和 `eyes`、`line` 脸一样使用五官色 `--mowa-face-soft`（大多数色相上是深色，深色墨上是白色，见[配色](/design/palette#脸的配色规则)）。每个状态各有一组眼型、嘴型和腮红，眼型按一定间隔轮换。所有表和演示在[表情](/design/expressions)，各状态的情绪特效和活动特效在[状态](/design/states)。
 
 在 `cute` 脸下，腰带状态不会把身体缩成一个小圆点：整个角色连同脸都保留，其他脸下由腰带表达的含义，改由身旁的特效表达。
 
@@ -173,7 +173,7 @@ morphMouth(MOUTHS.frown, MOUTHS.grin, t); // 永远是一张嘴
 
 ```tsx preview
 import { useState } from 'react';
-import { CharacterMark, FACE_STYLES, NOSE_IDS } from '@aora-bot/react';
+import { CharacterMark, FACE_STYLES, NOSE_IDS } from '@mowa-bot/react';
 
 export default function Demo() {
   const [face, setFace] = useState(0);
@@ -214,7 +214,7 @@ export default function Demo() {
 `lineWeight` 是第三个特征，和鼻子一样，每个角色只选一次。它是 `LINE_WEIGHT` 的倍数，限制在 `LINE_WEIGHT_RANGE`（0.8–1.25）之内。这一个数字会同时作用于鼻子、嘴**和 HUD 表盘**：身体外那圈环的描边线宽与身体内的五官一致，脸和表盘看起来是同一幅画，而不是脸旁边摆着一张图表。范围定得很窄，是有意的：线宽是决定角色看起来像钢笔画还是马克笔画的唯一数字，如果让宿主随意设置，列表里就会出现线宽与邻居不同的角色，整套风格就乱了。
 
 ```tsx preview
-import { CharacterMark, HudPlate } from '@aora-bot/react';
+import { CharacterMark, HudPlate } from '@mowa-bot/react';
 
 export default function Demo() {
   return (

@@ -1,5 +1,5 @@
 {
-  "name": "@aora-bot/docs",
+  "name": "@mowa-bot/docs",
   "version": "0.1.1",
   "private": true,
   "type": "module",
@@ -11,9 +11,9 @@
     "typecheck": "pnpm run api && tsc --noEmit"
   },
   "dependencies": {
-    "@aora-bot/engine": "workspace:*",
-    "@aora-bot/react": "workspace:*",
-    "@aora-bot/surfaces": "workspace:*",
+    "@mowa-bot/engine": "workspace:*",
+    "@mowa-bot/react": "workspace:*",
+    "@mowa-bot/surfaces": "workspace:*",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
   },

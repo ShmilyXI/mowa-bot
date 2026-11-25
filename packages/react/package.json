@@ -1,17 +1,16 @@
 {
-  "name": "@aora-bot/react",
+  "name": "@mowa-bot/react",
   "version": "0.3.0",
-  "description": "React components for the Aora Bot procedural character engine",
+  "description": "React components for the Mowa Bot procedural character engine",
   "license": "MIT",
-  "author": "sam70361",
-  "funding": "https://aora-bot.vercel.app/sponsor",
-  "homepage": "https://aora-bot.vercel.app",
+  "author": "ShmilyXI",
+  "homepage": "https://mowa-bot.vercel.app",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sam70361/aora-bot.git",
+    "url": "git+https://github.com/ShmilyXI/mowa-bot.git",
     "directory": "packages/react"
   },
-  "bugs": "https://github.com/sam70361/aora-bot/issues",
+  "bugs": "https://github.com/ShmilyXI/mowa-bot/issues",
   "keywords": [
     "react",
     "character",
@@ -67,7 +66,7 @@
     "react-dom": ">=19"
   },
   "dependencies": {
-    "@aora-bot/engine": "workspace:*"
+    "@mowa-bot/engine": "workspace:*"
   },
   "devDependencies": {
     "@rslib/core": "^0.18.0",

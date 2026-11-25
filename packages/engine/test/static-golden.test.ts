@@ -53,7 +53,7 @@ describe('static output', () => {
       const before = render();
       for (const svg of before) {
         expect(svg).not.toContain('foreignObject');
-        expect(svg).not.toContain('aora-anim');
+        expect(svg).not.toContain('mowa-anim');
       }
       vi.useFakeTimers({
         toFake: [

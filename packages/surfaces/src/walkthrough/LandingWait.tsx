@@ -1,6 +1,6 @@
-import type { ColorId, FaceStyle, HudSpec, NoseId, ShapeId } from '@aora-bot/engine';
+import type { ColorId, FaceStyle, HudSpec, NoseId, ShapeId } from '@mowa-bot/engine';
 import { useEffect, useState, type CSSProperties, type ReactNode } from 'react';
-import { HudPlate, CharacterMark, cx } from '@aora-bot/react';
+import { HudPlate, CharacterMark, cx } from '@mowa-bot/react';
 import { useSurfaceLocale } from '../locale/index.js';
 
 export interface LandingWaitProps {
@@ -67,7 +67,7 @@ export function LandingWait({
     waitMs != null && remaining != null ? { kind: 'timer', remainingMs: remaining, totalMs: waitMs } : null;
 
   return (
-    <div className={cx('aora-s-landing', className)} style={style}>
+    <div className={cx('mowa-s-landing', className)} style={style}>
       <HudPlate
         title={t('walkthrough.landing.elapsed')}
         value={clock(remaining ?? elapsed)}
@@ -86,10 +86,10 @@ export function LandingWait({
         />
       </HudPlate>
 
-      <div className="aora-s-landing__text">
-        <h2 className="aora-s-landing__title">{title ?? t('walkthrough.landing.title')}</h2>
-        <p className="aora-s-landing__body">{body ?? t('walkthrough.landing.body')}</p>
-        {action && <div className="aora-s-landing__action">{action}</div>}
+      <div className="mowa-s-landing__text">
+        <h2 className="mowa-s-landing__title">{title ?? t('walkthrough.landing.title')}</h2>
+        <p className="mowa-s-landing__body">{body ?? t('walkthrough.landing.body')}</p>
+        {action && <div className="mowa-s-landing__action">{action}</div>}
       </div>
     </div>
   );

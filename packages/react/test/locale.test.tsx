@@ -9,7 +9,7 @@ import {
   MOUTH_IDS,
   SHAPE_IDS,
   STYLE_IDS,
-} from '@aora-bot/engine';
+} from '@mowa-bot/engine';
 import { renderToString } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
 import { enUS, LocaleProvider, useLabel, useLocale, zhCN, type LocaleKey } from '../src/locale/index.js';

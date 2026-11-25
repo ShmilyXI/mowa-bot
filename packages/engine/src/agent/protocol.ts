@@ -5,7 +5,7 @@ import { CHARACTER_STATES, IDLE_STATE, isCharacterState, type CharacterState } f
  * The numeric emotion protocol.
  *
  * Agents and their hosts speak in two-digit ids, not in state names: a shell
- * hook can emit `{"aoraBotId":"34"}` without knowing what the character on
+ * hook can emit `{"mowaBotId":"34"}` without knowing what the character on
  * the other end calls an error, and a later kit can rename a state without
  * breaking every relay script written against it. The digits are grouped by
  * decade so a receiver that has never seen an id can still infer what kind of
@@ -211,7 +211,7 @@ export interface AgentMessage {
 }
 
 /**
- * Parse the wire form of a message: `{ aoraBotId, tips?, hud? }`,
+ * Parse the wire form of a message: `{ mowaBotId, tips?, hud? }`,
  * `{ emotionId }`, `{ state }`, or a JSON string of any of those.
  *
  * Returns `null` for malformed input instead of throwing, for the same reason
@@ -237,7 +237,7 @@ export function parseAgentMessage(input: unknown): AgentMessage | null {
   if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return null;
 
   const m = raw as Record<string, unknown>;
-  const candidate = m.aoraBotId ?? m.emotionId ?? m.emotion ?? m.state;
+  const candidate = m.mowaBotId ?? m.emotionId ?? m.emotion ?? m.state;
   if (candidate == null || (typeof candidate !== 'string' && typeof candidate !== 'number')) return null;
 
   const emotionId = resolveEmotionId(candidate);

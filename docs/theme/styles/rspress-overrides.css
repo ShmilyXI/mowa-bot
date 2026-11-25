@@ -28,29 +28,29 @@
    * the navbar, the sidebar and the prose in the same commit.
    */
   :root {
-    --rp-c-bg: var(--aora-bg-base) !important;
-    --rp-c-bg-soft: var(--aora-surface-sunken) !important;
+    --rp-c-bg: var(--mowa-bg-base) !important;
+    --rp-c-bg-soft: var(--mowa-surface-sunken) !important;
     --rp-c-bg-mute: var(--site-paper-mute) !important;
-    --rp-c-bg-alt: var(--aora-bg-base) !important;
-    --rp-c-divider: var(--aora-line-strong) !important;
-    --rp-c-divider-light: var(--aora-line) !important;
-    --rp-c-text-0: var(--aora-text) !important;
-    --rp-c-text-1: var(--aora-text) !important;
-    --rp-c-text-2: var(--aora-text-muted) !important;
-    --rp-c-text-3: var(--aora-text-faint) !important;
-    --rp-c-text-4: var(--aora-text-faint) !important;
+    --rp-c-bg-alt: var(--mowa-bg-base) !important;
+    --rp-c-divider: var(--mowa-line-strong) !important;
+    --rp-c-divider-light: var(--mowa-line) !important;
+    --rp-c-text-0: var(--mowa-text) !important;
+    --rp-c-text-1: var(--mowa-text) !important;
+    --rp-c-text-2: var(--mowa-text-muted) !important;
+    --rp-c-text-3: var(--mowa-text-faint) !important;
+    --rp-c-text-4: var(--mowa-text-faint) !important;
 
-    --rp-c-brand: var(--aora-accent) !important;
-    --rp-c-brand-dark: light-dark(var(--aora-blue-600), var(--aora-blue-500)) !important;
-    --rp-c-brand-darker: var(--aora-blue-700) !important;
-    --rp-c-brand-light: light-dark(var(--aora-blue-400), var(--aora-blue-300)) !important;
-    --rp-c-brand-lighter: var(--aora-blue-300) !important;
-    --rp-c-brand-tint: var(--aora-accent-soft) !important;
+    --rp-c-brand: var(--mowa-accent) !important;
+    --rp-c-brand-dark: light-dark(var(--mowa-blue-600), var(--mowa-blue-500)) !important;
+    --rp-c-brand-darker: var(--mowa-blue-700) !important;
+    --rp-c-brand-light: light-dark(var(--mowa-blue-400), var(--mowa-blue-300)) !important;
+    --rp-c-brand-lighter: var(--mowa-blue-300) !important;
+    --rp-c-brand-tint: var(--mowa-accent-soft) !important;
 
-    --rp-font-family-base: var(--aora-font-sans) !important;
-    --rp-font-family-mono: var(--aora-font-mono) !important;
-    --rp-radius: var(--aora-radius-lg) !important;
-    --rp-radius-small: var(--aora-radius-sm) !important;
+    --rp-font-family-base: var(--mowa-font-sans) !important;
+    --rp-font-family-mono: var(--mowa-font-mono) !important;
+    --rp-radius: var(--mowa-radius-lg) !important;
+    --rp-radius-small: var(--mowa-radius-sm) !important;
 
     /* The navbar's height plus the gap above it: what the layout reserves. */
     --rp-nav-height: calc(var(--site-nav-height) + var(--site-nav-inset)) !important;
@@ -109,10 +109,10 @@
     width: var(--site-nav-width) !important;
     height: var(--site-nav-height) !important;
     margin: var(--site-nav-inset) auto 0 !important;
-    --rp-nav-padding-x: var(--aora-space-6) !important;
+    --rp-nav-padding-x: var(--mowa-space-6) !important;
     padding: 0 var(--rp-nav-padding-x) !important;
     border: 0 !important;
-    border-radius: var(--aora-radius-pill) !important;
+    border-radius: var(--mowa-radius-pill) !important;
     background: var(--site-capsule-bg) !important;
     -webkit-backdrop-filter: var(--site-capsule-blur) !important;
     backdrop-filter: var(--site-capsule-blur) !important;
@@ -138,7 +138,7 @@
 
   @media (width < 640px) {
     .rp-nav {
-      --rp-nav-padding-x: var(--aora-space-4) !important;
+      --rp-nav-padding-x: var(--mowa-space-4) !important;
     }
   }
 
@@ -151,25 +151,17 @@
    * end's width moves them. That needs room for half the items plus the right
    * end on each side of the centre line, which the English labels run out of
    * below 1120px; there the items stay in the flow just before the search
-   * button. Below 960px even that is too narrow for five, so the last item,
-   * the external link to the classic Emotion Ball, steps out until the phone
-   * menu takes over.
+   * button.
    */
   @media (width > 768px) {
     .rp-nav__right {
       flex: 1 1 0;
       justify-content: flex-end;
-      gap: var(--aora-space-3);
+      gap: var(--mowa-space-3);
     }
 
     .rp-nav .rp-nav-menu--right {
       order: -1;
-    }
-  }
-
-  @media (768px < width < 960px) {
-    .rp-nav .rp-nav-menu--right > :last-child {
-      display: none !important;
     }
   }
 
@@ -187,17 +179,17 @@
    * on the same capsule surface, the same gap from the edges and from the pill.
    */
   .rp-nav-screen {
-    top: calc(var(--site-nav-offset) + var(--aora-space-2)) !important;
+    top: calc(var(--site-nav-offset) + var(--mowa-space-2)) !important;
     right: var(--site-capsule-gap) !important;
     bottom: auto !important;
     left: var(--site-capsule-gap) !important;
     width: auto !important;
     height: auto !important;
     max-height: calc(
-      100dvh - var(--site-nav-offset) - var(--aora-space-2) - var(--site-capsule-gap)
+      100dvh - var(--site-nav-offset) - var(--mowa-space-2) - var(--site-capsule-gap)
     ) !important;
     overflow-y: auto;
-    border-radius: var(--aora-radius-lg) !important;
+    border-radius: var(--mowa-radius-lg) !important;
     background: var(--site-capsule-bg-firm) !important;
     -webkit-backdrop-filter: var(--site-capsule-blur) !important;
     backdrop-filter: var(--site-capsule-blur) !important;
@@ -205,7 +197,7 @@
   }
 
   .rp-nav-menu__item {
-    font-size: var(--aora-text-sm) !important;
+    font-size: var(--mowa-text-sm) !important;
   }
 
   /* ---- language switch ------------------------------------------------------ */
@@ -246,15 +238,15 @@
     height: var(--_h);
     padding: 0;
     border: 0;
-    border-radius: var(--aora-radius-pill);
-    background: var(--aora-fill-hover);
+    border-radius: var(--mowa-radius-pill);
+    background: var(--mowa-fill-hover);
     box-shadow:
       inset 0 1px 2px color-mix(in oklab, black 18%, transparent),
       inset 0 0 0 1px color-mix(in oklab, currentColor 8%, transparent);
-    color: var(--aora-text-faint);
+    color: var(--mowa-text-faint);
     font: inherit;
-    font-size: var(--aora-text-xs);
-    font-weight: var(--aora-weight-semibold);
+    font-size: var(--mowa-text-xs);
+    font-weight: var(--mowa-weight-semibold);
     letter-spacing: 0.02em;
     cursor: pointer;
   }
@@ -272,11 +264,11 @@
     place-items: center;
     width: calc(var(--_w) / 2 - var(--_pad));
     height: calc(var(--_h) - var(--_pad) * 2);
-    border-radius: var(--aora-radius-pill);
-    background: var(--aora-surface);
-    box-shadow: var(--aora-shadow-sm);
-    color: var(--aora-text);
-    transition: translate var(--aora-duration-base) var(--aora-ease-out);
+    border-radius: var(--mowa-radius-pill);
+    background: var(--mowa-surface);
+    box-shadow: var(--mowa-shadow-sm);
+    color: var(--mowa-text);
+    transition: translate var(--mowa-duration-base) var(--mowa-ease-out);
   }
 
   .site-lang[aria-checked='true'] .site-lang__thumb {
@@ -284,7 +276,7 @@
   }
 
   .site-lang:hover .site-lang__thumb {
-    color: var(--aora-accent);
+    color: var(--mowa-accent);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -294,7 +286,7 @@
   }
 
   .rp-search-button {
-    border-radius: var(--aora-radius-pill);
+    border-radius: var(--mowa-radius-pill);
   }
 
   /* ---- shell alignment ------------------------------------------------------ */
@@ -369,22 +361,22 @@
    */
   .rp-sidebar-section-header {
     margin: 1.375rem 0 0.375rem;
-    padding-inline: var(--aora-space-3);
-    font-size: var(--aora-text-sm);
-    font-weight: var(--aora-weight-semibold);
+    padding-inline: var(--mowa-space-3);
+    font-size: var(--mowa-text-sm);
+    font-weight: var(--mowa-weight-semibold);
     letter-spacing: 0.04em;
-    color: var(--aora-text-faint);
+    color: var(--mowa-text-faint);
     text-transform: uppercase;
   }
 
   .rp-sidebar-section-header:first-child {
-    margin-top: var(--aora-space-1);
+    margin-top: var(--mowa-space-1);
   }
 
   /* A long sidebar needs tighter rows than a short one. */
   .rp-sidebar-item {
-    font-size: var(--aora-text-sm);
-    line-height: var(--aora-leading-normal);
+    font-size: var(--mowa-text-sm);
+    line-height: var(--mowa-leading-normal);
   }
 
   /*
@@ -396,9 +388,9 @@
   .rp-sidebar-item em,
   .rp-prev-next-page em {
     display: inline-block;
-    font-size: var(--aora-text-xs);
+    font-size: var(--mowa-text-xs);
     font-style: normal;
-    color: var(--aora-text-muted);
+    color: var(--mowa-text-muted);
     white-space: nowrap;
   }
 
@@ -422,10 +414,10 @@
     display: flex !important;
     flex-wrap: wrap;
     align-items: center;
-    gap: var(--aora-space-5);
+    gap: var(--mowa-space-5);
     min-width: 0;
     min-height: 7.5rem;
-    padding: 1.75rem var(--aora-space-6) !important;
+    padding: 1.75rem var(--mowa-space-6) !important;
     overflow: visible !important;
   }
 
@@ -438,9 +430,9 @@
 
     .rp-preview-operations--web {
       position: absolute;
-      inset-block-start: var(--aora-space-2);
-      inset-inline-end: var(--aora-space-2);
-      gap: var(--aora-space-2);
+      inset-block-start: var(--mowa-space-2);
+      inset-inline-end: var(--mowa-space-2);
+      gap: var(--mowa-space-2);
     }
 
     .rp-preview-operations--web .rp-preview-operations__button {
@@ -468,7 +460,7 @@
     max-width: 100%;
     overflow-x: auto;
     border-collapse: collapse;
-    font-size: var(--aora-text-sm);
+    font-size: var(--mowa-text-sm);
   }
 
   .rp-preview--internal__card__content pre {
@@ -477,7 +469,7 @@
   }
 
   .rp-preview--internal__card__content :is(th, td) {
-    padding: var(--aora-space-1) var(--aora-space-3);
+    padding: var(--mowa-space-1) var(--mowa-space-3);
     text-align: start;
   }
 
@@ -492,7 +484,7 @@
   .rp-callout__title::before {
     width: 0.5rem !important;
     height: 0.5rem !important;
-    border-radius: var(--aora-radius-pill) !important;
+    border-radius: var(--mowa-radius-pill) !important;
     align-self: center;
   }
 
@@ -511,7 +503,7 @@
   /* ---- doc tables ------------------------------------------------------------ */
 
   /*
-   * A token in a prose table is one word: `--aora-face` split after its
+   * A token in a prose table is one word: `--mowa-face` split after its
    * hyphen reads as two. Tables sit in a scroll container, so a cell that
    * cannot fit its code scrolls the table rather than breaking the name.
    */

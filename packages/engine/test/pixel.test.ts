@@ -361,7 +361,7 @@ describe('live pixel renderer', () => {
     const direct = createCharacter(mount(), { ...options, style: 'pixel' });
 
     // Ids carry a per-instance serial; the picture is what has to match.
-    const picture = (el: Element) => el.innerHTML.replace(/aora-p[xg]-[\w-]+/g, 'id');
+    const picture = (el: Element) => el.innerHTML.replace(/mowa-p[xg]-[\w-]+/g, 'id');
     expect(picture(switched.element)).toBe(picture(direct.element));
     switched.destroy();
     direct.destroy();

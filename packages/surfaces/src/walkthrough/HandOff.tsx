@@ -1,4 +1,4 @@
-import type { CharacterState, FaceStyle, NoseId } from '@aora-bot/engine';
+import type { CharacterState, FaceStyle, NoseId } from '@mowa-bot/engine';
 import { useEffect, useState, type CSSProperties } from 'react';
 import {
   agentColor,
@@ -8,7 +8,7 @@ import {
   type AgentLike,
   CharacterMark,
   cx,
-} from '@aora-bot/react';
+} from '@mowa-bot/react';
 import { useSurfaceLocale } from '../locale/index.js';
 
 export interface HandOffProps {
@@ -82,13 +82,13 @@ export function HandOff({
 
   return (
     <div
-      className={cx('aora-s-handoff', className)}
+      className={cx('mowa-s-handoff', className)}
       role="group"
       aria-label={t('walkthrough.handoff.title')}
       data-beat={beat}
       style={style}
     >
-      <figure className="aora-s-handoff__side">
+      <figure className="mowa-s-handoff__side">
         <CharacterMark
           shape={agentShape(from)}
           color={agentColor(from)}
@@ -102,9 +102,9 @@ export function HandOff({
         <figcaption>{from.name ?? t('walkthrough.handoff.from')}</figcaption>
       </figure>
 
-      <span className="aora-s-handoff__label">{label ?? t('walkthrough.handoff.title')}</span>
+      <span className="mowa-s-handoff__label">{label ?? t('walkthrough.handoff.title')}</span>
 
-      <figure className="aora-s-handoff__side">
+      <figure className="mowa-s-handoff__side">
         <CharacterMark
           shape={agentShape(to)}
           color={agentColor(to)}

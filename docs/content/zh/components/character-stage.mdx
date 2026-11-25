@@ -5,7 +5,7 @@ import { API } from '@theme';
 让外观相同的角色共享同一份动画。
 
 ```tsx preview
-import { CharacterStageProvider, StagedMark, COLOR_IDS } from '@aora-bot/react';
+import { CharacterStageProvider, StagedMark, COLOR_IDS } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -60,13 +60,13 @@ key 由形状、状态、脸型、鼻子、线宽、强调和暂停组成，墨�
 
 ## style 与 ref
 
-`style` 最后应用，所以在其中设置的 `--aora-fg` 会覆盖由 `color` 推出的墨色。要给角色传一个可动画的自定义属性，而不是固定墨色，只能这样做，群组活动的墨色过渡就依赖它。
+`style` 最后应用，所以在其中设置的 `--mowa-fg` 会覆盖由 `color` 推出的墨色。要给角色传一个可动画的自定义属性，而不是固定墨色，只能这样做，群组活动的墨色过渡就依赖它。
 
 `ref` 暴露的 `CharacterHandle` 与 `CharacterMark` 相同，但只有在角色自己拥有引擎时才有效，对 `StagedMark` 来说就是在 provider 之外。在 provider 之内，每个角色都是舞台隐藏源的镜像，与所有外观相同的角色共用一份动画，无法单独动作。这时句柄不会挂载，[`useTapCycle`](/components/mark-commands) 会返回没有可戳的角色。
 
 ```tsx preview
 import { useRef, type CSSProperties } from 'react';
-import { CharacterStageProvider, StagedMark, type CharacterHandle } from '@aora-bot/react';
+import { CharacterStageProvider, StagedMark, type CharacterHandle } from '@mowa-bot/react';
 
 export default function Demo() {
   const own = useRef<CharacterHandle>(null);
@@ -79,7 +79,7 @@ export default function Demo() {
           color="cyan"
           state="happy"
           sizePx={72}
-          style={{ '--aora-fg': '#0ea5e9' } as CSSProperties}
+          style={{ '--mowa-fg': '#0ea5e9' } as CSSProperties}
         />
         <StagedMark ref={mirror} shape="hex" color="cyan" state="happy" sizePx={72} />
       </CharacterStageProvider>

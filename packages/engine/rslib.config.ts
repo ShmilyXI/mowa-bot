@@ -12,7 +12,7 @@ export default defineConfig({
       static: './src/static.ts',
       agent: './src/agent.ts',
       labels: './src/labels.ts',
-      // Every shipped theme is an entry of its own (`@aora-bot/engine/themes/<id>`).
+      // Every shipped theme is an entry of its own (`@mowa-bot/engine/themes/<id>`).
       ...Object.fromEntries(THEME_MANIFEST.map(({ id }) => [`themes/${id}`, `./src/themes/${id}/index.ts`])),
       // What draws a theme's decorations and motions, shared by the theme entries that bring it.
       'themes/extras': './src/themes/extras/index.ts',
@@ -29,7 +29,7 @@ export default defineConfig({
     target: 'web',
     externals: [
       // A theme loads through the package's own subpath, never bundled into the core's entries.
-      /^@aora-bot\/engine\/themes\//,
+      /^@mowa-bot\/engine\/themes\//,
       // A theme entry reads the extras from their own entry beside it, so a page loads them once for every theme.
       ({ request, context }, callback) => {
         if (request === '../extras/index.js' && context && !/[\\/]themes[\\/]extras$/.test(context)) {

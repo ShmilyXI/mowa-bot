@@ -1,7 +1,7 @@
-import type { ColorId, FaceStyle, NoseId, ShapeId } from '@aora-bot/engine';
+import type { ColorId, FaceStyle, NoseId, ShapeId } from '@mowa-bot/engine';
 import { useState, type CSSProperties } from 'react';
 import { useSurfaceLocale } from '../locale/index.js';
-import { CharacterMark, cx } from '@aora-bot/react';
+import { CharacterMark, cx } from '@mowa-bot/react';
 
 export interface ShareCardProps {
   name: string;
@@ -61,8 +61,8 @@ export function ShareCard({
   };
 
   return (
-    <div className={cx('aora-s-share', className)} style={style}>
-      <span className="aora-s-share__mark">
+    <div className={cx('mowa-s-share', className)} style={style}>
+      <span className="mowa-s-share__mark">
         {pictureUrl ? (
           <img src={pictureUrl} alt="" width={sizePx} height={sizePx} />
         ) : (
@@ -79,14 +79,14 @@ export function ShareCard({
         )}
       </span>
 
-      <span className="aora-s-share__body">
-        <span className="aora-s-share__name">{name}</span>
-        <span className="aora-s-share__url">{url}</span>
+      <span className="mowa-s-share__body">
+        <span className="mowa-s-share__name">{name}</span>
+        <span className="mowa-s-share__url">{url}</span>
       </span>
 
       <button
         type="button"
-        className="aora-button"
+        className="mowa-button"
         aria-label={t('template.copyLink')}
         onClick={() => void copy()}
       >

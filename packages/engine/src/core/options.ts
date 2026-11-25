@@ -57,7 +57,7 @@ export type CharacterVariant = (typeof VECTOR_VARIANTS)[number];
 export type StyleVariant = CharacterVariant | (string & Record<never, never>);
 
 /**
- * Body paint, overriding the `--aora-fg` token.
+ * Body paint, overriding the `--mowa-fg` token.
  *
  * Two forms because they answer two different questions. A flat colour is
  * what a host uses when the character has to match something else on the

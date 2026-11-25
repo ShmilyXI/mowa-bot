@@ -1,4 +1,4 @@
-# Aora Bot 架构
+# Mowa Bot 架构
 
 本文是仓库的结构契约：每个目录放什么、层与层之间怎么依赖、新增一个"风格系列"要动哪里。
 改动结构前先改这里。
@@ -6,11 +6,11 @@
 ## 1. 分层
 
 ```
-@aora-bot/engine     纯 TypeScript，无 React。几何、模拟、风格系列与渲染器
+@mowa-bot/engine     纯 TypeScript，无 React。几何、模拟、风格系列与渲染器
       ↑
-@aora-bot/react      React 原语：CharacterMark、共享舞台、头像、选择器、HUD、外观上下文、tokens
+@mowa-bot/react      React 原语：CharacterMark、共享舞台、头像、选择器、HUD、外观上下文、tokens
       ↑
-@aora-bot/surfaces   产品/演示面：引导页、场景、模板发布、占用列表、群像舞台
+@mowa-bot/surfaces   产品/演示面：引导页、场景、模板发布、占用列表、群像舞台
       ↑
 docs/                Rspress 站点：theme/ 只是外壳，app/ 是首页控制台、打赏页和文档里的演示这些应用页
 ```
@@ -48,7 +48,7 @@ CharacterOptions ──► Simulation ──step(dt)──► FrameSnapshot ─�
   与身体共用同一次归一化（外框取身体与 parts 的并集，面积取身体）。
 - **快照**：`FrameSnapshot.body.parts` 带着身体的姿态变换，每个 part 附一个 `opacity`；换形状时旧 parts 淡出、新 parts 淡入（`partsFade` 弹簧），所以形变过程中不会有附件突然消失。
 - **渲染**：画法都在各自的模块里，`build.ts` / 像素栅格只留最小的挂钩。
-  - 向量（`render/vector/parts.ts`）：`body` 与身体同色同渐变；`leaf` 用 `--aora-leaf`（`#34B36B`，绿色身体上是 `#7BCB5A`，宿主设同名自定义属性，静态渲染直接写入十六进制）；`inner` 是 ink 与 45% 白的混合。
+  - 向量（`render/vector/parts.ts`）：`body` 与身体同色同渐变；`leaf` 用 `--mowa-leaf`（`#34B36B`，绿色身体上是 `#7BCB5A`，宿主设同名自定义属性，静态渲染直接写入十六进制）；`inner` 是 ink 与 45% 白的混合。
     `outline` / `glass` 里 body 调的 parts 与身体做多边形并集（`unionOutline`，按身体环的身份缓存）后统一描边，不留接缝；并集失败或淡入淡出途中退回逐个描边。`sticker` 的纸边与 `paper` 的硬阴影把 parts 一并包进去。`soft` 与 `riso` 多遍叠绘，body 调的 parts 每一遍都跟着身体走（`bodyPieces`）：soft 的径向高光渐变按身体外框取 `userSpaceOnUse`，耳朵吃到的明暗与它在整个形象上的位置一致，地面阴影按「身体加 body 调 parts」的外框定宽度和落点；riso 的第二色、白色提亮和网点都覆盖到 parts，leaf / inner 配件按各自颜色盖在印刷层之上。
     画材变体（`render/vector/media.ts`）不用 `partLayers`，自己从轮廓重画身体和每个 part：线描画材（pencil / neon / chalk）与 outline 一样把 body 调的 parts 并进身体轮廓、不画 inner；涂色画材（marker / crayon / watercolor）把 body 调的 parts 画在身体下面，leaf / inner / hair 用各自颜色和同一支笔画在上面。折纸（origami，几何在 `render/vector/origami.ts`）同涂色画材的分层，每个 piece 拉直成多边形后从一点折到各角，按面的朝向和山折谷折交替叠白或叠黑，折法按轮廓缓存。
   - 像素（`render/pixel/parts.ts`）：body 调的 parts 写进身体的蒙版；leaf / inner 作为带 tint 的配件按 paint id 绘制，三个变体通用。
@@ -56,7 +56,7 @@ CharacterOptions ──► Simulation ──step(dt)──► FrameSnapshot ─�
 ### 主题的涂鸦、签名动作与分层绘制
 
 - **数据与画法分开**：主题入口用 `ThemePackage.decor`（`DecorSpec`，按心情或状态排的涂鸦）和 `ThemePackage.motions`（美术部件点名的签名动作）带来自己的装饰和动作。画法在共享的 `themes/extras/` 里，打成独立的 `themes/extras.js`，由主题的 `extras: EXTRAS` 带进来；核心只留挂钩 `themes/extras-hook.ts`，主包和 `/static` 都不含画法（`test/extras.test.ts` 检查）。
-- **分层绘制**：live 角色只要穿主题皮肤，或播放主题的涂鸦和动作，就分层绘制（`drawsInLayers`）。根 SVG 自己的组只留最底层，其余图层由 `themes/extras/stage.ts` 写进根 SVG 里的一个 `<foreignObject>`，每层是 HTML 盒子里的一个 SVG。身体的弹簧运动是承载图层的盒子的 transform，签名动作和涂鸦是内部盒子的 CSS 动画，所以浏览器只做合成，不重画带纹理的皮肤。关键帧写进每个文档或 shadow root 共用的一个 `<style data-aora-motion>`，按帧内容的哈希命名。
+- **分层绘制**：live 角色只要穿主题皮肤，或播放主题的涂鸦和动作，就分层绘制（`drawsInLayers`）。根 SVG 自己的组只留最底层，其余图层由 `themes/extras/stage.ts` 写进根 SVG 里的一个 `<foreignObject>`，每层是 HTML 盒子里的一个 SVG。身体的弹簧运动是承载图层的盒子的 transform，签名动作和涂鸦是内部盒子的 CSS 动画，所以浏览器只做合成，不重画带纹理的皮肤。关键帧写进每个文档或 shadow root 共用的一个 `<style data-mowa-motion>`，按帧内容的哈希命名。
 - **WebKit 的约束**：WebKit 合成 `<foreignObject>` 里的 HTML 时不套用 SVG 自身的变换。所以 `<foreignObject>` 放在根 SVG 的原点、尺寸等于显示尺寸，用它自己的 transform 抵消 viewBox，让其中一个单位等于一个 CSS 像素；只有这个变换的净效果为零，各浏览器才画在同一个位置。
 - **静态输出不变**：`test/static-golden.test.ts` 钉住了分层之前的逐字节输出。
 
@@ -123,7 +123,7 @@ defineStyle({
 
 - `eyes` / `line`：另外两种脸，有各自的眼型表、嘴型表和摆放逻辑。`cute` 与它们之间用 `cuteBlend` 弹簧过渡，运行时切换不跳变。
 - 手绘脸（`brow`、`glossy`、`sparkle`、`button`、`shades`、`droopy`、`bigmouth`、`pie`、`screen`、`symbol`）：cute 一族（`isCuteFamily`），沿用 cute 的点半径、眼线、腮红、特效和保留身体的腰带规则。每种脸是 `face/drawn/designs/<id>.ts` 里的一张 `FaceDesign`：布局、按名字的表情（每个表情是一组数字，19 个 cute 名字都有自己的画法）、状态表、嘴型表、颜色角色、要静音的特效、颜文字字形，以及把数字变成图层的构建函数；共用 cute 的表时在数据里直接写出来。模拟在 cute 眼睛之外再跑一对手绘眼睛（同一个 `eyeMorph` 弹簧），换脸时用 `faceFade` 交叉淡化。几何是 `FaceGeometry.drawn`：每只眼、面盘、嘴里的若干图层，每层是闭合轮廓加颜色角色（`face`、`pupil`、`feature`、`glint`、`iris`、强调色、`light`），由各渲染器按变体和配色解释（向量 `render/vector/drawn.ts`，像素 `render/pixel/drawn.ts`，颜文字 `drawnFaceText`）。放上身体前先量外廓、按头部投影检查，放不下就同时缩小并下移（`face/drawn/place.ts`）。
-- 脸色是 CSS 变量：`--aora-face`（色相身体上为白，黑色身体上缺省，回落为页面底色，等于挖空）、`--aora-face-soft`（soft、crayon、watercolor 的深色脸，也是手绘脸画在身体上的眉毛和眼睛）、`--aora-face-pupil` / `--aora-face-glint`（手绘脸的瞳孔与身体上眼睛的高光，只有黑色身体需要写）、`--aora-ink2`（riso 的第二色，粉色改用金色）。宿主用 `getInkVars(color)` 一次写全，不要只写 `--aora-fg`。
+- 脸色是 CSS 变量：`--mowa-face`（色相身体上为白，黑色身体上缺省，回落为页面底色，等于挖空）、`--mowa-face-soft`（soft、crayon、watercolor 的深色脸，也是手绘脸画在身体上的眉毛和眼睛）、`--mowa-face-pupil` / `--mowa-face-glint`（手绘脸的瞳孔与身体上眼睛的高光，只有黑色身体需要写）、`--mowa-ink2`（riso 的第二色，粉色改用金色）。宿主用 `getInkVars(color)` 一次写全，不要只写 `--mowa-fg`。
 
 约束：
 
@@ -138,7 +138,7 @@ defineStyle({
 
 首页控制台能设置的东西叫 `Preset`（shape、color、style、variant、state），它和分享链接的编码都只属于站点，放在 `docs/app/shared/share.ts`：
 
-- 分享参数 `?s=` 的前缀带版本号（`aorabot1.`）；解码对每个字段做校验，注册表不认识的字段回落默认值（系列回落到 `DEFAULT_STYLE_ID`），链接不会坏。
+- 分享参数 `?s=` 的前缀带版本号（`mowabot1.`）；解码对每个字段做校验，注册表不认识的字段回落默认值（系列回落到 `DEFAULT_STYLE_ID`），链接不会坏。
 - 代码片段（`snippet.ts`）与首页注册表（`home/registry.ts`）读同一个 `Preset`。
 - 站点专属的东西（UI 状态）留在 `docs/app/`，不往引擎里塞；如果别的宿主也需要同一份描述，再下沉到引擎，而不是复制。
 
@@ -154,7 +154,7 @@ defineStyle({
 - **共享舞台**：外观键包含 style、variant 和 styleOptions（只取与默认值不同的参数，`{}` 与默认值共用一个源），不同系列的角色不会共用同一个源。
 - 根元素输出 `data-style`、`data-variant`，供宿主 CSS 选择。
 - `CharacterMark` 的 `variant` 没有固定默认值，由所选系列的 `defaultVariant` 决定。
-- `@aora-bot/react` 只放通用原语。截图式场景、引导流程、带业务语义的对话框放 `@aora-bot/surfaces`。
+- `@mowa-bot/react` 只放通用原语。截图式场景、引导流程、带业务语义的对话框放 `@mowa-bot/surfaces`。
 
 ## 6. 样式与设计令牌
 
@@ -163,16 +163,16 @@ defineStyle({
 - **深色模式只有一种机制**：令牌一律写成 `light-dark()`；页面通过 `color-scheme` 决定明暗。
   `:root` 默认 `color-scheme: light dark` 跟随系统，`.dark` / `[data-theme=dark]` / `.rp-dark` 强制 dark，`.light` / `[data-theme=light]` 强制 light。
   角色的 ink 本来就用 `light-dark()`，所以 UI 和角色永远一致。
-- **类名前缀**：库用 `aora-`，站点用 `site-`，`@aora-bot/surfaces` 用 `aora-s-`。站点不得复用库的类名来定义自己的组件。
-- **层**：库在 `@layer aora.*` 里；站点在 `@layer site.*` 里，并且排在库之后。不用 `!important`，对 Rspress 的覆盖除外，且要集中在一个文件里。
-  完整顺序在 `docs/theme/styles/site-tokens.css` 第一行声明：`rp-base, aora.tokens, aora.base, aora.components, aora.surfaces, site.shell, site.components, site.pages`。
+- **类名前缀**：库用 `mowa-`，站点用 `site-`，`@mowa-bot/surfaces` 用 `mowa-s-`。站点不得复用库的类名来定义自己的组件。
+- **层**：库在 `@layer mowa.*` 里；站点在 `@layer site.*` 里，并且排在库之后。不用 `!important`，对 Rspress 的覆盖除外，且要集中在一个文件里。
+  完整顺序在 `docs/theme/styles/site-tokens.css` 第一行声明：`rp-base, mowa.tokens, mowa.base, mowa.components, mowa.surfaces, site.shell, site.components, site.pages`。
   Rspress 自己的 CSS 不在任何层里，普通声明会压过所有层内规则；层内的 `!important` 反过来压过未分层规则。因此对 Rspress 变量和选择器的覆盖只放在 `rspress-overrides.css`，并用 `!important`。
-- **站点 CSS 文件**（都由 `docs/theme/index.tsx` 导入）：`site-tokens.css`（`--site-*`、层声明、`--aora-bg-base` 的唯一映射）、
+- **站点 CSS 文件**（都由 `docs/theme/index.tsx` 导入）：`site-tokens.css`（`--site-*`、层声明、`--mowa-bg-base` 的唯一映射）、
   `rspress-overrides.css`、`shell.css`（背景、焦点环、`.site-capsule`、`.site-glow`）、`controls.css`（`.site-btn/field/menu/swatch/demo` 和滑块等共用控件）、
-  `doc-components.css`（API / token / 概览 / 协议 / 图 / 状态矩阵）、`pages/{home,sponsor}.css`。
+  `doc-components.css`（API / token / 概览 / 协议 / 图 / 状态矩阵）、`pages/home.css`。
 - **浮动胶囊**：站点的导航栏与首页的左 / 右 / 下三条边都是同一种胶囊：半透明纸色加 `backdrop-filter` 模糊、1px 全周环线、柔和投影，全圆角，离视口边缘 `--site-capsule-gap`。
   这套表面只在 `site-tokens.css` 的 `--site-capsule-*` 里写一次，`.site-capsule`（`shell.css`）与 `.rp-nav`（`rspress-overrides.css`）都读它们，不要在页面里另写一份。
-- **站点定制库组件**：在容器上设自定义属性（如 `--aora-mark-filter`、`--aora-hud-value-size`、`--aora-bg-base`），不写 `.site-x .aora-mark {…}` 这类后代覆盖。
+- **站点定制库组件**：在容器上设自定义属性（如 `--mowa-mark-filter`、`--mowa-hud-value-size`、`--mowa-bg-base`），不写 `.site-x .mowa-mark {…}` 这类后代覆盖。
 - **构建要求**：rslib 与 rspress 都必须设 `overrideBrowserslist` 指向支持 `light-dark()` / oklch / 嵌套的浏览器，否则 lightningcss 会把它们降级，破坏 `color-scheme` 切换。
 - **静态 SVG 的明暗**：静态 SVG 自己带墨水深浅色，由 `StaticOptions.colorScheme` 选机制（共用 `render/scheme.ts`，四个系列都走它）。
   `system`（默认）写 `@media (prefers-color-scheme: dark)`，跟系统走，适合 `<img>`、data URL 和导出文件，因为 SVG 文档在这些场合看不到宿主页面。
@@ -183,12 +183,12 @@ defineStyle({
   不改 `font-weight`、`font-size`、`padding`、`margin`、边框宽度、尺寸。`transition` 只写具体的非布局属性，不写 `all`。
   会变的数字用 `tabular-nums`；异步内容和图片预留尺寸；`html` 设 `scrollbar-gutter: stable`。
 - **不允许单侧加粗边框**：不用 `border-left/inline-start: 3px` 一类的色条，也不用 `inset 2px 0 0` 一类的单边内阴影。
-  强调状态改用整圈细边框着色、背景着色或填充反色；下划线用 `text-decoration`。分隔线用 1px 的 `--aora-line`。
+  强调状态改用整圈细边框着色、背景着色或填充反色；下划线用 `text-decoration`。分隔线用 1px 的 `--mowa-line`。
 
 ## 7. 代码约定
 
 - **默认值只有一个出处**：默认系列是 `DEFAULT_STYLE_ID`，内置系列表是 `STYLE_IDS`（都在引擎 `styles/ids.ts`）。包与站点引用它们，不写 `'vector'` 之类的字面量；工具类（`cx`、`prefersReducedMotion`、`mulberry32`）各只有一份，surfaces 与站点从 react / engine 引入。
-- **文档站的导入**：`docs/` 在运行时把 `@aora-bot/*` 别名到各包的 `src`（改包立刻生效），但 `tsc` 从各包的 `dist` 取类型，所以文档站类型检查前先 `build:lib`。站内用 `@app`（`docs/app`）与 `@theme`（`docs/theme`）别名，不写跨目录的相对路径。
+- **文档站的导入**：`docs/` 在运行时把 `@mowa-bot/*` 别名到各包的 `src`（改包立刻生效），但 `tsc` 从各包的 `dist` 取类型，所以文档站类型检查前先 `build:lib`。站内用 `@app`（`docs/app`）与 `@theme`（`docs/theme`）别名，不写跨目录的相对路径。
 - **两套 i18n，各管一边**：站点壳（导航、控制台文案、`docs/i18n.json`）用 Rspress 的 `useI18n`；角色与场景相关的名字（形状、颜色、状态、表情、系列、变体、状态分组、脸、鼻子）用 react 的 `useLocale` / `useLabel`。`useLabel` 的访问器覆盖所有这些 id 族，调用方不写 `as LocaleKey`、不自己拼 `shape.${id}` 键。只在站内、一句中英对照的数据（表格里的说明）用 `useLocalized()`，不在组件里写 `isZh ? … : …`。
 - **派生状态不用 effect**：由 props 派生的值直接在渲染里算；"值变了才更新"用 `utils/hooks.ts` 的 `useStable(value, keyOf)`，"回调总是最新的"用 `useLatest(value)`；props 变化后要重置的 state，用"渲染期间调整 state"的写法（比较上一次的值，`setState` 在渲染里），不写 `useEffect(() => setState(…), [prop])`。
 - **lint 例外**：只有 effect 真的在桥接外部系统（`EventSource` 连接状态、动画触发）时才允许关规则，写成 `// oxlint-disable-next-line <规则> -- 原因`，一行、带原因、只盖一行；不写整文件或整块的 disable。规则以 oxlint 的 react-compiler 规则为准。
@@ -218,7 +218,7 @@ packages/react/src/
   appearance/ locale/ styles/ utils/                                           外观上下文、i18n、令牌与样式、通用 hooks
 packages/surfaces/src/     walkthrough/ scenes/ template/ occupancy/ cast/ locale/ styles/
 docs/theme/                Rspress 外壳与文档内嵌组件（components/：ApiTable、StateMatrix、StyleParamsDemo …；styles/；generated/）
-docs/app/                  home/（控制台 + 角色墙） themes/（主题展：书架、卡册、looks/、walls/） sponsor/ shared/（share、snippet、i18n、families …）
+docs/app/                  home/（控制台 + 角色墙） themes/（主题展：书架、卡册、looks/、walls/） shared/（share、snippet、i18n、families …）
 docs/content/{en,zh}/      mdx（两种语言的页面一一对应，构建时检查）
 ```
 

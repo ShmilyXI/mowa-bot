@@ -5,7 +5,7 @@ import { API } from '@theme';
 把已经在运行的角色在别处再画一份。
 
 ```tsx preview
-import { CharacterMark, CharacterMarkMirror } from '@aora-bot/react';
+import { CharacterMark, CharacterMarkMirror } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -29,7 +29,7 @@ export default function Demo() {
 
 ## 换墨色不必再跑一份动画
 
-墨色是可继承的 CSS 自定义属性，所以在 `<use>` 所在的位置解析，而不是在源定义的位置。每个镜像设置自己的 `--aora-fg`，共享的几何图形会读取它。
+墨色是可继承的 CSS 自定义属性，所以在 `<use>` 所在的位置解析，而不是在源定义的位置。每个镜像设置自己的 `--mowa-fg`，共享的几何图形会读取它。
 
 尺寸的处理方式相同：设置在外层容器上，而不是 SVG 内部。
 

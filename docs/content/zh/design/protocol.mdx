@@ -5,7 +5,7 @@ import { ProtocolTable } from '@theme';
 智能体不使用状态名，而是使用两位数字的编号。
 
 ```json
-{ "session_id": "s1", "aoraBotId": "34", "tips": "Build failed" }
+{ "session_id": "s1", "mowaBotId": "34", "tips": "Build failed" }
 ```
 
 shell hook 可以直接发出 `34`，不必知道另一端的角色把「出错」叫什么；状态名也可以随意改，不会弄坏按编号写的中继脚本。编号按十位分段，所以接收方即使没见过某个编号，也能大致判断它属于哪一类。
@@ -39,7 +39,7 @@ stateForEmotion(3); //    'curious'   —— 数字和单个数位会被归一�
 
 编号的数字和含义一经确定就不再改变，因为外面已有脚本在发送它们。每个十位段的空位里放的是 `03` 好奇、`09` 拖拽、`26` 弹跳、`27` 哼歌、`38` 拒绝，以及 `42`–`49` 更细分的工具状态，所以两位数始终够用，也没有任何编号改过含义。`09` 归在生命周期段，是因为被拿起来移动是发生*在*角色身上的事，不是一种心情；`27` 是一种情绪，指某件事自行顺利运转时的一点满足。
 
-有些编号共用同一个状态：`15` *疲惫*和 `06` *休眠*都是困倦，`16` *专注*和 `32` *处理中*都是工作。这是有意的。编号记录的是发送方的本意，状态则是 Aora Bot 选择的呈现方式。`emotionIdForState` 返回某个状态对应的最小编号，基于 Aora Bot 的宿主应当发出这个编号。
+有些编号共用同一个状态：`15` *疲惫*和 `06` *休眠*都是困倦，`16` *专注*和 `32` *处理中*都是工作。这是有意的。编号记录的是发送方的本意，状态则是 Mowa Bot 选择的呈现方式。`emotionIdForState` 返回某个状态对应的最小编号，基于 Mowa Bot 的宿主应当发出这个编号。
 
 ## 事件与条件
 
@@ -52,7 +52,7 @@ stateForEmotion(3); //    'curious'   —— 数字和单个数位会被归一�
 ```ts
 parseAgentMessage('34'); //                     { emotionId: '34', state: 'alerting' }
 parseAgentMessage('thinking'); //               { emotionId: '30', state: 'thinking' }
-parseAgentMessage({ aoraBotId: 33, tips: 'ok' }); // { emotionId: '33', state: 'celebrate', tips: 'ok' }
+parseAgentMessage({ mowaBotId: 33, tips: 'ok' }); // { emotionId: '33', state: 'celebrate', tips: 'ok' }
 parseAgentMessage('{"emotionId":"40"}'); //     { emotionId: '40', state: 'searching' }
 parseAgentMessage('nope'); //                   null
 ```
@@ -71,7 +71,7 @@ React 组件可以用 `emotionId` 代替 `state`：
 ```json
 {
   "session_id": "s1",
-  "aoraBotId": "32",
+  "mowaBotId": "32",
   "tips": "Indexing 3 of 5",
   "hud": { "kind": "progress", "value": 0.6 }
 }

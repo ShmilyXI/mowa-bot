@@ -5,7 +5,7 @@ import { StyleParamsDemo } from '@theme';
 The same character, drawn on a grid. Every state, shape and face is available, including the default `cute` face and the effects around it, because the pixel series reads the same frame as the vector series and only decides which cells to fill.
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -28,7 +28,7 @@ The default series is `vector`; a character that does not name a style is drawn 
 ## Variants
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 const variants = ['crisp', 'dot', 'block'] as const;
 
@@ -79,7 +79,7 @@ Pick a variant and the panel lists only the parameters that variant reads. It is
 <StyleParamsDemo style="pixel" />
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 const grids = [12, 16, 24, 32, 48] as const;
 
@@ -147,7 +147,7 @@ A gradient `ink` is quantised by cell position into `shades` bands along the gra
 ## In the engine
 
 ```ts
-import { createCharacter, renderStaticSvg } from '@aora-bot/engine';
+import { createCharacter, renderStaticSvg } from '@mowa-bot/engine';
 
 const mark = createCharacter(host, {
   style: 'pixel',
@@ -172,7 +172,7 @@ A variant the series does not have falls back to its default, so switching a `ve
 `AppearanceProvider` sets them for a subtree. A prop on the mark wins over it, and nested providers merge field by field.
 
 ```tsx
-import { AppearanceProvider, CharacterMark, StagedMark } from '@aora-bot/react';
+import { AppearanceProvider, CharacterMark, StagedMark } from '@mowa-bot/react';
 
 <AppearanceProvider styleId="pixel" variant="block" styleOptions={{ grid: 20 }}>
   <CharacterMark shape="blob" />

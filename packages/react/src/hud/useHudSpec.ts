@@ -1,4 +1,4 @@
-import { isHudSpec, type HudKind, type HudSpec } from '@aora-bot/engine';
+import { isHudSpec, type HudKind, type HudSpec } from '@mowa-bot/engine';
 import { useMemo } from 'react';
 import { useOptionalAgentState } from '../agent/AgentState.js';
 import { useStable } from '../utils/hooks.js';

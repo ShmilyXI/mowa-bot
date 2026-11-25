@@ -8,7 +8,7 @@ importers:
 
   .:
     dependencies:
-      '@aora-bot/engine':
+      '@mowa-bot/engine':
         specifier: workspace:*
         version: link:packages/engine
     devDependencies:
@@ -36,13 +36,13 @@ importers:
 
   docs:
     dependencies:
-      '@aora-bot/engine':
+      '@mowa-bot/engine':
         specifier: workspace:*
         version: link:../packages/engine
-      '@aora-bot/react':
+      '@mowa-bot/react':
         specifier: workspace:*
         version: link:../packages/react
-      '@aora-bot/surfaces':
+      '@mowa-bot/surfaces':
         specifier: workspace:*
         version: link:../packages/surfaces
       react:
@@ -73,7 +73,7 @@ importers:
 
   packages/element:
     dependencies:
-      '@aora-bot/engine':
+      '@mowa-bot/engine':
         specifier: workspace:*
         version: link:../engine
     devDependencies:
@@ -107,7 +107,7 @@ importers:
 
   packages/react:
     dependencies:
-      '@aora-bot/engine':
+      '@mowa-bot/engine':
         specifier: workspace:*
         version: link:../engine
     devDependencies:
@@ -138,10 +138,10 @@ importers:
 
   packages/surfaces:
     devDependencies:
-      '@aora-bot/engine':
+      '@mowa-bot/engine':
         specifier: workspace:*
         version: link:../engine
-      '@aora-bot/react':
+      '@mowa-bot/react':
         specifier: workspace:*
         version: link:../react
       '@rslib/core':

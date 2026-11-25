@@ -10,8 +10,8 @@ Push to talk. Holding the button opens the channel; the occupancy list shows who
 
 ```tsx preview
 import { useEffect, useState } from 'react';
-import { CharacterMark, CharacterStageProvider, type CharacterState } from '@aora-bot/react';
-import { Composer, OccupancyList } from '@aora-bot/surfaces';
+import { CharacterMark, CharacterStageProvider, type CharacterState } from '@mowa-bot/react';
+import { Composer, OccupancyList } from '@mowa-bot/surfaces';
 
 const me = { id: 'you', name: 'You', shape: 'pebble', color: 'cyan' } as const;
 const agent = { id: 'echo', name: 'Echo', shape: 'pill', color: 'magenta' } as const;
@@ -119,7 +119,7 @@ A voice interface has one problem a text one does not: nothing on screen proves 
 
 ```tsx preview
 import { useState } from 'react';
-import { CharacterMark, HudPlate } from '@aora-bot/react';
+import { CharacterMark, HudPlate } from '@mowa-bot/react';
 
 export default function Demo() {
   const [level, setLevel] = useState(0.6);

@@ -4,11 +4,11 @@ import { API } from '@theme';
 
 六个组件，用来展示智能体产品，而不必真的实现它：窗口框、进行中的任务、起点卡片、等待屏、交接和消息输入框。
 
-> 属于 `@aora-bot/surfaces`，不在 `@aora-bot/react` 中：`pnpm add @aora-bot/surfaces @aora-bot/react`，并在 React 样式之后引入 `@aora-bot/surfaces/styles.css`。
+> 属于 `@mowa-bot/surfaces`，不在 `@mowa-bot/react` 中：`pnpm add @mowa-bot/surfaces @mowa-bot/react`，并在 React 样式之后引入 `@mowa-bot/surfaces/styles.css`。
 
 ```tsx preview
-import { CharacterStageProvider } from '@aora-bot/react';
-import { Composer, DemoDesktop, JobBubbles } from '@aora-bot/surfaces';
+import { CharacterStageProvider } from '@mowa-bot/react';
+import { Composer, DemoDesktop, JobBubbles } from '@mowa-bot/surfaces';
 
 export default function Demo() {
   return (
@@ -47,7 +47,7 @@ export default function Demo() {
 
 ```tsx preview
 import { useState } from 'react';
-import { SuggestionCards, type SuggestionCard } from '@aora-bot/surfaces';
+import { SuggestionCards, type SuggestionCard } from '@mowa-bot/surfaces';
 
 const cards: SuggestionCard[] = [
   { id: 'triage', title: '整理收件箱', body: '把昨夜到达的邮件按该看的人分类。' },
@@ -71,7 +71,7 @@ export default function Demo() {
 ## LandingWait
 
 ```tsx preview
-import { LandingWait } from '@aora-bot/surfaces';
+import { LandingWait } from '@mowa-bot/surfaces';
 
 export default function Demo() {
   return (
@@ -93,8 +93,8 @@ export default function Demo() {
 ## HandOff
 
 ```tsx preview
-import { CharacterStageProvider } from '@aora-bot/react';
-import { HandOff } from '@aora-bot/surfaces';
+import { CharacterStageProvider } from '@mowa-bot/react';
+import { HandOff } from '@mowa-bot/surfaces';
 
 export default function Demo() {
   return (

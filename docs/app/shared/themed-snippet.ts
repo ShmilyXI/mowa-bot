@@ -6,7 +6,7 @@ import {
   getTheme,
   themeDefault,
   type CastId,
-} from '@aora-bot/engine';
+} from '@mowa-bot/engine';
 import type { Preset } from './share.js';
 import { AVATAR_ORIGIN, ELEMENT_SCRIPT, SNIPPET_SIZE_PX, type SnippetFormat } from './snippet.js';
 
@@ -71,7 +71,7 @@ export function themedAvatarUrlFor(card: ThemedCard): string {
 /** What the chip shows for a theme's card. */
 export function themedLineFor(format: SnippetFormat, card: ThemedCard): string {
   if (format === 'react') return `<CharacterMark ${themedProps(card).join(' ')} />`;
-  if (format === 'html') return `<aora-bot ${themedAttributes(card).join(' ')}></aora-bot>`;
+  if (format === 'html') return `<mowa-bot ${themedAttributes(card).join(' ')}></mowa-bot>`;
   return themedAvatarUrlFor(card);
 }
 
@@ -79,8 +79,8 @@ export function themedLineFor(format: SnippetFormat, card: ThemedCard): string {
 export function themedCopyFor(format: SnippetFormat, card: ThemedCard): string {
   if (format === 'react') {
     return [
-      `import { CharacterMark } from '@aora-bot/react';`,
-      `import '@aora-bot/react/styles.css';`,
+      `import { CharacterMark } from '@mowa-bot/react';`,
+      `import '@mowa-bot/react/styles.css';`,
       ``,
       `<CharacterMark`,
       ...themedProps(card).map((prop) => `  ${prop}`),
@@ -89,7 +89,7 @@ export function themedCopyFor(format: SnippetFormat, card: ThemedCard): string {
     ].join('\n');
   }
   if (format === 'html') {
-    const tag = `<aora-bot ${[...themedAttributes(card), `size="${SNIPPET_SIZE_PX}"`].join(' ')}></aora-bot>`;
+    const tag = `<mowa-bot ${[...themedAttributes(card), `size="${SNIPPET_SIZE_PX}"`].join(' ')}></mowa-bot>`;
     return [ELEMENT_SCRIPT, tag].join('\n');
   }
   return themedAvatarUrlFor(card);

@@ -5,7 +5,7 @@ import { StyleParamsDemo } from '@theme';
 同一个角色，画在网格上。所有状态、形状和脸（包括默认的 `cute` 脸和周围的特效）在像素系列里都能用：它读取的帧与 vector 系列相同，只决定填哪些格子。
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -28,7 +28,7 @@ export default function Demo() {
 ## 变体
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 const variants = ['crisp', 'dot', 'block'] as const;
 
@@ -79,7 +79,7 @@ export default function Demo() {
 <StyleParamsDemo style="pixel" />
 
 ```tsx preview
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 const grids = [12, 16, 24, 32, 48] as const;
 
@@ -147,7 +147,7 @@ export default function Demo() {
 ## 在引擎里
 
 ```ts
-import { createCharacter, renderStaticSvg } from '@aora-bot/engine';
+import { createCharacter, renderStaticSvg } from '@mowa-bot/engine';
 
 const mark = createCharacter(host, {
   style: 'pixel',
@@ -172,7 +172,7 @@ const svg = renderStaticSvg({ style: 'pixel', shape: 'hex', state: 'thinking' })
 `AppearanceProvider` 为整棵子树统一设置这三个 prop。标记自己的 prop 优先，嵌套的 Provider 按字段逐项合并。
 
 ```tsx
-import { AppearanceProvider, CharacterMark, StagedMark } from '@aora-bot/react';
+import { AppearanceProvider, CharacterMark, StagedMark } from '@mowa-bot/react';
 
 <AppearanceProvider styleId="pixel" variant="block" styleOptions={{ grid: 20 }}>
   <CharacterMark shape="blob" />

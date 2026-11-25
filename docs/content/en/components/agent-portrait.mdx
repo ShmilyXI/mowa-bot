@@ -5,7 +5,7 @@ import { API } from '@theme';
 The avatar you actually drop into a list.
 
 ```tsx preview
-import { CharacterStageProvider, AgentPortrait } from '@aora-bot/react';
+import { CharacterStageProvider, AgentPortrait } from '@mowa-bot/react';
 
 const people = [
   { id: 'ada@example.com', name: 'Ada' },
@@ -45,7 +45,7 @@ So an application can pass whatever it has and get something sensible, rather th
 Shape and ink are hashed from `id` when not given explicitly, so every user has a consistent character and you store nothing. Two clients, two sessions and a server render all agree.
 
 ```tsx preview
-import { AgentPortrait } from '@aora-bot/react';
+import { AgentPortrait } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -65,7 +65,7 @@ Pass `shape` or `color` on the agent to override either independently.
 Put `face: 'line'` on the agent for the [line face](/design/face). The nose is hashed from `id` like the shape and ink, so it is as stable as they are; set `nose` to choose one or `null` for none.
 
 ```tsx preview
-import { AgentPortrait } from '@aora-bot/react';
+import { AgentPortrait } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -83,7 +83,7 @@ A cast `preset` can carry a face and nose too; an explicit value on the agent wi
 ## Sizes
 
 ```tsx preview
-import { AgentPortrait, AVATAR_SIZES } from '@aora-bot/react';
+import { AgentPortrait, AVATAR_SIZES } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -106,7 +106,7 @@ export default function Demo() {
 `still` renders an image instead of an animation — the right choice in long lists. `halo` adds a soft colour wash derived from the character's own hue.
 
 ```tsx preview
-import { AgentPortrait } from '@aora-bot/react';
+import { AgentPortrait } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -124,7 +124,7 @@ export default function Demo() {
 `fillPx` sets the size of the character inside the circle. The circle keeps its size; only what is drawn inside it changes, so smaller than the circle leaves a margin and larger crops it. The default fills the circle exactly. It is a custom property rather than a width on the child, because the child is an `img` in two of the three branches and the stylesheet already sizes those.
 
 ```tsx preview
-import { AgentPortrait } from '@aora-bot/react';
+import { AgentPortrait } from '@mowa-bot/react';
 
 export default function Demo() {
   return (

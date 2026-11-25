@@ -6,7 +6,7 @@ A painted character driven by the same states as the vector ones.
 
 ```tsx preview
 import { useState } from 'react';
-import { SpriteMark, CharacterMark, EMOTION_IDS, getEmotion } from '@aora-bot/react';
+import { SpriteMark, CharacterMark, EMOTION_IDS, getEmotion } from '@mowa-bot/react';
 
 const ids = ['02', '30', '32', '33', '34', '10', '13', '21', '00'];
 
@@ -35,7 +35,7 @@ Two sprite sets and one procedural character, all answering the same [protocol i
 
 ## When to reach for this
 
-The vector characters are the point of Aora Bot: they are procedural, themeable, and weightless. `SpriteMark` is the escape hatch for the one thing they cannot be: a specific illustration, such as a brand mascot, a hand-drawn pet or a creature derived from a photograph. These looks cannot be generated.
+The vector characters are the point of Mowa Bot: they are procedural, themeable, and weightless. `SpriteMark` is the escape hatch for the one thing they cannot be: a specific illustration, such as a brand mascot, a hand-drawn pet or a creature derived from a photograph. These looks cannot be generated.
 
 The cost is real. A sheet is tens of PNG files instead of a few kilobytes of maths; it does not recolour with the theme; it has exactly the states someone drew. Treat it as an asset, not a component you configure.
 
@@ -85,7 +85,7 @@ For server rendering, or when the manifest is bundled, pass it directly with the
 An imported JSON file types `kind` as `string`, so narrow it with `isSpriteManifest` first:
 
 ```tsx
-import { SpriteMark, isSpriteManifest } from '@aora-bot/react';
+import { SpriteMark, isSpriteManifest } from '@mowa-bot/react';
 import manifest from './sprites/bao/manifest.json';
 
 if (!isSpriteManifest(manifest)) throw new Error('Not a sprite-mate manifest');

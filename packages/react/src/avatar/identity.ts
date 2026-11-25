@@ -10,7 +10,7 @@ import {
   type FaceStyle,
   type NoseId,
   type ShapeId,
-} from '@aora-bot/engine';
+} from '@mowa-bot/engine';
 import { characterStateForActivity, isKnownActivity } from '../activity/catalog.js';
 
 /** The minimum an application has to tell the kit about a character. */

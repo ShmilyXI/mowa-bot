@@ -165,7 +165,7 @@ export const renderVectorStatic: StaticRenderer = (frame, context) => {
       ...(fxPair ? [{ prop: `--${uid}-fx`, ...fxPair }] : []),
       ...(linePair ? [{ prop: `--${uid}-line`, ...linePair }] : []),
       ...(rimPair ? [{ prop: `--${uid}-rim`, ...rimPair }] : []),
-      ...(secondPair ? [{ prop: '--aora-ink2', ...secondPair }] : []),
+      ...(secondPair ? [{ prop: '--mowa-ink2', ...secondPair }] : []),
     ]);
     root = ` class="${uid}"`;
     fill = solid;
@@ -228,7 +228,7 @@ export const renderVectorStatic: StaticRenderer = (frame, context) => {
   });
   // Pink and the light inks would vanish into, or print as, the default pink, so the riso variant swaps it;
   // where the ink switches with the page, so does the second ink, in the root's rule.
-  const second = secondPair && !root ? ` style="--aora-ink2:${secondPair.light}"` : '';
+  const second = secondPair && !root ? ` style="--mowa-ink2:${secondPair.light}"` : '';
   const size = context.sizePx ? ` width="${context.sizePx}" height="${context.sizePx}"` : '';
   // Decorations or an underlay that reach past the box show where the page lets the SVG overflow.
   const bleed =

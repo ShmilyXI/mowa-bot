@@ -65,7 +65,7 @@ function timeoutScheduler(): Scheduler {
  */
 export function createCharacter(host: Element, options: CharacterOptions = {}): CharacterController {
   const reduced = options.reducedMotion ?? prefersReducedMotion();
-  const seed = options.seed ?? 'aora';
+  const seed = options.seed ?? 'mowa';
 
   let style = getStyle(options.style ?? DEFAULT_STYLE_ID);
   let styleId = style.id;

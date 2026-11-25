@@ -1,4 +1,4 @@
-import { settleForState, type CharacterState } from '@aora-bot/engine';
+import { settleForState, type CharacterState } from '@mowa-bot/engine';
 import { useEffect, useState } from 'react';
 import { useDeadline, useReducedMotion } from '../stage/hooks.js';
 

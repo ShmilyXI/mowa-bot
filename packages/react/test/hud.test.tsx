@@ -1,4 +1,4 @@
-import type { HudSpec } from '@aora-bot/engine';
+import type { HudSpec } from '@mowa-bot/engine';
 import { renderToString } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
 import { AgentStateProvider } from '../src/agent/AgentState.js';
@@ -40,7 +40,7 @@ describe('HudPlate', () => {
         <CharacterMark shape="blob" />
       </HudPlate>,
     );
-    expect(html).not.toContain('aora-hud-plate__text');
+    expect(html).not.toContain('mowa-hud-plate__text');
   });
 });
 

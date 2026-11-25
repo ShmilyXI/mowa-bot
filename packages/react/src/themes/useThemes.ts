@@ -1,4 +1,4 @@
-import { loadThemes, themesNeeded } from '@aora-bot/engine';
+import { loadThemes, themesNeeded } from '@mowa-bot/engine';
 import { useEffect, useReducer } from 'react';
 
 /** The ids a mark names that a theme may own. */

@@ -20,7 +20,7 @@ import {
   type ShapeId,
   type StyleId,
   type StyleVariant,
-} from '@aora-bot/engine';
+} from '@mowa-bot/engine';
 import {
   createContext,
   useCallback,
@@ -302,7 +302,7 @@ export function CharacterStageProvider({ children, maxSources = 36 }: CharacterS
   );
 
   const sourceId = useCallback(
-    (appearance: Appearance) => `aora-src-${prefix}-${sourceSlug(appearanceKey(appearance))}`,
+    (appearance: Appearance) => `mowa-src-${prefix}-${sourceSlug(appearanceKey(appearance))}`,
     [prefix],
   );
 
@@ -327,7 +327,7 @@ export function CharacterStageProvider({ children, maxSources = 36 }: CharacterS
   return (
     <MarkCommandContext.Provider value={commands}>
       <StageContext.Provider value={value}>
-        <div className="aora-stage" aria-hidden="true">
+        <div className="mowa-stage" aria-hidden="true">
           <AppearanceReset>
             {hosted.map((key) => {
               const appearance = parseAppearanceKey(key);
@@ -438,7 +438,7 @@ export interface StagedMarkProps {
   eyeColor?: string;
   className?: string;
   /**
-   * Applied last, so `--aora-fg` here overrides the ink derived from `color`.
+   * Applied last, so `--mowa-fg` here overrides the ink derived from `color`.
    * That is the only way to hand a mark an animatable custom property instead
    * of a fixed colour, which is what the group activity ink transition needs.
    */
@@ -555,7 +555,7 @@ export function StagedMark({
     );
   }
 
-  const classes = cx('aora-mark', className);
+  const classes = cx('mowa-mark', className);
   const status = ready ? stage.status(appearance) : 'pending';
 
   if (status === 'pending') {
@@ -581,7 +581,7 @@ export function StagedMark({
     // follow the page's `color-scheme`.
     return (
       <span
-        className={`${classes} aora-mark--still`}
+        className={`${classes} mowa-mark--still`}
         data-state={state}
         data-shape={shape}
         data-color={color}
@@ -591,7 +591,7 @@ export function StagedMark({
         style={
           {
             ...getInkVars(color),
-            '--aora-leaf': getLeafColor(color),
+            '--mowa-leaf': getLeafColor(color),
             width: sizePx,
             ...style,
           } as CSSProperties

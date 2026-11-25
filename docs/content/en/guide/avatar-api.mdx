@@ -1,21 +1,21 @@
 # Avatar API
 
-A free endpoint that turns any string into a character. Put the URL in an `<img>` and you get a deterministic Aora Bot avatar: the same id always returns the same character, with nothing to install, store or sign up for.
+A free endpoint that turns any string into a character. Put the URL in an `<img>` and you get a deterministic Mowa Bot avatar: the same id always returns the same character, with nothing to install, store or sign up for.
 
 :::warning Not yet available in mainland China
-The endpoint runs on `aora-bot.vercel.app`, which is usually unreachable from mainland China, so avatars may not show for users there. Access for users in mainland China is planned.
+The endpoint runs on `mowa-bot.vercel.app`, which is usually unreachable from mainland China, so avatars may not show for users there. Access for users in mainland China is planned.
 :::
 
 ## Use it
 
 ```html
-<img src="https://aora-bot.vercel.app/avatar/alice.svg" width="64" height="64" alt="alice" />
+<img src="https://mowa-bot.vercel.app/avatar/alice.svg" width="64" height="64" alt="alice" />
 ```
 
 The same works in Markdown, for example in a README, an issue or a comment on any host that allows remote images:
 
 ```md
-![alice](https://aora-bot.vercel.app/avatar/alice.svg)
+![alice](https://mowa-bot.vercel.app/avatar/alice.svg)
 ```
 
 The id is any URL-safe string up to 128 characters: a username, an email hash, a database key. The `.svg` suffix is optional.
@@ -50,10 +50,10 @@ Themes add skins of their own, which the endpoint accepts by name: `doodle` and 
 Every parameter of the chosen style is also a query key, for example `strokeWidth` or `paperOffset` for `vector`, `grid` or `outline` for `pixel`, `weight` or `tail` for `kaomoji`, `cols` or `charset` for `ascii`. Numbers are written as numbers and booleans as `true` or `false` (`1` and `0` also work). The ranges are listed on the style pages: [vector](/design/styles/vector), [pixel](/design/styles/pixel), [kaomoji](/design/styles/kaomoji) and [ascii](/design/styles/ascii).
 
 ```text
-https://aora-bot.vercel.app/avatar/alice.svg?style=pixel&variant=block&size=96
-https://aora-bot.vercel.app/avatar/alice.svg?state=happy
-https://aora-bot.vercel.app/avatar/mochi-blue.svg?shape=mochi&color=blue&state=happy
-https://aora-bot.vercel.app/avatar/alice.svg?variant=paper&paperOffset=12
+https://mowa-bot.vercel.app/avatar/alice.svg?style=pixel&variant=block&size=96
+https://mowa-bot.vercel.app/avatar/alice.svg?state=happy
+https://mowa-bot.vercel.app/avatar/mochi-blue.svg?shape=mochi&color=blue&state=happy
+https://mowa-bot.vercel.app/avatar/alice.svg?variant=paper&paperOffset=12
 ```
 
 The [console](/) on the home page builds one of these for you: choose the avatar format on its code chip to copy the link for the character you made.
@@ -69,8 +69,8 @@ If the id is exactly a [cast](/design/cast) id, you get that character: `/avatar
 `theme=halloween` picks the character from the theme's cast instead of the default pool, with the same consistent hash, and fills every parameter the request leaves out from the theme: its first skin (`doodle`), its first face, its first state (`happy`; every theme allows all the engine's states), and the member's colour: the one the theme gives it, otherwise its own when the theme offers it, otherwise one of the theme's colours picked by the id. A dimension the theme fixes takes its fixed value. Any parameter you set wins: `theme=halloween&variant=solid&state=angry` keeps the theme's character and drops its skin and state. A `style` other than the theme's drops its skin too. `pool` applies to the default pool only and is refused with `theme`.
 
 ```text
-https://aora-bot.vercel.app/avatar/alice.svg?theme=halloween
-https://aora-bot.vercel.app/avatar/alice.svg?theme=halloween&variant=grainy&color=cream
+https://mowa-bot.vercel.app/avatar/alice.svg?theme=halloween
+https://mowa-bot.vercel.app/avatar/alice.svg?theme=halloween&variant=grainy&color=cream
 ```
 
 The result is fixed for a given engine version. A release that redraws a character or changes the cast can change what an id looks like.
@@ -86,7 +86,7 @@ Inside an `<img>` the SVG cannot see your page, so the ink of some characters fo
 For a product, render avatars yourself rather than calling an endpoint on every page view. The server-safe entry needs no DOM and no network:
 
 ```ts
-import { castMember, renderStaticSvg } from '@aora-bot/engine/static';
+import { castMember, renderStaticSvg } from '@mowa-bot/engine/static';
 
 const luna = castMember('luna')!;
 const svg = renderStaticSvg({ shape: luna.shape, color: luna.color, state: 'happy', sizePx: 64 });
@@ -95,19 +95,19 @@ const svg = renderStaticSvg({ shape: luna.shape, color: luna.color, state: 'happ
 A theme's characters, skins and colours live in the theme's own entry. Load it before rendering one of them, or the render throws `ThemeNotInstalledError`:
 
 ```ts
-import { loadTheme, renderStaticSvg } from '@aora-bot/engine/static';
+import { loadTheme, renderStaticSvg } from '@mowa-bot/engine/static';
 
 await loadTheme('halloween');
 const svg = renderStaticSvg({ shape: 'pumpkin', color: 'orange', variant: 'doodle', sizePx: 64 });
 ```
 
-`loadTheme` fetches the entry through the engine's manifest (`THEME_MANIFEST`). To bundle a theme up front instead, import its entry and install it: `installTheme(HALLOWEEN)`, with `HALLOWEEN` from `@aora-bot/engine/themes/halloween` (`@aora-bot/react/themes/halloween` in a React app). Installing twice does nothing. `themesNeeded({ shape, preset, variant, style, color })` lists the themes a set of ids needs, so a host can load them before drawing; `getTheme(id)` and `listThemes()` read the installed definitions, and `themeLabel(kind, id)` gives the name a theme puts on its characters, skins and colours. `CharacterMark` and `<aora-bot>` do the loading themselves: given a theme's character, skin or colour, they hold their box, load the theme, then draw.
+`loadTheme` fetches the entry through the engine's manifest (`THEME_MANIFEST`). To bundle a theme up front instead, import its entry and install it: `installTheme(HALLOWEEN)`, with `HALLOWEEN` from `@mowa-bot/engine/themes/halloween` (`@mowa-bot/react/themes/halloween` in a React app). Installing twice does nothing. `themesNeeded({ shape, preset, variant, style, color })` lists the themes a set of ids needs, so a host can load them before drawing; `getTheme(id)` and `listThemes()` read the installed definitions, and `themeLabel(kind, id)` gives the name a theme puts on its characters, skins and colours. `CharacterMark` and `<mowa-bot>` do the loading themselves: given a theme's character, skin or colour, they hold their box, load the theme, then draw.
 
 A theme's ids can be drawn and are accepted everywhere, but they stay out of the default lists. `SHAPE_IDS`, `CAST` and `COLOR_IDS` hold the listed ids; `ALL_SHAPE_IDS`, `ALL_CAST_IDS` and `ALL_COLOR_IDS` hold every id the engine knows, and `CORE_SHAPE_IDS` the core's own characters.
 To draw a theme's member exactly as this endpoint does, take its look from `themeLook`, which is the rule the endpoint uses too:
 
 ```ts
-import { loadTheme, renderStaticSvg, themeLook } from '@aora-bot/engine/static';
+import { loadTheme, renderStaticSvg, themeLook } from '@mowa-bot/engine/static';
 
 await loadTheme('halloween');
 const look = themeLook('halloween', 'floaty')!;

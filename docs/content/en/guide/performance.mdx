@@ -1,13 +1,13 @@
 # Performance
 
-A character is not free. It runs a physics integrator and writes a few dozen SVG attributes every frame. One is trivial; two hundred, done naively, will drop frames on any machine. This page explains what Aora Bot does about that and what you need to do.
+A character is not free. It runs a physics integrator and writes a few dozen SVG attributes every frame. One is trivial; two hundred, done naively, will drop frames on any machine. This page explains what Mowa Bot does about that and what you need to do.
 
 ## One loop, not one per character
 
 Every character subscribes to a single shared `requestAnimationFrame` loop.
 
 ```ts
-import { ticker } from '@aora-bot/engine';
+import { ticker } from '@mowa-bot/engine';
 
 const stop = ticker.add((dt, now) => {
   // Called once per frame, after every character has been updated.
@@ -23,7 +23,7 @@ The loop stops entirely when the last character unmounts.
 The larger win is not running the same animation twice. `CharacterStageProvider` hosts one hidden character per distinct **appearance** and every visible instance becomes a `<use href>` reference to it.
 
 ```tsx preview
-import { CharacterStageProvider, StagedMark } from '@aora-bot/react';
+import { CharacterStageProvider, StagedMark } from '@mowa-bot/react';
 
 const COLOURS = ['blue', 'green', 'violet', 'orange', 'magenta', 'cyan'] as const;
 
@@ -80,7 +80,7 @@ Pass an options object to drop a signal or grow the intersection margin:
 For very large collections, do not animate at all. `renderAvatarDataUrl` produces a static SVG with no runtime cost:
 
 ```tsx preview
-import { renderAvatarDataUrl } from '@aora-bot/react';
+import { renderAvatarDataUrl } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -96,7 +96,7 @@ export default function Demo() {
 Static rendering accepts an expression and a state, so a still character can still show what it was doing:
 
 ```tsx preview
-import { renderStaticSvgDataUrl } from '@aora-bot/react';
+import { renderStaticSvgDataUrl } from '@mowa-bot/react';
 
 const states = ['idle', 'sleeping', 'happy', 'angry', 'surprised', 'thinking'] as const;
 
@@ -126,7 +126,7 @@ This matters more than it looks. A static renderer locked to one neutral express
 The engine checks `prefers-reduced-motion` before starting. When it is set, springs settle to their targets immediately, one frame is drawn, no loop starts and no particles are emitted. You do not need to handle this yourself, but you can query it:
 
 ```ts
-import { prefersReducedMotion, onReducedMotionChange } from '@aora-bot/engine';
+import { prefersReducedMotion, onReducedMotionChange } from '@mowa-bot/engine';
 ```
 
 ## Budget

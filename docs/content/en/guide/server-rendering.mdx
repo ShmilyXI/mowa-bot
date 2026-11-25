@@ -6,13 +6,13 @@ What renders without a DOM, and how a character reaches the HTML before any Java
 
 | Import                   | Contains                        | Safe without a DOM |
 | ------------------------ | ------------------------------- | ------------------ |
-| `@aora-bot/react`        | Every component and hook        | No                 |
-| `@aora-bot/react/static` | Rendering functions and hashing | Yes                |
+| `@mowa-bot/react`        | Every component and hook        | No                 |
+| `@mowa-bot/react/static` | Rendering functions and hashing | Yes                |
 
 The static entry deliberately excludes the animation runtime. Nothing it exports touches `window`, `document` or `requestAnimationFrame`, so it works in a React Server Component, during static generation, or in a worker.
 
 ```ts
-import { renderAvatarDataUrl } from '@aora-bot/react/static';
+import { renderAvatarDataUrl } from '@mowa-bot/react/static';
 
 export default async function Page() {
   return <img src={renderAvatarDataUrl('ada@example.com')} width={40} height={40} alt="" />;
@@ -25,7 +25,7 @@ The component package ships with a `'use client'` banner, so importing it from a
 
 ```tsx
 // app/page.tsx — a server component
-import { CharacterMark } from '@aora-bot/react';
+import { CharacterMark } from '@mowa-bot/react';
 
 export default function Page() {
   return <CharacterMark shape="blob" color="blue" />;
@@ -36,7 +36,7 @@ Import the stylesheet once in the root layout:
 
 ```tsx
 // app/layout.tsx
-import '@aora-bot/react/styles.css';
+import '@mowa-bot/react/styles.css';
 ```
 
 ### Prefer the static entry where you can
@@ -48,7 +48,7 @@ Characters in a long list, in an email, or in metadata do not need to animate. U
 Components render markup with no animation applied. The character appears in its rest pose, and the engine takes over on hydration. This means no layout shift: the server-rendered SVG occupies exactly the box the animated one will.
 
 ```tsx preview
-import { renderStaticSvg } from '@aora-bot/react';
+import { renderStaticSvg } from '@mowa-bot/react';
 
 export default function Demo() {
   const svg = renderStaticSvg({ shape: 'hex', color: 'green', expression: 'happy' });

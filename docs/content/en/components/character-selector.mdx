@@ -6,7 +6,7 @@ Shape and ink chooser.
 
 ```tsx preview
 import { useState } from 'react';
-import { CharacterSelector, CharacterMark, type FaceStyle } from '@aora-bot/react';
+import { CharacterSelector, CharacterMark, type FaceStyle } from '@mowa-bot/react';
 
 export default function Demo() {
   const [shape, setShape] = useState('blob' as const);
@@ -33,7 +33,7 @@ The highlight is drawn in the selected shape's own outline, not as a generic cir
 ## Layouts
 
 ```tsx preview
-import { CharacterSelector } from '@aora-bot/react';
+import { CharacterSelector } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -55,7 +55,7 @@ Pass `face` to add a `cute | eyes | line` toggle. While the line face is selecte
 
 ```tsx preview
 import { useState } from 'react';
-import { CharacterSelector, CharacterMark, type FaceStyle } from '@aora-bot/react';
+import { CharacterSelector, CharacterMark, type FaceStyle } from '@mowa-bot/react';
 
 export default function Demo() {
   const [shape, setShape] = useState('pear' as const);
@@ -88,7 +88,7 @@ Omit `face` and the picker stays a shape and ink chooser.
 ## Restricting the options
 
 ```tsx preview
-import { CharacterSelector } from '@aora-bot/react';
+import { CharacterSelector } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -107,7 +107,7 @@ export default function Demo() {
 `sizePx` sets the size of each shape preview; face and nose previews scale with it. The default is `SELECTOR_MARK_PX` (36). `lineWeight` is passed to the previews so a picker matches the character it edits.
 
 ```tsx preview
-import { CharacterSelector } from '@aora-bot/react';
+import { CharacterSelector } from '@mowa-bot/react';
 
 export default function Demo() {
   return (
@@ -125,7 +125,7 @@ export default function Demo() {
 
 ## Colour chips
 
-Each colour chip shows the colour the body takes on the current page (`getInkColorCss`), so the `black` chip is white in dark mode. A chip that almost matches the page background gets the same hairline edge as the body (`--aora-rim`). See [Palette](/design/palette).
+Each colour chip shows the colour the body takes on the current page (`getInkColorCss`), so the `black` chip is white in dark mode. A chip that almost matches the page background gets the same hairline edge as the body (`--mowa-rim`). See [Palette](/design/palette).
 
 ## `onSelectColor`
 
